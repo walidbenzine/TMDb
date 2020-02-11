@@ -1,7 +1,8 @@
-package com.example.iwatch
+package com.example.iwatch.Activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.iwatch.R
 
 class MainActivity : AppCompatActivity() {
 
