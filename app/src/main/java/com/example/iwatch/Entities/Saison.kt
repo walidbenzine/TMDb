@@ -9,7 +9,7 @@ class Saison {
     internal var dateSortie: Date? = null
     internal var nbrEpisodes: Int = 0
     internal var listEpisodes: List<Episode>? = null
-    internal var actors: List<Actors>? = null
+    internal var actors: List<Actor>? = null
 
 
 }

@@ -12,7 +12,7 @@ class Film {
     internal var duration: Time? = null
     internal var filmsLiees: List<Film>? = null
     internal var genre: List<String>? = null  //PEUT ETRE A CHANGER
-    internal var actors: List<Actors>? = null
+    internal var actors: List<Actor>? = null
     internal var realisator: List<String>? = null
     internal var comments: List<Comment>? = null
 
