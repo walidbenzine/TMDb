@@ -8,6 +8,7 @@ import java.util.Vector;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.sciruse.models.Comments;
 import com.sciruse.models.Film;
 import com.sciruse.models.Genre;
 
@@ -25,11 +26,13 @@ public class test {
 	public static void main(String[] args) {
 		Vector<Film>films;
 		Vector<Genre>genres;
+		Vector<Comments>comments;
 		try {
-			 films = Movies("https://api.themoviedb.org/3/movie/popular?api_key=94327dc22a17d2c12b806d241682cd96&language=en-US&page=1");
+			 films = MoviesPopular("https://api.themoviedb.org/3/movie/popular?api_key=94327dc22a17d2c12b806d241682cd96&language=en-US&page=1");
 			 genres= genre("https://api.themoviedb.org/3/genre/movie/list?api_key=94327dc22a17d2c12b806d241682cd96&language=fr");
-			 
-			System.out.println(genres);
+			 //we need to give it the movie id 
+			 comments = Comment("https://api.themoviedb.org/3/movie/419704/reviews?api_key=94327dc22a17d2c12b806d241682cd96&language=en-US&page=1");
+			System.out.println(comments);
 		}catch (Exception e) {System.out.println(e);}
 
 		
@@ -50,7 +53,7 @@ public class test {
 		return object;
 	}
 
-	public static  Vector<Film> Movies(String url) throws IOException {
+	public static  Vector<Film> MoviesPopular(String url) throws IOException {
 		
 		Vector<Film>films =new Vector<Film>();
 		ArrayList<String> listdata;      
@@ -87,21 +90,24 @@ public class test {
 	}
 
 	
-	public static  void Comment(String url) throws IOException {
-		
+	public static  Vector<Comments> Comment(String url) throws IOException {
+		Vector<Comments> comments=new Vector<Comments>(); 
 		JSONObject myobj;
 		JSONObject object = GetMyJson(url);
-		JSONArray obj = object.getJSONArray("results");
-		Iterator<String> keyList = object.keys();
-		myobj = (JSONObject)obj.get(1);
-		Iterator<String> keyList2 =myobj.keys();
-		System.out.println(obj.toString());
-
-		while (keyList2.hasNext()){
-			String key = keyList2.next();
-			System.out.println(key);
-		}
-		System.out.println(obj.length());		
+		JSONArray commment = object.getJSONArray("results");
+		Comments com = null;
+		if (commment != null) { 
+			   for (int j=0;j<commment.length();j++){ 
+				   com =new Comments();
+				   JSONObject obj =(JSONObject) commment.get(j);
+				  // System.out.println(obj.get("author").toString());
+				   com.setUser(obj.get("author").toString());
+				   com.setText(obj.getString("content").toString());
+				   comments.add(com);
+			   } 
+			} 
+		
+		return comments;
 
 	}
 	
