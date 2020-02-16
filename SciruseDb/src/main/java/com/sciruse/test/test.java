@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import com.sciruse.models.Comments;
 import com.sciruse.models.Film;
 import com.sciruse.models.Genre;
+import com.sciruse.models.Serie;
 import com.sciruse.models.Actors;
 
 import okhttp3.OkHttpClient;
@@ -29,16 +30,17 @@ public class test {
 		Vector<Genre>genres;
 		Vector<Comments>comments;
 		Vector<Actors>actors;
+		Vector<Serie> series;
 		Actors act;
 		try {
-			films = MoviesPopular(Base_url+"movie/popular?api_key="+API_Key+"&language=fr&page=1");
+			//films = MoviesPopular(Base_url+"movie/popular?api_key="+API_Key+"&language=fr&page=1");
 			
 			//we need to give it the movie id 
-			comments = Comment(Base_url+"movie/419704/reviews?api_key="+API_Key+"&language=en-US&page=1");
-			actors = Actors(Base_url+"movie/419704/credits?api_key="+API_Key);
+			//comments = Comment(Base_url+"movie/419704/reviews?api_key="+API_Key+"&language=en-US&page=1");
+			//actors = Actors(Base_url+"movie/419704/credits?api_key="+API_Key);
 			//act = getActorInfo(Base_url+"person/287?api_key="+API_Key+"&language=en-US");
-			
-			System.out.println(films);
+			series = Serie(Base_url+"tv/popular?api_key="+API_Key+"&language=fr&page=1");
+			System.out.println(series.get(0));
 		}catch (Exception e) {System.out.println(e);}
 
 
@@ -80,12 +82,6 @@ public class test {
 		}
 		return films; 
 	}
-	
-	
-	
-	
-	
-	
 
 //Base_url+"person/287?api_key="+API_Key+"&language=en-US"
 	public static  Vector<Actors> Actors(String url) throws IOException {
@@ -180,6 +176,45 @@ public class test {
 		} 
 
 		return genres;
+	}
+	
+	
+	public static  Vector<Serie> Serie(String url) throws IOException {
+		Vector<Serie> series=new Vector<Serie>(); ; 
+		String id;
+		JSONObject myobj;
+		JSONObject object = GetMyJson(url);
+		JSONArray serieArray = object.getJSONArray("results");
+		Serie serie = null;
+		if (serieArray != null) { 
+			for (int j=0;j<serieArray.length();j++){ 
+				serie = new Serie();
+				JSONObject obj =(JSONObject) serieArray.get(j);
+				 serie.setId_tmdb(obj.get("id").toString());
+				 serie.setResume(obj.get("overview").toString());
+				 serie.setDateSortie(obj.get("first_air_date").toString());
+				 serie.setNote(obj.get("vote_average").toString());
+				 serie.setPath(obj.get("poster_path").toString());
+				 serie.setTitle(obj.get("original_name").toString());
+				 
+				  serie = setSaisonEpisodeCount(obj.get("id").toString(), serie);
+				
+				series.add(serie);
+			} 
+		} 
+
+		return series;
+	}
+	
+	
+	public static Serie setSaisonEpisodeCount(String movieId,Serie serie) throws IOException {
+		
+		JSONObject myobj;
+		JSONObject object = GetMyJson(Base_url+"tv/"+movieId+"?api_key="+API_Key+"&language=fr");
+		
+		serie.setNbrEpisodes(object.get("number_of_episodes").toString());
+		serie.setNbrSaison(object.get("number_of_seasons").toString());
+		return serie;
 	}
 	
 	
