@@ -2,7 +2,8 @@ package com.sciruse.models;
 
 public class Genre {
 
-	private String id;
+	
+	private String id_tmdb;
 	private String desig;
 	
 	
@@ -13,13 +14,13 @@ public class Genre {
 
 
 	public String getId() {
-		return id;
+		return id_tmdb;
 	}
 
 
 
 	public void setId(String id) {
-		this.id = id;
+		this.id_tmdb = id;
 	}
 
 
@@ -38,7 +39,7 @@ public class Genre {
 
 	@Override
 	public String toString() {
-		return "Genre [id=" + id + ", desig=" + desig + "]";
+		return "Genre [id=" + id_tmdb + ", desig=" + desig + "]";
 	}
 	
 	

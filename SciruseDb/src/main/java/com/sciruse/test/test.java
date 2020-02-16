@@ -31,14 +31,14 @@ public class test {
 		Vector<Actors>actors;
 		Actors act;
 		try {
-			films = MoviesPopular(Base_url+"movie/popular?api_key="+API_Key+"&language=en-US&page=1");
-			genres= genre(Base_url+"genre/movie/list?api_key="+API_Key+"&language=fr");
+			films = MoviesPopular(Base_url+"movie/popular?api_key="+API_Key+"&language=fr&page=1");
+			
 			//we need to give it the movie id 
 			comments = Comment(Base_url+"movie/419704/reviews?api_key="+API_Key+"&language=en-US&page=1");
 			actors = Actors(Base_url+"movie/419704/credits?api_key="+API_Key);
 			//act = getActorInfo(Base_url+"person/287?api_key="+API_Key+"&language=en-US");
 			
-			System.out.println(actors);
+			System.out.println(films);
 		}catch (Exception e) {System.out.println(e);}
 
 
@@ -68,32 +68,24 @@ public class test {
 		JSONObject object = GetMyJson(url);
 
 		JSONArray liJsonArray = object.getJSONArray("results");
-		Iterator<String> keyList = object.keys();
+		String id;
 		Film a =null ;
 		for (int i = 0; i < liJsonArray.length(); i++) {
+			JSONObject obj =(JSONObject) liJsonArray.get(i);
+			 id = obj.get("id").toString();
 			listdata= new ArrayList<String>();
-			a= new Film();
-			movie = (JSONObject)liJsonArray.get(i);		     
-			a.setTitle(movie.get("title").toString());
-			a.setID(movie.get("id").toString());
-			a.setResume(movie.get("overview").toString());
-			a.setDateSortie(movie.get("release_date").toString()); 
-
-			JSONArray genreArr = movie.getJSONArray("genre_ids");
-			//System.out.println(genreArr);
-			//------------------------------------------------------------
-			if (genreArr != null) { 
-				for (int j=0;j<genreArr.length();j++){ 
-					listdata.add(genreArr.get(j).toString());
-				} 
-			} 
-
-			a.setGenre(listdata);
+			a= getFilmInfo(Base_url+"movie/"+id+"?api_key="+API_Key+"&language=fr");
 			films.add(a);
 
 		}
 		return films; 
 	}
+	
+	
+	
+	
+	
+	
 
 //Base_url+"person/287?api_key="+API_Key+"&language=en-US"
 	public static  Vector<Actors> Actors(String url) throws IOException {
@@ -117,7 +109,25 @@ public class test {
 		return actors;
 	}
 
+	//            get/movie/{movie_id}
+	public static  Film getFilmInfo(String url) throws IOException {
+		Film film = new Film();
+		Genre g =null;
+		JSONObject myobj;
+		JSONObject object = GetMyJson(url);
+				     
+		film.setTitle(object.get("title").toString());
+		film.setTmdb_id(object.get("id").toString());
+		film.setResume(object.get("overview").toString());
+		film.setDateSortie(object.get("release_date").toString()); 
+		film.setImage(object.get("poster_path").toString());
+		film.setNote(object.get("vote_average").toString());
+		film.setGenre(genre(object));
+		 
+		return film;
+	}
 
+	
 	public static  Actors getActorInfo(String url) throws IOException {
 		Actors actor = new Actors();
 		JSONObject myobj;
@@ -152,10 +162,10 @@ public class test {
 		return comments;
 	}
 
-	public static Vector<Genre> genre(String url) throws IOException {
+	public static Vector<Genre> genre(JSONObject myJsonObject) throws IOException {
 		//https://api.themoviedb.org/3/genre/movie/list?api_key=94327dc22a17d2c12b806d241682cd96&language=fr
 		Vector<Genre> genres=new Vector<Genre>(); 
-		JSONObject object = GetMyJson(url);
+		JSONObject object = myJsonObject;
 		JSONArray genreArr = object.getJSONArray("genres");
 		Genre g =null;
 
@@ -171,4 +181,7 @@ public class test {
 
 		return genres;
 	}
+	
+	
+	
 }
