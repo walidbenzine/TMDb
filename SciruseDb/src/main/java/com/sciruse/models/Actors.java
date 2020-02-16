@@ -1,4 +1,4 @@
-package com.sciruse.models;
+ package com.sciruse.models;
 
 import java.util.Date;
 import java.util.List;
@@ -13,11 +13,11 @@ public class Actors {
 	@GeneratedValue
 	private Long id;
 	private String  nom ;
-	private String prenom ;
+	private String tdm_id;
 	private String lieuNaissance ;
 	private String bibliographie ;
-	private	int popularite ;
-	private Date dateNaissance ;
+	private	String popularite ;
+	private String dateNaissance ;
 	//private	List<Film>filmographie ;
 	private	String photo ; //TYPE DE VARIABLE A CHANGER
 	
@@ -34,12 +34,7 @@ public class Actors {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public String getPrenom() {
-		return prenom;
-	}
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
+	
 	public String getLieuNaissance() {
 		return lieuNaissance;
 	}
@@ -52,16 +47,16 @@ public class Actors {
 	public void setBibliographie(String bibliographie) {
 		this.bibliographie = bibliographie;
 	}
-	public int getPopularite() {
+	public String getPopularite() {
 		return popularite;
 	}
-	public void setPopularite(int popularite) {
+	public void setPopularite(String popularite) {
 		this.popularite = popularite;
 	}
-	public Date getDateNaissance() {
+	public String getDateNaissance() {
 		return dateNaissance;
 	}
-	public void setDateNaissance(Date dateNaissance) {
+	public void setDateNaissance(String dateNaissance) {
 		this.dateNaissance = dateNaissance;
 	}
 	
@@ -71,6 +66,24 @@ public class Actors {
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
+	
+	
+	
+	public String getTdm_id() {
+		return tdm_id;
+	}
+	public void setTdm_id(String tdm_id) {
+		this.tdm_id = tdm_id;
+	}
+	@Override
+	public String toString() {
+		return "Actors [id=" + id + ", nom=" + nom + ", tdm_id=" + tdm_id + ", lieuNaissance=" + lieuNaissance
+				+ ", bibliographie=" + bibliographie + ", popularite=" + popularite + ", dateNaissance=" + dateNaissance
+				+ ", photo=" + photo + "]";
+	}
+	
+	
+	
 	
 	
 	
