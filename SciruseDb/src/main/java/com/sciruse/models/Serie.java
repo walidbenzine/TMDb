@@ -15,8 +15,8 @@ public class Serie {
 			private String Path;
 			//private List<Saison>saisons ;
 			//private  List<Serie>seriesLiees;
-			//private List<Comments>comments ;
-			//private  List<String>genre ;
+			private List<Comments>comments ;
+			private  List<Genre>genre ;
 			public String getTitle() {
 				return title;
 			}
@@ -70,11 +70,35 @@ public class Serie {
 			public void setId_tmdb(String id_tmdb) {
 				this.id_tmdb = id_tmdb;
 			}
+			
+			
+			public List<Comments> getComments() {
+				return comments;
+			}
+			public void setComments(List<Comments> comments) {
+				this.comments = comments;
+			}
+			
+			public List<Genre> getGenre() {
+				return genre;
+			}
+			
+			public void setGenre(List<Genre> genre) {
+				this.genre = genre;
+			}
 			@Override
 			public String toString() {
-				return "Serie [title=" + title + ", resume=" + resume + ", dateSortie=" + dateSortie + ", note=" + note
-						+ ", nbrEpisodes=" + nbrEpisodes + ", nbrSaison=" + nbrSaison + ", Path=" + Path + "]";
+				return "Serie [id_tmdb=" + id_tmdb + ", title=" + title + ", resume=" + resume + ", dateSortie="
+						+ dateSortie + ", note=" + note + ", nbrEpisodes=" + nbrEpisodes + ", nbrSaison=" + nbrSaison
+						+ ", Path=" + Path + ", comments=" + comments + ", genre=" + genre + "]";
 			}
+			
+			
+			
+			
+			
+			
+			
 		
 			
 			

@@ -1,24 +1,33 @@
 package com.sciruse.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 @Entity
 public class Film {
 	
-	private String ID;
+	@Id @GeneratedValue
+	private Integer ID;
 	private String tmdb_id;
 	private String title ;
+	@Column(columnDefinition="LONGTEXT")
 	private String resume;
 	private	 String note ;
 	private String dateSortie ;
 	private String duration ;
 	private String image;
 	//private List<Film>filmsLiees ;
-	private List<Genre>genre;
+	@ManyToMany (cascade = {CascadeType.ALL})
+	private List<Genre>genre = new ArrayList<Genre>();
 	//private List<Actors> actors;
 	//private List<String>realisator ;
 	//private List<Comments>comments ;
@@ -39,10 +48,10 @@ public class Film {
 	public void setResume(String resume) {
 		this.resume = resume;
 	}
-	public String getID() {
+	public Integer getID() {
 		return ID;
 	}
-	public void setID(String iD) {
+	public void setID(Integer iD) {
 		ID = iD;
 	}
 	public String getNote() {

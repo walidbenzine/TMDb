@@ -1,15 +1,49 @@
 package com.sciruse.models;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+@Entity
 public class Genre {
 
-	
+	@Id @GeneratedValue
+	private Integer id;
 	private String id_tmdb;
 	private String desig;
 	
-	
+
 	public Genre() {
 		// TODO Auto-generated constructor stub
 	}
+
+	
+
+
+	public String getId_tmdb() {
+		return id_tmdb;
+	}
+
+
+
+
+	public void setId_tmdb(String id_tmdb) {
+		this.id_tmdb = id_tmdb;
+	}
+
+
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 
 
 
@@ -39,7 +73,7 @@ public class Genre {
 
 	@Override
 	public String toString() {
-		return "Genre [id=" + id_tmdb + ", desig=" + desig + "]";
+		return "[idtmdb=" + id_tmdb + ", desig=" + desig + "]";
 	}
 	
 	
