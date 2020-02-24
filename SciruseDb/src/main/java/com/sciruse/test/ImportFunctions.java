@@ -128,6 +128,32 @@ public class ImportFunctions {
 
 		return film;
 	}
+	
+	
+	public static  Vector<Film> getFilmBiblio(String url) throws IOException {
+		Vector<Film>films =new Vector<Film>();
+		String id;
+		JSONObject myobj;
+		JSONObject object = GetMyJson(url);
+		JSONArray FilmArray = object.getJSONArray("cast");
+		Film a =null ;
+		if (FilmArray != null) { 
+			int i=0;
+			for (int j=0;j<FilmArray.length();j++){ 
+				i++;
+				JSONObject obj =(JSONObject) FilmArray.get(j);
+				id = obj.get("id").toString();
+
+				a= getFilmInfo(Base_url+"movie/"+id+"?api_key="+API_Key+"&language=fr");
+				films.add(a);
+				if(i==10)j =FilmArray.length();
+
+			} 
+		} 
+
+		return films;
+	}
+
 
 
 	public static  Actors getActorInfo(String url) throws IOException {

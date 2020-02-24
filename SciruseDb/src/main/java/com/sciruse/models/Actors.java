@@ -3,9 +3,11 @@
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 @Entity
 public class Actors {
 
@@ -13,15 +15,24 @@ public class Actors {
 	@GeneratedValue
 	private Long id;
 	private String  nom ;
+	@Column(unique = true)
 	private String tdm_id;
 	private String lieuNaissance ;
+	@Column(columnDefinition="LONGTEXT")
 	private String bibliographie ;
 	private	String popularite ;
 	private String dateNaissance ;
-	//private	List<Film>filmographie ;
+	@ManyToMany(mappedBy = "actors")
+	private	List<Film>filmographie ;
 	private	String photo ; //TYPE DE VARIABLE A CHANGER
 	
 	
+	public List<Film> getFilmographie() {
+		return filmographie;
+	}
+	public void setFilmographie(List<Film> filmographie) {
+		this.filmographie = filmographie;
+	}
 	public Long getId() {
 		return id;
 	}

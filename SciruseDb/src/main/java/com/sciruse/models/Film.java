@@ -12,11 +12,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import com.sciruse.models.Actors;
+import org.hibernate.validator.constraints.UniqueElements;
 @Entity
 public class Film {
 	
 	@Id @GeneratedValue
 	private Integer ID;
+	@Column(unique = true)
 	private String tmdb_id;
 	private String title ;
 	@Column(columnDefinition="LONGTEXT")
@@ -28,11 +31,31 @@ public class Film {
 	//private List<Film>filmsLiees ;
 	@ManyToMany (cascade = {CascadeType.ALL})
 	private List<Genre>genre = new ArrayList<Genre>();
-	//private List<Actors> actors;
+	
+	@ManyToMany (cascade = {CascadeType.ALL})
+	private List<Actors> actors;
+	
 	//private List<String>realisator ;
-	//private List<Comments>comments ;
+	@ManyToMany (cascade = {CascadeType.ALL})
+	private List<Comments>comments = new ArrayList<Comments>();
 
 
+	
+	public List<Comments> getComments() {
+		return comments;
+	}
+	public void setComments(List<Comments> comments) {
+		this.comments = comments;
+	}
+	
+	
+	
+	public List<Actors> getActors() {
+		return actors;
+	}
+	public void setActors(List<Actors> actors) {
+		this.actors = actors;
+	}
 	public Film() {
 		
 	}
