@@ -138,8 +138,9 @@ public class ImportFunctions {
 		JSONArray FilmArray = object.getJSONArray("cast");
 		Film a =null ;
 		if (FilmArray != null) { 
-			int i=0;
-			for (int j=0;j<FilmArray.length();j++){ 
+			int i=0,x=FilmArray.length();
+			if(x>3) { x = 3;}
+			for (int j=0;j<x;j++){ 
 				i++;
 				JSONObject obj =(JSONObject) FilmArray.get(j);
 				id = obj.get("id").toString();

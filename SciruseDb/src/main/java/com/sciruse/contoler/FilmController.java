@@ -76,13 +76,5 @@ public class FilmController {
 	}
 	
 	
-	@RequestMapping("/getmovies")
-	public List<Film> addComment() throws IOException
-	{
-		
-		
-		 return  t.getFilmBiblio(Base_url+"person/287/movie_credits?api_key="+API_Key+"&language=fr");
-		 
-		
-	}
+	
 }
