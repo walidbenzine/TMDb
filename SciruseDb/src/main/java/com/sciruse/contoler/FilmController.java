@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sciruse.models.Actors;
 import com.sciruse.models.Comments;
 import com.sciruse.models.Film;
+import com.sciruse.models.Serie;
 import com.sciruse.repository.FilmRepository;
 import com.sciruse.repository.GenreRepository;
+import com.sciruse.repository.SerieRepository;
 import com.sciruse.test.ImportFunctions;
 
 @RestController
@@ -26,6 +28,8 @@ public class FilmController {
 	ImportFunctions t;
 	@Autowired
 	FilmRepository repo;
+	@Autowired
+	SerieRepository repo2;
 	
 	@Autowired
 	GenreRepository repoGenre;
@@ -40,49 +44,52 @@ public class FilmController {
 	@RequestMapping("/getMovies")
 	public List<Film> addAlien(Film film) throws IOException
 	{
-		
-		
+				
 		return (List<Film>) repo.findAll();
 	}
 	
+	@RequestMapping("/getTv")
+	public List<Serie> addAlien(Serie serie) throws IOException
+	{
+				
+		return (List<Serie>) repo2.findAll();
+	}
+	
+
 	
 	@RequestMapping("/addMovies")
 	public String addMovies() throws IOException
 	{
 		 t =new  ImportFunctions();
-		Vector<Film>v= t.MoviesPopular("https://api.themoviedb.org/3/movie/popular?api_key=94327dc22a17d2c12b806d241682cd96&language=en-US&page=1");
+		Vector<Film>films= t.MoviesPopular("https://api.themoviedb.org/3/movie/popular?api_key="+API_Key+"&language=en-US&page=1");
 		
-		for (Film film : v) {
+		for (Film film : films) {
 			
-		List<Comments> com = t.Comment(Base_url+"movie/"+film.getTmdb_id() +"/reviews?api_key="+API_Key+"&language=en-US");
+		List<Comments> com = t.Comment(Base_url+"movie/"+film.getID() +"/reviews?api_key="+API_Key+"&language=en-US");
 		film.setComments(com);
 		
-		List<Actors> act = t.Actors(Base_url+"movie/"+film.getTmdb_id() +"/credits?api_key="+API_Key+"&language=en-US");
-		
-		for (Actors actor: act) {
-			actor.setFilmographie(t.getFilmBiblio(Base_url+"person/287/movie_credits?api_key="+API_Key+"&language=fr"));
-		}
-		
+		List<Actors> act = t.Actors(Base_url+"movie/"+film.getID() +"/credits?api_key="+API_Key+"&language=en-US");
 		film.setActors(act);
 		
-		
-		
-		
-		
+		for (Actors actor: act) {
+			actor.setFilmographie(t.getFilmBiblio(Base_url+"person/"+actor.getId()+"/movie_credits?api_key="+API_Key+"&language=fr"));
+		}
 		
 		}
-		repo.saveAll(v);
+		
+		repo.saveAll(films);
+
 		return "yes";
 	}
 	
-	
-	@RequestMapping("/getmovies")
-	public List<Film> addComment() throws IOException
+	@RequestMapping("/addTv")
+	public String addTv() throws IOException
 	{
-		
-		
-		 return  t.getFilmBiblio(Base_url+"person/287/movie_credits?api_key="+API_Key+"&language=fr");
-		 
-		
+		 t =new  ImportFunctions();
+	Vector<Serie>series= t.Serie("https://api.themoviedb.org/3/tv/popular?api_key="+API_Key+"&language=en-US&page=1");
+	repo2.saveAll(series);
+	
+	return "yes";
 	}
+	
 }

@@ -3,6 +3,7 @@ package com.sciruse.test;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 
 import org.json.JSONArray;
@@ -26,7 +27,10 @@ public class ImportFunctions {
 	private final static OkHttpClient httpClient = new OkHttpClient();
 	private static String Base_url="https://api.themoviedb.org/3/";
 	private static String API_Key="94327dc22a17d2c12b806d241682cd96";
-
+	
+	private static Vector<String> idsActor=new Vector<String>(); 
+	private static Vector<String> idsFilms=new Vector<String>(); 
+	private static Vector<String> idsSerie=new Vector<String>(); 
 	
 	public ImportFunctions() {
 		
@@ -82,18 +86,20 @@ public class ImportFunctions {
 			JSONObject obj =(JSONObject) liJsonArray.get(i);
 			id = obj.get("id").toString();
 			listdata= new ArrayList<String>();
+			
+			if(idsActor.contains(id)==false) {
+				idsActor.add(id);
 			a= getFilmInfo(Base_url+"movie/"+id+"?api_key="+API_Key+"&language=fr");
 			films.add(a);
-
+			}
 		}
 		return films; 
 	}
 
 	//Base_url+"person/287?api_key="+API_Key+"&language=en-US"
 	public static  Vector<Actors> Actors(String url) throws IOException {
-		Vector<Actors> actors=new Vector<Actors>(); ; 
-		String id;
-		JSONObject myobj;
+		Vector<Actors> actors=new Vector<Actors>(); 
+				String id;
 		JSONObject object = GetMyJson(url);
 		JSONArray actorArray = object.getJSONArray("cast");
 		Actors act = null;
@@ -101,10 +107,12 @@ public class ImportFunctions {
 			for (int j=0;j<actorArray.length();j++){ 
 				JSONObject obj =(JSONObject) actorArray.get(j);
 				id = obj.get("id").toString();
-
-				act = getActorInfo(Base_url+"person/"+id+"?api_key="+API_Key+"&language=fr");
-
-				actors.add(act);
+				if(idsActor.contains(id)==false) {
+					idsActor.add(id);
+					act = getActorInfo(Base_url+"person/"+id+"?api_key="+API_Key+"&language=fr");
+					actors.add(act);
+				}
+				
 			} 
 		} 
 
@@ -115,11 +123,10 @@ public class ImportFunctions {
 	public static  Film getFilmInfo(String url) throws IOException {
 		Film film = new Film();
 		Genre g =null;
-		JSONObject myobj;
 		JSONObject object = GetMyJson(url);
 
 		film.setTitle(object.get("title").toString());
-		film.setTmdb_id(object.get("id").toString());
+		film.setID((Integer) object.get("id"));
 		film.setResume(object.get("overview").toString());
 		film.setDateSortie(object.get("release_date").toString()); 
 		film.setImage(object.get("poster_path").toString());
@@ -130,24 +137,24 @@ public class ImportFunctions {
 	}
 	
 	
-	public static  Vector<Film> getFilmBiblio(String url) throws IOException {
-		Vector<Film>films =new Vector<Film>();
+	public static  List<Film> getFilmBiblio(String url) throws IOException {
+		List<Film>films =new Vector<Film>();
 		String id;
-		JSONObject myobj;
 		JSONObject object = GetMyJson(url);
 		JSONArray FilmArray = object.getJSONArray("cast");
 		Film a =null ;
 		if (FilmArray != null) { 
-			int i=0;
-			for (int j=0;j<FilmArray.length();j++){ 
-				i++;
+			int x=FilmArray.length();
+			if(x>4) { x = 4;}
+			for (int j=0;j<x;j++){ 
+
 				JSONObject obj =(JSONObject) FilmArray.get(j);
 				id = obj.get("id").toString();
-
+				if(idsActor.contains(id)==false) {
+					idsActor.add(id);
 				a= getFilmInfo(Base_url+"movie/"+id+"?api_key="+API_Key+"&language=fr");
 				films.add(a);
-				if(i==10)j =FilmArray.length();
-
+				}
 			} 
 		} 
 
@@ -166,7 +173,7 @@ public class ImportFunctions {
 		actor.setPhoto(object.get("profile_path").toString());
 		actor.setBibliographie(object.get("biography").toString());
 		actor.setPopularite(object.get("popularity").toString());
-		actor.setTdm_id(object.get("id").toString());
+		actor.setId((Integer) object.get("id"));
 		return actor;
 	}
 
@@ -224,7 +231,10 @@ public class ImportFunctions {
 				serie = new Serie();
 				JSONObject obj =(JSONObject) serieArray.get(j);
 				id = obj.get("id").toString();
-				serie.setId_tmdb(obj.get("id").toString());
+				if(idsSerie.contains(id)==false) {
+					idsSerie.add(id);
+				
+				serie.setId((Integer) obj.get("id"));
 				serie.setResume(obj.get("overview").toString());
 				serie.setDateSortie(obj.get("first_air_date").toString());
 				serie.setNote(obj.get("vote_average").toString());
@@ -237,6 +247,7 @@ public class ImportFunctions {
 				
 				serie.setGenre(genre(GetMyJson(Base_url+"tv/"+id+"?api_key="+API_Key+"&language=fr&page=1")));
 				series.add(serie);
+				}
 			} 
 		} 
 

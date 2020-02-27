@@ -1,12 +1,23 @@
 package com.sciruse.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+@Entity
 public class Serie {
 
-			private String id_tmdb;
+			@Id 	
+			@Column(unique = true)
+			private Integer id;
 			private String title;
+			@Column(columnDefinition="LONGTEXT")
 			private String resume ;
 			private String dateSortie ;
 			private String note ;
@@ -15,8 +26,12 @@ public class Serie {
 			private String Path;
 			//private List<Saison>saisons ;
 			//private  List<Serie>seriesLiees;
-			private List<Comments>comments ;
-			private  List<Genre>genre ;
+			@ManyToMany (cascade = {CascadeType.ALL})
+			private List<Comments>comments = new ArrayList<Comments>();
+			@ManyToMany (cascade = {CascadeType.ALL})
+			private  List<Genre> genre =  new ArrayList<Genre>();
+			
+			
 			public String getTitle() {
 				return title;
 			}
@@ -64,11 +79,11 @@ public class Serie {
 			
 			
 			
-			public String getId_tmdb() {
-				return id_tmdb;
+			public Integer getId() {
+				return id;
 			}
-			public void setId_tmdb(String id_tmdb) {
-				this.id_tmdb = id_tmdb;
+			public void setId(Integer id_tmdb) {
+				this.id = id_tmdb;
 			}
 			
 			
@@ -88,7 +103,7 @@ public class Serie {
 			}
 			@Override
 			public String toString() {
-				return "Serie [id_tmdb=" + id_tmdb + ", title=" + title + ", resume=" + resume + ", dateSortie="
+				return "Serie [id=" + id + ", title=" + title + ", resume=" + resume + ", dateSortie="
 						+ dateSortie + ", note=" + note + ", nbrEpisodes=" + nbrEpisodes + ", nbrSaison=" + nbrSaison
 						+ ", Path=" + Path + ", comments=" + comments + ", genre=" + genre + "]";
 			}
