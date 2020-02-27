@@ -2,27 +2,29 @@
 
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 @Entity
 public class Actors {
 
 	@Id
-	@GeneratedValue
-	private Long id;
+	@Column(unique = true, nullable = false)
+	private Integer id;
 	private String  nom ;
-	@Column(unique = true)
-	private String tdm_id;
 	private String lieuNaissance ;
 	@Column(columnDefinition="LONGTEXT")
 	private String bibliographie ;
 	private	String popularite ;
 	private String dateNaissance ;
-	@ManyToMany(mappedBy = "actors")
+	@ManyToMany (cascade = {CascadeType.ALL})
+	@Column(unique = false,nullable = true)
 	private	List<Film>filmographie ;
 	private	String photo ; //TYPE DE VARIABLE A CHANGER
 	
@@ -33,10 +35,10 @@ public class Actors {
 	public void setFilmographie(List<Film> filmographie) {
 		this.filmographie = filmographie;
 	}
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getNom() {
@@ -78,17 +80,10 @@ public class Actors {
 		this.photo = photo;
 	}
 	
-	
-	
-	public String getTdm_id() {
-		return tdm_id;
-	}
-	public void setTdm_id(String tdm_id) {
-		this.tdm_id = tdm_id;
-	}
+
 	@Override
 	public String toString() {
-		return "Actors [id=" + id + ", nom=" + nom + ", tdm_id=" + tdm_id + ", lieuNaissance=" + lieuNaissance
+		return "Actors [id=" + id + ", nom=" + nom + ", lieuNaissance=" + lieuNaissance
 				+ ", bibliographie=" + bibliographie + ", popularite=" + popularite + ", dateNaissance=" + dateNaissance
 				+ ", photo=" + photo + "]";
 	}

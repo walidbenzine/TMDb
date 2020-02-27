@@ -17,16 +17,15 @@ import org.hibernate.validator.constraints.UniqueElements;
 @Entity
 public class Film {
 	
-	@Id @GeneratedValue
-	private Integer ID;
+	@Id 	
 	@Column(unique = true)
-	private String tmdb_id;
+	private Integer ID;
+
 	private String title ;
 	@Column(columnDefinition="LONGTEXT")
 	private String resume;
 	private	 String note ;
 	private String dateSortie ;
-	private String duration ;
 	private String image;
 	//private List<Film>filmsLiees ;
 	@ManyToMany (cascade = {CascadeType.ALL})
@@ -89,24 +88,14 @@ public class Film {
 	public void setDateSortie(String dateSortie) {
 		this.dateSortie = dateSortie;
 	}
-	public String getDuration() {
-		return duration;
-	}
-	public void setDuration(String duration) {
-		this.duration = duration;
-	}
+
 	public List<Genre> getGenre() {
 		return genre;
 	}
 	public void setGenre(List<Genre> genre) {
 		this.genre = genre;
 	}
-	public String getTmdb_id() {
-		return tmdb_id;
-	}
-	public void setTmdb_id(String tmdb_id) {
-		this.tmdb_id = tmdb_id;
-	}
+
 	public String getImage() {
 		return image;
 	}
@@ -115,8 +104,8 @@ public class Film {
 	}
 	@Override
 	public String toString() {
-		return "Film [ID=" + ID + ", tmdb_id=" + tmdb_id + ", title=" + title + ", resume=" + resume + ", note=" + note
-				+ ", dateSortie=" + dateSortie + ", duration=" + duration + ", image=" + image + ", genre=" + genre
+		return "Film [ID=" + ID + ", title=" + title + ", resume=" + resume + ", note=" + note
+				+ ", dateSortie=" + dateSortie +", image=" + image + ", genre=" + genre
 				+ "]";
 	}
 	
