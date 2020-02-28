@@ -85,9 +85,17 @@ public class FilmController {
 	@RequestMapping("/addTv")
 	public String addTv() throws IOException
 	{
+		 Integer[] pages = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
 		 t =new  ImportFunctions();
-	Vector<Serie>series= t.Serie("https://api.themoviedb.org/3/tv/popular?api_key="+API_Key+"&language=en-US&page=1");
-	repo2.saveAll(series);
+		 Vector<Serie>series = new Vector<Serie>();
+		 for(int i=0;i<pages.length;i++) {
+		 series.addAll(t.Serie("https://api.themoviedb.org/3/tv/popular?api_key="+API_Key+"&language=en-US&page="+pages[i]));
+		 }
+		 for (Serie serie : series) {
+		 List<Actors> act = t.Actors(Base_url+"tv/"+serie.getId() +"/credits?api_key="+API_Key+"&language=en-US");
+			serie.setActors(act);
+		 }
+		 repo2.saveAll(series);
 	
 	return "yes";
 	}

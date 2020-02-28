@@ -179,7 +179,6 @@ public class ImportFunctions {
 
 	public static  Vector<Comments> Comment(String url) throws IOException {
 		Vector<Comments> comments=new Vector<Comments>(); 
-		JSONObject myobj;
 		JSONObject object = GetMyJson(url);
 		JSONArray commment = object.getJSONArray("results");
 		Comments com = null;
@@ -187,7 +186,6 @@ public class ImportFunctions {
 			for (int j=0;j<commment.length();j++){ 
 				com =new Comments();
 				JSONObject obj =(JSONObject) commment.get(j);
-				// System.out.println(obj.get("author").toString());
 				com.setUser(obj.get("author").toString());
 				com.setText(obj.getString("content").toString());
 				comments.add(com);
@@ -221,7 +219,6 @@ public class ImportFunctions {
 	public static  Vector<Serie> Serie(String url) throws IOException {
 		Vector<Serie> series=new Vector<Serie>(); ; 
 		String id;
-		JSONObject myobj;
 		JSONObject object = GetMyJson(url);
 		JSONArray serieArray = object.getJSONArray("results");
 		Serie serie = null;
@@ -246,6 +243,8 @@ public class ImportFunctions {
 				serie.setComments(Comment(Base_url+"tv/"+id+"/reviews?api_key="+API_Key+"&language=fr&page=1"));
 				
 				serie.setGenre(genre(GetMyJson(Base_url+"tv/"+id+"?api_key="+API_Key+"&language=fr&page=1")));
+				
+				
 				series.add(serie);
 				}
 			} 
