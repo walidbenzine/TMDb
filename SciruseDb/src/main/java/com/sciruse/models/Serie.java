@@ -30,6 +30,8 @@ public class Serie {
 			private List<Comments>comments = new ArrayList<Comments>();
 			@ManyToMany (cascade = {CascadeType.ALL})
 			private  List<Genre> genre =  new ArrayList<Genre>();
+			@ManyToMany (cascade = {CascadeType.ALL})
+			private List<Actors> actors;
 			
 			
 			public String getTitle() {
@@ -101,21 +103,18 @@ public class Serie {
 			public void setGenre(List<Genre> genre) {
 				this.genre = genre;
 			}
+			
+			public List<Actors> getActors() {
+				return actors;
+			}
+			public void setActors(List<Actors> actors) {
+				this.actors = actors;
+			}
 			@Override
 			public String toString() {
 				return "Serie [id=" + id + ", title=" + title + ", resume=" + resume + ", dateSortie="
 						+ dateSortie + ", note=" + note + ", nbrEpisodes=" + nbrEpisodes + ", nbrSaison=" + nbrSaison
 						+ ", Path=" + Path + ", comments=" + comments + ", genre=" + genre + "]";
-			}
-			
-			
-			
-			
-			
-			
-			
-		
-			
-			
-			
+			}			
 }
+
