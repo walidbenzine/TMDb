@@ -13,8 +13,6 @@ public class Comments {
 	private Integer id;
 	@Column(columnDefinition="LONGTEXT")
 	private String text  ;
-	private String TypeComment;
-	private Date dateComment ;
 	private String user;
 	
 	
@@ -31,18 +29,6 @@ public class Comments {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public String getTypeComment() {
-		return TypeComment;
-	}
-	public void setTypeComment(String typeComment) {
-		TypeComment = typeComment;
-	}
-	public Date getDateComment() {
-		return dateComment;
-	}
-	public void setDateComment(Date dateComment) {
-		this.dateComment = dateComment;
-	}
 	public String getUser() {
 		return user;
 	}
@@ -51,10 +37,10 @@ public class Comments {
 	}
 	@Override
 	public String toString() {
-		return "Comments [id=" + id + ", text=" + text + ", TypeComment=" + TypeComment + ", dateComment=" + dateComment
-				+ ", user=" + user + "]";
+		return "Comments [id=" + id + ", text=" + text + ", user=" + user + "]";
 	}
 	
 	
 	
 }
+
