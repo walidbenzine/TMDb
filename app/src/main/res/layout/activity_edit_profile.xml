@@ -15,7 +15,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="32dp"
+            android:layout_margin="16dp"
             android:background="@drawable/round_icon"
             android:layout_gravity="center"/>
         <LinearLayout
@@ -36,111 +36,121 @@
                 android:textStyle="bold"
                 android:textSize="20dp"/>
 
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="16dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/lightGrey"
-                    android:text="First Name"
-                    android:textSize="12dp"/>
-                <EditText
-                    android:id="@+id/first_name"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/lightGrey"
-                    android:textColorHint="@color/white"
-                    android:textColor="@color/white"
-                    android:inputType="textEmailAddress">
-                </EditText>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="16dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/lightGrey"
-                    android:text="First Name"
-                    android:textSize="12dp"/>
-                <EditText
-                    android:id="@+id/last_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/lightGrey"
-                    android:textColorHint="@color/white"
-                    android:textColor="@color/white"
-                    android:inputType="textEmailAddress">
-                </EditText>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="16dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/lightGrey"
-                    android:text="First Name"
-                    android:textSize="12dp"/>
-                <EditText
-                    android:id="@+id/email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/lightGrey"
-                    android:textColorHint="@color/white"
-                    android:textColor="@color/white"
-                    android:inputType="textEmailAddress">
-                </EditText>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="16dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/lightGrey"
-                    android:text="First Name"
-                    android:textSize="12dp"/>
-                <EditText
-                    android:id="@+id/address"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/lightGrey"
-                    android:textColorHint="@color/white"
-                    android:textColor="@color/white"
-                    android:inputType="textEmailAddress">
-                </EditText>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="16dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/lightGrey"
-                    android:text="First Name"
-                    android:textSize="12dp"/>
-                <EditText
-                    android:id="@+id/phone_number"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/lightGrey"
-                    android:textColorHint="@color/white"
-                    android:textColor="@color/white"
-                    android:inputType="textEmailAddress">
-                </EditText>
-            </LinearLayout>
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="16dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/lightGrey"
+                            android:text="First Name"
+                            android:textSize="12dp"/>
+                        <EditText
+                            android:id="@+id/first_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/lightGrey"
+                            android:textColorHint="@color/white"
+                            android:textColor="@color/white"
+                            android:inputType="textEmailAddress">
+                        </EditText>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="16dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/lightGrey"
+                            android:text="Last Name"
+                            android:textSize="12dp"/>
+                        <EditText
+                            android:id="@+id/last_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/lightGrey"
+                            android:textColorHint="@color/white"
+                            android:textColor="@color/white"
+                            android:inputType="textEmailAddress">
+                        </EditText>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="16dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/lightGrey"
+                            android:text="Email"
+                            android:textSize="12dp"/>
+                        <EditText
+                            android:id="@+id/email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/lightGrey"
+                            android:textColorHint="@color/white"
+                            android:textColor="@color/white"
+                            android:inputType="textEmailAddress">
+                        </EditText>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="16dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/lightGrey"
+                            android:text="Adresse"
+                            android:textSize="12dp"/>
+                        <EditText
+                            android:id="@+id/address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/lightGrey"
+                            android:textColorHint="@color/white"
+                            android:textColor="@color/white"
+                            android:inputType="textEmailAddress">
+                        </EditText>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="16dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/lightGrey"
+                            android:text="Phone Number"
+                            android:textSize="12dp"/>
+                        <EditText
+                            android:id="@+id/phone_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/lightGrey"
+                            android:textColorHint="@color/white"
+                            android:textColor="@color/white"
+                            android:inputType="textEmailAddress">
+                        </EditText>
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -149,7 +159,7 @@
             android:background="@color/darkGrey"
             android:layout_marginTop="6dp"
             android:paddingTop="16dp"
-            android:paddingBottom="16dp"
+            android:paddingBottom="32dp"
             android:paddingRight="32dp"
             android:paddingLeft="32dp">
 
