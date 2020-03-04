@@ -88,6 +88,7 @@
                 android:layout_height="wrap_content"
                 android:text="Genre"
                 android:textColor="@color/white"
+                android:textStyle="bold"
                 android:textSize="20dp"/>
             <ListView
                 android:id="@+id/genre_list"
