@@ -3,12 +3,93 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/darkGrey"
     tools:context=".Fragments.SignUp1">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="32dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/logo"
+            android:layout_weight="0">
+        </ImageView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_weight="1">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/lightGrey"
+                android:textColorHint="@color/lightGrey"
+                android:hint="First Name"
+                android:textColor="@color/white"
+                android:inputType="textEmailAddress">
+            </EditText>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/lightGrey"
+                android:textColorHint="@color/lightGrey"
+                android:hint="Last Name"
+                android:textColor="@color/white"
+                android:inputType="textPassword">
+            </EditText>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/lightGrey"
+                android:textColorHint="@color/lightGrey"
+                android:hint="Email"
+                android:textColor="@color/white"
+                android:inputType="textPassword">
+            </EditText>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/lightGrey"
+                android:textColorHint="@color/lightGrey"
+                android:hint="Password"
+                android:textColor="@color/white"
+                android:inputType="textPassword">
+            </EditText>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <Button
+                style="@style/ButtonCnx"
+                android:id="@+id/btn_next"
+                android:background="@drawable/next_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Next"
+                android:textColor="@color/bordo"
+                android:drawableRight="@mipmap/ic_arrow_next"></Button>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
 
 </FrameLayout>

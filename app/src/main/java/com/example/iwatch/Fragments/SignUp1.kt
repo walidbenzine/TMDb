@@ -8,7 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
+import kotlinx.android.synthetic.main.fragment_sign_up1.*
+import android.content.Intent
 import com.example.iwatch.R
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -42,7 +45,28 @@ class SignUp1 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sign_up1, container, false)
+
+
+
+
+
+
+        /*_next.setOnClickListener {
+            val fragment = SignUp2()
+            val fragmentManager = activity!!.supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.contaner,fragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }*/
+        //return inflater.inflate(com.example.iwatch.R.layout.fragment_sign_up1, container, false)
+
+
+        val v = inflater.inflate(com.example.iwatch.R.layout.fragment_sign_up1, container, false)
+
+
+
+        return v
     }
 
     // TODO: Rename method, update argument and hook method into UI event
