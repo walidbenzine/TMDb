@@ -46,7 +46,7 @@ class SignUp1 : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-
+        val v = inflater.inflate(com.example.iwatch.R.layout.fragment_sign_up1, container, false)
 
 
 
@@ -62,7 +62,7 @@ class SignUp1 : Fragment() {
         //return inflater.inflate(com.example.iwatch.R.layout.fragment_sign_up1, container, false)
 
 
-        val v = inflater.inflate(com.example.iwatch.R.layout.fragment_sign_up1, container, false)
+
 
 
 
