@@ -4,13 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.iwatch.R
 
-
-class MainActivity : AppCompatActivity() {
+class Home : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
-
+        setContentView( R.layout.activity_home)
     }
-
 }
