@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 
 import com.example.iwatch.R
-import kotlinx.android.synthetic.main.fragment_home.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,10 +45,13 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_home, container, false)
-        btn_movies.setBackgroundResource(R.drawable.clicked_button)
-        btn_movies.setTextColor(Color.parseColor("#ffffff"))
-        btn_series.setBackgroundResource(R.drawable.no_clicked_button)
-        btn_series.setTextColor(Color.parseColor("#EF4B53"))
+        val btnMovies = v.findViewById<View>(R.id.btn_movies) as Button
+        btnMovies.setBackgroundResource(R.drawable.clicked_button)
+        btnMovies.setTextColor(Color.parseColor("#ffffff"))
+
+        val btnSeries = v.findViewById<View>(R.id.btn_series) as Button
+        btnSeries.setBackgroundResource(R.drawable.no_clicked_button)
+        btnSeries.setTextColor(Color.parseColor("#EF4B53"))
         return v
     }
 

@@ -8,10 +8,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import android.widget.Button
 import com.example.iwatch.R
-import kotlinx.android.synthetic.main.fragment_cinema.*
-import kotlinx.android.synthetic.main.fragment_home.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,11 +43,15 @@ class CinemaFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val v = inflater.inflate(R.layout.fragment_home, container, false)
-        btn_movies_cinema.setBackgroundResource(R.drawable.clicked_button)
-        btn_movies_cinema.setTextColor(Color.parseColor("#ffffff"))
-        btn_rooms.setBackgroundResource(R.drawable.no_clicked_button)
-        btn_rooms.setTextColor(Color.parseColor("#EF4B53"))
+        val v = inflater.inflate(R.layout.fragment_cinema, container, false)
+
+        val btnCinemaMovies = v.findViewById<View>(R.id.btn_movies_cinema) as Button
+        btnCinemaMovies.setBackgroundResource(R.drawable.clicked_button)
+        btnCinemaMovies.setTextColor(Color.parseColor("#ffffff"))
+
+        val btnRooms = v.findViewById<View>(R.id.btn_rooms) as Button
+        btnRooms.setBackgroundResource(R.drawable.no_clicked_button)
+        btnRooms.setTextColor(Color.parseColor("#EF4B53"))
         return v
     }
 
