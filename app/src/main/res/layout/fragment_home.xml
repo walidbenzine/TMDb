@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.HomeFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="24dp">
+
+            <Button
+                android:id="@+id/btn_movies"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Film en cour"/>
+
+            <Button
+                android:id="@+id/btn_series"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="serie en cour"
+                android:layout_marginLeft="24dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
