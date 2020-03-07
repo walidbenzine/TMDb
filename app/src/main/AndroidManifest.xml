@@ -15,19 +15,13 @@
 
     <activity android:name=".Activities.EditProfile"/>
     <activity android:name=".Activities.Profile"/>
-
-
-        <activity android:name=".Activities.Home"/>
-
-
-        <activity android:name=".Activities.SignUp">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
+    <activity android:name=".Activities.Home">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+    <activity android:name=".Activities.SignUp"/>
     </application>
 
 </manifest>
