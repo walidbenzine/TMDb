@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import com.example.iwatch.R
 import kotlinx.android.synthetic.main.fragment_sign_up1.*
 
@@ -42,36 +43,17 @@ class SignUp1 : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-<<<<<<< HEAD
-        // Inflate the layout for this fragment
-
-        val v = inflater.inflate(com.example.iwatch.R.layout.fragment_sign_up1, container, false)
-
-
-
-
-        /*_next.setOnClickListener {
-            val fragment = SignUp2()
-            val fragmentManager = activity!!.supportFragmentManager
-            val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.contaner,fragment)
+        val v = inflater.inflate(R.layout.fragment_sign_up1, container, false)
+        val btnNext = v.findViewById<View>(R.id.btn_next) as Button
+        btnNext.setOnClickListener {
+            val fragmentTransaction = fragmentManager!!.beginTransaction()
+            fragmentTransaction.replace(R.id.fragment_container, signUp2Fragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
-        }*/
-        //return inflater.inflate(com.example.iwatch.R.layout.fragment_sign_up1, container, false)
-
-
-
-
-
+        }
 
         return v
-=======
-        btn_next.setOnClickListener {
-            System.out.println("hello")
-        }
-        return inflater.inflate(R.layout.fragment_sign_up1, container, false)
->>>>>>> 1e87b127a8d078543c23c8e477602a7bd67955dd
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

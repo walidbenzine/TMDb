@@ -10,9 +10,10 @@
     </item>
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <corners android:radius="8dp"/>
+            <corners android:radius="24dp"/>
             <solid android:color="@color/bordo"/>
-            <size android:width="150dp" android:height="50dp"/>
+            <stroke android:color="@color/bordo" android:width="1dp" />
+            <size android:width="250dp" android:height="50dp"/>
         </shape>
     </item>
 </selector>
