@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkGrey"
+    tools:context=".Activities.ConfirmRegistration">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="32dp">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/txt2"
+                android:layout_width="match_parent"
+                android:layout_height="87dp"
+                android:ems="20"
+                android:gravity="center_horizontal|top|center_vertical"
+
+                android:text="Please set the confirmation code sent to your email ey_azzi@esi.dz"
+                android:textColor="@color/white"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="65dp"
+            android:layout_marginRight="65dp"
+            android:orientation="horizontal">
+
+
+            <EditText
+                android:id="@+id/editText1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/bordo"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:inputType="phone"
+                android:textSize="18dp"
+                android:textColor="@color/bordo" />
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/bordo"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:inputType="phone"
+                android:textSize="18dp"
+                android:textColor="@color/bordo" />
+
+            <EditText
+                android:id="@+id/editText3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/bordo"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:inputType="phone"
+                android:textSize="18dp"
+                android:textColor="@color/bordo" />
+
+            <EditText
+                android:id="@+id/editText4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/bordo"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:inputType="phone"
+                android:textSize="18dp"
+                android:textColor="@color/bordo" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_marginTop="36dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_next"
+                style="@style/ButtonCnx"
+                android:layout_width="196dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cnx_button"
+                android:text="Sin Up"
+                android:textColor="@color/white"></Button>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</FrameLayout>
