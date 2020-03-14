@@ -8,6 +8,8 @@ import android.widget.BaseAdapter
 import com.example.iwatch.R
 import kotlinx.android.synthetic.main.profile_genre_item.view.*
 
+
+
 class GenreAdapter(context: Context?): BaseAdapter() {
     private val mContext: Context? = context
 
@@ -19,6 +21,13 @@ class GenreAdapter(context: Context?): BaseAdapter() {
         "Thriller"
     )
 
+    private val icons = arrayListOf<Int>(
+        R.mipmap.ic_compass,
+        R.mipmap.ic_gun,
+        R.mipmap.ic_drama,
+        R.mipmap.ic_heart,
+        R.mipmap.ic_ghost
+    )
     //rendering out each row
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val LayoutInflater = LayoutInflater.from(mContext)
@@ -26,6 +35,7 @@ class GenreAdapter(context: Context?): BaseAdapter() {
 
         genreItem.genre.text = genres.get(position)
         genreItem.genre_decription.text = "find all movies"
+        genreItem.genre_icon.setImageResource(icons.get(position))
         return genreItem
     }
 

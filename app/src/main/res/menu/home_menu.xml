@@ -6,4 +6,5 @@
         android:icon="@mipmap/ic_search"
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+
 </menu>
