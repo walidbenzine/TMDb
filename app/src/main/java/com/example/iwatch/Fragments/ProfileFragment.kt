@@ -1,17 +1,19 @@
 package com.example.iwatch.Fragments
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ListView
+import com.example.iwatch.Activities.EditProfile
 import com.example.iwatch.Adapters.GenreAdapter
 
 import com.example.iwatch.R
-import kotlinx.android.synthetic.main.activity_profile.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,6 +54,13 @@ class ProfileFragment : Fragment() {
 
         val genreList = v.findViewById<ListView>(R.id.genre_list) as ListView
         genreList.adapter = this.context?.let { GenreAdapter(it) }
+
+        val btnEditProfile = v.findViewById<View>(R.id.btn_edit_profile) as Button
+        btnEditProfile.setOnClickListener {
+            val editProfile = Intent(this.context, EditProfile::class.java)
+            startActivity(editProfile)
+        }
+
 
         return v
     }

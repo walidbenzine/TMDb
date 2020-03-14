@@ -19,8 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.Profile" />
-        <activity android:name=".Activities.EditProfile" />
+        <activity android:name=".Activities.EditProfile"
+            android:parentActivityName=".Activities.Home"/>
         <activity android:name=".Activities.ConfirmRegistration"/>
     </application>
 
