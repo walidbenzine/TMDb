@@ -8,8 +8,8 @@ import android.widget.BaseAdapter
 import com.example.iwatch.R
 import kotlinx.android.synthetic.main.profile_genre_item.view.*
 
-class GenreAdapter(context: Context): BaseAdapter() {
-    private val mContext: Context = context
+class GenreAdapter(context: Context?): BaseAdapter() {
+    private val mContext: Context? = context
 
     private val genres = arrayListOf<String>(
         "Adventure",

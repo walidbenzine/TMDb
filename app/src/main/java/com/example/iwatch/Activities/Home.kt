@@ -6,17 +6,15 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.iwatch.Fragments.CinemaFragment
-import com.example.iwatch.Fragments.HomeFragment
-import com.example.iwatch.Fragments.PersonsFragment
-import com.example.iwatch.Fragments.SeriesFragment
+import com.example.iwatch.Fragments.*
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_home.*
 
 class Home : AppCompatActivity(),
     HomeFragment.OnFragmentInteractionListener, CinemaFragment.OnFragmentInteractionListener,
-    SeriesFragment.OnFragmentInteractionListener, PersonsFragment.OnFragmentInteractionListener {
+    SeriesFragment.OnFragmentInteractionListener, PersonsFragment.OnFragmentInteractionListener,
+    ProfileFragment.OnFragmentInteractionListener{
 
     override fun onFragmentInteraction(uri: Uri) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -52,7 +50,7 @@ class Home : AppCompatActivity(),
                 1 -> CinemaFragment()
                 2 -> SeriesFragment()
                 3 -> PersonsFragment()
-                4 -> HomeFragment()
+                4 -> ProfileFragment()
                 else -> Fragment()
             }
         }

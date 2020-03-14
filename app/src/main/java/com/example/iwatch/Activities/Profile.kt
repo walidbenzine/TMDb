@@ -20,7 +20,6 @@ class Profile : AppCompatActivity() {
         btn_edit_profile.setOnClickListener {
             val editProfile = Intent(this, EditProfile::class.java)
             startActivity(editProfile)
-            System.out.println("hello")
         }
     }
 }
