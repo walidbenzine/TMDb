@@ -1,8 +1,14 @@
 package com.example.iwatch.Activities
 
+import android.app.SearchManager
+import android.content.Context
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.widget.Toast
+import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -16,15 +22,18 @@ class Home : AppCompatActivity(),
     SeriesFragment.OnFragmentInteractionListener, PersonsFragment.OnFragmentInteractionListener,
     ProfileFragment.OnFragmentInteractionListener{
 
+    private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
+
     override fun onFragmentInteraction(uri: Uri) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView( R.layout.activity_home)
+
+        // set the toolbar
+        setSupportActionBar(toolbar)
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -36,6 +45,36 @@ class Home : AppCompatActivity(),
 
         home_container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(home_container))
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.home_menu, menu)
+
+        val manager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchItem = menu?.findItem(R.id.search)
+        val searchView = searchItem?.actionView as SearchView
+
+        searchView.setSearchableInfo(manager.getSearchableInfo(componentName))
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchView.clearFocus()
+                searchView.setQuery("", false)
+                searchItem.collapseActionView()
+
+                Toast.makeText(this@Home, "looking for $query", Toast.LENGTH_LONG).show()
+
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+
+        })
+
+
+        return super.onCreateOptionsMenu(menu)
     }
 
     /**
