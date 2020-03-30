@@ -80,17 +80,6 @@
         <item name="android:layout_marginBottom">32dp</item>
     </style>
 
-
-    <!-- title card  -->
-    <style name="title">
-        <item name="android:textColor">#ffffff</item>
-        <item name="android:textSize">8pt</item>
-
-        <item name="android:paddingLeft">16dp</item>
-        <item name="android:paddingRight">16dp</item>
-        <item name="android:paddingTop">16dp</item>
-    </style>
-
     <!-- Detail card  -->
     <style name="details">
         <item name="android:textColor">#ffffff</item>
