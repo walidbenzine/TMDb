@@ -4,12 +4,12 @@ import java.util.Date
 
 class Actor {
 
-    private val nom: String? = null
-    private val prenom: String? = null
-    private val lieuNaissance: String? = null
-    private val bibliographie: String? = null
-    internal var popularite: Int = 0
-    internal var dateNaissance: Date? = null
-    internal var filmographie: List<Film>? = null
-    internal var photo: String? = null //TYPE DE VARIABLE A CHANGER
+    private val firstName: String? = null
+    private val lastName: String? = null
+    private val cityOfBirth: String? = null
+    private val bibliography: String? = null
+    internal var popularity: Int = 0
+    internal var dateOfBirth: Date? = null
+    internal var filmography: List<Film>? = null
+    internal var picture: String? = null //TYPE DE VARIABLE A CHANGER
 }

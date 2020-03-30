@@ -7,10 +7,10 @@ class Film {
 
     private val title: String? = null
     private val resume: String? = null
-    internal var note: Int = 0
-    internal var dateSortie: Date? = null
+    internal var grade: Int = 0
+    internal var releasedDate: Date? = null
     internal var duration: Time? = null
-    internal var filmsLiees: List<Film>? = null
+    internal var associatedMovies: List<Film>? = null
     internal var genre: List<String>? = null  //PEUT ETRE A CHANGER
     internal var actors: List<Actor>? = null
     internal var realisator: List<String>? = null

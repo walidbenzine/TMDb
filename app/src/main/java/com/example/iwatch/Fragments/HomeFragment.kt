@@ -49,6 +49,7 @@ class HomeFragment : Fragment() {
         btnMovies.setBackgroundResource(R.drawable.clicked_button)
         btnMovies.setTextColor(Color.parseColor("#ffffff"))
 
+
         val btnSeries = v.findViewById<View>(R.id.btn_series) as Button
         btnSeries.setBackgroundResource(R.drawable.no_clicked_button)
         btnSeries.setTextColor(Color.parseColor("#EF4B53"))
