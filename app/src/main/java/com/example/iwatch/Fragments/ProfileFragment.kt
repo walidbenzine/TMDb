@@ -9,11 +9,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.ListView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Activities.EditProfile
 import com.example.iwatch.Adapters.GenreAdapter
+import com.example.iwatch.Entities.Genre
+import com.example.iwatch.Enumerations.GenreType
 
 import com.example.iwatch.R
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,15 +41,14 @@ class ProfileFragment : Fragment() {
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
+    var genres = ArrayList<Genre>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
-
-
     }
 
     override fun onCreateView(
@@ -51,10 +57,17 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_profile, container, false)
+        val genreRecyclerView = v.findViewById<RecyclerView>(R.id.genre_recycler_view)
 
-        val genreList = v.findViewById<ListView>(R.id.genre_list) as ListView
-        genreList.adapter = this.context?.let { GenreAdapter(it) }
+        genres.add(Genre(GenreType.Thriller))
+        genres.add(Genre(GenreType.Action))
+        genres.add(Genre(GenreType.Romance))
+        genres.add(Genre(GenreType.Drama))
 
+        genreRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this.context)
+            adapter = GenreAdapter(genres)
+        }
         val btnEditProfile = v.findViewById<View>(R.id.btn_edit_profile) as Button
         btnEditProfile.setOnClickListener {
             val editProfile = Intent(this.context, EditProfile::class.java)

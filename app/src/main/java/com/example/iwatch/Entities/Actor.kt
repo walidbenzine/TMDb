@@ -10,6 +10,6 @@ class Actor {
     private val bibliography: String? = null
     internal var popularity: Int = 0
     internal var dateOfBirth: Date? = null
-    internal var filmography: List<Film>? = null
+    internal var filmography: List<Movie>? = null
     internal var picture: String? = null //TYPE DE VARIABLE A CHANGER
 }

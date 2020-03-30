@@ -81,6 +81,7 @@
             android:paddingTop="16dp"
             android:paddingBottom="16dp"
             android:paddingLeft="32dp"
+            android:paddingRight="32dp"
             android:background="@color/darkGrey">
             <TextView
                 android:layout_width="wrap_content"
@@ -89,10 +90,12 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="20dp"/>
-            <ListView
-                android:id="@+id/genre_list"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/genre_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/profile_genre_item"
+                android:scrollbars="none"
                 android:layout_marginTop="16dp"/>
         </LinearLayout>
     </LinearLayout>

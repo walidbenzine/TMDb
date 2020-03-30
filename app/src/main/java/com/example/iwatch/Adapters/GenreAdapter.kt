@@ -5,13 +5,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Entities.Genre
 import com.example.iwatch.R
+import com.example.iwatch.ViewHolders.GenreViewHolder
 import kotlinx.android.synthetic.main.profile_genre_item.view.*
 
 
 
-class GenreAdapter(context: Context?): BaseAdapter() {
-    private val mContext: Context? = context
+class GenreAdapter(val genreList: ArrayList<Genre>): RecyclerView.Adapter<GenreViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenreViewHolder {
+        var v = LayoutInflater.from(parent.context).inflate(R.layout.profile_genre_item, parent, false)
+        return GenreViewHolder(v)
+    }
+
+    override fun getItemCount(): Int {
+        return genreList.size
+    }
+
+    override fun onBindViewHolder(holder: GenreViewHolder, position: Int) {
+        val genre: Genre = genreList[position]
+
+        holder.genre.text = genre.genreType.toString()
+        holder.genreDescription.text = genre.toast
+        holder.genreIcon.setImageResource(genre.iconId!!)
+    }
+    /*private val mContext: Context? = context
 
     private val genres = arrayListOf<String>(
         "Adventure",
@@ -50,5 +70,5 @@ class GenreAdapter(context: Context?): BaseAdapter() {
     //number of rows in listView
     override fun getCount(): Int {
         return 5
-    }
+    }*/
 }

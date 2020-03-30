@@ -8,8 +8,8 @@ class User {
     private val password: String? = null
     private val mobile: String? = null
 
-    internal var FavoriteMovies: List<Film>? = null  //A CHANGER
-    internal var MovieHistory: List<Film>? = null  //peut etre
+    internal var FavoriteMovies: List<Movie>? = null  //A CHANGER
+    internal var MovieHistory: List<Movie>? = null  //peut etre
     internal var FavoriteSeries: List<Serie>? = null //en hashmap
     internal var SerieHistory: List<Serie>? = null  //pour les favoris
 
