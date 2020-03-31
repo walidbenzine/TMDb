@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:id="@+id/btn_movie_detail"
+        android:id="@+id/btn_serie_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="8dp">
@@ -34,7 +34,7 @@
                 android:paddingLeft="16dp">
 
                 <TextView
-                    android:id="@+id/movie_title"
+                    android:id="@+id/serie_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="20dp"
@@ -42,7 +42,7 @@
                     android:textStyle="bold"/>
 
                 <TextView
-                    android:id="@+id/movie_resume"
+                    android:id="@+id/serie_details"
                     android:layout_width="match_parent"
                     android:layout_height="32dp"
                     android:maxLength="132"
@@ -60,7 +60,7 @@
                         android:text="Date de sortie"/>
 
                     <TextView
-                        android:id="@+id/movie_released_date"
+                        android:id="@+id/serie_released_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
@@ -70,10 +70,8 @@
 
         </androidx.cardview.widget.CardView>
 
-
-
         <ImageView
-            android:id="@+id/movie_picture"
+            android:id="@+id/serie_picture"
             android:layout_width="110dp"
             android:layout_height="180dp"
             android:background="@color/darkGrey"
@@ -83,16 +81,15 @@
             android:elevation="2dp"/>
 
         <Button
-            android:id="@+id/movie_grade"
+            android:id="@+id/serie_grade"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginTop="4dp"
 
-            android:layout_alignStart="@+id/movie_picture"
-            android:layout_alignTop="@+id/movie_picture"
+            android:layout_alignStart="@+id/serie_picture"
+            android:layout_alignTop="@+id/serie_picture"
             android:layout_marginStart="98dp"
             android:background="@drawable/round_button" />
-
 
     </RelativeLayout>
 
