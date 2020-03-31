@@ -85,15 +85,6 @@ public class FilmController {
 		return "yes";
 	}
 
-	@RequestMapping("/addTv")
-	public String addTv() throws IOException
-	{
-		t =new  ImportFunctions();
-
-		repo2.saveAll(t.Serie("https://api.themoviedb.org/3/tv/popular?api_key="+API_Key+"&language=en-US&page=1"));
-
-		return "good";
-	}
 
 	@RequestMapping("/addliee")
 	public String getFilmliee() throws IOException

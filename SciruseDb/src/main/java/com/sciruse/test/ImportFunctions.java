@@ -288,7 +288,7 @@ public class ImportFunctions {
 				serie.setResume(obj.get("overview").toString());
 				serie.setDateSortie(obj.get("first_air_date").toString());
 				serie.setNote(obj.get("vote_average").toString());
-				serie.setPath(obj.get("poster_path").toString());
+				serie.setImage(obj.get("poster_path").toString());
 				serie.setTitle(obj.get("original_name").toString());
 
 				serie = setSaisonEpisodeCount(id, serie);
@@ -359,7 +359,49 @@ public class ImportFunctions {
 	}
 	
 
-	
+public static  List<Serie> getSerieLiee(String url) throws IOException {
+		
+		List<Serie> seriesLies = new ArrayList<Serie>();
+		JSONObject object = GetMyJson(url);
+		JSONArray serieArray = object.getJSONArray("results");
+		if (serieArray != null) { 
+		for(int i=0;i<serieArray.length();i++) {
+			
+			Serie serie = new Serie();
+			JSONObject obj =(JSONObject) serieArray.get(i);
+			String id = obj.get("id").toString();
+			
+			if(idsSerie.contains(id)==false) {
+				idsSerie.add(id);
+			serie.setId((Integer) obj.get("id"));
+			serie.setResume(obj.get("overview").toString());
+			serie.setDateSortie(obj.get("first_air_date").toString());
+			serie.setNote(obj.get("vote_average").toString());
+			serie.setImage(obj.get("poster_path").toString());
+			serie.setTitle(obj.get("original_name").toString());
+			
+			serie = setSaisonEpisodeCount(id, serie);
+
+			serie.setComments(Comment(Base_url+"tv/"+id+"/reviews?api_key="+API_Key+"&language=&page=1"));
+			
+			serie.setGenre(genre(GetMyJson(Base_url+"tv/"+id+"?api_key="+API_Key+"&language=fr&page=1")));
+			
+			serie.setActors(Actors(Base_url+"tv/"+id+"/credits?api_key="+API_Key+"&language=en-US"));
+		
+			/*List<Saison> saisons = new ArrayList<Saison>();
+			
+			for (int j = 1; j <= Integer.parseInt( serie.getNbrSaison()); j++) {
+				saisons.add(getSaisonInfo(Base_url+"tv/"+id+"/season/"+j+"?api_key="+API_Key+"&language=en-US"));
+			}
+			
+			serie.setSaisons(saisons);*/
+			seriesLies.add(serie);
+			
+		}
+		}}
+
+		return seriesLies;
+	}
 
 
 

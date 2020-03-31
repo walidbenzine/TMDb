@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
-Built-By: yassi
-Build-Jdk: 13
+Built-By: Admin
+Build-Jdk: 13.0.1
 Implementation-Title: SciruseDb
 Implementation-Version: 0.0.1-SNAPSHOT
 Implementation-Vendor-Id: com.sciruse

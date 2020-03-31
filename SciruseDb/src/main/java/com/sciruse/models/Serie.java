@@ -25,13 +25,14 @@ public class Serie {
 	private String note ;
 	private String nbrEpisodes;
 	private String nbrSaison ;
-	private String Path;
+	private String Image;
 	
 	
 	@ManyToMany (cascade = {CascadeType.ALL})
 	private List<Saison>saisons ;
 	
-	//private  List<Serie>seriesLiees;
+	@ManyToMany (cascade = {CascadeType.ALL})
+	private  List<Serie>seriesLiees;
 	
 	@ManyToMany (cascade = {CascadeType.ALL})
 	private List<Comments>comments = new ArrayList<Comments>();
@@ -79,11 +80,11 @@ public class Serie {
 	}
 
 
-	public String getPath() {
-		return Path;
+	public String getImage() {
+		return Image;
 	}
-	public void setPath(String path) {
-		Path = path;
+	public void setImage(String Image) {
+		this.Image = Image;
 	}
 
 
@@ -125,11 +126,19 @@ public class Serie {
 	public void setSaisons(List<Saison> saisons) {
 		this.saisons = saisons;
 	}
+	
+	public List<Serie> getSeriesLiees() {
+		return seriesLiees;
+	}
+	public void setSeriesLiees(List<Serie> seriesLiees) {
+		this.seriesLiees = seriesLiees;
+	}
+	
 	@Override
 	public String toString() {
 		return "Serie [id=" + id + ", title=" + title + ", resume=" + resume + ", dateSortie="
 				+ dateSortie + ", note=" + note + ", nbrEpisodes=" + nbrEpisodes + ", nbrSaison=" + nbrSaison
-				+ ", Path=" + Path + ", comments=" + comments + ", genre=" + genre + "]";
+				+ ", Image=" + Image + ", comments=" + comments + ", genre=" + genre + "]";
 	}
 
 
