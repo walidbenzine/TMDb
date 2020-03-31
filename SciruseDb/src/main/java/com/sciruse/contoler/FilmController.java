@@ -44,9 +44,19 @@ public class FilmController {
 	@RequestMapping("/getMovies")
 	public List<Film> addAlien(Film film) throws IOException
 	{
-				
+		t =new  ImportFunctions();
 		return (List<Film>) repo.findAll();
 	}
+
+	@RequestMapping("/getTv")
+	public List<Serie> addAlien(Serie serie) throws IOException
+	{
+		t =new  ImportFunctions();
+
+		return t.Serie("https://api.themoviedb.org/3/tv/popular?api_key="+API_Key+"&language=en-US&page=1");
+	}
+
+
 
 	@RequestMapping("/addMovies")
 	public String addMovies() throws IOException
@@ -55,6 +65,7 @@ public class FilmController {
 		Vector<Film>films= t.MoviesPopular("https://api.themoviedb.org/3/movie/popular?api_key="+API_Key+"&language=en-US&page=1");
 
 		for (Film film : films) {
+
 
 			List<Actors> act = t.Actors(Base_url+"movie/"+film.getID() +"/credits?api_key="+API_Key+"&language=en-US");
 			film.setActors(act);
@@ -66,13 +77,13 @@ public class FilmController {
 			for (Actors actor: act) {
 				actor.setFilmographie(t.getFilmBiblio(Base_url+"person/"+actor.getId()+"/movie_credits?api_key="+API_Key+"&language=en-US"));
 			}
+
 		}
 
 		repo.saveAll(films);
 
 		return "yes";
 	}
-
 
 	@RequestMapping("/addTv")
 	public String addTv() throws IOException
@@ -84,7 +95,6 @@ public class FilmController {
 		return "good";
 	}
 
-	
 	@RequestMapping("/addliee")
 	public String getFilmliee() throws IOException
 	{
@@ -99,6 +109,8 @@ public class FilmController {
 		return "done";
 
 	}
+
+
 
 
 }
