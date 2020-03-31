@@ -313,8 +313,6 @@ public class ImportFunctions {
 
 		return series;
 	}
-
-
 	public static Serie setSaisonEpisodeCount(String movieId,Serie serie) throws IOException {
 
 		JSONObject myobj;

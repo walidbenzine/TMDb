@@ -74,6 +74,7 @@ public class MovieController {
 	{
 		
 		return ActorRep.getActor(id).getFilmographie();
+		
 	}
 	
 	

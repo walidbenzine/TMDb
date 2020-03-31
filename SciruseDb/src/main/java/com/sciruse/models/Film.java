@@ -38,11 +38,11 @@ public class Film {
 	@ManyToMany (cascade = {CascadeType.ALL})
 	private List<Genre>genre = new ArrayList<Genre>();
 	
-	
+	@JsonIgnore
 	@ManyToMany (cascade = {CascadeType.ALL})
 	private List<Actors> actors;
 	
-	//private List<String>realisator ;
+	@JsonIgnore
 	@ManyToMany (cascade = {CascadeType.ALL})
 	private List<Comments>comments = new ArrayList<Comments>();
 
