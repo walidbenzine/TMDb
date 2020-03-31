@@ -29,12 +29,7 @@ public class Film {
 	private	 String note ;
 	private String dateSortie ;
 	private String image;
-	
-	@JsonIgnore
-	@ManyToMany (cascade = {CascadeType.ALL})
-	@Column(unique = false,nullable = true)
-	private List<Film>filmsLiees ;
-	
+	//private List<Film>filmsLiees ;
 	@ManyToMany (cascade = {CascadeType.ALL})
 	private List<Genre>genre = new ArrayList<Genre>();
 	
@@ -57,12 +52,6 @@ public class Film {
 	
 	
 	
-	public List<Film> getFilmsLiees() {
-		return filmsLiees;
-	}
-	public void setFilmsLiees(List<Film> filmsLiees) {
-		this.filmsLiees = filmsLiees;
-	}
 	public List<Actors> getActors() {
 		return actors;
 	}
