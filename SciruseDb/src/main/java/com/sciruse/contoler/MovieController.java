@@ -27,7 +27,8 @@ public class MovieController {
 	
 	@RequestMapping("/getPopular")
 	public List<Film> getPopular() throws IOException
-	{			
+	{
+				
 		return (List<Film>) movieRepository.getpopular();
 	}
 	
@@ -44,13 +45,6 @@ public class MovieController {
 	{
 		
 		return movieRepository.getMovie(id).getActors();
-	}
-	
-	@RequestMapping("/getFilmLie/{id}")
-	public List<Film> getFilmLie(@PathVariable Integer id) throws IOException
-	{
-		
-		return movieRepository.getMovie(id).getFilmsLiees();
 	}
 	
 	@RequestMapping("/getMovieComment/{id}")
@@ -75,9 +69,6 @@ public class MovieController {
 		
 		return ActorRep.getActor(id).getFilmographie();
 	}
-	
-	
-	
 	
 	
 	
