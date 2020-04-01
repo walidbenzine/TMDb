@@ -2,6 +2,8 @@ package com.sciruse.contoler;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Vector;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sciruse.models.Film;
 import com.sciruse.models.Serie;
 import com.sciruse.models.User;
+import com.sciruse.repository.SerieRepository;
 import com.sciruse.repository.UserRepository;
 import com.sciruse.test.ImportFunctions;
 
@@ -22,6 +25,9 @@ public class UserController {
 	@Autowired
 	UserRepository userRepository;
 	
+	@Autowired
+	SerieRepository serieRepository;
+	
 	@RequestMapping("/getUser/{login}/{password}")
 	public List<User> getUser(@PathVariable String login,@PathVariable String password) throws IOException
 	{			
@@ -32,6 +38,13 @@ public class UserController {
 	public List<Serie> getFavSerie(@PathVariable Integer id) throws IOException
 	{
 		return userRepository.getUser(id).getSerieFavoris();
+	}
+	
+	@RequestMapping("/addFavSerie/{id}/{idSerie}")
+	public String addFavSerie(@PathVariable Integer id, @PathVariable Integer idSerie) throws IOException
+	{
+		userRepository.addFavSerie(id,idSerie);
+		return "Ajout de la série aux favoris réussi";
 	}
 	
 	@RequestMapping("/getHistSerie/{id}")
