@@ -23,4 +23,10 @@ public interface UserRepository extends CrudRepository<User, Long>{
 	@Transactional
 	void addFavSerie(Integer id, Integer idSerie);
 	
+	
+	@Modifying
+	@Query(value = "INSERT INTO sciruse.user_film_favoris VALUES( ?1 , ?2 );", nativeQuery = true)
+	@Transactional
+	void addFavFilm(Integer id, Integer idFilm);
+	
 }

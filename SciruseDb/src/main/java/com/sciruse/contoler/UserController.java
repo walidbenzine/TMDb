@@ -65,6 +65,15 @@ public class UserController {
 		return userRepository.getUser(id).getFilmhistory();
 	}
 	
+	@RequestMapping("/addFavFilm/{id}/{idFilm}")
+	public String addFavFilm(@PathVariable Integer id,@PathVariable Integer idFilm) throws IOException
+	{
+		userRepository.addFavFilm(id,idFilm);
+		return "Ajout du film aux favoris reussi";
+	}
+	
+	
+	
 
 	
 }
