@@ -72,6 +72,28 @@ public class UserController {
 		return "Ajout du film aux favoris reussi";
 	}
 	
+	@RequestMapping("/addUser/{email}/{jeton}/{login}/{nom}/{password}/{picture}/{prenom}/{tel}")
+	public String addUser(@PathVariable String email, @PathVariable Integer jeton, @PathVariable String login, @PathVariable String nom, @PathVariable  String password, @PathVariable String picture, @PathVariable String prenom, @PathVariable String tel) throws IOException
+	{			
+		userRepository.addUser(email,jeton,  login,  nom,  password,  picture,  prenom,  tel);
+		return "Ajout user reussi";
+	}
+	
+	@RequestMapping("/addHistSerie/{user_id}/{seriehistory}")
+	public String addHistSerie(@PathVariable Integer user_id, @PathVariable Integer seriehistory) throws IOException
+	{
+		userRepository.addUserHistSerie(user_id, seriehistory);
+		return "Ajout history serie reussi";
+		
+	}
+	
+	
+	@RequestMapping("/addHistFilm/{user_id}/{filmhistory}")
+	public String addHistFilm(@PathVariable Integer user_id, @PathVariable Integer filmhistory) throws IOException
+	{
+		userRepository.addUserHistFilm(user_id,filmhistory);
+		return "Ajout history film reussi";
+	}
 	
 	
 

@@ -29,4 +29,20 @@ public interface UserRepository extends CrudRepository<User, Long>{
 	@Transactional
 	void addFavFilm(Integer id, Integer idFilm);
 	
+	@Modifying
+	@Query(value = "INSERT INTO sciruse.user(email,jeton,  login,  nom,  password,  picture,  prenom,  tel) VALUES(?1 , ?2, ?3, ?4, ?5, ?6, ?7, ?8);", nativeQuery = true)
+	@Transactional
+	void addUser(String email, Integer jeton, String login, String nom, String password, String picture, String prenom, String tel);
+	
+	
+	@Modifying
+	@Query(value = "INSERT INTO sciruse.user_seriehistory VALUES( ?1 , ?2 );", nativeQuery = true)
+	@Transactional
+	void addUserHistSerie(Integer user_id, Integer seriehistory);
+	
+	@Modifying
+	@Query(value = "INSERT INTO sciruse.user_filmhistory VALUES( ?1 , ?2 );", nativeQuery = true)
+	@Transactional
+	void addUserHistFilm(Integer user_id, Integer filmhistory);
+	
 }
