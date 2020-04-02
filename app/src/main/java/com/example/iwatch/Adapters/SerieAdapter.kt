@@ -25,9 +25,5 @@ class SerieAdapter (val serieList: ArrayList<Serie>): RecyclerView.Adapter<Serie
         holder.seriedetails.text =serie.details
         holder.seriereleazeddate.text = serie.releasedDate
         holder.seriepicture.setImageResource(serie.img)
-
-        //holder.genre.text = genre.genreType.toString()
-        //holder.genreDescription.text = genre.toast
-        //holder.genreIcon.setImageResource(genre.iconId!!)
     }
 }
