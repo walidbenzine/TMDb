@@ -14,7 +14,8 @@ import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_movie_details.*
 
 
-class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInteractionListener{
+class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInteractionListener,
+    MovieRoomsFragment.OnFragmentInteractionListener, CommentsFragment.OnFragmentInteractionListener{
 
     private var mSectionsPagerAdapter:SectionsPagerAdapter? = null
 
