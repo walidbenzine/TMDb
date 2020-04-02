@@ -167,7 +167,7 @@
             </LinearLayout>
 
             <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tablayout"
+                android:id="@+id/movie_tabs"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:elevation="5dp"
@@ -193,8 +193,9 @@
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/movie_view_pager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="500dp"
                 android:background="@color/darkGrey"/>
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -72,7 +71,6 @@ class Home : AppCompatActivity(),
             }
 
         })
-
 
         return super.onCreateOptionsMenu(menu)
     }

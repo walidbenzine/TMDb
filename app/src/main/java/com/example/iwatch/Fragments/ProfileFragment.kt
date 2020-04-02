@@ -9,10 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.ListView
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Activities.EditProfile
 import com.example.iwatch.Adapters.GenreAdapter
@@ -20,7 +17,6 @@ import com.example.iwatch.Entities.Genre
 import com.example.iwatch.Enumerations.GenreType
 
 import com.example.iwatch.R
-import kotlinx.android.synthetic.main.fragment_profile.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
