@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/darkGrey"
+        app:navigationIcon="@drawable/ic_action_navigation_arrow_back_inverted"
         android:elevation="4dp"/>
 
     <androidx.core.widget.NestedScrollView
@@ -30,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp">
                 <VideoView
-                    android:id="@+id/youtube_player_view"
+                    android:id="@+id/movie_trailer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </FrameLayout>
@@ -105,7 +106,7 @@
                             style="?android:attr/ratingBarStyleSmall"
                             android:layout_gravity="center_vertical"
                             android:saveEnabled="true"
-                            android:numStars="5"
+                            android:numStars="10"
                             android:stepSize=".5"/>
 
                         <LinearLayout
@@ -126,7 +127,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:text="/5"/>
+                                android:text="/10"/>
 
                         </LinearLayout>
 
@@ -186,7 +187,7 @@
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="commentaires"/>
+                    android:text="comments"/>
 
             </com.google.android.material.tabs.TabLayout>
 
