@@ -1,5 +1,4 @@
-package fr.upem.myapplication
-
+package com.example.iwatch.Entities
 import android.widget.ImageView
 import java.util.Date
 

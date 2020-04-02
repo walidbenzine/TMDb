@@ -76,6 +76,7 @@
             android:layout_width="110dp"
             android:layout_height="180dp"
             android:background="@color/darkGrey"
+            android:src="@drawable/theprotector"
             android:scaleType="fitXY"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"

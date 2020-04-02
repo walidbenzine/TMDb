@@ -1,5 +1,4 @@
-package fr.upem.myapplication
-
+package com.example.iwatch.Entities
 class User {
 
     private val firstName: String? = null

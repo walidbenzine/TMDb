@@ -1,5 +1,4 @@
-package fr.upem.myapplication
-
+package com.example.iwatch.Entities
 import java.sql.Time
 import java.util.Date
 

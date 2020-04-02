@@ -1,5 +1,4 @@
-package fr.upem.myapplication
-
+package com.example.iwatch.Entities
 class Cinema {
 
     private val name: String? = null
