@@ -1,9 +1,7 @@
 package com.sciruse.models;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -130,8 +128,8 @@ public class Serie {
 	public List<Serie> getSeriesLiees() {
 		return seriesLiees;
 	}
-	public void setSeriesLiees(List<Serie> seriesLiees) {
-		this.seriesLiees = seriesLiees;
+	public void setSeriesLiees(Serie seriesLiees) {
+		this.seriesLiees.add(seriesLiees);
 	}
 	
 	@Override

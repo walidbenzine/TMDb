@@ -89,7 +89,7 @@ public class SerieController {
 	{
 		 t =new  ImportFunctions();
 		
-		 serieRepository.saveAll(t.Serie("https://api.themoviedb.org/3/tv/popular?api_key="+API_Key+"&language=en-US&page=1"));
+		 serieRepository.saveAll(t.Serie(Base_url+"tv/popular?api_key="+API_Key+"&language=en-US&page=1"));
 		 
 	return "Series ajoutées !";
 	}
