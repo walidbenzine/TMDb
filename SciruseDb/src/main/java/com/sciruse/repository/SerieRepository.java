@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import com.sciruse.models.Saison;
 import com.sciruse.models.Serie;
 
 
@@ -21,5 +22,8 @@ public interface SerieRepository extends CrudRepository<Serie, Long>{
 	
 	@Query(value = "SELECT * FROM sciruse.serie where `image` !='null' order by `date_sortie` desc LIMIT 20 ", nativeQuery = true)
 	List<Serie> getSerieLast();
+	
+	@Query(value = "SELECT * FROM sciruse.saison where `id` = ?1 ", nativeQuery = true)
+	Saison getSaison(Integer id);
 
 }

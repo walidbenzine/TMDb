@@ -94,10 +94,10 @@ public class ImportFunctions {
 			if(idsActor.contains(id)==false) {
 				idsActor.add(id);
 			a= getFilmInfo(Base_url+"movie/"+id+"?api_key="+API_Key+"&language=en-US");
-		
+			if(a!=null) {
 			films.add(a);
 			}
-		}
+		}}
 		return films; 
 	}
 
@@ -130,6 +130,8 @@ public class ImportFunctions {
 	public static  Film getFilmInfo(String url) throws IOException {
 		Film film = new Film();
 		Genre g =null;
+		try {
+			
 		JSONObject object = GetMyJson(url);
 
 		film.setTitle(object.get("title").toString());
@@ -140,9 +142,11 @@ public class ImportFunctions {
 		film.setNote(object.get("vote_average").toString());
 		film.setGenre(genre(object));
 		film.setComments(Comment(Base_url+"movie/"+object.get("id")+"/reviews?api_key="+API_Key+"&language=en-US&page=1"));
-		
-		
 		return film;
+		}catch(Exception e) {
+			System.out.println(e);
+			return null;
+		}
 	}
 	public static  Film getFilmInfo2(String url) throws IOException {
 		Film film = new Film();
@@ -186,6 +190,33 @@ public class ImportFunctions {
 		return films;
 	}
 	
+	
+	public static  List<Serie> getSerieBiblio(String url) throws IOException {
+		List<Serie> series =new Vector<Serie>();
+		String id;
+		JSONObject object = GetMyJson(url);
+		JSONArray SerieArray = object.getJSONArray("cast");
+		Serie a =null ;
+		if (SerieArray != null) { 
+			int x=SerieArray.length();
+			if(x>4) { x = 4;}
+			for (int j=0;j<x;j++){ 
+
+				JSONObject obj =(JSONObject) SerieArray.get(j);
+				id = obj.get("id").toString();
+				if(idsActor.contains(id)==false) {
+					idsActor.add(id);
+				a= getSerieInfo(Base_url+"tv/"+id+"?api_key="+API_Key+"&language=en-US");
+				if(a!=null) {
+				series.add(a);
+				}
+				}
+			} 
+		} 
+
+		return series;
+	}
+	
 	public static  List<Film> getFilmLiee(String url) throws IOException {
 		List<Film>films =new Vector<Film>();
 		String id;
@@ -213,7 +244,6 @@ public class ImportFunctions {
 
 	public static  Actors getActorInfo(String url) throws IOException {
 		Actors actor = new Actors();
-		JSONObject myobj;
 		JSONObject object = GetMyJson(url);
 		actor.setDateNaissance(object.get("birthday").toString());  ;
 		actor.setLieuNaissance(object.get("place_of_birth").toString());
@@ -223,9 +253,10 @@ public class ImportFunctions {
 		actor.setPopularite(object.get("popularity").toString());
 		actor.setId((Integer) object.get("id"));
 		
-		
 		return actor;
 	}
+	
+
 
 	public static  Vector<Comments> Comment(String url) throws IOException {
 		Vector<Comments> comments=new Vector<Comments>(); 
@@ -268,58 +299,81 @@ public class ImportFunctions {
 	}
 
 
-	public static  Vector<Serie> Serie(String url) throws IOException {
-		Vector<Serie> series=new Vector<Serie>();
-		List<Saison> saisons =null;
+	public static  List<Serie> Serie(String url) throws IOException {
+		List<Serie> series=new Vector<Serie>();
 		String id;
 		JSONObject object = GetMyJson(url);
-		JSONArray serieArray = object.getJSONArray("results");
-		Serie serie = null;
-		if (serieArray != null) { 
-			for (int j=0;j<serieArray.length();j++){ 
-
-				serie = new Serie();
-				JSONObject obj =(JSONObject) serieArray.get(j);
-				id = obj.get("id").toString();
-				if(idsSerie.contains(id)==false) {
-					idsSerie.add(id);
-				
-				serie.setId((Integer) obj.get("id"));
-				serie.setResume(obj.get("overview").toString());
-				serie.setDateSortie(obj.get("first_air_date").toString());
-				serie.setNote(obj.get("vote_average").toString());
-				serie.setImage(obj.get("poster_path").toString());
-				serie.setTitle(obj.get("original_name").toString());
-
-				serie = setSaisonEpisodeCount(id, serie);
-
-				serie.setComments(Comment(Base_url+"tv/"+id+"/reviews?api_key="+API_Key+"&language=en-US&page=1"));
-				
-				serie.setGenre(genre(GetMyJson(Base_url+"tv/"+id+"?api_key="+API_Key+"&language=en-US")));
-				
-				serie.setActors(Actors(Base_url+"tv/"+id+"/credits?api_key="+API_Key+"&language=en-US"));
-				saisons = new ArrayList<Saison>();
-				for (int i = 1; i <= Integer.parseInt( serie.getNbrSaison()); i++) {
-					
-					saisons.add(getSaisonInfo(Base_url+"tv/"+id+"/season/"+i+"?api_key="+API_Key+"&language=en-US"));
-					
-				}
-				
-				serie.setSaisons(saisons);
-				series.add(serie);
+		if(object != null) {
+			JSONArray serieArray = object.getJSONArray("results");
+			Serie serie = null;
+			if (serieArray != null) { 
+				for (int j=0;j<serieArray.length();j++){ 
+					serie = new Serie();
+					JSONObject obj =(JSONObject) serieArray.get(j);
+					id = obj.get("id").toString();
+					serie = getSerieInfo(Base_url+"tv/"+id+"?api_key="+API_Key+"&language=en-US");
+					if(serie!=null) {
+						series.add(serie);
+					}
 				}
 			} 
-		} 
+		}
 
 		return series;
 	}
+	
+	public static  Serie getSerieInfo(String url) throws IOException {
+		Serie serie = new Serie();
+		JSONObject object = GetMyJson(url);
+		
+		if(object != null) {
+		String id = object.get("id").toString();
+		List<Saison> saisons = new ArrayList<Saison>();
+
+		if(idsSerie.contains(id)==false) {
+			idsSerie.add(id);
+		
+		serie.setId((Integer) object.get("id"));
+		serie.setResume(object.get("overview").toString());
+		serie.setDateSortie(object.get("first_air_date").toString());
+		serie.setNote(object.get("vote_average").toString());
+		serie.setImage(object.get("poster_path").toString());
+		serie.setTitle(object.get("original_name").toString());
+
+		serie = setSaisonEpisodeCount(id, serie);
+
+		serie.setComments(Comment(Base_url+"tv/"+id+"/reviews?api_key="+API_Key+"&language=en-US&page=1"));
+		
+		serie.setGenre(genre(GetMyJson(Base_url+"tv/"+id+"?api_key="+API_Key+"&language=en-US")));
+		
+		//serie.setActors(Actors(Base_url+"tv/"+id+"/credits?api_key="+API_Key+"&language=en-US"));
+
+		for (int i = 1; i <= Integer.parseInt( serie.getNbrSaison()); i++) {	
+			Saison saison = getSaisonInfo(Base_url+"tv/"+id+"/season/"+i+"?api_key="+API_Key+"&language=en-US");
+			if(saison!=null) {
+				saisons.add(saison);
+			}
+		}
+		
+		serie.setSaisons(saisons);
+		}
+		else {
+			return null;
+		}
+		}
+		
+		return serie;
+	}
+	
+	
+	
 	public static Serie setSaisonEpisodeCount(String movieId,Serie serie) throws IOException {
 
-		JSONObject myobj;
 		JSONObject object = GetMyJson(Base_url+"tv/"+movieId+"?api_key="+API_Key+"&language=en-US");
-
+        if(object != null) {
 		serie.setNbrEpisodes(object.get("number_of_episodes").toString());
 		serie.setNbrSaison(object.get("number_of_seasons").toString());
+        }
 		return serie;
 	}
 	
@@ -327,9 +381,12 @@ public class ImportFunctions {
 	public static  Saison getSaisonInfo(String url) throws IOException {
 		List<Episode> ep = new ArrayList<Episode>();
 		Saison saison = new Saison();
-		JSONObject myobj;
+		try {
 		JSONObject object = GetMyJson(url);
+		if(object != null) {
 		JSONArray EpisodArray = object.getJSONArray("episodes");
+		
+		if(EpisodArray!= null) {
 		saison.setId((int) object.get("id"));
 		saison.setDetails(object.get("overview").toString());
 		saison.setDateSortie(object.get("air_date").toString());
@@ -355,7 +412,13 @@ public class ImportFunctions {
 		}
 		
 		saison.setListEpisodes(ep);
+		}}
+
 		return saison;
+		}catch(Exception e) {
+			System.out.println(e);
+			return null;
+		}
 	}
 	
 

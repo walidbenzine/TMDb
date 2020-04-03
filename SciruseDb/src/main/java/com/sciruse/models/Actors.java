@@ -24,6 +24,21 @@ public class Actors {
 	@JsonIgnore
 	@Column(unique = false,nullable = true)
 	private	List<Film>filmographie ;
+	
+	@ManyToMany (cascade = {CascadeType.ALL})
+	@JsonIgnore
+	@Column(unique = false,nullable = true)
+	private	List<Serie> seriegraphie ;
+	
+	
+	public List<Serie> getSeriegraphie() {
+		return seriegraphie;
+	}
+	public void setSeriegraphie(List<Serie> seriegraphie) {
+		this.seriegraphie = seriegraphie;
+	}
+
+
 	private	String photo ; //TYPE DE VARIABLE A CHANGER
 	
 	
