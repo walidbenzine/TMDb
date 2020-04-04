@@ -13,6 +13,7 @@ import com.sciruse.models.Actors;
 import com.sciruse.models.Comments;
 import com.sciruse.models.Film;
 import com.sciruse.models.Genre;
+import com.sciruse.models.Room;
 import com.sciruse.repository.ActorRepository;
 import com.sciruse.repository.FilmRepository;
 
@@ -74,6 +75,15 @@ public class MovieController {
 	{
 		
 		return ActorRep.getActor(id).getFilmographie();
+		
+	}
+	
+	
+	@RequestMapping("/getRoom/{id}")
+	public List<Room> getRoom(@PathVariable Integer id) throws IOException
+	{
+		
+		return movieRepository.getMovie(id).getRooms();
 		
 	}
 	
