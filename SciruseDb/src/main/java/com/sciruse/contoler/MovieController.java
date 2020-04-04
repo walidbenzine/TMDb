@@ -2,8 +2,6 @@ package com.sciruse.contoler;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +21,6 @@ public class MovieController {
 	@Autowired
 	FilmRepository movieRepository;
 	
-	@Autowired
-	ActorRepository ActorRep;
 	
 	@RequestMapping("/getPopular")
 	public List<Film> getPopular() throws IOException
@@ -69,7 +65,6 @@ public class MovieController {
 		return movieRepository.getMovie(id).getGenre();
 	}
 	
-	
 	@RequestMapping("/getActorFilmoGrah/{id}")
 	public List<Film> getActorFilmoGrah(@PathVariable Integer id) throws IOException
 	{
@@ -78,7 +73,6 @@ public class MovieController {
 		
 	}
 	
-	
 	@RequestMapping("/getRoom/{id}")
 	public List<Room> getRoom(@PathVariable Integer id) throws IOException
 	{
@@ -86,11 +80,5 @@ public class MovieController {
 		return movieRepository.getMovie(id).getRooms();
 		
 	}
-	
-	
-	
-	
-	
-	
 	
 }

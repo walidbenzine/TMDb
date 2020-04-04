@@ -2,8 +2,6 @@ package com.sciruse.contoler;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Vector;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +16,6 @@ import com.sciruse.test.ImportFunctions;
 @RestController
 public class UserController {
 
-	private static String Base_url="https://api.themoviedb.org/3/";
-	private static String API_Key="94327dc22a17d2c12b806d241682cd96";
 	ImportFunctions t;
 	
 	@Autowired

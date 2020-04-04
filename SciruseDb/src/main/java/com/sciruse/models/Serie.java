@@ -8,12 +8,15 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Serie {
 
-	@Id 	
-	@Column(unique = true)
+	@Id 
+	@Column(unique = true,nullable = false)
 	private Integer id;
+	
 	private String title;
 	
 	@Column(columnDefinition="LONGTEXT")
@@ -25,17 +28,23 @@ public class Serie {
 	private String nbrSaison ;
 	private String Image;
 	
-	
+	@JsonIgnore
 	@ManyToMany (cascade = {CascadeType.ALL})
 	private List<Saison>saisons ;
 	
+	@JsonIgnore
 	@ManyToMany (cascade = {CascadeType.ALL})
+	@Column(unique = false,nullable = true)
 	private  List<Serie>seriesLiees;
 	
+	@JsonIgnore
 	@ManyToMany (cascade = {CascadeType.ALL})
 	private List<Comments>comments = new ArrayList<Comments>();
+	
 	@ManyToMany (cascade = {CascadeType.ALL})
 	private  List<Genre> genre =  new ArrayList<Genre>();
+	
+	@JsonIgnore
 	@ManyToMany (cascade = {CascadeType.ALL})
 	private List<Actors> actors;
 
@@ -98,6 +107,7 @@ public class Serie {
 	public List<Comments> getComments() {
 		return comments;
 	}
+	
 	public void setComments(List<Comments> comments) {
 		this.comments = comments;
 	}
