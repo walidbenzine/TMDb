@@ -65,14 +65,6 @@ public class MovieController {
 		return movieRepository.getMovie(id).getGenre();
 	}
 	
-	@RequestMapping("/getActorFilmoGrah/{id}")
-	public List<Film> getActorFilmoGrah(@PathVariable Integer id) throws IOException
-	{
-		
-		return ActorRep.getActor(id).getFilmographie();
-		
-	}
-	
 	@RequestMapping("/getRoom/{id}")
 	public List<Room> getRoom(@PathVariable Integer id) throws IOException
 	{
