@@ -1,8 +1,7 @@
-package fr.upem.myapplication
-
+package com.example.iwatch.Entities
 class Cinema {
 
-    private val nom: String? = null
+    private val name: String? = null
     private val localisation: String? = null  //A CHANGER TYPE
-    private val photo: String? = null  //A CHANGER TYPE
+    private val picture: String? = null  //A CHANGER TYPE
 }

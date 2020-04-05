@@ -1,17 +1,16 @@
-package fr.upem.myapplication
-
+package com.example.iwatch.Entities
 class User {
 
-    private val name: String? = null
-    private val prenom: String? = null
+    private val firstName: String? = null
+    private val lastName: String? = null
     private val email: String? = null
     private val password: String? = null
-    private val tel: String? = null
+    private val mobile: String? = null
 
-    internal var FilmFavoris: List<Film>? = null  //A CHANGER
-    internal var Filmhistory: List<Film>? = null  //peut etre
-    internal var SerieFavoris: List<Serie>? = null //en hashmap
-    internal var Seriehistory: List<Serie>? = null  //pour les favoris
+    internal var FavoriteMovies: List<Movie>? = null  //A CHANGER
+    internal var MovieHistory: List<Movie>? = null  //peut etre
+    internal var FavoriteSeries: List<Serie>? = null //en hashmap
+    internal var SerieHistory: List<Serie>? = null  //pour les favoris
 
     internal var genrePref: List<String>? = null  //PEUT ETRE A CHANGER
     internal var jeton: Int = 0

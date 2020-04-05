@@ -1,6 +1,5 @@
-package fr.upem.myapplication
-
+package com.example.iwatch.Entities
 class Episode {
     private val resume: String? = null
-    private val bandeAnnonce: String? = null  // TYPE DE VARIABLE A CHANGER
+    private val trailer: String? = null  // TYPE DE VARIABLE A CHANGER
 }
