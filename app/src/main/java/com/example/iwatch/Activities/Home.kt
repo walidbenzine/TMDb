@@ -15,6 +15,8 @@ import com.example.iwatch.Fragments.*
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_home.*
+import org.json.JSONObject
+import java.net.URL
 
 class Home : AppCompatActivity(),
     HomeFragment.OnFragmentInteractionListener, CinemaFragment.OnFragmentInteractionListener,
@@ -30,6 +32,15 @@ class Home : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView( R.layout.activity_home)
+
+
+        val user = JSONObject(intent.getStringExtra("user"))
+        val filmsPopular = Post("http://10.0.2.2:8080/getLastMovies")
+        val seriesPopular = Post("http://10.0.2.2:8080/getLastSerie")
+
+        System.out.println("USER INFOS ===== "+user)
+        System.out.println("FILM LASTEST ===== "+filmsPopular)
+        System.out.println("SERIES LASTEST ===== "+seriesPopular)
 
         // set the toolbar
         setSupportActionBar(toolbar)
@@ -99,5 +110,18 @@ class Home : AppCompatActivity(),
             return 5
         }
 
+    }
+
+    fun Post(url: String) :String{
+
+        val x = try {
+            URL(url)
+                .openStream()
+                .bufferedReader()
+                .use { it.readText() } }
+        catch(e: Exception){
+            System.out.println(e)
+        }
+        return x.toString()
     }
 }
