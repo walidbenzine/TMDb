@@ -9,14 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".Activities.SeasonDetails"></activity>
-        <activity android:name=".Activities.SerieDetails">
+        <activity android:name=".Activities.SeasonDetails">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activities.SerieDetails"/>
         <activity android:name=".Activities.MovieDetails" />
         <activity android:name=".Activities.MainActivity" />
         <activity android:name=".Activities.SignUp" />
