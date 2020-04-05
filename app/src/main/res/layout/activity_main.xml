@@ -29,26 +29,25 @@
             android:layout_weight="1">
 
             <EditText
-                android:id="@+id/EmailEditText"
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/lightGrey"
-                android:textColorHint="@color/lightGrey"
                 android:hint="Email"
+                android:inputType="textEmailAddress"
                 android:textColor="@color/white"
-                android:inputType="textEmailAddress">
-            </EditText>
+                android:textColorHint="@color/lightGrey"></EditText>
+
             <EditText
-                android:id="@+id/passEditText"
+                android:id="@+id/pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="@color/lightGrey"
-                android:textColorHint="@color/lightGrey"
                 android:hint="Password"
+                android:inputType="textPassword"
                 android:textColor="@color/white"
-                android:inputType="textPassword">
-            </EditText>
+                android:textColorHint="@color/lightGrey"></EditText>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -63,21 +62,21 @@
             android:layout_weight="0"
             android:orientation="vertical"
             android:gravity="center_horizontal">
+
             <Button
-                android:id="@+id/ButtonCnx"
+                android:id="@+id/signb"
                 style="@style/ButtonCnx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@drawable/cnx_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="LogIn" />
+                android:text="LogIn"></Button>
             <Button
-                android:id="@+id/ButtonSignUp"
+                android:id="@+id/signupb"
+                style="@style/ButtonCnx"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="SignUp"
-                android:textColor="@color/bordo"
-                android:textSize="18dp"/>
+                android:background="@drawable/cnx_button"
+                android:text="SignUp"></Button>
         </LinearLayout>
 
     </LinearLayout>

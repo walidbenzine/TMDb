@@ -7,6 +7,7 @@ import com.example.iwatch.Entities.Serie
 import com.example.iwatch.R
 import com.example.iwatch.ViewHolders.SerieViewHolder
 
+
 class SerieAdapter (val serieList: ArrayList<Serie>): RecyclerView.Adapter<SerieViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SerieViewHolder {
