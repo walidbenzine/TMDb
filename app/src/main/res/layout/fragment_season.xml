@@ -7,7 +7,7 @@
     tools:context=".Fragments.SeasonFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/season_recycler_view"
+        android:id="@+id/season_view_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

@@ -29,6 +29,7 @@
             android:layout_weight="1">
 
             <EditText
+                android:id="@+id/EmailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/lightGrey"
@@ -38,6 +39,7 @@
                 android:inputType="textEmailAddress">
             </EditText>
             <EditText
+                android:id="@+id/passEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -62,18 +64,20 @@
             android:orientation="vertical"
             android:gravity="center_horizontal">
             <Button
+                android:id="@+id/ButtonCnx"
                 style="@style/ButtonCnx"
                 android:background="@drawable/cnx_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="LogIn"></Button>
-            <TextView
+                android:text="LogIn" />
+            <Button
+                android:id="@+id/ButtonSignUp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="SignUp"
                 android:textColor="@color/bordo"
-                android:textSize="18dp"></TextView>
+                android:textSize="18dp"/>
         </LinearLayout>
 
     </LinearLayout>
