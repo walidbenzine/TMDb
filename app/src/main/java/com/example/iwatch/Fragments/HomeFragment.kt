@@ -9,6 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Adapters.SerieAdapter
+import com.example.iwatch.Entities.Serie
 
 import com.example.iwatch.R
 
@@ -29,6 +33,7 @@ class HomeFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    var serie = ArrayList<Serie>()
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,16 +48,33 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_home, container, false)
         val btnMovies = v.findViewById<View>(R.id.btn_movies) as Button
         btnMovies.setBackgroundResource(R.drawable.clicked_button)
         btnMovies.setTextColor(Color.parseColor("#ffffff"))
 
-
         val btnSeries = v.findViewById<View>(R.id.btn_series) as Button
         btnSeries.setBackgroundResource(R.drawable.no_clicked_button)
         btnSeries.setTextColor(Color.parseColor("#EF4B53"))
+
+
+        val serieRecyclerView = v.findViewById<RecyclerView>(R.id.home_recycler_view)
+
+        System.out.println("Hello there")
+
+         serie.add(Serie("ree","zeze nghjg hgz","dddsds", "dsdsds", R.drawable.theprotector))
+         serie.add(Serie("yyy","sssjhj hgg hgghjg dsd", "dddsds", "dsdsds", R.drawable.theprotector))
+         serie.add(Serie("aaa","sdsjh  hgjhjhd","dddsds", "dsdsds",  R.drawable.theprotector))
+         System.out.println("jus")
+         System.out.println("yas "+serie.size)
+
+        serieRecyclerView.apply {
+            //serieRecyclerView!!.layoutManager = LinearLayoutManager(this.context)
+            layoutManager = LinearLayoutManager(this.context)
+             adapter = SerieAdapter(serie)
+         }
         return v
     }
 

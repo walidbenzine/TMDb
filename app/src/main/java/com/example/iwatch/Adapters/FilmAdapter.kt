@@ -3,9 +3,10 @@ package com.example.iwatch.Adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Entities.Movie
 import com.example.iwatch.R
 import com.example.iwatch.ViewHolders.FilmViewHolder
-import fr.upem.myapplication.Movie
+
 
 class FilmAdapter (val movieList: ArrayList<Movie>): RecyclerView.Adapter<FilmViewHolder>() {
 

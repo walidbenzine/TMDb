@@ -10,16 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".Activities.SerieDetails">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Activities.MovieDetails"/>
         <activity android:name=".Activities.MainActivity" />
         <activity android:name=".Activities.SignUp" />
-        <activity android:name=".Activities.Home" />
+        <activity android:name=".Activities.Home" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity
             android:name=".Activities.EditProfile"
             android:parentActivityName=".Activities.Home" />
