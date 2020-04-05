@@ -17,5 +17,5 @@ class Serie: Serializable{
     internal var saisonList: List<Saison>? = null
     internal var associatedSeries: List<Serie>? = null
     internal var commentList: List<Comment>? = null
-    internal var genreList: List<String>? = null //PEUT ETRE A CHANGER
+    internal var genreList: ArrayList<String>? = null //PEUT ETRE A CHANGER
 }

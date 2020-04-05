@@ -28,6 +28,7 @@ class Home : AppCompatActivity(),
 
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
     var convert = Convert()
+    var serieslast = ArrayList<Serie>()
 
     override fun onFragmentInteraction(uri: Uri) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -37,17 +38,10 @@ class Home : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView( R.layout.activity_home)
 
-
-
         val user = intent.getSerializableExtra("user") as User
         //val filmsPopular = Post("http://10.0.2.2:8080/getLastMovies")
-        val seriesPopular = PostSerie("http://10.0.2.2:8080/getLastSerie")
+        serieslast = PostSerie("http://10.0.2.2:8080/getLastSerie")
 
-
-
-        System.out.println("USER name===== "+user.firstName)
-        //System.out.println("FILM LASTEST ===== "+filmsPopular.get(1))
-        System.out.println("SERIES LASTEST ===== "+seriesPopular.get(2).title)
 
         // set the toolbar
         setSupportActionBar(toolbar)
@@ -137,13 +131,6 @@ class Home : AppCompatActivity(),
                 arrayseries.add(convert.toSerie(JSONObject(jsonarray.get(i).toString())))
             }
             return arrayseries
-
-            /*
-            val y = JSONObject(filmsPopular.get(1).toString())
-            val yy = JSONArray(y.get("genre").toString())
-            val yyy =  JSONObject(yy.get(1).toString())
-            //System.out.println("HAAAWLIIIIIK "+yyy.get("desig"))*/
-
         }
         return arrayseries
     }

@@ -2,6 +2,7 @@ package com.example.iwatch.Activities
 
 import com.example.iwatch.Entities.Serie
 import com.example.iwatch.Entities.User
+import org.json.JSONArray
 import org.json.JSONObject
 import java.net.URL
 
@@ -25,6 +26,7 @@ class Convert {
     fun toSerie(obj: JSONObject) : Serie {
 
         val serie =  Serie ()
+        val genres = ArrayList<String>()
         serie.id = obj.get("id").toString().toInt()
         serie.title = obj.get("title").toString()
         serie.resume = obj.get("resume").toString()
@@ -34,7 +36,11 @@ class Convert {
         serie.nbrSaison = obj.get("nbrSaison").toString().toInt()
         serie.picture = obj.get("image").toString()
 
-
+        var genrearray = JSONArray(obj.get("genre").toString())
+        for( i in 0 until genrearray.length()){
+            genres.add(JSONObject(genrearray.get(i).toString()).get("desig").toString())
+        }
+        serie.genreList = genres
 
         return serie
     }
