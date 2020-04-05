@@ -1,5 +1,4 @@
 package com.example.iwatch.Entities
-
 import android.widget.ImageView
 import com.example.iwatch.Enumerations.GenreType
 import com.example.iwatch.R

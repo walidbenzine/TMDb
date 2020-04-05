@@ -55,6 +55,7 @@
                     android:layout_marginTop="8dp">
 
                     <TextView
+                        android:id="@+id/date_sortie"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Date de sortie"/>
@@ -75,6 +76,7 @@
             android:layout_width="110dp"
             android:layout_height="180dp"
             android:background="@color/darkGrey"
+            android:src="@drawable/theprotector"
             android:scaleType="fitXY"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"

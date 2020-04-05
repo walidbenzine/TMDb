@@ -1,14 +1,12 @@
-package fr.upem.myapplication
-
+package com.example.iwatch.Entities
 import java.sql.Time
 import java.util.Date
 
-class Movie {
+class Movie (val title: String, var imgFilm: Int){
 
-    private val title: String? = null
-    private val resume: String? = null
+    internal val resume: String? = null
     internal var grade: Int = 0
-    internal var releasedDate: Date? = null
+    internal var releasedDate: String? = null
     internal var duration: Time? = null
     internal var associatedMovies: List<Movie>? = null
     internal var genre: List<String>? = null  //PEUT ETRE A CHANGER

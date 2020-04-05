@@ -1,12 +1,13 @@
-package fr.upem.myapplication
-
+package com.example.iwatch.Entities
+import android.widget.ImageView
 import java.util.Date
 
-class Serie {
+data class Serie (var title:String, var details:String, var img: Int)
+{
 
-    private val title: String? = null
+    //private val title: String? = null
     private val resume: String? = null
-    internal var releasedDate: Date? = null
+    internal var releasedDate: String? = null
     internal var grade: Int = 0
     internal var nbrEpisodes: Int = 0
     internal var nbrSaison: Int = 0
