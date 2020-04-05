@@ -11,10 +11,13 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.example.iwatch.Entities.Serie
+import com.example.iwatch.Entities.User
 import com.example.iwatch.Fragments.*
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_home.*
+import org.json.JSONArray
 import org.json.JSONObject
 import java.net.URL
 
@@ -24,6 +27,7 @@ class Home : AppCompatActivity(),
     ProfileFragment.OnFragmentInteractionListener{
 
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
+    var convert = Convert()
 
     override fun onFragmentInteraction(uri: Uri) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -34,13 +38,16 @@ class Home : AppCompatActivity(),
         setContentView( R.layout.activity_home)
 
 
-        val user = JSONObject(intent.getStringExtra("user"))
-        val filmsPopular = Post("http://10.0.2.2:8080/getLastMovies")
-        val seriesPopular = Post("http://10.0.2.2:8080/getLastSerie")
 
-        System.out.println("USER INFOS ===== "+user)
-        System.out.println("FILM LASTEST ===== "+filmsPopular)
-        System.out.println("SERIES LASTEST ===== "+seriesPopular)
+        val user = intent.getSerializableExtra("user") as User
+        //val filmsPopular = Post("http://10.0.2.2:8080/getLastMovies")
+        val seriesPopular = PostSerie("http://10.0.2.2:8080/getLastSerie")
+
+
+
+        System.out.println("USER name===== "+user.firstName)
+        //System.out.println("FILM LASTEST ===== "+filmsPopular.get(1))
+        System.out.println("SERIES LASTEST ===== "+seriesPopular.get(2).title)
 
         // set the toolbar
         setSupportActionBar(toolbar)
@@ -112,16 +119,32 @@ class Home : AppCompatActivity(),
 
     }
 
-    fun Post(url: String) :String{
-
+    fun PostSerie(url: String) : ArrayList<Serie> {
+        var arrayseries = ArrayList<Serie>()
         val x = try {
             URL(url)
-                .openStream()
-                .bufferedReader()
-                .use { it.readText() } }
+                    .openStream()
+                    .bufferedReader()
+                    .use { it.readText() } }
         catch(e: Exception){
             System.out.println(e)
         }
-        return x.toString()
+        if(!x.toString().isNullOrEmpty() && x.toString() != "null"){
+            //System.out.println("NIIIIIIIK "+x.toString())
+
+            var jsonarray = JSONArray(x.toString())
+            for( i in 0 until jsonarray.length()){
+                arrayseries.add(convert.toSerie(JSONObject(jsonarray.get(i).toString())))
+            }
+            return arrayseries
+
+            /*
+            val y = JSONObject(filmsPopular.get(1).toString())
+            val yy = JSONArray(y.get("genre").toString())
+            val yyy =  JSONObject(yy.get(1).toString())
+            //System.out.println("HAAAWLIIIIIK "+yyy.get("desig"))*/
+
+        }
+        return arrayseries
     }
 }

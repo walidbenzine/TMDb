@@ -1,8 +1,9 @@
 package com.example.iwatch.Entities
 
+import java.io.Serializable
 import java.util.Date
 
-class Actor {
+class Actor : Serializable {
 
     private val firstName: String? = null
     private val lastName: String? = null

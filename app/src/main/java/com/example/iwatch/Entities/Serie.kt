@@ -1,15 +1,19 @@
 package com.example.iwatch.Entities
 
+import java.io.Serializable
 
-data class Serie (var title:String, var details:String, var releasedDate:String, var dateSortie:String, var img: Int)
-{
 
-    //private val title: String? = null
+class Serie: Serializable{
 
-    private val resume: String? = null
-    internal var grade: Int = 0
+    internal var title: String? = null
+    internal var id: Int = 0
+    internal var resume: String? = null
+    internal var dateSortie: String? = null
+    internal var note: String? = null
     internal var nbrEpisodes: Int = 0
     internal var nbrSaison: Int = 0
+    internal var picture: String? = null
+
     internal var saisonList: List<Saison>? = null
     internal var associatedSeries: List<Serie>? = null
     internal var commentList: List<Comment>? = null

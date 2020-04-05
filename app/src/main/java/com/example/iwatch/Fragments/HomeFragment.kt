@@ -63,12 +63,12 @@ class HomeFragment : Fragment() {
         val serieRecyclerView = v.findViewById<RecyclerView>(R.id.home_recycler_view)
 
         System.out.println("Hello there")
-
+/*
          serie.add(Serie("ree","zeze nghjg hgz","dddsds", "dsdsds", R.drawable.theprotector))
          serie.add(Serie("yyy","sssjhj hgg hgghjg dsd", "dddsds", "dsdsds", R.drawable.theprotector))
          serie.add(Serie("aaa","sdsjh  hgjhjhd","dddsds", "dsdsds",  R.drawable.theprotector))
          System.out.println("jus")
-         System.out.println("yas "+serie.size)
+         System.out.println("yas "+serie.size)*/
 
         serieRecyclerView.apply {
             //serieRecyclerView!!.layoutManager = LinearLayoutManager(this.context)
