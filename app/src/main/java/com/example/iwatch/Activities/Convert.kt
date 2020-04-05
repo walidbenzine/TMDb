@@ -2,6 +2,7 @@ package com.example.iwatch.Activities
 
 import com.example.iwatch.Entities.Serie
 import com.example.iwatch.Entities.User
+import fr.upem.myapplication.Film
 import org.json.JSONObject
 import java.net.URL
 
@@ -37,5 +38,18 @@ class Convert {
 
 
         return serie
+    }
+    fun toFilm(obj: JSONObject) : Film {
+
+        val film =  Film ()
+        film.dateSortie= obj.get("dateSortie").toString()
+        film.duration = obj.get("title").toString()
+        film.note = obj.get("resume").toString().toInt()
+        film.title = obj.get("dateSortie").toString()
+        film.resume = obj.get("note").toString()
+
+
+
+        return film
     }
 }

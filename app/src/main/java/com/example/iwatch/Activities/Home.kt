@@ -16,6 +16,7 @@ import com.example.iwatch.Entities.User
 import com.example.iwatch.Fragments.*
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
+import fr.upem.myapplication.Film
 import kotlinx.android.synthetic.main.activity_home.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -40,13 +41,13 @@ class Home : AppCompatActivity(),
 
 
         val user = intent.getSerializableExtra("user") as User
-        //val filmsPopular = Post("http://10.0.2.2:8080/getLastMovies")
+        val filmsPopular = PostFilm("http://10.0.2.2:8080/getLastMovies")
         val seriesPopular = PostSerie("http://10.0.2.2:8080/getLastSerie")
 
 
 
         System.out.println("USER name===== "+user.firstName)
-        //System.out.println("FILM LASTEST ===== "+filmsPopular.get(1))
+        System.out.println("FILM LASTEST ===== "+filmsPopular.get(1))
         System.out.println("SERIES LASTEST ===== "+seriesPopular.get(2).title)
 
         // set the toolbar
@@ -130,7 +131,6 @@ class Home : AppCompatActivity(),
             System.out.println(e)
         }
         if(!x.toString().isNullOrEmpty() && x.toString() != "null"){
-            //System.out.println("NIIIIIIIK "+x.toString())
 
             var jsonarray = JSONArray(x.toString())
             for( i in 0 until jsonarray.length()){
@@ -138,13 +138,32 @@ class Home : AppCompatActivity(),
             }
             return arrayseries
 
-            /*
-            val y = JSONObject(filmsPopular.get(1).toString())
-            val yy = JSONArray(y.get("genre").toString())
-            val yyy =  JSONObject(yy.get(1).toString())
-            //System.out.println("HAAAWLIIIIIK "+yyy.get("desig"))*/
-
         }
         return arrayseries
+    }
+
+
+
+    fun PostFilm(url: String) : ArrayList<Film> {
+        var arrayfilms = ArrayList<Film>()
+        val x = try {
+            URL(url)
+                .openStream()
+                .bufferedReader()
+                .use { it.readText() } }
+        catch(e: Exception){
+            System.out.println(e)
+        }
+        if(!x.toString().isNullOrEmpty() && x.toString() != "null"){
+
+            var jsonarray = JSONArray(x.toString())
+            for( i in 0 until jsonarray.length()){
+                arrayfilms.add(convert.toFilm(JSONObject(jsonarray.get(i).toString())))
+            }
+            return arrayfilms
+
+
+        }
+        return arrayfilms
     }
 }

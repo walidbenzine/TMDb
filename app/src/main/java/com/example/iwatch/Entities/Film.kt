@@ -8,11 +8,13 @@ import java.util.Date
 
 class Film : Serializable {
 
-    private val title: String? = null
-    private val resume: String? = null
+    internal var title: String? = null
+    internal var resume: String? = null
     internal var note: Int = 0
-    internal var dateSortie: Date? = null
-    internal var duration: Time? = null
+    internal var dateSortie: String? = null
+    internal var duration: String? = null
+
+
     internal var filmsLiees: List<Film>? = null
     internal var genre: List<String>? = null  //PEUT ETRE A CHANGER
     internal var actors: List<Actor>? = null
