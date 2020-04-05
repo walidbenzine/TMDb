@@ -44,6 +44,8 @@ class Home : AppCompatActivity(),
 
         home_container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(home_container))
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -29,24 +29,25 @@
             android:layout_weight="1">
 
             <EditText
+                android:id="@+id/add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/lightGrey"
-                android:textColorHint="@color/lightGrey"
                 android:hint="Adress"
+                android:inputType="textEmailAddress"
                 android:textColor="@color/white"
-                android:inputType="textEmailAddress">
-            </EditText>
+                android:textColorHint="@color/lightGrey"></EditText>
+
             <EditText
+                android:id="@+id/phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="@color/lightGrey"
-                android:textColorHint="@color/lightGrey"
                 android:hint="Phone Number"
+                android:inputType="textPassword"
                 android:textColor="@color/white"
-                android:inputType="textPassword">
-            </EditText>
+                android:textColorHint="@color/lightGrey"></EditText>
 
 
         </LinearLayout>
@@ -59,10 +60,11 @@
 
 
             <Button
+                android:id="@+id/signup"
                 style="@style/ButtonCnx"
-                android:background="@drawable/cnx_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/cnx_button"
                 android:text="Sign Up"></Button>
 
         </LinearLayout>

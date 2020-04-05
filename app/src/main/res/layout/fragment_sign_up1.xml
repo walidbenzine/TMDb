@@ -29,44 +29,58 @@
             android:layout_weight="1">
 
             <EditText
+                android:id="@+id/fname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/lightGrey"
-                android:textColorHint="@color/lightGrey"
                 android:hint="First Name"
+                android:inputType="textEmailAddress"
                 android:textColor="@color/white"
-                android:inputType="textEmailAddress">
-            </EditText>
+                android:textColorHint="@color/lightGrey"></EditText>
+
             <EditText
+                android:id="@+id/lname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="@color/lightGrey"
-                android:textColorHint="@color/lightGrey"
                 android:hint="Last Name"
+                android:inputType="textPassword"
                 android:textColor="@color/white"
-                android:inputType="textPassword">
-            </EditText>
+                android:textColorHint="@color/lightGrey"></EditText>
+
             <EditText
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="@color/lightGrey"
-                android:textColorHint="@color/lightGrey"
                 android:hint="Email"
+                android:inputType="textPassword"
                 android:textColor="@color/white"
-                android:inputType="textPassword">
-            </EditText>
+                android:textColorHint="@color/lightGrey"></EditText>
+
             <EditText
+                android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="@color/lightGrey"
-                android:textColorHint="@color/lightGrey"
-                android:hint="Password"
+                android:hint="Username"
+                android:inputType="textPassword"
                 android:textColor="@color/white"
-                android:inputType="textPassword">
-            </EditText>
+                android:textColorHint="@color/lightGrey"></EditText>
+
+            <EditText
+                android:id="@+id/pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/lightGrey"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:textColor="@color/white"
+                android:textColorHint="@color/lightGrey"></EditText>
 
         </LinearLayout>
         <LinearLayout
