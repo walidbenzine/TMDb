@@ -7,6 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Adapters.CommentAdapter
+import com.example.iwatch.Entities.Comment
 
 import com.example.iwatch.R
 
@@ -26,6 +30,8 @@ class CommentsFragment : Fragment() {
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
+    var comments = ArrayList<Comment>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -40,6 +46,21 @@ class CommentsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         var v = inflater.inflate(R.layout.fragment_comments, container, false)
+        val commentRecyclerView = v.findViewById<RecyclerView>(R.id.comments_recycler_view)
+
+        comments.add(Comment("comment 1"))
+        comments.add(Comment("comment 2"))
+        comments.add(Comment("comment 3"))
+        comments.add(Comment("comment 4"))
+        comments.add(Comment("comment 5"))
+        comments.add(Comment("comment 6"))
+
+        commentRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this.context)
+            adapter = CommentAdapter(comments)
+        }
+
+
         return v
     }
 
