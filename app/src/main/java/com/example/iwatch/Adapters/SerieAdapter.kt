@@ -3,9 +3,9 @@ package com.example.iwatch.Adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Entities.Serie
 import com.example.iwatch.R
 import com.example.iwatch.ViewHolders.SerieViewHolder
-import fr.upem.myapplication.Serie
 
 class SerieAdapter (val serieList: ArrayList<Serie>): RecyclerView.Adapter<SerieViewHolder>() {
 
