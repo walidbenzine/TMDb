@@ -70,7 +70,6 @@ class ProfileFragment : Fragment() {
             startActivity(editProfile)
         }
 
-
         return v
     }
 
