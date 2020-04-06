@@ -1,16 +1,42 @@
 package com.sciruse.models;
 
-import java.util.Date;
-import java.util.List;
 
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+@Entity
 public class Saison {
 
+	@Id 
+	private Integer id;
 	private String nom ;
+	@Column(columnDefinition="LONGTEXT")
 	private String details;
-	private Date dateSortie ;
+	private String dateSortie ;
 	private int nbrEpisodes;
+	private String image;
+	
+	
+	@ManyToMany (cascade = {CascadeType.ALL})
 	private	 List<Episode> listEpisodes;
-	private  List<Actors>actors;
+	
+
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public String getNom() {
 		return nom;
 	}
@@ -23,10 +49,10 @@ public class Saison {
 	public void setDetails(String details) {
 		this.details = details;
 	}
-	public Date getDateSortie() {
+	public String getDateSortie() {
 		return dateSortie;
 	}
-	public void setDateSortie(Date dateSortie) {
+	public void setDateSortie(String dateSortie) {
 		this.dateSortie = dateSortie;
 	}
 	public int getNbrEpisodes() {
@@ -41,16 +67,11 @@ public class Saison {
 	public void setListEpisodes(List<Episode> listEpisodes) {
 		this.listEpisodes = listEpisodes;
 	}
-	public List<Actors> getActors() {
-		return actors;
-	}
-	public void setActors(List<Actors> actors) {
-		this.actors = actors;
-	}
+	
 	@Override
 	public String toString() {
 		return "Saison [nom=" + nom + ", details=" + details + ", dateSortie=" + dateSortie + ", nbrEpisodes="
-				+ nbrEpisodes + ", listEpisodes=" + listEpisodes + ", actors=" + actors + "]";
+				+ nbrEpisodes + ", listEpisodes=" + listEpisodes + ", actors=" ;
 	} 
 	
 	

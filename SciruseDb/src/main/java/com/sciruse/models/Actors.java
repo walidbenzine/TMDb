@@ -1,16 +1,13 @@
  package com.sciruse.models;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Vector;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Actors {
 
@@ -24,8 +21,24 @@ public class Actors {
 	private	String popularite ;
 	private String dateNaissance ;
 	@ManyToMany (cascade = {CascadeType.ALL})
+	@JsonIgnore
 	@Column(unique = false,nullable = true)
 	private	List<Film>filmographie ;
+	
+	@ManyToMany (cascade = {CascadeType.ALL})
+	@JsonIgnore
+	@Column(unique = false,nullable = true)
+	private	List<Serie> seriegraphie ;
+	
+	
+	public List<Serie> getSeriegraphie() {
+		return seriegraphie;
+	}
+	public void setSeriegraphie(List<Serie> seriegraphie) {
+		this.seriegraphie = seriegraphie;
+	}
+
+
 	private	String photo ; //TYPE DE VARIABLE A CHANGER
 	
 	

@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: yassi
+Build-Jdk: 13
+Implementation-Title: SciruseDb
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.sciruse
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/SciruseDb
+Created-By: Maven Integration for Eclipse
+

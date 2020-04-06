@@ -1,6 +1,5 @@
 package com.sciruse.contoler;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +20,14 @@ import com.sciruse.repository.GenreRepository;
 import com.sciruse.repository.SerieRepository;
 import com.sciruse.test.ImportFunctions;
 
+
+/* to  load movies call
+ * 1) /addMovies
+ * 2) /addliee
+ * 3) /addRoom
+ * and u're good to go 
+ * nb: do this just one time 
+ * */
 @RestController
 public class FilmController {
 	private static String Base_url="https://api.themoviedb.org/3/";
@@ -30,66 +37,81 @@ public class FilmController {
 	FilmRepository repo;
 	@Autowired
 	SerieRepository repo2;
-	
+
 	@Autowired
 	GenreRepository repoGenre;
-	
+
 	@RequestMapping("/lola")
 	@ResponseBody
 	public void home() {
-		System.out.println("looooooooooooooooooooooola");
-		
+		System.out.println("Test Working");
 	}
-	
+
 	@RequestMapping("/getMovies")
 	public List<Film> addAlien(Film film) throws IOException
 	{
-				
+		t =new  ImportFunctions();
 		return (List<Film>) repo.findAll();
 	}
-	
+
 	@RequestMapping("/getTv")
 	public List<Serie> addAlien(Serie serie) throws IOException
 	{
-				
-		return (List<Serie>) repo2.findAll();
+		t =new  ImportFunctions();
+		return t.Serie("https://api.themoviedb.org/3/tv/popular?api_key="+API_Key+"&language=en-US&page=1");
 	}
 	
-
-	
+//add popular movies include add comments actors each actor has list of movies that we also added them************************************
 	@RequestMapping("/addMovies")
 	public String addMovies() throws IOException
 	{
-		 t =new  ImportFunctions();
+		t =new  ImportFunctions();
 		Vector<Film>films= t.MoviesPopular("https://api.themoviedb.org/3/movie/popular?api_key="+API_Key+"&language=en-US&page=1");
-		
+
 		for (Film film : films) {
-			
-		List<Comments> com = t.Comment(Base_url+"movie/"+film.getID() +"/reviews?api_key="+API_Key+"&language=en-US");
-		film.setComments(com);
-		
-		List<Actors> act = t.Actors(Base_url+"movie/"+film.getID() +"/credits?api_key="+API_Key+"&language=en-US");
-		film.setActors(act);
-		
-		for (Actors actor: act) {
-			actor.setFilmographie(t.getFilmBiblio(Base_url+"person/"+actor.getId()+"/movie_credits?api_key="+API_Key+"&language=fr"));
+			//add actors to  movie
+			List<Actors> act = t.Actors(Base_url+"movie/"+film.getID() +"/credits?api_key="+API_Key+"&language=en-US");
+			film.setActors(act);
+			//add movie to actors
+			for (Actors actor: act) {
+				actor.setFilmographie(t.getFilmBiblio(Base_url+"person/"+actor.getId()+"/movie_credits?api_key="+API_Key+"&language=en-US"));
+			}
 		}
-		
-		}
-		
 		repo.saveAll(films);
 
 		return "yes";
 	}
-	
-	@RequestMapping("/addTv")
-	public String addTv() throws IOException
+
+// add list of similar movies to  one movie 
+	@RequestMapping("/addliee")
+	public String getFilmliee() throws IOException
 	{
-		 t =new  ImportFunctions();
-	Vector<Serie>series= t.Serie("https://api.themoviedb.org/3/tv/popular?api_key="+API_Key+"&language=en-US&page=1");
-	repo2.saveAll(series);
-	
-	return "yes";
+		t =new  ImportFunctions();
+		List<Film>films = (List<Film>) repo.getpopular();
+		for (Film film : films) {
+			List<Film>liee= t.getFilmLiee(Base_url+"movie/"+film.getID() +"/similar?api_key="+API_Key+"&language=en-US&page=1");
+			film.setFilmsLiees(liee);
+			repo.save(film);
+		}
+
+		return "done";
 	}
 	
+// add Rooms to  popular movies 
+	@RequestMapping("/addRoom")
+	public String addRoom() throws IOException
+	{
+		t =new  ImportFunctions();
+		List<Film>films = (List<Film>) repo.getpopular();
+		for (Film film : films) {
+			
+			film.setRooms(t.addRoom());
+			repo.save(film);
+		}
+
+		return "done";
+	}
+
+
 }
+
