@@ -21,9 +21,11 @@ class SerieAdapter (val serieList: ArrayList<Serie>): RecyclerView.Adapter<Serie
     override fun onBindViewHolder(holder: SerieViewHolder, position: Int) {
         val serie: Serie = serieList[position]
 
-        holder.serietitle.text= serie.title
-        holder.seriedetails.text =serie.details
-        holder.seriereleazeddate.text = serie.releasedDate
-        holder.seriepicture.setImageResource(serie.img)
+        holder.serietitle!!.text= serie.title
+        holder.seriedetails!!.text =serie.resume
+        holder.seriereleazeddate!!.text = serie.dateSortie
+        holder.datesortie!!.text= serie.dateSortie
+        holder.seriepicture!!.setImageResource(serie.id)
+
     }
 }

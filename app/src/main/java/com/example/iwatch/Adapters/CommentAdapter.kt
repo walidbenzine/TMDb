@@ -21,5 +21,6 @@ class CommentAdapter(val commentList: ArrayList<Comment>): RecyclerView.Adapter<
         val comment: Comment = commentList[position]
 
         holder.commentText.text = comment.text
+        holder.commentUserPicture.setImageResource(R.mipmap.ic_gun)
     }
 }
