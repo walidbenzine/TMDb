@@ -1,5 +1,6 @@
 package com.example.iwatch.Activities
 
+import com.example.iwatch.Entities.Comment
 import com.example.iwatch.Entities.Serie
 import com.example.iwatch.Entities.User
 import fr.upem.myapplication.Film
@@ -51,5 +52,15 @@ class Convert {
 
 
         return film
+    }
+
+    fun toComment(obj: JSONObject) : Comment {
+
+        val comment =  Comment ()
+        comment.
+
+
+
+        return comment
     }
 }
