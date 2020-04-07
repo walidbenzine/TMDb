@@ -36,6 +36,7 @@ class Home : AppCompatActivity(),
     var sais = ArrayList<Saison>()
     var CommentTop = ArrayList<Comment>()
 
+
     override fun onFragmentInteraction(uri: Uri) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -51,10 +52,17 @@ class Home : AppCompatActivity(),
         filmsTop = PostFilm("http://10.0.2.2:8080/getTopRated")
         actorsTop = PostActor("http://10.0.2.2:8080/getActorPopular")
 
+        // Comme ça je récupere bien les series (VOIR CONSOLE)
+        var frag = HomeFragment.newInstance(seriesLast)
+        System.out.println("TEST AFFICHAGE SERIES FRAGMENT :")
+        frag.onCreate(savedInstanceState)
+
+
+
         System.out.println("USER name===== "+user.firstName)
         System.out.println("FILM LASTEST ===== "+filmsLast)
-        System.out.println("SERIES LASTEST ===== "+seriesLast.get(2).genreList)
-        System.out.println("Actor Pop ===== "+actorsTop.get(2).firstName)
+        System.out.println("SERIES LASTEST ===== "+seriesLast)
+        System.out.println("Actor Pop ===== "+actorsTop)
 
         // set the toolbar
         setSupportActionBar(toolbar)
@@ -74,6 +82,7 @@ class Home : AppCompatActivity(),
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
         val inflater = menuInflater
         inflater.inflate(R.menu.home_menu, menu)
 
@@ -106,7 +115,7 @@ class Home : AppCompatActivity(),
      * A [FragmentPagerAdapter] that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+    class SectionsPagerAdapter(fm: FragmentManager)  : FragmentPagerAdapter(fm) {
 
         override fun getItem(position: Int): Fragment {
             return when (position){

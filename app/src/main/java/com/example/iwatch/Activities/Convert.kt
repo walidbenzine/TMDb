@@ -1,11 +1,7 @@
 package com.example.iwatch.Activities
 
-import com.example.iwatch.Entities.Comment
-import com.example.iwatch.Entities.Serie
-import com.example.iwatch.Entities.User
 import com.example.iwatch.Entities.*
 import com.example.iwatch.Enumerations.GenreType
-import fr.upem.myapplication.CommentType
 import org.json.JSONArray
 import fr.upem.myapplication.Film
 import org.json.JSONObject
@@ -34,8 +30,6 @@ class Convert {
 
         val serie = Serie()
         val genres = ArrayList<Genre>()
-        val comment = ArrayList<Comment>()
-
         serie.id = obj.get("id").toString().toInt()
         serie.title = obj.get("title").toString()
         serie.resume = obj.get("resume").toString()
@@ -56,7 +50,6 @@ class Convert {
         serie.genreList = genres
 
         serie.commentList = PostComment("http://10.0.2.2:8080/getSerieComment/"+serie.id)
-
         return serie
     }
 
@@ -65,7 +58,6 @@ class Convert {
 
         val film = Film()
         val genres = ArrayList<Genre>()
-        val comment = ArrayList<Comment>()
 
         film.id = obj.get("id").toString().toInt()
         film.dateSortie = obj.get("dateSortie").toString()
@@ -83,6 +75,7 @@ class Convert {
             }
         }
         film.genre = genres
+
         film.comments = PostComment("http://10.0.2.2:8080/getSerieComment/"+film.id)
 
 
@@ -145,6 +138,7 @@ class Convert {
     }
 
 
+
     fun toComment(obj: JSONObject): Comment {
 try {
     var co = Comment(CommentType.valueOf(obj.get("type").toString()))
@@ -179,6 +173,5 @@ try {
         }
         return arrayComment
     }
-
 
 }

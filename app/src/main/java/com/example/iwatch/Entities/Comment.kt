@@ -1,12 +1,7 @@
 package com.example.iwatch.Entities
-import com.example.iwatch.Enumerations.GenreType
-import com.example.iwatch.R
-import fr.upem.myapplication.CommentType
-import java.io.Serializable
 import java.util.Date
 
-class Comment (var commentType: CommentType): Serializable {
-    var toast:String? = null
+class Comment(var text: String) {
 
 
     internal var text: String? = null
@@ -44,4 +39,9 @@ class Comment (var commentType: CommentType): Serializable {
     }
 
 
+
+    private val type: String? = null
+    internal var publishedDate: Date? = null
+    internal var idUser: Int = 0
+    internal var idProd: Int = 0
 }
