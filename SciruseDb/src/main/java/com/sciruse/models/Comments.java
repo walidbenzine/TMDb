@@ -13,15 +13,9 @@ public class Comments {
 	@Column(columnDefinition="LONGTEXT")
 	private String text  ;
 	private String user;
-	private String type;
 	
-
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
+	
+	
 	public Integer getId() {
 		return id;
 	}

@@ -41,20 +41,6 @@ public class SerieController {
 		return (List<Serie>) serieRepository.getSeriePopular();
 	}
 	
-	@RequestMapping("/getSerieTopRated")
-	public List<Serie> getSerieTopRated() throws IOException
-	{
-				
-		return (List<Serie>) serieRepository.getSerieTopRated();
-	}
-	
-	@RequestMapping("/getLastSerie")
-	public List<Serie> getLastSerie() throws IOException
-	{
-				
-		return (List<Serie>) serieRepository.getSerieLast();
-	}
-	
 	@RequestMapping("/getSerie/{id}")
 	public Serie addAlien(@PathVariable Integer id) throws IOException
 	{
@@ -136,12 +122,10 @@ public class SerieController {
 
 
 				List<Actors> act = t.Actors(Base_url+"tv/"+serie.getId() +"/credits?api_key="+API_Key+"&language=en-US");
-				System.out.println("GETTING ACTOR INFOS");
 				serie.setActors(act);
 
 				for (Actors actor: act) {
 					actor.setSeriegraphie(t.getSerieBiblio(Base_url+"person/"+actor.getId()+"/tv_credits?api_key="+API_Key+"&language=en-US"));
-					System.out.println("GETTING ACTOR SERIGRAPHIE INFOS");
 				}
 
 			}

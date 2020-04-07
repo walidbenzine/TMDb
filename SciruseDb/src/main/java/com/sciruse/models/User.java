@@ -56,13 +56,6 @@ private  List<Serie>Seriehistory = new ArrayList<Serie>();
 private List<Genre>genrePref =  new ArrayList<Genre>(); 
 
 
-public Long getId() {
-	return id;
-}
-public void setId(Long id) {
-	this.id = id;
-}
-
 public String getNom() {
 	return nom;
 }

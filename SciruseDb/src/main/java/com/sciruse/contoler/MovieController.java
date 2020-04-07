@@ -11,6 +11,7 @@ import com.sciruse.models.Actors;
 import com.sciruse.models.Comments;
 import com.sciruse.models.Film;
 import com.sciruse.models.Genre;
+import com.sciruse.models.Room;
 import com.sciruse.repository.ActorRepository;
 import com.sciruse.repository.FilmRepository;
 
@@ -25,18 +26,6 @@ public class MovieController {
 	public List<Film> getPopular() throws IOException
 	{			
 		return (List<Film>) movieRepository.getpopular();
-	}
-	
-	@RequestMapping("/getTopRated")
-	public List<Film> getTopRated() throws IOException
-	{			
-		return (List<Film>) movieRepository.getTopRated();
-	}
-	
-	@RequestMapping("/getLastMovies")
-	public List<Film> getLastMovies() throws IOException
-	{			
-		return (List<Film>) movieRepository.getLast();
 	}
 	
 	@RequestMapping("/getMovie/{id}")
@@ -76,5 +65,12 @@ public class MovieController {
 		return movieRepository.getMovie(id).getGenre();
 	}
 	
+	@RequestMapping("/getRoom/{id}")
+	public List<Room> getRoom(@PathVariable Integer id) throws IOException
+	{
+		
+		return movieRepository.getMovie(id).getRooms();
+		
+	}
 	
 }
