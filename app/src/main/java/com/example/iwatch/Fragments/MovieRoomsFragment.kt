@@ -7,6 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Adapters.MovieRoomAdapter
+import com.example.iwatch.Entities.Cinema
 
 import com.example.iwatch.R
 
@@ -26,6 +30,8 @@ class MovieRoomsFragment : Fragment() {
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
+    var movieRooms = ArrayList<Cinema>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -40,6 +46,17 @@ class MovieRoomsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         var v = inflater.inflate(R.layout.fragment_movie_rooms, container, false)
+        val movieRoomRecyclerView = v.findViewById<RecyclerView>(R.id.movie_detail_rooms)
+
+        movieRooms.add(Cinema("Cinema Village", "rue Sain-Louis, 44300 Nantes"))
+        movieRooms.add(Cinema("Cinema Village", "rue Sain-Louis, 44300 Nantes"))
+        movieRooms.add(Cinema("Cinema Village", "rue Sain-Louis, 44300 Nantes"))
+
+        movieRoomRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this.context)
+            adapter = MovieRoomAdapter(movieRooms)
+        }
+
         return v
     }
 
