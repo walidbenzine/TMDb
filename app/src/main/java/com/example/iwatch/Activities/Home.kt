@@ -58,10 +58,29 @@ class Home : AppCompatActivity(),
         frag.onCreate(savedInstanceState)
 
 
+        for(i in seriesLast.indices ){
+            try {
+                //System.out.println("COMENTS SERIES===== " + seriesLast.get(i).commentList?.get(0)?.text)
+            }catch(e: Exception){
 
+            }
+        }
+
+        for(i in filmsLast.indices ){
+            try {
+                //System.out.println("COMENTS Films===== " + filmsLast.get(i).comments?.get(0)?.text)
+            }catch(e: Exception){
+
+            }
+        }
+
+        //nom de l'utilisateur
         System.out.println("USER name===== "+user.firstName)
+        //Arraylist de films récents
         System.out.println("FILM LASTEST ===== "+filmsLast)
+        //Arraylist de series récentes
         System.out.println("SERIES LASTEST ===== "+seriesLast)
+        //Arraylist des acteurs populaires
         System.out.println("Actor Pop ===== "+actorsTop)
 
         // set the toolbar

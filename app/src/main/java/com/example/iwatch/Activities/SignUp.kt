@@ -32,6 +32,7 @@ class SignUp : AppCompatActivity() , SignUp1.OnFragmentInteractionListener, Sign
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragment_container, signUp1Fragment)
         fragmentTransaction.commit()
+
         signup.setOnClickListener() {
             doAsync {
                 conx(email.text as String, 0, username.text as String, fname.text as String,pass.text as String ,"null",lname.text as String,phone.text as Int)
