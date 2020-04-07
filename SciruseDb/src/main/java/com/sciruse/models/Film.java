@@ -23,6 +23,7 @@ public class Film {
 	private	 String note ;
 	private String dateSortie ;
 	private String image;
+	private String video;
 	
 	@JsonIgnore
 	@ManyToMany (cascade = {CascadeType.ALL})
@@ -120,12 +121,23 @@ public class Film {
 	public void setImage(String image) {
 		this.image = image;
 	}
+	
+	
+	
+	
+	public String getVideo() {
+		return video;
+	}
+	public void setVideo(String video) {
+		this.video = video;
+	}
 	@Override
 	public String toString() {
-		return "Film [ID=" + ID + ", title=" + title + ", resume=" + resume + ", note=" + note
-				+ ", dateSortie=" + dateSortie +", image=" + image + ", genre=" + genre
-				+ "]";
+		return "Film [ID=" + ID + ", title=" + title + ", resume=" + resume + ", note=" + note + ", dateSortie="
+				+ dateSortie + ", image=" + image + ", video=" + video + ", filmsLiees=" + filmsLiees + ", genre="
+				+ genre + ", actors=" + actors + ", comments=" + comments + ", rooms=" + rooms + "]";
 	}
+	
 	
 	
 	

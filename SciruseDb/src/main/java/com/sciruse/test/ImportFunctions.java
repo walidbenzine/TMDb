@@ -56,12 +56,13 @@ public class ImportFunctions {
 			//series = Serie(Base_url+"tv/popular?api_key="+API_Key+"&language=fr&page=1");
 			//actors=Actors(Base_url+"tv/456/credits?api_key="+API_Key+"&language=en-US");
 			//Saison e =  getSaisonInfo(Base_url+"tv/456/season/1?api_key="+API_Key+"&language=en-US");
-		
+			
+			System.out.println(getMovieVideo(Base_url+"movie/654527/videos?api_key="+API_Key+"&language=en-US"));
 			
 			
 		}catch (Exception e) {System.out.println(e);}
 
-		addRoom();
+		//addRoom();
 
 	}
 
@@ -303,7 +304,6 @@ public class ImportFunctions {
 		return genres;
 	}
 
-
 	public static  List<Serie> Serie(String url) throws IOException {
 		List<Serie> series=new Vector<Serie>();
 		String id;
@@ -471,7 +471,6 @@ public static  List<Serie> getSerieLiee(String url) throws IOException {
 		return seriesLies;
 	}
 
-
 		public static List<Room> addRoom() {
 			
 			List<Room>rooms = new ArrayList<Room>();
@@ -496,10 +495,30 @@ public static  List<Serie> getSerieLiee(String url) throws IOException {
 				
 			}
 			
-			return rooms;	
-			
+			return rooms;		
 		}
 
+
+		
+		public static  String getMovieVideo(String url) throws IOException {
+			String video ="null";
+			
+			try {
+				JSONObject object = GetMyJson(url);
+				JSONArray serieArray = object.getJSONArray("results");
+				if (serieArray != null) {
+					if(serieArray.length()>0) {
+					JSONObject obj =(JSONObject) serieArray.get(0);
+					video = obj.getString("key");}
+					
+				}
+			} catch (Exception e) {
+				
+			}
+			
+			return video;
+		}
+		
 
 
 
