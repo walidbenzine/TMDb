@@ -11,13 +11,12 @@ class Comment (var commentType: CommentType): Serializable {
 
     internal var text: String? = null
     internal var type: String? = null
-    internal var publishedDate: String? = null
     internal var idUser: Int = 0
-    internal var idProd: Int = 0
+
 
     init {
         when(commentType){
-            CommentType.Film -> {
+            CommentType.Movie -> {
                 toast = "You comment a film"
 
             }
@@ -25,12 +24,17 @@ class Comment (var commentType: CommentType): Serializable {
                 toast = "You comment an episode"
 
             }
-           CommentType.Saison -> {
+           CommentType.Season -> {
                 toast = "You comment a saison"
 
             }
-           CommentType.Serie -> {
+           CommentType.Tv -> {
                 toast = "You comment a serie"
+
+            }
+
+            CommentType.nulle -> {
+                toast = "no comment"
 
             }
 

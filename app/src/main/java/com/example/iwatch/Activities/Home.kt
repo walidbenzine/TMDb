@@ -11,10 +11,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.iwatch.Entities.Actor
-import com.example.iwatch.Entities.Saison
-import com.example.iwatch.Entities.Serie
-import com.example.iwatch.Entities.User
+import com.example.iwatch.Entities.*
 import com.example.iwatch.Fragments.*
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
@@ -37,6 +34,7 @@ class Home : AppCompatActivity(),
     var filmsTop = ArrayList<Film>()
     var actorsTop = ArrayList<Actor>()
     var sais = ArrayList<Saison>()
+    var CommentTop = ArrayList<Comment>()
 
     override fun onFragmentInteraction(uri: Uri) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -210,4 +208,6 @@ class Home : AppCompatActivity(),
         }
         return arraySaison
     }
+
+
 }
