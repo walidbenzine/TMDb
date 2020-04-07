@@ -3,7 +3,7 @@ package com.example.iwatch.Entities
 import java.io.Serializable
 
 
-class Actor(var firstName: String, var lastName: String): Serializable{
+class Actor: Serializable{
 
     internal var id: Int = 0
     internal var firstName: String? = null
@@ -16,10 +16,4 @@ class Actor(var firstName: String, var lastName: String): Serializable{
 
     internal var filmography: List<Movie>? = null
 
-    val cityOfBirth: String? = null
-    val bibliography: String? = null
-    internal var popularity: Int = 0
-    internal var dateOfBirth: Date? = null
-    internal var filmography: List<Movie>? = null
-    internal var picture: String? = null 
 }
