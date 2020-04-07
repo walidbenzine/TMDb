@@ -1,5 +1,6 @@
 package com.sciruse.contoler;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +21,6 @@ import com.sciruse.repository.GenreRepository;
 import com.sciruse.repository.SerieRepository;
 import com.sciruse.test.ImportFunctions;
 
-
-/* to  load movies call
- * 1) /addMovies
- * 2) /addliee
- * 3) /addRoom
- * and u're good to go 
- * nb: do this just one time 
- * */
 @RestController
 public class FilmController {
 	private static String Base_url="https://api.themoviedb.org/3/";
@@ -44,7 +37,8 @@ public class FilmController {
 	@RequestMapping("/lola")
 	@ResponseBody
 	public void home() {
-		System.out.println("Test Working");
+		System.out.println("looooooooooooooooooooooola");
+
 	}
 
 	@RequestMapping("/getMovies")
@@ -54,14 +48,8 @@ public class FilmController {
 		return (List<Film>) repo.findAll();
 	}
 
-	@RequestMapping("/getTv")
-	public List<Serie> addAlien(Serie serie) throws IOException
-	{
-		t =new  ImportFunctions();
-		return t.Serie("https://api.themoviedb.org/3/tv/popular?api_key="+API_Key+"&language=en-US&page=1");
-	}
-	
-//add popular movies include add comments actors each actor has list of movies that we also added them************************************
+
+
 	@RequestMapping("/addMovies")
 	public String addMovies() throws IOException
 	{
@@ -69,25 +57,32 @@ public class FilmController {
 		Vector<Film>films= t.MoviesPopular("https://api.themoviedb.org/3/movie/popular?api_key="+API_Key+"&language=en-US&page=1");
 
 		for (Film film : films) {
-			//add actors to  movie
+
+
 			List<Actors> act = t.Actors(Base_url+"movie/"+film.getID() +"/credits?api_key="+API_Key+"&language=en-US");
 			film.setActors(act);
-			//add movie to actors
+
+			//List<Film>liee= t.getFilmLiee(Base_url+"movie/"+film.getID() +"/similar?api_key="+API_Key+"&language=en-US&page=1");
+			//film.setFilmsLiees(liee);
+
+			//film.setFilmsLiees(t.getFilmLiee(Base_url+"movie/"+film.getID()+"/similar?api_key="+API_Key+"&language=en-US&page=1"));
 			for (Actors actor: act) {
 				actor.setFilmographie(t.getFilmBiblio(Base_url+"person/"+actor.getId()+"/movie_credits?api_key="+API_Key+"&language=en-US"));
 			}
+
 		}
+
 		repo.saveAll(films);
 
 		return "yes";
 	}
 
-// add list of similar movies to  one movie 
+
 	@RequestMapping("/addliee")
 	public String getFilmliee() throws IOException
 	{
 		t =new  ImportFunctions();
-		List<Film>films = (List<Film>) repo.getpopular();
+		List<Film>films = (List<Film>) repo.findAll();
 		for (Film film : films) {
 			List<Film>liee= t.getFilmLiee(Base_url+"movie/"+film.getID() +"/similar?api_key="+API_Key+"&language=en-US&page=1");
 			film.setFilmsLiees(liee);
@@ -95,22 +90,10 @@ public class FilmController {
 		}
 
 		return "done";
-	}
-	
-// add Rooms to  popular movies 
-	@RequestMapping("/addRoom")
-	public String addRoom() throws IOException
-	{
-		t =new  ImportFunctions();
-		List<Film>films = (List<Film>) repo.getpopular();
-		for (Film film : films) {
-			
-			film.setRooms(t.addRoom());
-			repo.save(film);
-		}
 
-		return "done";
 	}
+
+
 
 
 }

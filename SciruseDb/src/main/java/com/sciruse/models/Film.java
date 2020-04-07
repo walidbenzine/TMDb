@@ -39,19 +39,9 @@ public class Film {
 	@JsonIgnore
 	@ManyToMany (cascade = {CascadeType.ALL})
 	private List<Comments>comments = new ArrayList<Comments>();
-	
-	@JsonIgnore
-	@ManyToMany (cascade = {CascadeType.ALL})
-	private List<Room>rooms = new ArrayList<Room>();
 
 
 	
-	public List<Room> getRooms() {
-		return rooms;
-	}
-	public void setRooms(List<Room> rooms) {
-		this.rooms = rooms;
-	}
 	public List<Comments> getComments() {
 		return comments;
 	}
