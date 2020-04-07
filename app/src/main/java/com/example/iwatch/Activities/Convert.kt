@@ -1,7 +1,11 @@
 package com.example.iwatch.Activities
 
+import com.example.iwatch.Entities.Comment
+import com.example.iwatch.Entities.Serie
+import com.example.iwatch.Entities.User
 import com.example.iwatch.Entities.*
 import com.example.iwatch.Enumerations.GenreType
+import fr.upem.myapplication.CommentType
 import org.json.JSONArray
 import fr.upem.myapplication.Film
 import org.json.JSONObject
@@ -29,6 +33,8 @@ class Convert {
 
         val serie =  Serie ()
         val genres = ArrayList<Genre>()
+        val comment = ArrayList<Comment>()
+
         serie.id = obj.get("id").toString().toInt()
         serie.title = obj.get("title").toString()
         serie.resume = obj.get("resume").toString()
@@ -48,6 +54,16 @@ class Convert {
         }
         serie.genreList = genres
 
+        var commentarray = JSONArray(obj.get("comment").toString())
+        for( i in 0 until commentarray.length()){
+            try {
+                comment.add(Comment(CommentType.valueOf((commentarray.get(i).toString()))))
+            }catch(e: Exception){
+                System.out.println(e)
+            }
+        }
+        serie.commentList = comment
+
         return serie
     }
 
@@ -56,6 +72,7 @@ class Convert {
 
         val film =  Film ()
         val genres = ArrayList<Genre>()
+        val comment = ArrayList<Comment>()
 
         film.id = obj.get("id").toString().toInt()
         film.dateSortie= obj.get("dateSortie").toString()
@@ -73,6 +90,16 @@ class Convert {
             }
         }
         film.genre = genres
+
+        var commentarray = JSONArray(obj.get("comment").toString())
+        for( i in 0 until commentarray.length()){
+            try {
+                comment.add(Comment(CommentType.valueOf((commentarray.get(i).toString()))))
+            }catch(e: Exception){
+                System.out.println(e)
+            }
+        }
+        film.comments = comment
         return film
     }
 
@@ -130,4 +157,6 @@ class Convert {
 
         return ep
     }
+
+
 }

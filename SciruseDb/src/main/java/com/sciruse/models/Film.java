@@ -1,19 +1,15 @@
 package com.sciruse.models;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Vector;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sciruse.models.Actors;
-import org.hibernate.validator.constraints.UniqueElements;
+
 @Entity
 public class Film {
 	
@@ -27,19 +23,35 @@ public class Film {
 	private	 String note ;
 	private String dateSortie ;
 	private String image;
-	//private List<Film>filmsLiees ;
+	
+	@JsonIgnore
+	@ManyToMany (cascade = {CascadeType.ALL})
+	@Column(unique = false,nullable = true)
+	private List<Film>filmsLiees ;
+	
 	@ManyToMany (cascade = {CascadeType.ALL})
 	private List<Genre>genre = new ArrayList<Genre>();
 	
+	@JsonIgnore
 	@ManyToMany (cascade = {CascadeType.ALL})
 	private List<Actors> actors;
 	
-	//private List<String>realisator ;
+	@JsonIgnore
 	@ManyToMany (cascade = {CascadeType.ALL})
 	private List<Comments>comments = new ArrayList<Comments>();
+	
+	@JsonIgnore
+	@ManyToMany (cascade = {CascadeType.ALL})
+	private List<Room>rooms = new ArrayList<Room>();
 
 
 	
+	public List<Room> getRooms() {
+		return rooms;
+	}
+	public void setRooms(List<Room> rooms) {
+		this.rooms = rooms;
+	}
 	public List<Comments> getComments() {
 		return comments;
 	}
@@ -49,6 +61,12 @@ public class Film {
 	
 	
 	
+	public List<Film> getFilmsLiees() {
+		return filmsLiees;
+	}
+	public void setFilmsLiees(List<Film> filmsLiees) {
+		this.filmsLiees = filmsLiees;
+	}
 	public List<Actors> getActors() {
 		return actors;
 	}

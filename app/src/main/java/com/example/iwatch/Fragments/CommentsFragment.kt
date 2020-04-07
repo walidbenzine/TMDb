@@ -48,13 +48,13 @@ class CommentsFragment : Fragment() {
         var v = inflater.inflate(R.layout.fragment_comments, container, false)
         val commentRecyclerView = v.findViewById<RecyclerView>(R.id.comments_recycler_view)
 
-        comments.add(Comment("comment 1"))
+     /*   comments.add(Comment("comment 1"))
         comments.add(Comment("comment 2"))
         comments.add(Comment("comment 3"))
         comments.add(Comment("comment 4"))
         comments.add(Comment("comment 5"))
         comments.add(Comment("comment 6"))
-
+*/
         commentRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
             adapter = CommentAdapter(comments)
