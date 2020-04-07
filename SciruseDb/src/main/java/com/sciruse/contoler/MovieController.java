@@ -28,6 +28,19 @@ public class MovieController {
 		return (List<Film>) movieRepository.getpopular();
 	}
 	
+	
+	@RequestMapping("/getlast")
+	public List<Film> getNew() throws IOException
+	{			
+		return (List<Film>) movieRepository.getLast();
+	}
+	
+	@RequestMapping("/getTopRated")
+	public List<Film> getTopRated() throws IOException
+	{			
+		return (List<Film>) movieRepository.getTopRated();
+	}
+	
 	@RequestMapping("/getMovie/{id}")
 	public Film addAlien(@PathVariable Integer id) throws IOException
 	{

@@ -17,10 +17,10 @@ public interface FilmRepository extends CrudRepository<Film, Long>{
 	@Query(value = "SELECT  * FROM  sciruse.film where id =?1", nativeQuery = true)
 	Film getMovie(Integer id);
 	
-	@Query(value = "SELECT * FROM sciruse.film where image !='null' order by note desc ", nativeQuery = true)
+	@Query(value = "SELECT * FROM sciruse.film where image !='null' and video != 'null' order by note desc limit 20", nativeQuery = true)
 	List<Film> getTopRated();
 	
-	@Query(value = "SELECT * FROM sciruse.film where image !='null' order by date_sortie desc ", nativeQuery = true)
+	@Query(value = "SELECT * FROM sciruse.film where image !='null' and video != 'null' order by date_sortie desc limit 20 ", nativeQuery = true)
 	List<Film> getLast();
 	
 	
