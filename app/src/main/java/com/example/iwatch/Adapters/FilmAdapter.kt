@@ -7,7 +7,6 @@ import com.example.iwatch.Entities.Movie
 import com.example.iwatch.R
 import com.example.iwatch.ViewHolders.FilmViewHolder
 
-
 class FilmAdapter (val movieList: ArrayList<Movie>): RecyclerView.Adapter<FilmViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmViewHolder {

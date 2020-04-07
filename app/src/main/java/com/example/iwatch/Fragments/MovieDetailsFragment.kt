@@ -7,6 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Adapters.ActorAdapter
+import com.example.iwatch.Adapters.AssociatedFilmAdapter
+import com.example.iwatch.Entities.Actor
+import com.example.iwatch.Entities.Movie
 import com.example.iwatch.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -25,6 +31,9 @@ class MovieDetailsFragment : Fragment() {
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
+    var actors = ArrayList<Actor>()
+    var associatedFilms = ArrayList<Movie>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -39,6 +48,25 @@ class MovieDetailsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_movie_details, container, false)
+        val actorRecyclerView = v.findViewById<RecyclerView>(R.id.movie_detail_actors)
+
+        actors.add(Actor("Amel", "AZZI"))
+        actors.add(Actor("Bob", "MASTIGAS"))
+
+        actorRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = ActorAdapter(actors)
+        }
+
+        val associatedFilmRecyclerView = v.findViewById<RecyclerView>(R.id.movie_detail_associated_films)
+
+        associatedFilms.add(Movie("Joker", R.mipmap.ic_ghost))
+        associatedFilms.add(Movie("Invisible Guest", R.mipmap.ic_ghost))
+
+        associatedFilmRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = AssociatedFilmAdapter(associatedFilms)
+        }
 
         return v
     }
