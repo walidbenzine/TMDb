@@ -3,7 +3,7 @@ package com.example.iwatch.Entities
 import java.io.Serializable
 
 
-class Serie: Serializable{
+class Serie: Serializable {
 
     internal var title: String? = null
     internal var id: Int = 0
@@ -13,9 +13,10 @@ class Serie: Serializable{
     internal var nbrEpisodes: Int = 0
     internal var nbrSaison: Int = 0
     internal var picture: String? = null
+    internal var genreList: ArrayList<Genre>? = null
 
     internal var saisonList: List<Saison>? = null
     internal var associatedSeries: List<Serie>? = null
     internal var commentList: List<Comment>? = null
-    internal var genreList: ArrayList<String>? = null //PEUT ETRE A CHANGER
+
 }

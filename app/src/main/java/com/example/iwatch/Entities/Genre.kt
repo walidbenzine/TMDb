@@ -34,6 +34,10 @@ data class Genre (var genreType: GenreType) {
                 toast = "who will be killed"
                 iconId = R.mipmap.ic_ghost
             }
+            GenreType.Documentary -> {
+                toast = "Let's learn today"
+                iconId = R.mipmap.ic_ghost
+            }
         }
 
     }
