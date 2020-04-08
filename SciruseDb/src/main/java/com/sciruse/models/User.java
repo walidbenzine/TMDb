@@ -55,6 +55,13 @@ private  List<Serie>Seriehistory = new ArrayList<Serie>();
 @Column(unique = false,nullable = true)
 private List<Genre>genrePref =  new ArrayList<Genre>(); 
 
+public Long getId() {
+	return id;
+}
+public void setJeton(Long id) {
+	this.id = id;
+}
+
 
 public String getNom() {
 	return nom;

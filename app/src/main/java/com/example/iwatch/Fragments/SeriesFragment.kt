@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.iwatch.Entities.Serie
 
 import com.example.iwatch.R
 
@@ -27,20 +28,22 @@ class SeriesFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    var serie =  ArrayList<Serie>()
+
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        serie = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Serie>
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        System.out.println("FIRST SERIE TITLE = "+ serie.get(0).title)
+
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_series, container, false)
         return v
@@ -92,11 +95,11 @@ class SeriesFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(param1: ArrayList<Serie>) =
             SeriesFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putSerializable(ARG_PARAM1, param1)
+                    //putString(ARG_PARAM2, param2)
                 }
             }
     }

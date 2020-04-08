@@ -9,7 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import com.example.iwatch.Entities.Cinema
 import com.example.iwatch.R
+import fr.upem.myapplication.Film
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,22 +28,26 @@ private const val ARG_PARAM2 = "param2"
  */
 class CinemaFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var films =  ArrayList<Film>()
+    private var cinemas =  ArrayList<Cinema>()
+
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
+        films = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Film>
+        cinemas = arguments?.getSerializable(ARG_PARAM2) as ArrayList<Cinema>
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        System.out.println("FIRST FILM TITLE = "+ films.get(0).title)
+
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_cinema, container, false)
 
@@ -101,11 +107,11 @@ class CinemaFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(param1: ArrayList<Film>, param2: ArrayList<Cinema>) =
             CinemaFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putSerializable(ARG_PARAM1, param1)
+                    putSerializable(ARG_PARAM2, param2)
                 }
             }
     }

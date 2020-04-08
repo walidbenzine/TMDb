@@ -325,8 +325,8 @@ public class ImportFunctions {
 			JSONArray serieArray = object.getJSONArray("results");
 			Serie serie = null;
 			if (serieArray != null) { 
-				int x = 5;
-				if (serieArray.length() <= 5) {
+				int x = 10;
+				if (serieArray.length() <= 10) {
 					x = serieArray.length();
 				}
 				for (int j=0;j<x;j++){ 
