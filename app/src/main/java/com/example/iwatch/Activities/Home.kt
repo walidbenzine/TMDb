@@ -11,8 +11,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.iwatch.Entities.Serie
-import com.example.iwatch.Entities.User
+import com.example.iwatch.Entities.*
 import com.example.iwatch.Fragments.*
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
@@ -29,26 +28,37 @@ class Home : AppCompatActivity(),
 
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
     var convert = Convert()
-
-    override fun onFragmentInteraction(uri: Uri) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    var seriesLast = ArrayList<Serie>()
+    var filmsLast = ArrayList<Film>()
+    var seriesTop = ArrayList<Serie>()
+    var filmsTop = ArrayList<Film>()
+    var actorsTop = ArrayList<Actor>()
+    var sais = ArrayList<Saison>()
+    var CommentTop = ArrayList<Comment>()
+    var frag = HomeFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView( R.layout.activity_home)
 
+        /*val user = intent.getSerializableExtra("user") as User
+        seriesLast = PostSerie("http://10.0.2.2:8080/getLastSerie")
+        filmsLast = PostFilm("http://10.0.2.2:8080/getLastMovies")
+        seriesTop = PostSerie("http://10.0.2.2:8080/getSerieTopRated")
+        filmsTop = PostFilm("http://10.0.2.2:8080/getTopRated")
+        actorsTop = PostActor("http://10.0.2.2:8080/getActorPopular")*/
+
+        // Comme ça je récupere bien les series (VOIR CONSOLE)
+        /*var frag = HomeFragment.newInstance(seriesLast)
+        System.out.println("TEST AFFICHAGE SERIES FRAGMENT :")
+        frag.onCreate(savedInstanceState)*/
 
 
-        val user = intent.getSerializableExtra("user") as User
-        val filmsPopular = PostFilm("http://10.0.2.2:8080/getLastMovies")
-        val seriesPopular = PostSerie("http://10.0.2.2:8080/getLastSerie")
 
-
-
-        System.out.println("USER name===== "+user.firstName)
-        System.out.println("FILM LASTEST ===== "+filmsPopular.get(1))
-        System.out.println("SERIES LASTEST ===== "+seriesPopular.get(2).title)
+        /*System.out.println("USER name===== "+user.firstName)
+        System.out.println("FILM LASTEST ===== "+filmsLast)
+        System.out.println("SERIES LASTEST ===== "+seriesLast)
+        System.out.println("Actor Pop ===== "+actorsTop)*/
 
         // set the toolbar
         setSupportActionBar(toolbar)
@@ -64,10 +74,10 @@ class Home : AppCompatActivity(),
         home_container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(home_container))
 
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
         val inflater = menuInflater
         inflater.inflate(R.menu.home_menu, menu)
 
@@ -100,7 +110,8 @@ class Home : AppCompatActivity(),
      * A [FragmentPagerAdapter] that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+    var name : String = "amel"
+    class SectionsPagerAdapter(fm: FragmentManager)  : FragmentPagerAdapter(fm) {
 
         override fun getItem(position: Int): Fragment {
             return when (position){
@@ -131,13 +142,11 @@ class Home : AppCompatActivity(),
             System.out.println(e)
         }
         if(!x.toString().isNullOrEmpty() && x.toString() != "null"){
-
             var jsonarray = JSONArray(x.toString())
             for( i in 0 until jsonarray.length()){
                 arrayseries.add(convert.toSerie(JSONObject(jsonarray.get(i).toString())))
             }
             return arrayseries
-
         }
         return arrayseries
     }
@@ -155,15 +164,58 @@ class Home : AppCompatActivity(),
             System.out.println(e)
         }
         if(!x.toString().isNullOrEmpty() && x.toString() != "null"){
-
             var jsonarray = JSONArray(x.toString())
             for( i in 0 until jsonarray.length()){
                 arrayfilms.add(convert.toFilm(JSONObject(jsonarray.get(i).toString())))
             }
             return arrayfilms
-
-
         }
         return arrayfilms
     }
+
+    fun PostActor(url: String) : ArrayList<Actor> {
+        var arrayactors = ArrayList<Actor>()
+        val x = try {
+            URL(url)
+                    .openStream()
+                    .bufferedReader()
+                    .use { it.readText() } }
+        catch(e: Exception){
+            System.out.println(e)
+        }
+        if(!x.toString().isNullOrEmpty() && x.toString() != "null"){
+            var jsonarray = JSONArray(x.toString())
+            for( i in 0 until jsonarray.length()){
+                arrayactors.add(convert.toActor(JSONObject(jsonarray.get(i).toString())))
+            }
+            return arrayactors
+        }
+        return arrayactors
+    }
+
+
+    fun PostSaison(url: String) : ArrayList<Saison> {
+        var arraySaison = ArrayList<Saison>()
+        val x = try {
+            URL(url)
+                    .openStream()
+                    .bufferedReader()
+                    .use { it.readText() } }
+        catch(e: Exception){
+            System.out.println(e)
+        }
+        if(!x.toString().isNullOrEmpty() && x.toString() != "null"){
+            var jsonarray = JSONArray(x.toString())
+            for( i in 0 until jsonarray.length()){
+                arraySaison.add(convert.toSaison(JSONObject(jsonarray.get(i).toString())))
+            }
+            return arraySaison
+        }
+        return arraySaison
+    }
+
+    override fun onFragmentInteraction(uri: Uri) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
 }

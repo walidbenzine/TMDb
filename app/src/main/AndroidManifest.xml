@@ -16,6 +16,7 @@
         <activity android:name=".Activities.PersonDetails"/>
         <activity android:name=".Activities.SeasonDetails"/>
         <activity android:name=".Activities.SerieDetails" />
+
         <activity android:name=".Activities.MovieDetails"/>
         <activity android:name=".Activities.MainActivity" />
         <activity android:name=".Activities.SignUp" />
@@ -26,6 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".Activities.EditProfile"
             android:parentActivityName=".Activities.Home" />

@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             if(!login.isNullOrEmpty() && !password.isNullOrEmpty()) {
 
                 val userJson = Post("http://10.0.2.2:8080/getUser/" + login + "/" + password)
-
+                System.out.println(userJson)
                 if (userJson.toString() != "{}" ) {
                     Toast.makeText(applicationContext,"Connexion résussi",Toast.LENGTH_SHORT).show()
                     val user = convert.toUser(userJson.getJSONObject(0))

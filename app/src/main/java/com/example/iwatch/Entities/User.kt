@@ -1,9 +1,11 @@
 package com.example.iwatch.Entities
 
 import java.io.Serializable
+import java.math.BigInteger
 
 class User :Serializable{
 
+    internal var id: Int? = null
     internal var firstName: String? = null
     internal var lastName: String? = null
     internal var email: String? = null

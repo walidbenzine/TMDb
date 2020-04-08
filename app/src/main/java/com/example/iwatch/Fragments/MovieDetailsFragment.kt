@@ -50,8 +50,8 @@ class MovieDetailsFragment : Fragment() {
         val v = inflater.inflate(R.layout.fragment_movie_details, container, false)
         val actorRecyclerView = v.findViewById<RecyclerView>(R.id.movie_detail_actors)
 
-        actors.add(Actor("Amel", "AZZI"))
-        actors.add(Actor("Bob", "MASTIGAS"))
+       /* actors.add(Actor("Amel", "AZZI"))
+        actors.add(Actor("Bob", "MASTIGAS"))*/
 
         actorRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)

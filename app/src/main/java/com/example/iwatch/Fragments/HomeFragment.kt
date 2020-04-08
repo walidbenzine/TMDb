@@ -31,17 +31,21 @@ private const val ARG_PARAM2 = "param2"
  */
 class HomeFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
+    private var param1: ArrayList<Serie>? = null
     private var param2: String? = null
-    var serie = ArrayList<Serie>()
+    var serie =  ArrayList<Serie>()
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
+      /*  arguments?.let {
+            param1 = it.getSerializable(ARG_PARAM1) as ArrayList<Serie>
             param2 = it.getString(ARG_PARAM2)
-        }
+        }*/
+
+        //ICI CE PASSE LA RECUPERATION
+        val test = arguments?.getSerializable("serie") as? ArrayList<Serie>
+        System.out.println(test)
     }
 
     override fun onCreateView(
@@ -59,19 +63,16 @@ class HomeFragment : Fragment() {
         btnSeries.setBackgroundResource(R.drawable.no_clicked_button)
         btnSeries.setTextColor(Color.parseColor("#EF4B53"))
 
-
         val serieRecyclerView = v.findViewById<RecyclerView>(R.id.home_recycler_view)
 
-        System.out.println("Hello there")
-/*
-         serie.add(Serie("ree","zeze nghjg hgz","dddsds", "dsdsds", R.drawable.theprotector))
+         /*serie.add(Serie("ree","zeze nghjg hgz","dddsds", "dsdsds", R.drawable.theprotector))
          serie.add(Serie("yyy","sssjhj hgg hgghjg dsd", "dddsds", "dsdsds", R.drawable.theprotector))
          serie.add(Serie("aaa","sdsjh  hgjhjhd","dddsds", "dsdsds",  R.drawable.theprotector))
          System.out.println("jus")
          System.out.println("yas "+serie.size)*/
 
         serieRecyclerView.apply {
-            //serieRecyclerView!!.layoutManager = LinearLayoutManager(this.context)
+            serieRecyclerView!!.layoutManager = LinearLayoutManager(this.context)
             layoutManager = LinearLayoutManager(this.context)
              adapter = SerieAdapter(serie)
          }
@@ -123,13 +124,24 @@ class HomeFragment : Fragment() {
          * @return A new instance of fragment HomeFragment.
          */
         // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+       /* @JvmStatic
+        fun newInstance(param1: ArrayList<Serie>, param2: String) =
             HomeFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
+                    putSerializable(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
                 }
-            }
+            }*/
+
+        fun newInstance(param: ArrayList<Serie>): HomeFragment {
+
+            val args = Bundle()
+            args.putSerializable("serie", param)
+            val fragment = HomeFragment()
+            fragment.arguments = args
+            return fragment
+        }
+
+
     }
 }

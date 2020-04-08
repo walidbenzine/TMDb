@@ -1,5 +1,5 @@
 package fr.upem.myapplication
 
 enum class CommentType {
-    Film, Saison, Serie, Episode
+    Movie, Season, Tv, Episode, nulle
 }

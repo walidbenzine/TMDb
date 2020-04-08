@@ -1,5 +1,11 @@
 package com.example.iwatch.Entities
 class Episode {
-    private val resume: String? = null
-    private val trailer: String? = null  // TYPE DE VARIABLE A CHANGER
+
+    internal var id: Int? = 0
+    internal var number: String? = null
+    internal var dateDiffusion: String? = null
+    internal var picture: String? = null
+    internal var name: String? = null
+    internal var resume: String? = null
+    internal var trailer: String? = null
 }
