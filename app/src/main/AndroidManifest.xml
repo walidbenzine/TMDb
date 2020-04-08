@@ -12,23 +12,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.Favorite">
+        <activity android:name=".Activities.Favorite"/>
+
+        <activity android:name=".Activities.PersonDetails"/>
+
+        <activity android:name=".Activities.SeasonDetails"/>
+
+        <activity android:name=".Activities.SerieDetails"/>
+
+        <activity android:name=".Activities.MovieDetails"/>
+
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.PersonDetails" />
-        <activity android:name=".Activities.SeasonDetails" />
-        <activity android:name=".Activities.SerieDetails" />
-        <activity android:name=".Activities.MovieDetails" />
-        <activity android:name=".Activities.MainActivity" />
-        <activity android:name=".Activities.SignUp" />
+        <activity android:name=".Activities.SignUp"
+            android:parentActivityName=".Activities.MainActivity"/>
+
         <activity android:name=".Activities.Home"/>
+
         <activity
-            android:name=".Activities.EditProfile"
-            android:parentActivityName=".Activities.Home" />
+            android:name=".Activities.EditProfile"/>
+
         <activity android:name=".Activities.ConfirmRegistration" />
     </application>
 

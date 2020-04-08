@@ -9,9 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Activities.EditProfile
+import com.example.iwatch.Activities.Favorite
 import com.example.iwatch.Adapters.GenreAdapter
 import com.example.iwatch.Entities.Genre
 import com.example.iwatch.Enumerations.GenreType
@@ -68,6 +70,12 @@ class ProfileFragment : Fragment() {
         btnEditProfile.setOnClickListener {
             val editProfile = Intent(this.context, EditProfile::class.java)
             startActivity(editProfile)
+        }
+
+        val btnFavorite = v.findViewById<View>(R.id.btn_favorite) as LinearLayout
+        btnFavorite.setOnClickListener {
+            val favoriteIntent = Intent(this.context, Favorite::class.java)
+            startActivity(favoriteIntent)
         }
 
         return v

@@ -3,6 +3,7 @@ package com.example.iwatch.Activities
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -21,6 +22,11 @@ class SeasonDetails : AppCompatActivity(), EpisodesFragment.OnFragmentInteractio
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_season_details)
 
+        //enable back button on the toolbar
+        season_detail_toolbar.title = ""
+        setSupportActionBar(season_detail_toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
@@ -33,6 +39,12 @@ class SeasonDetails : AppCompatActivity(), EpisodesFragment.OnFragmentInteractio
         season_tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(season_view_pager))
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId==android.R.id.home){
+            onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
+    }
     /**
      * A [FragmentPagerAdapter] that returns a fragment corresponding to
      * one of the sections/tabs/pages.

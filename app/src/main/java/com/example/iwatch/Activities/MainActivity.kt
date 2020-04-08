@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.StrictMode
+import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import com.example.iwatch.R
 import kotlinx.android.synthetic.main.activity_main.*
@@ -25,13 +27,14 @@ class MainActivity : AppCompatActivity() {
 
         val convert = Convert()
 
-        signupb.setOnClickListener() {
-            var clickedu = Intent(this@MainActivity, SignUp::class.java)
-            startActivity(clickedu)
-            }
+        val btnSignUp = findViewById<View>(R.id.btn_signUp) as Button
+        btnSignUp.setOnClickListener() {
+            var signUpIntent = Intent(this@MainActivity, SignUp::class.java)
+            startActivity(signUpIntent)
+        }
 
 
-        buttonCnx.setOnClickListener {
+        btn_login.setOnClickListener {
 
             val login = email.text
             val password = pass.text
@@ -43,9 +46,9 @@ class MainActivity : AppCompatActivity() {
                 if (userJson.toString() != "{}" ) {
                     Toast.makeText(applicationContext,"Connexion résussi",Toast.LENGTH_SHORT).show()
                     val user = convert.toUser(userJson.getJSONObject(0))
-                    val intent = Intent(this, Home::class.java)
-                    intent.putExtra("user", user)
-                    startActivity(intent)
+                    val homeIntent = Intent(this, Home::class.java)
+                    homeIntent.putExtra("user", user)
+                    startActivity(homeIntent)
                 }
                 else{
                     Toast.makeText(applicationContext,"Identifiants incorrects",Toast.LENGTH_SHORT).show()

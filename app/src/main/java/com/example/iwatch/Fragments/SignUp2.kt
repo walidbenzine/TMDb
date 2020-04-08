@@ -1,14 +1,23 @@
 package com.example.iwatch.Fragments
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import com.example.iwatch.Activities.Home
+import com.example.iwatch.Activities.MainActivity
 import com.example.iwatch.R
+import com.squareup.okhttp.OkHttpClient
+import com.squareup.okhttp.Request
+import kotlinx.android.synthetic.main.fragment_sign_up1.*
+import kotlinx.android.synthetic.main.fragment_sign_up2.*
+import org.jetbrains.anko.doAsync
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,7 +50,42 @@ class SignUp2 : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_sign_up2, container, false)
+        var v = inflater.inflate(R.layout.fragment_sign_up2, container, false)
+
+        val btnSignUpF = v.findViewById<View>(R.id.signup) as Button
+        btnSignUpF.setOnClickListener() {
+            doAsync {
+                conx(
+                    email.text as String, 0, username.text as String, fname.text as String,
+                    pass.text as String, "null", lname.text as String, phone.text as Int
+                )
+            }
+
+            var signUpIntent = Intent(this.context, Home::class.java)
+            startActivity(signUpIntent)
+        }
+
+        return v
+    }
+
+    private fun conx(
+        email: String,
+        jeton: Int,
+        username: String,
+        fname: String,
+        pass: String,
+        addresse: String,
+        lname: String,
+        phone: Int
+    ): String {
+        val url =
+            "http://10.0.2.2:8080/addUser/$email/$jeton/$username/$fname/$pass/$addresse/$lname/$phone"
+        val client = OkHttpClient()
+        val request = Request.Builder().url(url).build()
+        val response = client.newCall(request).execute()
+        val bodystr = response.body().string() // this can be consumed only once
+        return bodystr
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

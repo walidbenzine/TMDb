@@ -3,6 +3,7 @@ package com.example.iwatch.Activities
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -21,6 +22,11 @@ class Favorite : AppCompatActivity(), FavoriteMovieFragment.OnFragmentInteractio
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_favorite)
 
+
+        favorite_toolbar.title = "Favorite"
+        setSupportActionBar(favorite_toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
@@ -33,11 +39,18 @@ class Favorite : AppCompatActivity(), FavoriteMovieFragment.OnFragmentInteractio
         favorite_tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(favorite_view_pager))
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId==android.R.id.home){
+            onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     /**
      * A [FragmentPagerAdapter] that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    var name : String = "amel"
+
     class SectionsPagerAdapter(fm: FragmentManager)  : FragmentPagerAdapter(fm) {
 
         override fun getItem(position: Int): Fragment {

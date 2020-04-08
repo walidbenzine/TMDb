@@ -7,6 +7,8 @@ import org.jetbrains.anko.activityUiThread
 import org.jetbrains.anko.doAsync
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
 import com.example.iwatch.Fragments.SignUp1
 import com.example.iwatch.Fragments.SignUp2
 import com.example.iwatch.R
@@ -32,24 +34,6 @@ class SignUp : AppCompatActivity() , SignUp1.OnFragmentInteractionListener, Sign
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragment_container, signUp1Fragment)
         fragmentTransaction.commit()
-        signup.setOnClickListener() {
-            doAsync {
-                conx(email.text as String, 0, username.text as String, fname.text as String,pass.text as String ,"null",lname.text as String,phone.text as Int)
-            }
-        }
     }
 
-
-
-    private fun conx(email:String, jeton :Int, username:String, fname : String,pass:String, addresse:String, lname:String, phone:Int  ):String {
-        val url =
-            "http://10.0.2.2:8080/addUser/$email/$jeton/$username/$fname/$pass/$addresse/$lname/$phone"
-        val client = OkHttpClient()
-        val request = Request.Builder().url(url).build()
-        val response = client.newCall(request).execute()
-        val bodystr = response.body().string() // this can be consumed only once
-        return bodystr
-
-
-    }
 }
