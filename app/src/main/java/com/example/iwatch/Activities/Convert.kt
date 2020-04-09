@@ -137,6 +137,21 @@ class Convert {
     }
 
 
+    fun toCinema(obj: JSONObject): Cinema {
+
+        var cine = Cinema()
+
+        cine.id = obj.get("id").toString().toInt()
+        cine.nom = obj.get("nom").toString()
+        cine.adresse = obj.get("adresse").toString()
+        cine.image = obj.get("image").toString()
+        cine.latitude = obj.get("alt").toString()
+        cine.longitude = obj.get("lang").toString()
+
+        return cine
+    }
+
+
 
     fun toComment(obj: JSONObject): Comment {
     try {

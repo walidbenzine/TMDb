@@ -97,12 +97,30 @@ class Home : AppCompatActivity(),
 
         override fun getItem(position: Int): Fragment {
             return when (position){
-                0 -> HomeFragment.newInstance(PostSerie("http://10.0.2.2:8080/getSerieLast"),PostFilm("http://10.0.2.2:8080/getlast"))
-                1 -> CinemaFragment.newInstance(PostFilm("http://10.0.2.2:8080/getTopRated"), ArrayList<Cinema>() )
-                2 -> SeriesFragment.newInstance(PostSerie("http://10.0.2.2:8080/getSeriePopular"))
-                3 -> PersonsFragment.newInstance(PostActor("http://10.0.2.2:8080/getActorPopular"))
-                4 -> ProfileFragment.newInstance(user)
-                else -> Fragment()
+                0 -> {
+                    System.out.println("CASE 0")
+                    HomeFragment.newInstance(PostSerie("http://10.0.2.2:8080/getSerieLast"), PostFilm("http://10.0.2.2:8080/getlast"))
+                }
+                1 -> {
+                    System.out.println("CASE 1")
+                    CinemaFragment.newInstance(PostFilm("http://10.0.2.2:8080/getTopRated"), PostCinema("http://10.0.2.2:8080/getAllRooms"))
+                }
+                2 -> {
+                    System.out.println("CASE 2")
+                    SeriesFragment.newInstance(PostSerie("http://10.0.2.2:8080/getSeriePopular"))
+                }
+                3 -> {
+                    System.out.println("CASE 3")
+                    PersonsFragment.newInstance(PostActor("http://10.0.2.2:8080/getActorPopular"))
+                }
+                4 -> {
+                    System.out.println("CASE 4")
+                    ProfileFragment.newInstance(user)
+                }
+                else -> {
+                    System.out.println("CASE ELSE")
+                    Fragment()
+                }
             }
         }
 
@@ -194,4 +212,25 @@ fun PostSaison(url: String) : ArrayList<Saison> {
         return arraySaison
     }
     return arraySaison
+}
+
+
+fun PostCinema(url: String) : ArrayList<Cinema> {
+    var arrayCinema = ArrayList<Cinema>()
+    val x = try {
+        URL(url)
+                .openStream()
+                .bufferedReader()
+                .use { it.readText() } }
+    catch(e: Exception){
+        System.out.println(e)
+    }
+    if(!x.toString().isNullOrEmpty() && x.toString() != "null"){
+        var jsonarray = JSONArray(x.toString())
+        for( i in 0 until jsonarray.length()){
+            arrayCinema.add(convert.toCinema(JSONObject(jsonarray.get(i).toString())))
+        }
+        return arrayCinema
+    }
+    return arrayCinema
 }

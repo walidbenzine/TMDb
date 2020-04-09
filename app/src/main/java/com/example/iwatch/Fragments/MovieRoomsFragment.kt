@@ -48,9 +48,6 @@ class MovieRoomsFragment : Fragment() {
         var v = inflater.inflate(R.layout.fragment_movie_rooms, container, false)
         val movieRoomRecyclerView = v.findViewById<RecyclerView>(R.id.movie_detail_rooms)
 
-        movieRooms.add(Cinema("Cinema Village", "rue Sain-Louis, 44300 Nantes"))
-        movieRooms.add(Cinema("Cinema Village", "rue Sain-Louis, 44300 Nantes"))
-        movieRooms.add(Cinema("Cinema Village", "rue Sain-Louis, 44300 Nantes"))
 
         movieRoomRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)

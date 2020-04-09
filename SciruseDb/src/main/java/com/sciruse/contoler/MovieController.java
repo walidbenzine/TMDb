@@ -14,12 +14,16 @@ import com.sciruse.models.Genre;
 import com.sciruse.models.Room;
 import com.sciruse.repository.ActorRepository;
 import com.sciruse.repository.FilmRepository;
+import com.sciruse.repository.RoomRepository;
 
 @RestController
 public class MovieController {
 
 	@Autowired
 	FilmRepository movieRepository;
+	
+	@Autowired
+	RoomRepository roomRepository;
 	
 	
 	@RequestMapping("/getPopular")
@@ -83,6 +87,14 @@ public class MovieController {
 	{
 		
 		return movieRepository.getMovie(id).getRooms();
+		
+	}
+	
+	@RequestMapping("/getAllRooms")
+	public List<Room> getAllRooms() throws IOException
+	{
+		
+		return roomRepository.getAllRooms();
 		
 	}
 	

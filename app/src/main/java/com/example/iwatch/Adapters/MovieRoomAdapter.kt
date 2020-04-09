@@ -21,8 +21,8 @@ class MovieRoomAdapter(val movieRoomList: ArrayList<Cinema>): RecyclerView.Adapt
     override fun onBindViewHolder(holder: MovieRoomViewHolder, position: Int) {
         val movieRoom: Cinema = movieRoomList[position]
 
-        holder.movieRoomName.text = movieRoom.name
-        holder.movieRoomAddress.text = movieRoom.localisation
+        holder.movieRoomName.text = movieRoom.nom
+        holder.movieRoomAddress.text = movieRoom.adresse
         holder.movieRoomPicture.setImageResource(R.mipmap.ic_drama)
     }
 }

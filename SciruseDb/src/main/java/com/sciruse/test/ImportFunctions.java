@@ -514,14 +514,14 @@ public static  List<Serie> getSerieLiee(String url) throws IOException {
 			
 			List<Room>rooms = new ArrayList<Room>();
 			
-			Room C1 = new Room(1, "UGC Ciné Cité Paris 19","166 Boulevard Macdonald, 75019 Paris, France", "Cine1.png", 48.899761, 2.376952, false);
-			Room C2 = new Room(2, "UGC Ciné Cité Bercy","2 Cour Saint-Emilion, 75012 Paris, France", "Cine2.png", 48.832306, 2.385069, false);
-			Room C3 = new Room(3, "UGC Ciné Cité Les Halles","101 Rue Berger, 75001 Paris, France", "Cine3.png",48.863460, 2.343399, false);
-			Room C4 = new Room(4, "Luminor Hôtel de Ville","20 Rue du Temple, 75004 Paris, France", "Cine4.png",48.858716, 2.353561, false);
-			Room C5 = new Room(5, "La Filmothèque du Quartier Latin","9 Rue Champollion, 75005 Paris, France", "Cine5.png", 48.849578, 2.342828, false);
-			Room C6 = new Room(6, "Le Brady","39 Boulevard de Strasbourg, 75010 Paris", "Cine6.png",48.871777, 2.355446, false);
+			Room C1 = new Room(1, "UGC Ciné Cité Paris 19","166 Boulevard Macdonald, 75019 Paris, France", "https://cdn-www.konbini.com/fr/files/2013/10/article__X3E9464.jpg", 48.899761, 2.376952, false);
+			Room C2 = new Room(2, "UGC Ciné Cité Bercy","2 Cour Saint-Emilion, 75012 Paris, France", "https://files.offi.fr/lieu/3320/images/600/63e1ff91c9853a0b1f106b3fc45af2b5.jpg", 48.832306, 2.385069, false);
+			Room C3 = new Room(3, "UGC Ciné Cité Les Halles","101 Rue Berger, 75001 Paris, France", "https://www.sortiraparis.com/images/80/90246/531578-ugc-cine-cite-les-halles-3.jpg",48.863460, 2.343399, false);
+			Room C4 = new Room(4, "Luminor Hôtel de Ville","20 Rue du Temple, 75004 Paris, France", "https://www.pagesjaunes.fr/media/ugc/luminor_hotel_de_ville_07505600_195521190",48.858716, 2.353561, false);
+			Room C5 = new Room(5, "La Filmothèque du Quartier Latin","9 Rue Champollion, 75005 Paris, France", "https://www.pagesjaunes.fr/media/ugc/la_filmotheque_du_quartier_latin_07505600_174028275", 48.849578, 2.342828, false);
+			Room C6 = new Room(6, "Le Brady","39 Boulevard de Strasbourg, 75010 Paris", "https://salles-cinema.com/wp-content/uploads/2009/09/cinema-le-brady_11.jpg",48.871777, 2.355446, false);
 			Room r[]= {C1,C2,C3,C4,C5,C6};
-			int randomNum = ThreadLocalRandom.current().nextInt(1, 6 + 1);
+			/*int randomNum = ThreadLocalRandom.current().nextInt(1, 6 + 1);
 			
 			
 			for (int i = 0; i < randomNum; i++) {
@@ -533,6 +533,11 @@ public static  List<Serie> getSerieLiee(String url) throws IOException {
 				}
 				
 			}
+			*/
+
+			int rand = (int) (Math.random() * 6);
+			rooms.add(r[(rand+1)%6]);
+			rooms.add(r[rand]);
 			
 			return rooms;		
 		}
