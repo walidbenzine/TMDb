@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import com.example.iwatch.Activities.ConfirmRegistration
 import com.example.iwatch.Activities.Home
 import com.example.iwatch.Activities.MainActivity
 import com.example.iwatch.R
@@ -61,7 +62,7 @@ class SignUp2 : Fragment() {
                 )
             }
 
-            var signUpIntent = Intent(this.context, Home::class.java)
+            var signUpIntent = Intent(this.context, ConfirmRegistration::class.java)
             startActivity(signUpIntent)
         }
 
