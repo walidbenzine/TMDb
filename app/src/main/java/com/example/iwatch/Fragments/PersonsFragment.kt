@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Adapters.PersonAdapter
 import com.example.iwatch.Entities.Actor
 
 import com.example.iwatch.R
@@ -42,9 +45,16 @@ class PersonsFragment : Fragment() {
 
         System.out.println("FIRST ACTOR NAME = "+ actors.get(0).firstName)
 
-
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_persons, container, false)
+
+        //print popular actors list
+        val personRecyclerView = v.findViewById<RecyclerView>(R.id.person_recycler_view)
+        personRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this.context)
+            adapter = PersonAdapter(actors)
+        }
+
         return v
     }
 

@@ -60,13 +60,27 @@
                         android:textColor="@color/lightGrey"/>
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/person_birth_place"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textColor="@color/white"
-                    android:text="lieu de naissance: "/>
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:text="Lieu de naissance: "/>
+
+                    <TextView
+                        android:id="@+id/person_birth_place"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:textColor="@color/lightGrey"/>
+                </LinearLayout>
+
+
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
