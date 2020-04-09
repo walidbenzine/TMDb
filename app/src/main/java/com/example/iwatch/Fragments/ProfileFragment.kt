@@ -15,10 +15,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Activities.EditProfile
 import com.example.iwatch.Activities.Favorite
 import com.example.iwatch.Adapters.GenreAdapter
+import com.example.iwatch.Entities.Actor
 import com.example.iwatch.Entities.Genre
+import com.example.iwatch.Entities.User
 import com.example.iwatch.Enumerations.GenreType
 
 import com.example.iwatch.R
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,26 +38,35 @@ private const val ARG_PARAM2 = "param2"
  */
 class ProfileFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var user = User()
+
     private var listener: OnFragmentInteractionListener? = null
 
     var genres = ArrayList<Genre>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        user =  arguments?.getSerializable(ARG_PARAM1) as User
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
+        System.out.println("USERNAME = "+ user.firstName+" "+ user.firstName)
+
+
         // Inflate the layout for this fragment
+
         val v = inflater.inflate(R.layout.fragment_profile, container, false)
+
+        //get user attributes
+        user_name.text = user.firstName?.capitalize() + " " + user.firstName?.toUpperCase()
+        user_phone.text = user.mobile
+        user_jeton.text = user.jeton.toString()
+
         val genreRecyclerView = v.findViewById<RecyclerView>(R.id.genre_recycler_view)
 
         genres.add(Genre(GenreType.Thriller))
@@ -127,11 +139,11 @@ class ProfileFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(param1: User) =
             ProfileFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putSerializable(ARG_PARAM1, param1)
+
                 }
             }
     }

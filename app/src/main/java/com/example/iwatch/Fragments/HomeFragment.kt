@@ -15,6 +15,7 @@ import com.example.iwatch.Adapters.SerieAdapter
 import com.example.iwatch.Entities.Serie
 
 import com.example.iwatch.R
+import fr.upem.myapplication.Film
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,27 +32,29 @@ private const val ARG_PARAM2 = "param2"
  */
 class HomeFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: ArrayList<Serie>? = null
-    private var param2: String? = null
+
     var serie =  ArrayList<Serie>()
+    var films =  ArrayList<Film>()
+
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-      /*  arguments?.let {
-            param1 = it.getSerializable(ARG_PARAM1) as ArrayList<Serie>
-            param2 = it.getString(ARG_PARAM2)
-        }*/
 
-        //ICI CE PASSE LA RECUPERATION
-        val test = arguments?.getSerializable("serie") as? ArrayList<Serie>
-        System.out.println(test)
+        serie = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Serie>
+        films = arguments?.getSerializable(ARG_PARAM2) as ArrayList<Film>
+
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
+        System.out.println("FIRST SERIE TITLE = "+ serie.get(0).title)
+        System.out.println("FIRST FILM TITLE =  "+ films.get(0).title)
 
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_home, container, false)
@@ -65,11 +68,7 @@ class HomeFragment : Fragment() {
 
         val serieRecyclerView = v.findViewById<RecyclerView>(R.id.home_recycler_view)
 
-         /*serie.add(Serie("ree","zeze nghjg hgz","dddsds", "dsdsds", R.drawable.theprotector))
-         serie.add(Serie("yyy","sssjhj hgg hgghjg dsd", "dddsds", "dsdsds", R.drawable.theprotector))
-         serie.add(Serie("aaa","sdsjh  hgjhjhd","dddsds", "dsdsds",  R.drawable.theprotector))
-         System.out.println("jus")
-         System.out.println("yas "+serie.size)*/
+
 
         serieRecyclerView.apply {
             serieRecyclerView!!.layoutManager = LinearLayoutManager(this.context)
@@ -124,24 +123,13 @@ class HomeFragment : Fragment() {
          * @return A new instance of fragment HomeFragment.
          */
         // TODO: Rename and change types and number of parameters
-       /* @JvmStatic
-        fun newInstance(param1: ArrayList<Serie>, param2: String) =
+        @JvmStatic
+        fun newInstance(param1: ArrayList<Serie>, param2: ArrayList<Film>) =
             HomeFragment().apply {
                 arguments = Bundle().apply {
                     putSerializable(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putSerializable(ARG_PARAM2, param2)
                 }
-            }*/
-
-        fun newInstance(param: ArrayList<Serie>): HomeFragment {
-
-            val args = Bundle()
-            args.putSerializable("serie", param)
-            val fragment = HomeFragment()
-            fragment.arguments = args
-            return fragment
-        }
-
-
+            }
     }
 }

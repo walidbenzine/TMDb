@@ -21,6 +21,12 @@ import com.sciruse.repository.FilmRepository;
 import com.sciruse.repository.SerieRepository;
 import com.sciruse.test.ImportFunctions;
 
+
+/*
+ To load series, saisons, series liées, actors etc..
+ Just do /addTv 
+  
+ */
 @RestController
 public class SerieController {
 	
@@ -114,8 +120,7 @@ public class SerieController {
 	{
 		 t =new  ImportFunctions();
 		
-		// serieRepository.saveAll(t.Serie(Base_url+"tv/popular?api_key="+API_Key+"&language=en-US&page=1"));
-		 
+				 
 		 Vector<Serie> series= (Vector<Serie>) t.Serie(Base_url+"tv/popular?api_key="+API_Key+"&language=en-US&page=1");
 
 			for (Serie serie : series) {
