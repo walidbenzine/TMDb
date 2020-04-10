@@ -11,7 +11,7 @@ import com.sciruse.models.Serie;
 
 public interface SerieRepository extends CrudRepository<Serie, Long>{
 	
-	@Query(value = "SELECT  * FROM  sciruse.serie where `image` !='null' LIMIT 20;", nativeQuery = true)
+	@Query(value = "SELECT  * FROM  sciruse.serie where image !='null' and video !='null' and resume !='' and date_sortie > 2006 and nbr_saison >2 order by note desc limit 20;", nativeQuery = true)
 	List<Serie> getSeriePopular();
 	
 	@Query(value = "SELECT  * FROM  sciruse.serie where `image` !='null' AND `id` = ?1", nativeQuery = true)

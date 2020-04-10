@@ -18,6 +18,7 @@ public class Serie {
 	private Integer id;
 	
 	private String title;
+	private String video;
 	
 	@Column(columnDefinition="LONGTEXT")
 	private String resume ;
@@ -49,6 +50,14 @@ public class Serie {
 	private List<Actors> actors;
 
 
+	
+	
+	public String getVideo() {
+		return video;
+	}
+	public void setVideo(String video) {
+		this.video = video;
+	}
 	public String getTitle() {
 		return title;
 	}
@@ -138,10 +147,11 @@ public class Serie {
 	public List<Serie> getSeriesLiees() {
 		return seriesLiees;
 	}
-	public void setSeriesLiees(Serie seriesLiees) {
-		this.seriesLiees.add(seriesLiees);
-	}
 	
+	
+	public void setSeriesLiees(List<Serie> seriesLiees) {
+		this.seriesLiees = seriesLiees;
+	}
 	@Override
 	public String toString() {
 		return "Serie [id=" + id + ", title=" + title + ", resume=" + resume + ", dateSortie="

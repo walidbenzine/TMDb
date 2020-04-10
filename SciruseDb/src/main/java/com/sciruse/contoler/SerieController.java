@@ -107,33 +107,4 @@ public class SerieController {
 		return  serieRepository.getSaison(id).getListEpisodes();
 	}
 	
-	
-	
-	@RequestMapping("/addTv")
-	public String addTv() throws IOException
-	{
-		 t =new  ImportFunctions();
-		
-		// serieRepository.saveAll(t.Serie(Base_url+"tv/popular?api_key="+API_Key+"&language=en-US&page=1"));
-		 
-		 Vector<Serie> series= (Vector<Serie>) t.Serie(Base_url+"tv/popular?api_key="+API_Key+"&language=en-US&page=1");
-
-			for (Serie serie : series) {
-
-
-				List<Actors> act = t.Actors(Base_url+"tv/"+serie.getId() +"/credits?api_key="+API_Key+"&language=en-US");
-				serie.setActors(act);
-
-				for (Actors actor: act) {
-					actor.setSeriegraphie(t.getSerieBiblio(Base_url+"person/"+actor.getId()+"/tv_credits?api_key="+API_Key+"&language=en-US"));
-				}
-
-			}
-
-			serieRepository.saveAll(series);
-
-		 
-	return "Series ajoutées !";
-	}
-
 }
