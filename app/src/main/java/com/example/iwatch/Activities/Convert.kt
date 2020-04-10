@@ -51,7 +51,7 @@ class Convert {
         }
         serie.genreList = genres
 
-        serie.commentList = PostComment("http://10.0.2.2:8080/getSerieComment/"+serie.id)
+        serie.commentList = PostComment("https://scirusiwatch.herokuapp.com/getSerieComment/"+serie.id)
         return serie
     }
 
@@ -77,7 +77,7 @@ class Convert {
         }
         film.genre = genres
 
-        film.comments = PostComment("http://10.0.2.2:8080/getMovieComment/"+film.id)
+        film.comments = PostComment("https://scirusiwatch.herokuapp.com/getMovieComment/"+film.id)
 
 
         return film

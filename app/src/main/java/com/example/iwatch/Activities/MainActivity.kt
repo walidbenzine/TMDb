@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             if(!login.isNullOrEmpty() && !password.isNullOrEmpty()) {
 
                 //URL A CHANGER APRES HEBERGEMENT
-                val userJson = Post("http://10.0.2.2:8080/getUser/" + login + "/" + password)
+                val userJson = Post("https://scirusiwatch.herokuapp.com/getUser/" + login + "/" + password)
                 System.out.println(userJson)
                 if (userJson.toString() != "{}" ) {
                     Toast.makeText(applicationContext,"Connexion résussi",Toast.LENGTH_SHORT).show()

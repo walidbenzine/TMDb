@@ -65,8 +65,7 @@ class ConfirmRegistration : AppCompatActivity() {
 
         var sb = StringBuffer()
 
-        //URL A CHANGER APRES HEBERGEMENT
-        sb.append("http://10.0.2.2:8080/addUser/")
+        sb.append("https://scirusiwatch.herokuapp.com//addUser/")
         sb.append(usr.email+"/")
         sb.append(usr.jeton.toString()+"/")
         sb.append(usr.login+"/")
