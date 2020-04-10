@@ -68,10 +68,10 @@ public class UserController {
 		return "Ajout du film aux favoris reussi";
 	}
 	
-	@RequestMapping("/addUser/{email}/{jeton}/{login}/{nom}/{password}/{picture}/{prenom}/{tel}")
-	public String addUser(@PathVariable String email, @PathVariable Integer jeton, @PathVariable String login, @PathVariable String nom, @PathVariable  String password, @PathVariable String picture, @PathVariable String prenom, @PathVariable String tel) throws IOException
+	@RequestMapping("/addUser/{email}/{jeton}/{login}/{nom}/{password}/{picture}/{prenom}/{tel}/{adresse}")
+	public String addUser(@PathVariable String email, @PathVariable Integer jeton, @PathVariable String login, @PathVariable String nom, @PathVariable  String password, @PathVariable String picture, @PathVariable String prenom, @PathVariable String tel, @PathVariable String adresse) throws IOException
 	{			
-		userRepository.addUser(email,jeton,  login,  nom,  password,  picture,  prenom,  tel);
+		userRepository.addUser(email,jeton,  login,  nom,  password,  picture,  prenom,  tel, adresse);
 		return "Ajout user reussi";
 	}
 	

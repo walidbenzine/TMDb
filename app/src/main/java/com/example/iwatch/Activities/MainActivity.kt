@@ -11,9 +11,7 @@ import com.example.iwatch.R
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONArray
 import java.net.URL
-import android.telephony.SmsManager
 import android.util.Log
-import kotlin.random.Random
 
 
 class MainActivity : AppCompatActivity() {
@@ -53,6 +51,7 @@ class MainActivity : AppCompatActivity() {
 
             if(!login.isNullOrEmpty() && !password.isNullOrEmpty()) {
 
+                //URL A CHANGER APRES HEBERGEMENT
                 val userJson = Post("http://10.0.2.2:8080/getUser/" + login + "/" + password)
                 System.out.println(userJson)
                 if (userJson.toString() != "{}" ) {

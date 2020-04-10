@@ -45,7 +45,7 @@
                 android:layout_marginTop="16dp"
                 android:backgroundTint="@color/lightGrey"
                 android:hint="Phone Number"
-                android:inputType="textPassword"
+                android:inputType="textEmailAddress"
                 android:textColor="@color/white"
                 android:textColorHint="@color/lightGrey"></EditText>
 
@@ -60,7 +60,7 @@
 
 
             <Button
-                android:id="@+id/signup"
+                android:id="@+id/signupconfirm"
                 style="@style/ButtonCnx"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

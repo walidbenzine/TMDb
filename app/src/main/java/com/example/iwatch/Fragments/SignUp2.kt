@@ -9,11 +9,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Button
 import com.example.iwatch.Activities.ConfirmRegistration
-import com.example.iwatch.Activities.Home
+import com.example.iwatch.Entities.User
 import com.example.iwatch.R
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_sign_up2.*
 import kotlin.random.Random
 
@@ -35,6 +34,7 @@ class SignUp2 : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     var code =""
+    var usr = User()
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,27 +43,39 @@ class SignUp2 : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
-        signup.setOnClickListener {
-
-            var phone = phone.text.toString()
-
-            val smsManager = SmsManager.getDefault()
-            code = String.format("%04d", Random.nextInt(10000))
-            smsManager.sendTextMessage(phone, "Verification", "To verify your Iwatch account, please enter this code: "+code, null, null)
-            System.out.println("SMS SENT to" + phone)
-
-            val intent = Intent(activity, ConfirmRegistration::class.java)
-            intent.putExtra("code", code)
-            startActivity(intent)
-        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_sign_up2, container, false)
+
+        val v = inflater.inflate(R.layout.fragment_sign_up2, container, false)
+
+
+        var bundle = this.arguments
+        if(bundle!=null){
+            usr = bundle.getSerializable("user") as User
+        }
+
+        var signupconf = v.findViewById<View>(R.id.signupconfirm) as Button
+        signupconf.setOnClickListener {
+
+            usr.mobile = phone.text.toString()
+            usr.adresse = add.text.toString()
+
+            val smsManager = SmsManager.getDefault()
+            code = String.format("%04d", Random.nextInt(10000))
+            smsManager.sendTextMessage(usr.mobile, "Verification", "To verify your Iwatch account, please enter this code: "+code, null, null)
+            System.out.println("SMS SENT to" + phone)
+
+            val intent = Intent(activity, ConfirmRegistration::class.java)
+            intent.putExtra("code", code)
+            intent.putExtra("user", usr)
+            startActivity(intent)
+        }
+
+        return v
     }
 
     // TODO: Rename method, update argument and hook method into UI event

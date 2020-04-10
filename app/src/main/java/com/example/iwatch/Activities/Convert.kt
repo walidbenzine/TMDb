@@ -23,6 +23,8 @@ class Convert {
         usr.mobile = obj.get("tel").toString()
         usr.jeton = obj.get("jeton").toString().toInt()
         usr.picture = obj.get("picture").toString()
+        usr.login = obj.get("login").toString()
+        usr.adresse = obj.get("adresse").toString()
 
         return usr
     }
