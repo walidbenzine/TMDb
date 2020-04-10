@@ -27,6 +27,30 @@ private String email;
 private String login;
 private String password;
 private String tel;
+private String adresse;
+
+
+public String getAdresse() {
+	return adresse;
+}
+public void setAdresse(String adresse) {
+	this.adresse = adresse;
+}
+public void setId(Long id) {
+	this.id = id;
+}
+public void setFilmFavoris(List<Film> filmFavoris) {
+	FilmFavoris = filmFavoris;
+}
+public void setFilmhistory(List<Film> filmhistory) {
+	Filmhistory = filmhistory;
+}
+public void setSerieFavoris(List<Serie> serieFavoris) {
+	SerieFavoris = serieFavoris;
+}
+public void setSeriehistory(List<Serie> seriehistory) {
+	Seriehistory = seriehistory;
+}
 private int jeton ;
 private String picture ;
 

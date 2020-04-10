@@ -8,8 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import com.example.iwatch.Entities.User
 import com.example.iwatch.R
 import kotlinx.android.synthetic.main.fragment_sign_up1.*
+
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,7 +32,7 @@ class SignUp1 : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
-    private val signUp2Fragment = SignUp2()
+    private var signUp2Fragment = SignUp2()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,9 +47,23 @@ class SignUp1 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val v = inflater.inflate(R.layout.fragment_sign_up1, container, false)
-        val btnNext = v.findViewById<View>(R.id.btn_next) as Button
+
+        var btnNext = v.findViewById<View>(R.id.btn_next) as Button
         btnNext.setOnClickListener {
-            val fragmentTransaction = fragmentManager!!.beginTransaction()
+
+            var usr = User()
+            usr.firstName = fname.text.toString()
+            usr.lastName = lname.text.toString()
+            usr.email = email.text.toString()
+            usr.password = pass.text.toString()
+            usr.login = username.text.toString()
+
+            var bundle = Bundle()
+            bundle.putSerializable("user", usr)
+
+            signUp2Fragment.setArguments(bundle)
+
+            var fragmentTransaction = fragmentManager!!.beginTransaction()
             fragmentTransaction.replace(R.id.fragment_container, signUp2Fragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()

@@ -11,6 +11,8 @@ class User :Serializable{
     internal var email: String? = null
     internal var password: String? = null
     internal var mobile: String? = null
+    internal var login: String? = null
+    internal var adresse: String? = null
     internal var jeton: Int = 0
     internal var picture: String? = null //TYPE DE VARIABLE A CHANGER
 

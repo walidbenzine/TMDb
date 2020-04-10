@@ -30,9 +30,9 @@ public interface UserRepository extends CrudRepository<User, Long>{
 	void addFavFilm(Integer id, Integer idFilm);
 	
 	@Modifying
-	@Query(value = "INSERT INTO sciruse.user(email,jeton,  login,  nom,  password,  picture,  prenom,  tel) VALUES(?1 , ?2, ?3, ?4, ?5, ?6, ?7, ?8);", nativeQuery = true)
+	@Query(value = "INSERT INTO sciruse.user(email,jeton,  login,  nom,  password,  picture,  prenom,  tel, adresse) VALUES(?1 , ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9);", nativeQuery = true)
 	@Transactional
-	void addUser(String email, Integer jeton, String login, String nom, String password, String picture, String prenom, String tel);
+	void addUser(String email, Integer jeton, String login, String nom, String password, String picture, String prenom, String tel, String adresse);
 	
 	
 	@Modifying

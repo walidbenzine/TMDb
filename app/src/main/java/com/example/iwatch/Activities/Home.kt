@@ -97,6 +97,8 @@ class Home : AppCompatActivity(),
 
         override fun getItem(position: Int): Fragment {
             return when (position){
+
+                //URLS A CHANGER APRES HEBERGEMENT
                 0 -> {
                     System.out.println("CASE 0")
                     HomeFragment.newInstance(PostSerie("http://10.0.2.2:8080/getSerieLast"), PostFilm("http://10.0.2.2:8080/getlast"))
