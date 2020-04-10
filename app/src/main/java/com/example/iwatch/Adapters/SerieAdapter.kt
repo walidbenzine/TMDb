@@ -25,7 +25,9 @@ class SerieAdapter (val serieList: ArrayList<Serie>): RecyclerView.Adapter<Serie
         holder.seriedetails!!.text =serie.resume
         holder.seriereleazeddate!!.text = serie.dateSortie
         holder.datesortie!!.text= serie.dateSortie
-        holder.seriepicture!!.setImageResource(serie.id)
+
+        //A CORRIGER ICI
+        //holder.seriepicture!!.setImageResource(serie.nbrSaison)
 
     }
 }

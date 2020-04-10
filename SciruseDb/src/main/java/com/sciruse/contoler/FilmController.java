@@ -102,7 +102,7 @@ public class FilmController {
 	public String addRoom() throws IOException
 	{
 		t =new  ImportFunctions();
-		List<Film>films = (List<Film>) repo.getpopular();
+		List<Film>films = (List<Film>) repo.getTopRated();
 		for (Film film : films) {
 			
 			film.setRooms(t.addRoom());
@@ -111,6 +111,23 @@ public class FilmController {
 
 		return "done";
 	}
+	
+	
+	// add Rooms to  popular movies 
+		@RequestMapping("/addMovieVideo")
+		public String addMovieVideo() throws IOException
+		{
+			t =new  ImportFunctions();
+			List<Film>films = (List<Film>) repo.findAll();
+			for (Film film : films) {
+				
+				film.setVideo(t.getMovieVideo(Base_url+"movie/"+film.getID()+"/videos?api_key="+API_Key+"&language=en-US"));
+				repo.save(film);
+				
+			}
+
+			return "done";
+		}
 
 
 }

@@ -2,6 +2,7 @@ package com.example.iwatch.Activities
 
 import com.example.iwatch.Entities.*
 import com.example.iwatch.Enumerations.GenreType
+import fr.upem.myapplication.CommentType
 import org.json.JSONArray
 import fr.upem.myapplication.Film
 import org.json.JSONObject
@@ -44,7 +45,6 @@ class Convert {
             try {
                 genres.add(Genre(GenreType.valueOf(JSONObject(genrearray.get(i).toString()).get("desig").toString())))
             } catch (e: Exception) {
-                System.out.println(e)
             }
         }
         serie.genreList = genres
@@ -71,12 +71,11 @@ class Convert {
             try {
                 genres.add(Genre(GenreType.valueOf(JSONObject(genrearray.get(i).toString()).get("desig").toString())))
             } catch (e: Exception) {
-                System.out.println(e)
             }
         }
         film.genre = genres
 
-        film.comments = PostComment("http://10.0.2.2:8080/getSerieComment/"+film.id)
+        film.comments = PostComment("http://10.0.2.2:8080/getMovieComment/"+film.id)
 
 
         return film
@@ -138,17 +137,30 @@ class Convert {
     }
 
 
+    fun toCinema(obj: JSONObject): Cinema {
+
+        var cine = Cinema()
+
+        cine.id = obj.get("id").toString().toInt()
+        cine.nom = obj.get("nom").toString()
+        cine.adresse = obj.get("adresse").toString()
+        cine.image = obj.get("image").toString()
+        cine.latitude = obj.get("alt").toString()
+        cine.longitude = obj.get("lang").toString()
+
+        return cine
+    }
+
+
 
     fun toComment(obj: JSONObject): Comment {
-try {
+    try {
     var co = Comment(CommentType.valueOf(obj.get("type").toString()))
-    co.type = obj.get("type").toString()
-    co.idUser = obj.get("user").toString().toInt()
+    co.user = obj.get("user").toString()
     co.text = obj.get("text").toString()
     return co
     }
     catch (e:Exception){
-        System.out.println(e)
         return Comment(CommentType.nulle)
     }
 

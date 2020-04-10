@@ -1,14 +1,21 @@
 package com.example.iwatch.Fragments
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.telephony.SmsManager
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.iwatch.Activities.ConfirmRegistration
+import com.example.iwatch.Activities.Home
 import com.example.iwatch.R
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_sign_up2.*
+import kotlin.random.Random
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,6 +34,7 @@ class SignUp2 : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    var code =""
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +42,20 @@ class SignUp2 : Fragment() {
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+        }
+
+        signup.setOnClickListener {
+
+            var phone = phone.text.toString()
+
+            val smsManager = SmsManager.getDefault()
+            code = String.format("%04d", Random.nextInt(10000))
+            smsManager.sendTextMessage(phone, "Verification", "To verify your Iwatch account, please enter this code: "+code, null, null)
+            System.out.println("SMS SENT to" + phone)
+
+            val intent = Intent(activity, ConfirmRegistration::class.java)
+            intent.putExtra("code", code)
+            startActivity(intent)
         }
     }
 

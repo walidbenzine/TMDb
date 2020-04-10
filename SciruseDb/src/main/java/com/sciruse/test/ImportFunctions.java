@@ -56,12 +56,13 @@ public class ImportFunctions {
 			//series = Serie(Base_url+"tv/popular?api_key="+API_Key+"&language=fr&page=1");
 			//actors=Actors(Base_url+"tv/456/credits?api_key="+API_Key+"&language=en-US");
 			//Saison e =  getSaisonInfo(Base_url+"tv/456/season/1?api_key="+API_Key+"&language=en-US");
-		
+			
+			System.out.println(getMovieVideo(Base_url+"movie/654527/videos?api_key="+API_Key+"&language=en-US"));
 			
 			
 		}catch (Exception e) {System.out.println(e);}
 
-		addRoom();
+		//addRoom();
 
 	}
 
@@ -146,7 +147,14 @@ public class ImportFunctions {
 		film.setImage(object.get("poster_path").toString());
 		film.setNote(object.get("vote_average").toString());
 		film.setGenre(genre(object));
-		film.setComments(Comment(Base_url+"movie/"+object.get("id")+"/reviews?api_key="+API_Key+"&language=en-US&page=1"));
+
+		Vector<Comments> Comments = Comment(Base_url+"movie/"+object.get("id")+"/reviews?api_key="+API_Key+"&language=en-US&page=1");
+		Iterator<Comments> value = Comments.iterator();
+        while (value.hasNext()) { 
+            value.next().setType("Movie");
+        }
+        film.setComments(Comments);
+
 		return film;
 		}catch(Exception e) {
 			System.out.println(e);
@@ -165,7 +173,13 @@ public class ImportFunctions {
 		film.setImage(object.get("poster_path").toString());
 		film.setNote(object.get("vote_average").toString());
 		film.setGenre(genre(object));
-		film.setComments(Comment(Base_url+"movie/"+object.get("id")+"/reviews?api_key="+API_Key+"&language=en-US&page=1"));
+
+		Vector<Comments> Comments = Comment(Base_url+"movie/"+object.get("id")+"/reviews?api_key="+API_Key+"&language=en-US&page=1");
+		Iterator<Comments> value = Comments.iterator();
+        while (value.hasNext()) { 
+            value.next().setType("Movie");
+        }
+        film.setComments(Comments);
 		
 		return film;
 	}
@@ -303,7 +317,6 @@ public class ImportFunctions {
 		return genres;
 	}
 
-
 	public static  List<Serie> Serie(String url) throws IOException {
 		List<Serie> series=new Vector<Serie>();
 		String id;
@@ -312,7 +325,12 @@ public class ImportFunctions {
 			JSONArray serieArray = object.getJSONArray("results");
 			Serie serie = null;
 			if (serieArray != null) { 
-				for (int j=0;j<serieArray.length();j++){ 
+				int x = 10;
+				if (serieArray.length() <= 10) {
+					x = serieArray.length();
+				}
+				for (int j=0;j<x;j++){ 
+					System.out.println("GETTING A PRIMARY SERIE INFOS " +j);
 					serie = new Serie();
 					JSONObject obj =(JSONObject) serieArray.get(j);
 					id = obj.get("id").toString();
@@ -347,13 +365,25 @@ public class ImportFunctions {
 
 		serie = setSaisonEpisodeCount(id, serie);
 
-		serie.setComments(Comment(Base_url+"tv/"+id+"/reviews?api_key="+API_Key+"&language=en-US&page=1"));
+		Vector<Comments> Comments = Comment(Base_url+"tv/"+id+"/reviews?api_key="+API_Key+"&language=en-US&page=1");
+		Iterator<Comments> value = Comments.iterator();
+        while (value.hasNext()) { 
+            value.next().setType("Tv");
+        }
+		
+		serie.setComments(Comments);
 		
 		serie.setGenre(genre(GetMyJson(Base_url+"tv/"+id+"?api_key="+API_Key+"&language=en-US")));
 		
-		//serie.setActors(Actors(Base_url+"tv/"+id+"/credits?api_key="+API_Key+"&language=en-US"));
+		serie.setSeriesLiees(getSerieLiee(Base_url+"tv/"+id+"/similar?api_key="+API_Key+"&language=en-US"));
 
-		for (int i = 1; i <= Integer.parseInt( serie.getNbrSaison()); i++) {	
+
+		int x = 10;
+		if (Integer.parseInt( serie.getNbrSaison()) < 10) {
+			x = Integer.parseInt( serie.getNbrSaison());
+		}
+		for (int i = 1; i < x ; i++) {	
+			System.out.println("GETTING A SEASON INFOS "+i);
 			Saison saison = getSaisonInfo(Base_url+"tv/"+id+"/season/"+i+"?api_key="+API_Key+"&language=en-US");
 			if(saison!=null) {
 				saisons.add(saison);
@@ -400,8 +430,14 @@ public class ImportFunctions {
 		saison.setImage(object.get("poster_path").toString());
 		
 		Episode E;
+		int x = 20;
 		
-		for (int i = 0; i < EpisodArray.length(); i++) {
+		if(EpisodArray.length()<=20) {
+			x = EpisodArray.length();
+		}
+		
+		for (int i = 0; i < x; i++) {
+			System.out.println("GETTING EPISODE INFOS "+ i);
 			E = new Episode();
 			JSONObject obj =(JSONObject) EpisodArray.get(i);
 			E.setResume(obj.get("overview").toString());
@@ -433,8 +469,12 @@ public static  List<Serie> getSerieLiee(String url) throws IOException {
 		JSONObject object = GetMyJson(url);
 		JSONArray serieArray = object.getJSONArray("results");
 		if (serieArray != null) { 
-		for(int i=0;i<serieArray.length();i++) {
-			
+			int x = 5;
+			if(serieArray.length()<=5) {
+				x = serieArray.length();
+			}
+		for(int i=0;i<x;i++) {
+			System.out.println("GETTING SERIES LIES INFOS " +i);
 			Serie serie = new Serie();
 			JSONObject obj =(JSONObject) serieArray.get(i);
 			String id = obj.get("id").toString();
@@ -450,19 +490,18 @@ public static  List<Serie> getSerieLiee(String url) throws IOException {
 			
 			serie = setSaisonEpisodeCount(id, serie);
 
-			serie.setComments(Comment(Base_url+"tv/"+id+"/reviews?api_key="+API_Key+"&language=&page=1"));
+			Vector<Comments> Comments = Comment(Base_url+"tv/"+id+"/reviews?api_key="+API_Key+"&language=en-US&page=1");
+			Iterator<Comments> value = Comments.iterator();
+	        while (value.hasNext()) { 
+	            value.next().setType("Tv");
+	        }
+			
+			serie.setComments(Comments);
 			
 			serie.setGenre(genre(GetMyJson(Base_url+"tv/"+id+"?api_key="+API_Key+"&language=fr&page=1")));
 			
 			serie.setActors(Actors(Base_url+"tv/"+id+"/credits?api_key="+API_Key+"&language=en-US"));
 		
-			/*List<Saison> saisons = new ArrayList<Saison>();
-			
-			for (int j = 1; j <= Integer.parseInt( serie.getNbrSaison()); j++) {
-				saisons.add(getSaisonInfo(Base_url+"tv/"+id+"/season/"+j+"?api_key="+API_Key+"&language=en-US"));
-			}
-			
-			serie.setSaisons(saisons);*/
 			seriesLies.add(serie);
 			
 		}
@@ -471,19 +510,18 @@ public static  List<Serie> getSerieLiee(String url) throws IOException {
 		return seriesLies;
 	}
 
-
 		public static List<Room> addRoom() {
 			
 			List<Room>rooms = new ArrayList<Room>();
 			
-			Room C1 = new Room(1, "UGC Ciné Cité Paris 19","166 Boulevard Macdonald, 75019 Paris, France", "Cine1.png", 48.899761, 2.376952, false);
-			Room C2 = new Room(2, "UGC Ciné Cité Bercy","2 Cour Saint-Emilion, 75012 Paris, France", "Cine2.png", 48.832306, 2.385069, false);
-			Room C3 = new Room(3, "UGC Ciné Cité Les Halles","101 Rue Berger, 75001 Paris, France", "Cine3.png",48.863460, 2.343399, false);
-			Room C4 = new Room(4, "Luminor Hôtel de Ville","20 Rue du Temple, 75004 Paris, France", "Cine4.png",48.858716, 2.353561, false);
-			Room C5 = new Room(5, "La Filmothèque du Quartier Latin","9 Rue Champollion, 75005 Paris, France", "Cine5.png", 48.849578, 2.342828, false);
-			Room C6 = new Room(6, "Le Brady","39 Boulevard de Strasbourg, 75010 Paris", "Cine6.png",48.871777, 2.355446, false);
+			Room C1 = new Room(1, "UGC Ciné Cité Paris 19","166 Boulevard Macdonald, 75019 Paris, France", "https://cdn-www.konbini.com/fr/files/2013/10/article__X3E9464.jpg", 48.899761, 2.376952, false);
+			Room C2 = new Room(2, "UGC Ciné Cité Bercy","2 Cour Saint-Emilion, 75012 Paris, France", "https://files.offi.fr/lieu/3320/images/600/63e1ff91c9853a0b1f106b3fc45af2b5.jpg", 48.832306, 2.385069, false);
+			Room C3 = new Room(3, "UGC Ciné Cité Les Halles","101 Rue Berger, 75001 Paris, France", "https://www.sortiraparis.com/images/80/90246/531578-ugc-cine-cite-les-halles-3.jpg",48.863460, 2.343399, false);
+			Room C4 = new Room(4, "Luminor Hôtel de Ville","20 Rue du Temple, 75004 Paris, France", "https://www.pagesjaunes.fr/media/ugc/luminor_hotel_de_ville_07505600_195521190",48.858716, 2.353561, false);
+			Room C5 = new Room(5, "La Filmothèque du Quartier Latin","9 Rue Champollion, 75005 Paris, France", "https://www.pagesjaunes.fr/media/ugc/la_filmotheque_du_quartier_latin_07505600_174028275", 48.849578, 2.342828, false);
+			Room C6 = new Room(6, "Le Brady","39 Boulevard de Strasbourg, 75010 Paris", "https://salles-cinema.com/wp-content/uploads/2009/09/cinema-le-brady_11.jpg",48.871777, 2.355446, false);
 			Room r[]= {C1,C2,C3,C4,C5,C6};
-			int randomNum = ThreadLocalRandom.current().nextInt(1, 6 + 1);
+			/*int randomNum = ThreadLocalRandom.current().nextInt(1, 6 + 1);
 			
 			
 			for (int i = 0; i < randomNum; i++) {
@@ -495,11 +533,36 @@ public static  List<Serie> getSerieLiee(String url) throws IOException {
 				}
 				
 			}
+			*/
+
+			int rand = (int) (Math.random() * 6);
+			rooms.add(r[(rand+1)%6]);
+			rooms.add(r[rand]);
 			
-			return rooms;	
-			
+			return rooms;		
 		}
 
+
+		
+		public static  String getMovieVideo(String url) throws IOException {
+			String video ="null";
+			
+			try {
+				JSONObject object = GetMyJson(url);
+				JSONArray serieArray = object.getJSONArray("results");
+				if (serieArray != null) {
+					if(serieArray.length()>0) {
+					JSONObject obj =(JSONObject) serieArray.get(0);
+					video = obj.getString("key");}
+					
+				}
+			} catch (Exception e) {
+				
+			}
+			
+			return video;
+		}
+		
 
 
 
