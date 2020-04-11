@@ -51,7 +51,7 @@ class Convert {
         }
         serie.genreList = genres
 
-        serie.commentList = PostComment("https://scirusiwatch.herokuapp.com/getSerieComment/"+serie.id)
+        serie.commentList = PostComment("http://scirusiwatch.herokuapp.com/getSerieComment/"+serie.id)
         return serie
     }
 

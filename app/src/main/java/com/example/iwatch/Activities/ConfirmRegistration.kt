@@ -65,7 +65,7 @@ class ConfirmRegistration : AppCompatActivity() {
 
         var sb = StringBuffer()
 
-        sb.append("https://scirusiwatch.herokuapp.com//addUser/")
+        sb.append("http://scirusiwatch.herokuapp.com//addUser/")
         sb.append(usr.email+"/")
         sb.append(usr.jeton.toString()+"/")
         sb.append(usr.login+"/")

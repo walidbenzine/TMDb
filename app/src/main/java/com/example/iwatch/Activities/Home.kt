@@ -101,19 +101,19 @@ class Home : AppCompatActivity(),
                 //URLS A CHANGER APRES HEBERGEMENT
                 0 -> {
                     System.out.println("CASE 0")
-                    HomeFragment.newInstance(PostSerie("https://scirusiwatch.herokuapp.com/getSerieLast"), PostFilm("https://scirusiwatch.herokuapp.com/getlast"))
+                    HomeFragment.newInstance(PostSerie("http://scirusiwatch.herokuapp.com/getSerieLast"), PostFilm("https://scirusiwatch.herokuapp.com/getlast"))
                 }
                 1 -> {
                     System.out.println("CASE 1")
-                    CinemaFragment.newInstance(PostFilm("https://scirusiwatch.herokuapp.com/getTopRated"), PostCinema("https://scirusiwatch.herokuapp.com/getAllRooms"))
+                    CinemaFragment.newInstance(PostFilm("http://scirusiwatch.herokuapp.com/getTopRated"), PostCinema("https://scirusiwatch.herokuapp.com/getAllRooms"))
                 }
                 2 -> {
                     System.out.println("CASE 2")
-                    SeriesFragment.newInstance(PostSerie("https://scirusiwatch.herokuapp.com/getSeriePopular"))
+                    SeriesFragment.newInstance(PostSerie("http://scirusiwatch.herokuapp.com/getSeriePopular"))
                 }
                 3 -> {
                     System.out.println("CASE 3")
-                    PersonsFragment.newInstance(PostActor("https://scirusiwatch.herokuapp.com/getActorPopular"))
+                    PersonsFragment.newInstance(PostActor("http://scirusiwatch.herokuapp.com/getActorPopular"))
                 }
                 4 -> {
                     System.out.println("CASE 4")
