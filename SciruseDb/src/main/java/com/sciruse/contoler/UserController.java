@@ -11,7 +11,7 @@ import com.sciruse.models.Serie;
 import com.sciruse.models.User;
 import com.sciruse.repository.SerieRepository;
 import com.sciruse.repository.UserRepository;
-import com.sciruse.test.ImportFunctions;
+import com.sciruse.service.ImportFunctions;
 
 @RestController
 public class UserController {

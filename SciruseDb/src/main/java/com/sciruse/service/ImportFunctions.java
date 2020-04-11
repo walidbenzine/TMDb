@@ -1,4 +1,4 @@
-package com.sciruse.test;
+package com.sciruse.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -57,10 +57,8 @@ public class ImportFunctions {
 			//actors=Actors(Base_url+"tv/456/credits?api_key="+API_Key+"&language=en-US");
 			//Saison e =  getSaisonInfo(Base_url+"tv/456/season/1?api_key="+API_Key+"&language=en-US");
 
-			
-			
-				System.out.println(getMovieVideo(Base_url+"tv/59941/videos?api_key="+API_Key+"&language=en-US"));
-			
+			System.out.println(getMovieVideo(Base_url+"tv/21631/season/1/videos?api_key="+API_Key+"&language=en-US"));
+
 
 		}catch (Exception e) {System.out.println(e);}
 
@@ -437,98 +435,98 @@ public class ImportFunctions {
 		if (serieArray != null) { 
 			int size = serieArray.length();
 			if(serieArray.length()>3)size=3; 
-				for(int i=0;i<size;i++) {
+			for(int i=0;i<size;i++) {
 
-					Serie serie = new Serie();
-					JSONObject obj =(JSONObject) serieArray.get(i);
-					String id = obj.get("id").toString();
+				Serie serie = new Serie();
+				JSONObject obj =(JSONObject) serieArray.get(i);
+				String id = obj.get("id").toString();
 
-					if(idsSerie.contains(id)==false) {
-						idsSerie.add(id);
-						serie.setId((Integer) obj.get("id"));
-						serie.setResume(obj.get("overview").toString());
-						serie.setDateSortie(obj.get("first_air_date").toString());
-						serie.setNote(obj.get("vote_average").toString());
-						serie.setImage(obj.get("poster_path").toString());
-						serie.setTitle(obj.get("original_name").toString());
+				if(idsSerie.contains(id)==false) {
+					idsSerie.add(id);
+					serie.setId((Integer) obj.get("id"));
+					serie.setResume(obj.get("overview").toString());
+					serie.setDateSortie(obj.get("first_air_date").toString());
+					serie.setNote(obj.get("vote_average").toString());
+					serie.setImage(obj.get("poster_path").toString());
+					serie.setTitle(obj.get("original_name").toString());
 
-						serie = setSaisonEpisodeCount(id, serie);
+					serie = setSaisonEpisodeCount(id, serie);
 
-						serie.setComments(Comment(Base_url+"tv/"+id+"/reviews?api_key="+API_Key+"&language=&page=1"));
+					serie.setComments(Comment(Base_url+"tv/"+id+"/reviews?api_key="+API_Key+"&language=&page=1"));
 
-						serie.setGenre(genre(GetMyJson(Base_url+"tv/"+id+"?api_key="+API_Key+"&language=fr&page=1")));
+					serie.setGenre(genre(GetMyJson(Base_url+"tv/"+id+"?api_key="+API_Key+"&language=fr&page=1")));
 
-						serie.setActors(Actors(Base_url+"tv/"+id+"/credits?api_key="+API_Key+"&language=en-US"));
+					serie.setActors(Actors(Base_url+"tv/"+id+"/credits?api_key="+API_Key+"&language=en-US"));
 
-						/*List<Saison> saisons = new ArrayList<Saison>();
+					/*List<Saison> saisons = new ArrayList<Saison>();
 
 			for (int j = 1; j <= Integer.parseInt( serie.getNbrSaison()); j++) {
 				saisons.add(getSaisonInfo(Base_url+"tv/"+id+"/season/"+j+"?api_key="+API_Key+"&language=en-US"));
 			}
 
 			serie.setSaisons(saisons);*/
-						seriesLies.add(serie);
-
-					}
-				
-			}
-				
-			}
-
-			return seriesLies;
-		}
-
-		public static List<Room> addRoom() {
-
-			List<Room>rooms = new ArrayList<Room>();
-
-			Room C1 = new Room(1, "UGC Ciné Cité Paris 19","166 Boulevard Macdonald, 75019 Paris, France", "Cine1.png", 48.899761, 2.376952, false);
-			Room C2 = new Room(2, "UGC Ciné Cité Bercy","2 Cour Saint-Emilion, 75012 Paris, France", "Cine2.png", 48.832306, 2.385069, false);
-			Room C3 = new Room(3, "UGC Ciné Cité Les Halles","101 Rue Berger, 75001 Paris, France", "Cine3.png",48.863460, 2.343399, false);
-			Room C4 = new Room(4, "Luminor Hôtel de Ville","20 Rue du Temple, 75004 Paris, France", "Cine4.png",48.858716, 2.353561, false);
-			Room C5 = new Room(5, "La Filmothèque du Quartier Latin","9 Rue Champollion, 75005 Paris, France", "Cine5.png", 48.849578, 2.342828, false);
-			Room C6 = new Room(6, "Le Brady","39 Boulevard de Strasbourg, 75010 Paris", "Cine6.png",48.871777, 2.355446, false);
-			Room r[]= {C1,C2,C3,C4,C5,C6};
-			int randomNum = ThreadLocalRandom.current().nextInt(1, 6 + 1);
-
-
-			for (int i = 0; i < randomNum; i++) {
-
-				int random = ThreadLocalRandom.current().nextInt(1, 6 + 1);
-				System.out.println("C"+random);
-				if(rooms.contains(r[random-1])!=true) {
-					rooms.add(r[random-1]);
-				}
-
-			}
-
-			return rooms;		
-		}
-
-
-
-		public static  String getMovieVideo(String url) throws IOException {
-			String video ="null";
-
-			try {
-				JSONObject object = GetMyJson(url);
-				JSONArray serieArray = object.getJSONArray("results");
-				if (serieArray != null) {
-					if(serieArray.length()>0) {
-						JSONObject obj =(JSONObject) serieArray.get(0);
-						video = obj.getString("key");}
+					seriesLies.add(serie);
 
 				}
-			} catch (Exception e) {
 
 			}
 
-			return video;
 		}
 
-
-
-
-
+		return seriesLies;
 	}
+
+	public static List<Room> addRoom() {
+
+		List<Room>rooms = new ArrayList<Room>();
+
+		Room C1 = new Room(1, "UGC Ciné Cité Paris 19","166 Boulevard Macdonald, 75019 Paris, France", "Cine1.png", 48.899761, 2.376952, false);
+		Room C2 = new Room(2, "UGC Ciné Cité Bercy","2 Cour Saint-Emilion, 75012 Paris, France", "Cine2.png", 48.832306, 2.385069, false);
+		Room C3 = new Room(3, "UGC Ciné Cité Les Halles","101 Rue Berger, 75001 Paris, France", "Cine3.png",48.863460, 2.343399, false);
+		Room C4 = new Room(4, "Luminor Hôtel de Ville","20 Rue du Temple, 75004 Paris, France", "Cine4.png",48.858716, 2.353561, false);
+		Room C5 = new Room(5, "La Filmothèque du Quartier Latin","9 Rue Champollion, 75005 Paris, France", "Cine5.png", 48.849578, 2.342828, false);
+		Room C6 = new Room(6, "Le Brady","39 Boulevard de Strasbourg, 75010 Paris", "Cine6.png",48.871777, 2.355446, false);
+		Room r[]= {C1,C2,C3,C4,C5,C6};
+		int randomNum = ThreadLocalRandom.current().nextInt(1, 6 + 1);
+
+
+		for (int i = 0; i < randomNum; i++) {
+
+			int random = ThreadLocalRandom.current().nextInt(1, 6 + 1);
+			System.out.println("C"+random);
+			if(rooms.contains(r[random-1])!=true) {
+				rooms.add(r[random-1]);
+			}
+
+		}
+
+		return rooms;		
+	}
+
+
+
+	public static  String getMovieVideo(String url) throws IOException {
+		String video ="null";
+
+		try {
+			JSONObject object = GetMyJson(url);
+			JSONArray serieArray = object.getJSONArray("results");
+			if (serieArray != null) {
+				if(serieArray.length()>0) {
+					JSONObject obj =(JSONObject) serieArray.get(0);
+					video = obj.getString("key");}
+
+			}
+		} catch (Exception e) {
+
+		}
+
+		return video;
+	}
+
+
+
+
+
+}
 

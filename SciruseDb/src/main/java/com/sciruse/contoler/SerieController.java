@@ -19,7 +19,7 @@ import com.sciruse.models.Serie;
 import com.sciruse.repository.ActorRepository;
 import com.sciruse.repository.FilmRepository;
 import com.sciruse.repository.SerieRepository;
-import com.sciruse.test.ImportFunctions;
+import com.sciruse.service.ImportFunctions;
 
 @RestController
 public class SerieController {

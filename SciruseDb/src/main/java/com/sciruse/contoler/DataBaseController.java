@@ -18,7 +18,7 @@ import com.sciruse.models.Serie;
 import com.sciruse.repository.FilmRepository;
 import com.sciruse.repository.GenreRepository;
 import com.sciruse.repository.SerieRepository;
-import com.sciruse.test.ImportFunctions;
+import com.sciruse.service.ImportFunctions;
 
 
 /* to  load movies call
@@ -35,7 +35,7 @@ import com.sciruse.test.ImportFunctions;
  * 3)/addserieVideo
  * */
 @RestController
-public class FilmController {
+public class DataBaseController {
 	private static String Base_url="https://api.themoviedb.org/3/";
 	private static String API_Key="94327dc22a17d2c12b806d241682cd96";
 	ImportFunctions t;
