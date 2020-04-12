@@ -4,7 +4,6 @@ import com.example.iwatch.Entities.*
 import com.example.iwatch.Enumerations.GenreType
 import fr.upem.myapplication.CommentType
 import org.json.JSONArray
-import fr.upem.myapplication.Film
 import org.json.JSONObject
 import java.lang.Exception
 import java.net.URL
@@ -56,17 +55,18 @@ class Convert {
     }
 
 
-    fun toFilm(obj: JSONObject): Film {
+    fun toFilm(obj: JSONObject): Movie {
 
-        val film = Film()
+        val film = Movie()
         val genres = ArrayList<Genre>()
 
         film.id = obj.get("id").toString().toInt()
         film.dateSortie = obj.get("dateSortie").toString()
         film.duration = obj.get("title").toString()
         film.note = obj.get("note").toString()
-        film.title = obj.get("dateSortie").toString()
+        film.title = obj.get("title").toString()
         film.resume = obj.get("resume").toString()
+        film.imgFilm = obj.get("image").toString()
 
         var genrearray = JSONArray(obj.get("genre").toString())
         for (i in 0 until genrearray.length()) {

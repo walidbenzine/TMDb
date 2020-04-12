@@ -45,7 +45,6 @@ class MainActivity : AppCompatActivity() {
 
 
         buttonCnx.setOnClickListener {
-
             var login = email.text.toString()
             val password = pass.text
 

@@ -10,8 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.example.iwatch.Entities.Cinema
+import com.example.iwatch.Entities.Movie
 import com.example.iwatch.R
-import fr.upem.myapplication.Film
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,7 +28,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class CinemaFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var films =  ArrayList<Film>()
+    private var films =  ArrayList<Movie>()
     private var cinemas =  ArrayList<Cinema>()
 
     private var listener: OnFragmentInteractionListener? = null
@@ -36,7 +36,10 @@ class CinemaFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        films = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Film>
+        @Suppress("UNCHECKED_CAST")
+        films = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Movie>
+
+        @Suppress("UNCHECKED_CAST")
         cinemas = arguments?.getSerializable(ARG_PARAM2) as ArrayList<Cinema>
 
     }
@@ -108,7 +111,7 @@ class CinemaFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: ArrayList<Film>, param2: ArrayList<Cinema>) =
+        fun newInstance(param1: ArrayList<Movie>, param2: ArrayList<Cinema>) =
             CinemaFragment().apply {
                 arguments = Bundle().apply {
                     putSerializable(ARG_PARAM1, param1)

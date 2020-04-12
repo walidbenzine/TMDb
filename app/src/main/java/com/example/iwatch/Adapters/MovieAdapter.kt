@@ -24,7 +24,7 @@ class MovieAdapter (val movieList: ArrayList<Movie>): RecyclerView.Adapter<Movie
         holder.movietitle.text = film.title
         holder.movieresume.text = film.resume
         holder.moviereleazeddate.text = film.releasedDate
-        holder.moviepicture.setImageResource(film.imgFilm)
+        //holder.moviepicture.setImageResource(film.imgFilm)
 
     }
 }

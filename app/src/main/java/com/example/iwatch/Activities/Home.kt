@@ -15,7 +15,6 @@ import com.example.iwatch.Entities.*
 import com.example.iwatch.Fragments.*
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
-import fr.upem.myapplication.Film
 import kotlinx.android.synthetic.main.activity_home.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -93,7 +92,7 @@ class Home : AppCompatActivity(),
      * A [FragmentPagerAdapter] that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    class SectionsPagerAdapter(fm: FragmentManager)  : FragmentPagerAdapter(fm) {
+    class SectionsPagerAdapter(fm: FragmentManager)  : FragmentPagerAdapter(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT ){
 
         override fun getItem(position: Int): Fragment {
             return when (position){
@@ -155,8 +154,8 @@ fun PostSerie(url: String) : ArrayList<Serie> {
 }
 
 
-fun PostFilm(url: String) : ArrayList<Film> {
-    var arrayfilms = ArrayList<Film>()
+fun PostFilm(url: String) : ArrayList<Movie> {
+    var arrayfilms = ArrayList<Movie>()
     val x = try {
         URL(url)
                 .openStream()

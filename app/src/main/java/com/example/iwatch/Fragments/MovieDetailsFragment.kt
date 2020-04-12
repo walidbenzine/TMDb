@@ -60,13 +60,13 @@ class MovieDetailsFragment : Fragment() {
 
         val associatedFilmRecyclerView = v.findViewById<RecyclerView>(R.id.movie_detail_associated_films)
 
-        associatedFilms.add(Movie("Joker", R.mipmap.ic_ghost))
+        /*associatedFilms.add(Movie("Joker", R.mipmap.ic_ghost))
         associatedFilms.add(Movie("Invisible Guest", R.mipmap.ic_ghost))
 
         associatedFilmRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
             adapter = AssociatedFilmAdapter(associatedFilms)
-        }
+        }*/
 
         return v
     }
