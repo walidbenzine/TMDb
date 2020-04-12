@@ -5,20 +5,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Entities.Movie
 import com.example.iwatch.R
-import com.example.iwatch.ViewHolders.FilmViewHolder
+import com.example.iwatch.ViewHolders.MovieViewHolder
 
-class FilmAdapter (val movieList: ArrayList<Movie>): RecyclerView.Adapter<FilmViewHolder>() {
+class MovieAdapter (val movieList: ArrayList<Movie>): RecyclerView.Adapter<MovieViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         var v = LayoutInflater.from(parent.context).inflate(R.layout.movie_item, parent, false)
-        return FilmViewHolder(v)
+        return MovieViewHolder(v)
     }
 
     override fun getItemCount(): Int {
         return movieList.size
     }
 
-    override fun onBindViewHolder(holder: FilmViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val film: Movie = movieList[position]
 
         holder.movietitle.text = film.title
