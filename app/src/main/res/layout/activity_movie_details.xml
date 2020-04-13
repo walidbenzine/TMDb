@@ -43,7 +43,7 @@
                 android:paddingTop="32dp"
                 android:paddingBottom="32dp"
                 android:paddingLeft="16dp"
-                android:paddingRight="32dp">
+                android:paddingRight="16dp">
 
                 <ImageView
                     android:id="@+id/movie_detail_picture"
@@ -92,7 +92,7 @@
                             android:id="@+id/movie_detail_released_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"/>
+                            android:layout_marginLeft="8dp"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -101,12 +101,13 @@
                         android:orientation="horizontal">
 
                         <RatingBar
+                            android:id="@+id/movie_rating_bar"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             style="?android:attr/ratingBarStyleSmall"
                             android:layout_gravity="center_vertical"
                             android:saveEnabled="true"
-                            android:numStars="10"
+                            android:numStars="5"
                             android:stepSize=".5"/>
 
                         <LinearLayout
@@ -127,7 +128,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:text="/10"/>
+                                android:text="/5"/>
 
                         </LinearLayout>
 
