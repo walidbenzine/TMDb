@@ -30,4 +30,5 @@ class SerieAdapter (val serieList: ArrayList<Serie>): RecyclerView.Adapter<Serie
         //holder.seriepicture!!.setImageResource(serie.nbrSaison)
 
     }
+
 }
