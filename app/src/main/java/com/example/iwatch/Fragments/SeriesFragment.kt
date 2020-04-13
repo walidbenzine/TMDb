@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Adapters.SerieAdapter
 import com.example.iwatch.Entities.Serie
 
 import com.example.iwatch.R
@@ -43,10 +46,16 @@ class SeriesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        System.out.println("FIRST SERIE TITLE = "+ serie.get(0).title)
-
+        //System.out.println("FIRST SERIE TITLE = "+ serie.get(0).title)
+        
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_series, container, false)
+        val serieRecyclerView = v.findViewById<RecyclerView>(R.id.recycleViewSeries)
+        serieRecyclerView.apply {
+            serieRecyclerView!!.layoutManager = LinearLayoutManager(this.context)
+            layoutManager = LinearLayoutManager(this.context)
+            adapter = SerieAdapter(serie)
+        }
         return v
     }
 
