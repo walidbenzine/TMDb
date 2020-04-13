@@ -11,6 +11,7 @@ class Movie (): Serializable {
 
     internal var id: Int = 0
     internal var imgFilm: String? = null
+
     internal var title: String? = null
     internal var resume: String? = null
     internal var note: String? = null

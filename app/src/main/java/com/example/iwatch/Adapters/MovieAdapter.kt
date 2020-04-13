@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Entities.Movie
 import com.example.iwatch.R
 import com.example.iwatch.ViewHolders.MovieViewHolder
+import com.squareup.picasso.Picasso
 
 class MovieAdapter (val movieList: ArrayList<Movie>): RecyclerView.Adapter<MovieViewHolder>() {
 
@@ -21,11 +22,17 @@ class MovieAdapter (val movieList: ArrayList<Movie>): RecyclerView.Adapter<Movie
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val film: Movie = movieList[position]
 
-        holder.movietitle.text = film.title
-        holder.movieresume.text = film.resume
-        holder.datesortie.text= film.dateSortie
+        holder.movietitle!!.text = film.title
+        holder.movieresume!!.text = film.resume
+        holder.datesortie!!.text= film.dateSortie
+        System.out.println("cc")
+        System.out.println(film.imgFilm.toString())
 
-       // holder.moviepicture.setImageResource(film.imgFilm)
+        if(film.imgFilm != null){
+            val url = film.imgFilm
+            Picasso.get().load(url).into(holder.moviepicture)
+
+        }
 
     }
 }

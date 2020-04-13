@@ -7,12 +7,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.R
 
 class MovieViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
+    var movietitle: TextView?=null
+    var movieresume: TextView?=null
+    var datesortie: TextView?=null
+    var moviepicture: ImageView?=null
 
-    var movietitle = itemView.findViewById<TextView>(R.id.movie_title) as TextView
-    var movieresume = itemView.findViewById<TextView>(R.id.movie_resume) as TextView
-    var datesortie= itemView.findViewById<TextView> (R.id.date_sortie) as TextView
-    var moviereleazeddate = itemView.findViewById<TextView>(R.id.movie_released_date) as TextView
-    var moviepicture = itemView.findViewById<ImageView>(R.id.movie_picture) as ImageView
+    init {
+        movietitle = itemView.findViewById(R.id.movie_title) as TextView
+        movieresume = itemView.findViewById(R.id.movie_resume) as TextView
+        datesortie= itemView.findViewById (R.id.date_sortie) as TextView
+        moviepicture = itemView.findViewById(R.id.movie_picture) as ImageView
     //var pic = itemView.findViewById(R.id.serie_picture) as ImageView
 
+    }
 }

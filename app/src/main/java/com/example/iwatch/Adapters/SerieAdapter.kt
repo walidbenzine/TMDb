@@ -27,7 +27,7 @@ class SerieAdapter (val serieList: ArrayList<Serie>): RecyclerView.Adapter<Serie
         holder.seriedetails!!.text =serie.resume
         holder.seriereleazeddate!!.text = serie.dateSortie
         holder.datesortie!!.text= serie.dateSortie
-        var nre: Int =serie.nbrEpisodes
+        
         if(serie.picture != null){
             val url = serie.picture
             Picasso.get().load(url).into(holder.seriepicture)
