@@ -8,11 +8,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
+import android.widget.*
 import com.example.iwatch.Activities.ConfirmRegistration
-import com.example.iwatch.Activities.Home
-import com.example.iwatch.Activities.MainActivity
+import com.example.iwatch.Enumerations.GenreType
 import com.example.iwatch.R
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
@@ -33,7 +31,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [SignUp2.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SignUp2 : Fragment() {
+class SignUp2 : Fragment(), AdapterView.OnItemSelectedListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -142,5 +140,13 @@ class SignUp2 : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
     }
 }
