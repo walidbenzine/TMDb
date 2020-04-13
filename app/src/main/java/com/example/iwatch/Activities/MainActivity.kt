@@ -92,11 +92,16 @@ class MainActivity : AppCompatActivity() {
         } catch (e: Exception) {
             System.out.println(e)
         }
-        if (!x.toString().isNullOrEmpty() && x.toString() != "null" && x.toString() != "[]") {
-            System.out.println("X.TOSTRING === " + x.toString())
-            return JSONArray(x.toString())
+        try {
+            if (!x.toString().isNullOrEmpty() && x.toString() != "null" && x.toString() != "[]") {
+                System.out.println("X.TOSTRING === " + x.toString())
+                return JSONArray(x.toString())
 
+            }
+            return JSONArray()
+        }catch(e: Exception){
+            System.out.println(e)
+            return JSONArray()
         }
-        return JSONArray()
     }
 }
