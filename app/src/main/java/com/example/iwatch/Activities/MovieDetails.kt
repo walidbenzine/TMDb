@@ -13,6 +13,7 @@ import com.example.iwatch.Fragments.MovieDetailsFragment
 import com.example.iwatch.Fragments.MovieRoomsFragment
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_movie_details.*
 import kotlinx.android.synthetic.main.movie_item.*
 
@@ -50,6 +51,7 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
 
         //print movie details
         movie_detail_title.text = movie?.title
+        Picasso.get().load(movie?.imgFilm).into(movie_detail_picture)
         for(i in 0..movie!!.genre?.size!!-1){
             movie_detail_genre.text = movie!!.genre?.get(i)?.genreType.toString() + ", "
         }

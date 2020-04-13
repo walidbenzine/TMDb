@@ -171,4 +171,5 @@ class HomeFragment : Fragment(), OnMovieClickListener {
         movieDetailsIntent.putExtra("movie", movie)
         startActivity(movieDetailsIntent)
     }
+
 }

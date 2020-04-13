@@ -8,7 +8,6 @@ import java.util.Date
 
 class Movie (): Serializable {
 
-
     internal var id: Int = 0
     internal var imgFilm: String? = null
     internal var title: String? = null
@@ -20,5 +19,6 @@ class Movie (): Serializable {
     internal var actors: List<Actor>? = null
     internal var realisator: List<String>? = null
     internal var comments: List<Comment>? = null
+
 
 }

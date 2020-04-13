@@ -107,7 +107,7 @@
                             style="?android:attr/ratingBarStyleSmall"
                             android:layout_gravity="center_vertical"
                             android:saveEnabled="true"
-                            android:numStars="5"
+                            android:numStars="10"
                             android:stepSize=".5"/>
 
                         <LinearLayout
@@ -122,13 +122,13 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/white"
-                                android:textSize="9pt" />
+                                android:textSize="7pt" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:text="/5"/>
+                                android:text="/10"/>
 
                         </LinearLayout>
 
