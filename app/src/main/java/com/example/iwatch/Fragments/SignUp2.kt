@@ -9,11 +9,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+
+import android.widget.*
 import com.example.iwatch.Activities.ConfirmRegistration
+import kotlinx.android.synthetic.main.fragment_sign_up2.*
+import android.widget.Button
 import com.example.iwatch.Entities.User
 import com.example.iwatch.R
-import kotlinx.android.synthetic.main.fragment_sign_up2.*
 import kotlin.random.Random
 
 // TODO: Rename parameter arguments, choose names that match
@@ -29,11 +31,11 @@ private const val ARG_PARAM2 = "param2"
  * Use the [SignUp2.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SignUp2 : Fragment() {
+class SignUp2 : Fragment(), AdapterView.OnItemSelectedListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    var code =""
+    var code = ""
     var usr = User()
     private var listener: OnFragmentInteractionListener? = null
 
@@ -50,23 +52,29 @@ class SignUp2 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val v = inflater.inflate(R.layout.fragment_sign_up2, container, false)
-
+        var v = inflater.inflate(R.layout.fragment_sign_up2, container, false)
 
         var bundle = this.arguments
-        if(bundle!=null){
+
+        if (bundle != null) {
             usr = bundle.getSerializable("user") as User
         }
 
-        var signupconf = v.findViewById<View>(R.id.signupconfirm) as Button
-        signupconf.setOnClickListener {
+        var btnConfirmSignUp = v.findViewById<View>(R.id.btn_signup_confirm) as Button
+        btnConfirmSignUp.setOnClickListener {
 
             usr.mobile = phone.text.toString()
             usr.adresse = add.text.toString()
 
             val smsManager = SmsManager.getDefault()
             code = String.format("%04d", Random.nextInt(10000))
-            smsManager.sendTextMessage(usr.mobile, "Verification", "To verify your Iwatch account, please enter this code: "+code, null, null)
+            smsManager.sendTextMessage(
+                usr.mobile,
+                "Verification",
+                "To verify your Iwatch account, please enter this code: " + code,
+                null,
+                null
+            )
             System.out.println("SMS SENT to" + phone)
 
             val intent = Intent(activity, ConfirmRegistration::class.java)
@@ -131,5 +139,13 @@ class SignUp2 : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
     }
 }

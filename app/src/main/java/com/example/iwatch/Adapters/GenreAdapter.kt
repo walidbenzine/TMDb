@@ -1,15 +1,12 @@
 package com.example.iwatch.Adapters
 
-import android.content.Context
+
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Entities.Genre
 import com.example.iwatch.R
 import com.example.iwatch.ViewHolders.GenreViewHolder
-import kotlinx.android.synthetic.main.profile_genre_item.view.*
 
 
 

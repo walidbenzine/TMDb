@@ -67,8 +67,8 @@
                         android:id="@+id/serie_released_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="example"
                         android:layout_marginLeft="16dp"
+                        android:text="example"
                         android:textColor="@color/lightGrey" />
                 </LinearLayout>
             </LinearLayout>

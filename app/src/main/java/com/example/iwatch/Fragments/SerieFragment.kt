@@ -11,7 +11,7 @@ import com.example.iwatch.R
 
 class SerieFragment: Fragment()  {
 
-    var serie = ArrayList<Serie>()
+    /*var serie = ArrayList<Serie>()
 
 
     override fun onCreateView(
@@ -24,6 +24,6 @@ class SerieFragment: Fragment()  {
 
 
         return v
-    }
+    }*/
 }
 

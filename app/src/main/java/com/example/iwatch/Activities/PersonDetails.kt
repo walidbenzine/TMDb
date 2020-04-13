@@ -3,12 +3,14 @@ package com.example.iwatch.Activities
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.example.iwatch.Fragments.FilmographyFragment
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
+import kotlinx.android.synthetic.main.activity_favorite.*
 import kotlinx.android.synthetic.main.activity_person_details.*
 
 class PersonDetails : AppCompatActivity(), FilmographyFragment.OnFragmentInteractionListener {
@@ -18,6 +20,11 @@ class PersonDetails : AppCompatActivity(), FilmographyFragment.OnFragmentInterac
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_person_details)
+
+        //enable back button on the toolbar
+        person_detail_toolbar.title = ""
+        setSupportActionBar(person_detail_toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -29,6 +36,13 @@ class PersonDetails : AppCompatActivity(), FilmographyFragment.OnFragmentInterac
 
         person_view_pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(person_tabs))
         person_tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(person_view_pager))
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId==android.R.id.home){
+            onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     /**
