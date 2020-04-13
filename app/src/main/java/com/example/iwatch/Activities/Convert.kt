@@ -66,6 +66,7 @@ class Convert {
         film.title = obj.get("title").toString()
         film.resume = obj.get("resume").toString()
         film.imgFilm = "https://image.tmdb.org/t/p/original"+obj.get("image").toString()
+        film.video = "https://www.youtube.com/watch?v="+obj.get("video").toString()
 
         var genrearray = JSONArray(obj.get("genre").toString())
         for (i in 0 until genrearray.length()) {
