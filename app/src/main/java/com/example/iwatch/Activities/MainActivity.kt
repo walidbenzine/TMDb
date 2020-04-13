@@ -6,6 +6,8 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.StrictMode
+import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import com.example.iwatch.R
 import kotlinx.android.synthetic.main.activity_main.*
@@ -38,51 +40,60 @@ class MainActivity : AppCompatActivity() {
 
         val convert = Convert()
 
-        signupb.setOnClickListener() {
-            var clickedu = Intent(this@MainActivity, SignUp::class.java)
-            startActivity(clickedu)
-            }
+        val btnSignUp = findViewById<View>(R.id.btn_signUp) as Button
+        btnSignUp.setOnClickListener() {
+            var signUpIntent = Intent(this@MainActivity, SignUp::class.java)
+            startActivity(signUpIntent)
+        }
 
-
-        buttonCnx.setOnClickListener {
+        btn_login.setOnClickListener {
             var login = email.text.toString()
             val password = pass.text
 
-            if(!login.isNullOrEmpty() && !password.isNullOrEmpty()) {
+            if (!login.isNullOrEmpty() && !password.isNullOrEmpty()) {
 
                 //URL A CHANGER APRES HEBERGEMENT
-                val userJson = Post("http://scirusiwatch.herokuapp.com/getUser/" + login + "/" + password)
+                val userJson =
+                    Post("http://scirusiwatch.herokuapp.com/getUser/" + login + "/" + password)
                 System.out.println(userJson)
-                if (userJson.toString() != "{}" ) {
-                    Toast.makeText(applicationContext,"Connexion résussi",Toast.LENGTH_SHORT).show()
+                if (userJson.toString() != "{}" && userJson.toString() != "[]" ) {
+
+                    Toast.makeText(applicationContext, "Connexion résussi", Toast.LENGTH_SHORT).show()
 
                     val user = convert.toUser(userJson.getJSONObject(0))
-                    val intent = Intent(this, Home::class.java)
-                    intent.putExtra("user", user)
-                    startActivity(intent)
+                    val homeIntent = Intent(this, Home::class.java)
+                    homeIntent.putExtra("user", user)
+                    startActivity(homeIntent)
+                } else {
+                    Toast.makeText(
+                        applicationContext,
+                        "Identifiants incorrects",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
-                else{
-                    Toast.makeText(applicationContext,"Identifiants incorrects",Toast.LENGTH_SHORT).show()
-                }
-            }
-            else{
-                Toast.makeText(applicationContext,"Entrez de bonnes valeurs SVP",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(
+                    applicationContext,
+                    "Entrez de bonnes valeurs SVP",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
-        }
+    }
 
 
-    fun Post(url: String) : JSONArray {
+    fun Post(url: String): JSONArray {
 
         val x = try {
             URL(url)
                 .openStream()
                 .bufferedReader()
-                .use { it.readText() } }
-        catch(e: Exception){
+                .use { it.readText() }
+        } catch (e: Exception) {
             System.out.println(e)
         }
-        if(!x.toString().isNullOrEmpty() && x.toString() != "null"){
+        if (!x.toString().isNullOrEmpty() && x.toString() != "null" && x.toString() != "[]") {
+            System.out.println("X.TOSTRING === " + x.toString())
             return JSONArray(x.toString())
 
         }

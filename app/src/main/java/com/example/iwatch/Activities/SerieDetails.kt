@@ -3,8 +3,12 @@ package com.example.iwatch.Activities
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+
 import android.widget.TextView
 import android.widget.Toast
+
+import android.view.MenuItem
+
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -13,7 +17,7 @@ import com.example.iwatch.Fragments.CommentsFragment
 import com.example.iwatch.Fragments.SeasonFragment
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
-//import kotlinx.android.synthetic.main.activity_serie_details.*
+import kotlinx.android.synthetic.main.activity_serie_details.*
 
 class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionListener,
     AssociatedSeriesFragment.OnFragmentInteractionListener, CommentsFragment.OnFragmentInteractionListener{
@@ -32,6 +36,11 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_serie_details)
+
+        //enable back button on the toolbar
+        serie_detail_toolbar.title = ""
+        setSupportActionBar(serie_detail_toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -68,6 +77,13 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
         Toast.makeText(this, "titre "+titre, Toast.LENGTH_LONG).show()
 
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId==android.R.id.home){
+            onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     /**

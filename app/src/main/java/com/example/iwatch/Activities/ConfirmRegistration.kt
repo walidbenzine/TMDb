@@ -3,13 +3,14 @@ package com.example.iwatch.Activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import com.example.iwatch.Entities.User
+
+import android.text.Editable
+import android.text.TextWatcher
 import com.example.iwatch.R
 import kotlinx.android.synthetic.main.activity_confirm_registration.*
-import org.json.JSONArray
+import android.widget.Toast
+import com.example.iwatch.Entities.User
 import java.net.URL
-
 
 class ConfirmRegistration : AppCompatActivity() {
 
@@ -17,16 +18,79 @@ class ConfirmRegistration : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_registration)
 
+        field_one.addTextChangedListener(
+            object: TextWatcher{
+                override fun afterTextChanged(s: Editable?) {
+                    if (field_one.text.length>0){
+                        field_two.requestFocus()
+                    }
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            })
+
+        field_two.addTextChangedListener(
+            object : TextWatcher{
+                override fun afterTextChanged(s: Editable?) {
+                    if (field_two.text.length>0){
+                        field_three.requestFocus()
+                    }
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            })
+
+        field_three.addTextChangedListener(
+            object : TextWatcher{
+                override fun afterTextChanged(s: Editable?) {
+                    if (field_three.text.length>0){
+                        field_four.requestFocus()
+                    }
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            }
+        )
+
+
         var code = intent.getStringExtra("code").toString()
         var usr = intent.getSerializableExtra("user") as User
 
-        signupconfirm.setOnClickListener {
+        btn_confirm_signup.setOnClickListener {
 
             var sb = StringBuffer()
-            sb.append(number1.text.toString())
-            sb.append(number2.text.toString())
-            sb.append(number3.text.toString())
-            sb.append(number4.text.toString())
+            sb.append(field_one.text.toString())
+            sb.append(field_two.text.toString())
+            sb.append(field_three.text.toString())
+            sb.append(field_four.text.toString())
             var res = sb.toString()
             if (res.equals(code)) {
 

@@ -15,8 +15,6 @@ class Movie (): Serializable {
     internal var resume: String? = null
     internal var note: String? = null
     internal var dateSortie: String? = null
-    internal var duration: String? = null
-    internal var releasedDate: String? = null
     internal var genre: ArrayList<Genre>? = null
     internal var filmsLiees: List<Movie>? = null
     internal var actors: List<Actor>? = null

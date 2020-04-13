@@ -9,9 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Activities.EditProfile
+import com.example.iwatch.Activities.Favorite
 import com.example.iwatch.Adapters.GenreAdapter
 import com.example.iwatch.Entities.Actor
 import com.example.iwatch.Entities.Genre
@@ -19,6 +22,7 @@ import com.example.iwatch.Entities.User
 import com.example.iwatch.Enumerations.GenreType
 
 import com.example.iwatch.R
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,6 +62,17 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
 
         val v = inflater.inflate(R.layout.fragment_profile, container, false)
+
+        //get user attributes
+        var userName = v.findViewById<RecyclerView>(R.id.user_name) as TextView
+        userName.text = user.firstName?.capitalize() + " " + user.firstName?.toUpperCase()
+
+        var userPhone = v.findViewById<RecyclerView>(R.id.user_phone) as TextView
+        userPhone.text = user.mobile
+
+        var userJeton = v.findViewById<RecyclerView>(R.id.user_jeton) as TextView
+        userJeton.text = user.jeton.toString()
+
         val genreRecyclerView = v.findViewById<RecyclerView>(R.id.genre_recycler_view)
 
         genres.add(Genre(GenreType.Thriller))
@@ -73,6 +88,12 @@ class ProfileFragment : Fragment() {
         btnEditProfile.setOnClickListener {
             val editProfile = Intent(this.context, EditProfile::class.java)
             startActivity(editProfile)
+        }
+
+        val btnFavorite = v.findViewById<View>(R.id.btn_favorite) as LinearLayout
+        btnFavorite.setOnClickListener {
+            val favoriteIntent = Intent(this.context, Favorite::class.java)
+            startActivity(favoriteIntent)
         }
 
         return v

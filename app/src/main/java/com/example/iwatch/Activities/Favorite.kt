@@ -7,24 +7,24 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.iwatch.Fragments.EpisodesFragment
-import com.example.iwatch.Fragments.SeasonActorsFragment
+import com.example.iwatch.Fragments.FavoriteMovieFragment
+import com.example.iwatch.Fragments.FavoriteRoomFragment
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.activity_season_details.*
+import kotlinx.android.synthetic.main.activity_favorite.*
 
-class SeasonDetails : AppCompatActivity(), EpisodesFragment.OnFragmentInteractionListener,
-    SeasonActorsFragment.OnFragmentInteractionListener{
+class Favorite : AppCompatActivity(), FavoriteMovieFragment.OnFragmentInteractionListener,
+    FavoriteRoomFragment.OnFragmentInteractionListener{
 
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_season_details)
+        setContentView(R.layout.activity_favorite)
 
-        //enable back button on the toolbar
-        season_detail_toolbar.title = ""
-        setSupportActionBar(season_detail_toolbar)
+
+        favorite_toolbar.title = "Favorite"
+        setSupportActionBar(favorite_toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // Create the adapter that will return a fragment for each of the three
@@ -32,11 +32,11 @@ class SeasonDetails : AppCompatActivity(), EpisodesFragment.OnFragmentInteractio
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
 
         // Set up the ViewPager with the sections adapter.
-        season_view_pager.adapter = mSectionsPagerAdapter
-        season_view_pager.currentItem = 0
+        favorite_view_pager.adapter = mSectionsPagerAdapter
+        favorite_view_pager.currentItem = 0
 
-        season_view_pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(season_tabs))
-        season_tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(season_view_pager))
+        favorite_view_pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(favorite_tabs))
+        favorite_tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(favorite_view_pager))
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -45,22 +45,24 @@ class SeasonDetails : AppCompatActivity(), EpisodesFragment.OnFragmentInteractio
         }
         return super.onOptionsItemSelected(item)
     }
+
     /**
      * A [FragmentPagerAdapter] that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+
+    class SectionsPagerAdapter(fm: FragmentManager)  : FragmentPagerAdapter(fm) {
 
         override fun getItem(position: Int): Fragment {
             return when (position){
-                0 -> EpisodesFragment()
-                1 -> SeasonActorsFragment()
+                0 -> FavoriteMovieFragment()
+                1 -> FavoriteRoomFragment()
                 else -> Fragment()
             }
         }
 
         override fun getCount(): Int {
-            // Show 5 total pages.
+            // Show 2 total pages.
             return 2
         }
 

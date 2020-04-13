@@ -7,6 +7,8 @@ import org.jetbrains.anko.activityUiThread
 import org.jetbrains.anko.doAsync
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
 import com.example.iwatch.Fragments.SignUp1
 import com.example.iwatch.Fragments.SignUp2
 import com.example.iwatch.R
@@ -32,7 +34,6 @@ class SignUp : AppCompatActivity() , SignUp1.OnFragmentInteractionListener, Sign
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragment_container, signUp1Fragment)
         fragmentTransaction.commit()
-
 
     }
 }

@@ -26,10 +26,9 @@ var user = User()
 class Home : AppCompatActivity(),
     HomeFragment.OnFragmentInteractionListener, CinemaFragment.OnFragmentInteractionListener,
     SeriesFragment.OnFragmentInteractionListener, PersonsFragment.OnFragmentInteractionListener,
-    ProfileFragment.OnFragmentInteractionListener{
+    ProfileFragment.OnFragmentInteractionListener {
 
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
-
 
     override fun onFragmentInteraction(uri: Uri) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -37,7 +36,7 @@ class Home : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView( R.layout.activity_home)
+        setContentView(R.layout.activity_home)
 
         user = intent.getSerializableExtra("user") as User
 
@@ -54,7 +53,6 @@ class Home : AppCompatActivity(),
 
         home_container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(home_container))
-
 
     }
 
@@ -92,19 +90,27 @@ class Home : AppCompatActivity(),
      * A [FragmentPagerAdapter] that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    class SectionsPagerAdapter(fm: FragmentManager)  : FragmentPagerAdapter(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT ){
+
+    class SectionsPagerAdapter(fm: FragmentManager) :
+        FragmentPagerAdapter(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
         override fun getItem(position: Int): Fragment {
-            return when (position){
+            return when (position) {
 
                 //URLS A CHANGER APRES HEBERGEMENT
                 0 -> {
                     System.out.println("CASE 0")
-                    HomeFragment.newInstance(PostSerie("http://scirusiwatch.herokuapp.com/getSerieLast"), PostFilm("https://scirusiwatch.herokuapp.com/getlast"))
+                    HomeFragment.newInstance(
+                        PostSerie("http://scirusiwatch.herokuapp.com/getSerieLast"),
+                        PostFilm("https://scirusiwatch.herokuapp.com/getlast")
+                    )
                 }
                 1 -> {
                     System.out.println("CASE 1")
-                    CinemaFragment.newInstance(PostFilm("http://scirusiwatch.herokuapp.com/getTopRated"), PostCinema("https://scirusiwatch.herokuapp.com/getAllRooms"))
+                    CinemaFragment.newInstance(
+                        PostFilm("http://scirusiwatch.herokuapp.com/getTopRated"),
+                        PostCinema("https://scirusiwatch.herokuapp.com/getAllRooms")
+                    )
                 }
                 2 -> {
                     System.out.println("CASE 2")
@@ -133,19 +139,22 @@ class Home : AppCompatActivity(),
     }
 }
 
-fun PostSerie(url: String) : ArrayList<Serie> {
+fun PostSerie(url: String): ArrayList<Serie> {
     var arrayseries = ArrayList<Serie>()
     val x = try {
         URL(url)
-                .openStream()
-                .bufferedReader()
-                .use { it.readText() } }
-    catch(e: Exception){
+            .openStream()
+            .bufferedReader()
+            .use { it.readText() }
+    } catch (e: Exception) {
         System.out.println(e)
     }
-    if(!x.toString().isNullOrEmpty() && x.toString() != "null"){
+    if (!x.toString().isNullOrEmpty() && x.toString() != "null" && x.toString() != "[]") {
+
+        System.out.println("POSTSERIE: X.TOSTRING === " + x.toString())
+
         var jsonarray = JSONArray(x.toString())
-        for( i in 0 until jsonarray.length()){
+        for (i in 0 until jsonarray.length()) {
             arrayseries.add(convert.toSerie(JSONObject(jsonarray.get(i).toString())))
         }
         return arrayseries
@@ -154,19 +163,21 @@ fun PostSerie(url: String) : ArrayList<Serie> {
 }
 
 
-fun PostFilm(url: String) : ArrayList<Movie> {
+fun PostFilm(url: String): ArrayList<Movie> {
     var arrayfilms = ArrayList<Movie>()
     val x = try {
         URL(url)
-                .openStream()
-                .bufferedReader()
-                .use { it.readText() } }
-    catch(e: Exception){
+            .openStream()
+            .bufferedReader()
+            .use { it.readText() }
+    } catch (e: Exception) {
         System.out.println(e)
     }
-    if(!x.toString().isNullOrEmpty() && x.toString() != "null"){
+    if (!x.toString().isNullOrEmpty() && x.toString() != "null" && x.toString() != "[]") {
+        System.out.println("POSTFILMS: X.TOSTRING === " + x.toString())
+
         var jsonarray = JSONArray(x.toString())
-        for( i in 0 until jsonarray.length()){
+        for (i in 0 until jsonarray.length()) {
             arrayfilms.add(convert.toFilm(JSONObject(jsonarray.get(i).toString())))
         }
         return arrayfilms
@@ -174,19 +185,19 @@ fun PostFilm(url: String) : ArrayList<Movie> {
     return arrayfilms
 }
 
-fun PostActor(url: String) : ArrayList<Actor> {
+fun PostActor(url: String): ArrayList<Actor> {
     var arrayactors = ArrayList<Actor>()
     val x = try {
         URL(url)
-                .openStream()
-                .bufferedReader()
-                .use { it.readText() } }
-    catch(e: Exception){
+            .openStream()
+            .bufferedReader()
+            .use { it.readText() }
+    } catch (e: Exception) {
         System.out.println(e)
     }
-    if(!x.toString().isNullOrEmpty() && x.toString() != "null"){
+    if (!x.toString().isNullOrEmpty() && x.toString() != "null" && x.toString() != "[]") {
         var jsonarray = JSONArray(x.toString())
-        for( i in 0 until jsonarray.length()){
+        for (i in 0 until jsonarray.length()) {
             arrayactors.add(convert.toActor(JSONObject(jsonarray.get(i).toString())))
         }
         return arrayactors
@@ -195,19 +206,19 @@ fun PostActor(url: String) : ArrayList<Actor> {
 }
 
 
-fun PostSaison(url: String) : ArrayList<Saison> {
+fun PostSaison(url: String): ArrayList<Saison> {
     var arraySaison = ArrayList<Saison>()
     val x = try {
         URL(url)
-                .openStream()
-                .bufferedReader()
-                .use { it.readText() } }
-    catch(e: Exception){
+            .openStream()
+            .bufferedReader()
+            .use { it.readText() }
+    } catch (e: Exception) {
         System.out.println(e)
     }
-    if(!x.toString().isNullOrEmpty() && x.toString() != "null"){
+    if (!x.toString().isNullOrEmpty() && x.toString() != "null" && x.toString() != "[]") {
         var jsonarray = JSONArray(x.toString())
-        for( i in 0 until jsonarray.length()){
+        for (i in 0 until jsonarray.length()) {
             arraySaison.add(convert.toSaison(JSONObject(jsonarray.get(i).toString())))
         }
         return arraySaison
@@ -216,19 +227,19 @@ fun PostSaison(url: String) : ArrayList<Saison> {
 }
 
 
-fun PostCinema(url: String) : ArrayList<Cinema> {
+fun PostCinema(url: String): ArrayList<Cinema> {
     var arrayCinema = ArrayList<Cinema>()
     val x = try {
         URL(url)
-                .openStream()
-                .bufferedReader()
-                .use { it.readText() } }
-    catch(e: Exception){
+            .openStream()
+            .bufferedReader()
+            .use { it.readText() }
+    } catch (e: Exception) {
         System.out.println(e)
     }
-    if(!x.toString().isNullOrEmpty() && x.toString() != "null"){
+    if (!x.toString().isNullOrEmpty() && x.toString() != "null" && x.toString() != "[]") {
         var jsonarray = JSONArray(x.toString())
-        for( i in 0 until jsonarray.length()){
+        for (i in 0 until jsonarray.length()) {
             arrayCinema.add(convert.toCinema(JSONObject(jsonarray.get(i).toString())))
         }
         return arrayCinema

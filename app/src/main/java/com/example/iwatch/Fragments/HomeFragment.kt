@@ -57,7 +57,7 @@ class HomeFragment : Fragment() {
     ): View? {
 
 
-        System.out.println("FIRST SERIE TITLE = "+ serie.get(0).title)
+        System.out.println("FIRST SERIE PICTURE = "+ serie.get(0).picture)
         //System.out.println("FIRST FILM TITLE =  "+ films.get(0).title)
 
         // Inflate the layout for this fragment
@@ -71,8 +71,6 @@ class HomeFragment : Fragment() {
         btnSeries.setTextColor(Color.parseColor("#EF4B53"))
 
         val serieRecyclerView = v.findViewById<RecyclerView>(R.id.home_recycler_view)
-
-
 
         serieRecyclerView.apply {
             serieRecyclerView!!.layoutManager = LinearLayoutManager(this.context)
@@ -107,7 +105,7 @@ class HomeFragment : Fragment() {
         return v
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+
     fun onButtonPressed(uri: Uri) {
         listener?.onFragmentInteraction(uri)
     }

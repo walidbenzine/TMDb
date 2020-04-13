@@ -27,7 +27,7 @@ class SerieViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
         seriereleazeddate = itemView.findViewById(R.id.serie_released_date) as TextView
         seriepicture = itemView.findViewById(R.id.serie_picture) as ImageView
 
-        itemView.setOnClickListener{
+      /*  itemView.setOnClickListener{
             val intent = Intent(itemView.context, SerieDetails::class.java)
 
             intent.putExtra("titre",serietitle!!.text)
@@ -36,7 +36,7 @@ class SerieViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
             intent.putExtra("daterealisation",seriereleazeddate!!.text)
 
             ContextCompat.startActivity(itemView.context, intent, null)
-        }
+        }*/
 
     }
 

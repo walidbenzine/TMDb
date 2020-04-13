@@ -9,6 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Adapters.CinemaRoomAdapter
+import com.example.iwatch.Adapters.MovieAdapter
 import com.example.iwatch.Entities.Cinema
 import com.example.iwatch.Entities.Movie
 import com.example.iwatch.R
@@ -54,6 +58,7 @@ class CinemaFragment : Fragment() {
 
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_cinema, container, false)
+        val cinemaRecyclerView = v.findViewById<RecyclerView>(R.id.cinema_recycler_view)
 
         val btnCinemaMovies = v.findViewById<View>(R.id.btn_movies_cinema) as Button
         btnCinemaMovies.setBackgroundResource(R.drawable.clicked_button)
@@ -62,6 +67,42 @@ class CinemaFragment : Fragment() {
         val btnRooms = v.findViewById<View>(R.id.btn_rooms) as Button
         btnRooms.setBackgroundResource(R.drawable.no_clicked_button)
         btnRooms.setTextColor(Color.parseColor("#EF4B53"))
+
+        cinemaRecyclerView.apply {
+            cinemaRecyclerView!!.layoutManager = LinearLayoutManager(this.context)
+            layoutManager = LinearLayoutManager(this.context)
+            adapter = MovieAdapter(films)
+        }
+
+
+        btnCinemaMovies.setOnClickListener {
+            cinemaRecyclerView.apply {
+                cinemaRecyclerView!!.layoutManager = LinearLayoutManager(this.context)
+                layoutManager = LinearLayoutManager(this.context)
+                adapter = MovieAdapter(films)
+            }
+
+            btnCinemaMovies.setBackgroundResource(R.drawable.clicked_button)
+            btnCinemaMovies.setTextColor(Color.parseColor("#ffffff"))
+
+            btnRooms.setBackgroundResource(R.drawable.no_clicked_button)
+            btnRooms.setTextColor(Color.parseColor("#EF4B53"))
+        }
+
+        btnRooms.setOnClickListener {
+            cinemaRecyclerView.apply {
+                cinemaRecyclerView!!.layoutManager = LinearLayoutManager(this.context)
+                layoutManager = LinearLayoutManager(this.context)
+                adapter = CinemaRoomAdapter(cinemas)
+            }
+            btnRooms.setBackgroundResource(R.drawable.clicked_button)
+            btnRooms.setTextColor(Color.parseColor("#ffffff"))
+
+            btnCinemaMovies.setBackgroundResource(R.drawable.no_clicked_button)
+            btnCinemaMovies.setTextColor(Color.parseColor("#EF4B53"))
+        }
+
+
         return v
     }
 

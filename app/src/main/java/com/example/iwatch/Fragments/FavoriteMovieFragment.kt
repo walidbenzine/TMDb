@@ -7,55 +7,54 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.iwatch.Adapters.PersonAdapter
-import com.example.iwatch.Entities.Actor
 
 import com.example.iwatch.R
-
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-
 /**
  * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [PersonsFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [PersonsFragment.newInstance] factory method to
+ * Use the [FavoriteMovieFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class PersonsFragment : Fragment() {
+class FavoriteMovieFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var actors = ArrayList<Actor>()
-
+    private var param1: String? = null
+    private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        actors = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Actor>
+        arguments?.let {
+            param1 = it.getString(ARG_PARAM1)
+            param2 = it.getString(ARG_PARAM2)
+        }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        System.out.println("FIRST ACTOR NAME = "+ actors.get(0).firstName + " " + actors.get(0).popularity)
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val v = inflater.inflate(R.layout.fragment_persons, container, false)
+        return inflater.inflate(R.layout.fragment_favorite_movie, container, false)
+    }
 
-        //print popular actors list
-        val personRecyclerView = v.findViewById<RecyclerView>(R.id.person_recycler_view)
-        personRecyclerView.apply {
-            layoutManager = LinearLayoutManager(this.context)
-            adapter = PersonAdapter(actors)
-        }
-
-        return v
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment FavoriteMovieFragment.
+         */
+        // TODO: Rename and change types and number of parameters
+        @JvmStatic fun newInstance(param1: String, param2: String) =
+                FavoriteMovieFragment().apply {
+                    arguments = Bundle().apply {
+                        putString(ARG_PARAM1, param1)
+                        putString(ARG_PARAM2, param2)
+                    }
+                }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -91,24 +90,5 @@ class PersonsFragment : Fragment() {
     interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PersonsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: ArrayList<Actor>) =
-            PersonsFragment().apply {
-                arguments = Bundle().apply {
-                    putSerializable(ARG_PARAM1, param1)
-                }
-            }
     }
 }
