@@ -87,7 +87,6 @@ class Convert {
         var act = Actor()
         act.id = obj.get("id").toString().toInt()
         act.lastName = obj.get("nom").toString()
-        act.firstName = obj.get("nom").toString()
         act.cityOfBirth = obj.get("lieuNaissance").toString()
         act.bibliography = obj.get("bibliographie").toString()
         act.dateOfBirth = obj.get("dateNaissance").toString()
@@ -164,7 +163,10 @@ class Convert {
         return co
 
         }catch (e:Exception){
-            return Comment(CommentType.nulle)
+            var co = Comment(CommentType.nulle)
+            co.user = obj.get("user").toString()
+            co.text = obj.get("text").toString()
+            return co
         }
     }
 
