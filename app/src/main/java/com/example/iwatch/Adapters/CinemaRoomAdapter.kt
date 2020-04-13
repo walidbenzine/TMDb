@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Entities.Cinema
 import com.example.iwatch.R
 import com.example.iwatch.ViewHolders.CinemaRoomViewHolder
+import com.squareup.picasso.Picasso
 
 class CinemaRoomAdapter (val movieRoomList: ArrayList<Cinema>): RecyclerView.Adapter<CinemaRoomViewHolder>() {
 
@@ -23,6 +24,6 @@ class CinemaRoomAdapter (val movieRoomList: ArrayList<Cinema>): RecyclerView.Ada
 
         holder.movieRoomName.text = movieRoom.nom
         holder.movieRoomAddress.text = movieRoom.adresse
-        holder.movieRoomPicture.setImageResource(R.mipmap.ic_drama)
+        Picasso.get().load(movieRoom.image).into(holder.movieRoomPicture)
     }
 }
