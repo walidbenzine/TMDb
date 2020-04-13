@@ -27,6 +27,12 @@ class SerieViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
 
         itemView.setOnClickListener{
             val intent = Intent(itemView.context, SerieDetails::class.java)
+
+            intent.putExtra("titre",serietitle!!.text)
+            intent.putExtra("details",seriedetails!!.text)
+            intent.putExtra("datesortie",datesortie!!.text)
+            intent.putExtra("daterealisation",seriereleazeddate!!.text)
+
             ContextCompat.startActivity(itemView.context, intent, null)
         }
 

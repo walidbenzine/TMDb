@@ -85,10 +85,11 @@
                             android:layout_marginTop="8dp">
 
                             <TextView
+                                android:id="@+id/date_sortie"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/white"
-                                android:text="Date de sortie: "/>
+                                android:text="Date de sortie: "
+                                android:textColor="@color/white" />
 
                             <TextView
                                 android:id="@+id/serie_detail_released_date"
@@ -146,10 +147,11 @@
                     android:layout_marginTop="8dp">
 
                     <TextView
+                        android:id="@+id/nbr_episode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:text="Nombre d'Episodes"/>
+                        android:text="Nombre d'Episodes"
+                        android:textColor="@color/white" />
 
                     <TextView
                         android:id="@+id/serie_episodes_nbr"
@@ -165,10 +167,11 @@
                     android:layout_marginTop="8dp">
 
                     <TextView
+                        android:id="@+id/nbr_saison"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:text="Nombre de Saisons"/>
+                        android:text="Nombre de Saisons"
+                        android:textColor="@color/white" />
 
                     <TextView
                         android:id="@+id/serie_saisons_nbr"
