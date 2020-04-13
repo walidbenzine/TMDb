@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Entities.Serie
 import com.example.iwatch.R
 import com.example.iwatch.ViewHolders.SerieViewHolder
-import com.squareup.picasso.Picasso
+
 
 class SerieAdapter (val serieList: ArrayList<Serie>): RecyclerView.Adapter<SerieViewHolder>() {
 
