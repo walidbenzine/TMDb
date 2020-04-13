@@ -97,6 +97,6 @@ class MainActivity : AppCompatActivity() {
             return JSONArray(x.toString())
 
         }
-        return JSONArray("{}")
+        return JSONArray()
     }
 }
