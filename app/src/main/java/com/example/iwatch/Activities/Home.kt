@@ -46,7 +46,6 @@ class Home : AppCompatActivity(),
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
-        System.out.println("here")
 
         // Set up the ViewPager with the sections adapter.
         home_container.adapter = mSectionsPagerAdapter
@@ -150,7 +149,10 @@ fun PostSerie(url: String): ArrayList<Serie> {
     } catch (e: Exception) {
         System.out.println(e)
     }
-    if (!x.toString().isNullOrEmpty() && x.toString() != "null") {
+    if (!x.toString().isNullOrEmpty() && x.toString() != "null" && x.toString() != "[]") {
+
+        System.out.println("POSTSERIE: X.TOSTRING === " + x.toString())
+
         var jsonarray = JSONArray(x.toString())
         for (i in 0 until jsonarray.length()) {
             arrayseries.add(convert.toSerie(JSONObject(jsonarray.get(i).toString())))
@@ -171,7 +173,9 @@ fun PostFilm(url: String): ArrayList<Movie> {
     } catch (e: Exception) {
         System.out.println(e)
     }
-    if (!x.toString().isNullOrEmpty() && x.toString() != "null") {
+    if (!x.toString().isNullOrEmpty() && x.toString() != "null" && x.toString() != "[]") {
+        System.out.println("POSTFILMS: X.TOSTRING === " + x.toString())
+
         var jsonarray = JSONArray(x.toString())
         for (i in 0 until jsonarray.length()) {
             arrayfilms.add(convert.toFilm(JSONObject(jsonarray.get(i).toString())))
@@ -191,7 +195,7 @@ fun PostActor(url: String): ArrayList<Actor> {
     } catch (e: Exception) {
         System.out.println(e)
     }
-    if (!x.toString().isNullOrEmpty() && x.toString() != "null") {
+    if (!x.toString().isNullOrEmpty() && x.toString() != "null" && x.toString() != "[]") {
         var jsonarray = JSONArray(x.toString())
         for (i in 0 until jsonarray.length()) {
             arrayactors.add(convert.toActor(JSONObject(jsonarray.get(i).toString())))
@@ -212,7 +216,7 @@ fun PostSaison(url: String): ArrayList<Saison> {
     } catch (e: Exception) {
         System.out.println(e)
     }
-    if (!x.toString().isNullOrEmpty() && x.toString() != "null") {
+    if (!x.toString().isNullOrEmpty() && x.toString() != "null" && x.toString() != "[]") {
         var jsonarray = JSONArray(x.toString())
         for (i in 0 until jsonarray.length()) {
             arraySaison.add(convert.toSaison(JSONObject(jsonarray.get(i).toString())))
@@ -233,7 +237,7 @@ fun PostCinema(url: String): ArrayList<Cinema> {
     } catch (e: Exception) {
         System.out.println(e)
     }
-    if (!x.toString().isNullOrEmpty() && x.toString() != "null") {
+    if (!x.toString().isNullOrEmpty() && x.toString() != "null" && x.toString() != "[]") {
         var jsonarray = JSONArray(x.toString())
         for (i in 0 until jsonarray.length()) {
             arrayCinema.add(convert.toCinema(JSONObject(jsonarray.get(i).toString())))

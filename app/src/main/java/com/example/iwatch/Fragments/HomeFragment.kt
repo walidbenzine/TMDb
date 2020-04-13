@@ -57,7 +57,7 @@ class HomeFragment : Fragment() {
     ): View? {
 
 
-        System.out.println("FIRST SERIE TITLE = "+ serie.get(0).title)
+        System.out.println("FIRST SERIE PICTURE = "+ serie.get(0).picture)
         //System.out.println("FIRST FILM TITLE =  "+ films.get(0).title)
 
         // Inflate the layout for this fragment
