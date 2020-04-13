@@ -47,7 +47,7 @@ class SeriesFragment : Fragment() {
     ): View? {
 
         //System.out.println("FIRST SERIE TITLE = "+ serie.get(0).title)
-        
+
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_series, container, false)
         val serieRecyclerView = v.findViewById<RecyclerView>(R.id.recycleViewSeries)

@@ -56,9 +56,9 @@ class MainActivity : AppCompatActivity() {
                 val userJson =
                     Post("http://scirusiwatch.herokuapp.com/getUser/" + login + "/" + password)
                 System.out.println(userJson)
-                if (userJson.toString() != "{}") {
-                    Toast.makeText(applicationContext, "Connexion résussi", Toast.LENGTH_SHORT)
-                        .show()
+                if (userJson.toString() != "{}" && userJson.toString() != "[]" ) {
+
+                    Toast.makeText(applicationContext, "Connexion résussi", Toast.LENGTH_SHORT).show()
 
                     val user = convert.toUser(userJson.getJSONObject(0))
                     val homeIntent = Intent(this, Home::class.java)
@@ -92,10 +92,11 @@ class MainActivity : AppCompatActivity() {
         } catch (e: Exception) {
             System.out.println(e)
         }
-        if (!x.toString().isNullOrEmpty() && x.toString() != "null") {
+        if (!x.toString().isNullOrEmpty() && x.toString() != "null" && x.toString() != "[]") {
+            System.out.println("X.TOSTRING === " + x.toString())
             return JSONArray(x.toString())
 
         }
-        return JSONArray("{}")
+        return JSONArray()
     }
 }

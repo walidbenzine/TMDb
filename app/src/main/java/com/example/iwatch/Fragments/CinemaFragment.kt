@@ -1,6 +1,7 @@
 package com.example.iwatch.Fragments
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -9,6 +10,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Activities.MovieDetails
+import com.example.iwatch.Adapters.CinemaRoomAdapter
+import com.example.iwatch.Adapters.MovieAdapter
+import com.example.iwatch.Adapters.OnMovieClickListener
 import com.example.iwatch.Entities.Cinema
 import com.example.iwatch.Entities.Movie
 import com.example.iwatch.R
@@ -26,7 +33,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [CinemaFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class CinemaFragment : Fragment() {
+class CinemaFragment : Fragment(), OnMovieClickListener {
     // TODO: Rename and change types of parameters
     private var films =  ArrayList<Movie>()
     private var cinemas =  ArrayList<Cinema>()
@@ -54,6 +61,7 @@ class CinemaFragment : Fragment() {
 
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_cinema, container, false)
+        val cinemaRecyclerView = v.findViewById<RecyclerView>(R.id.cinema_recycler_view)
 
         val btnCinemaMovies = v.findViewById<View>(R.id.btn_movies_cinema) as Button
         btnCinemaMovies.setBackgroundResource(R.drawable.clicked_button)
@@ -62,6 +70,39 @@ class CinemaFragment : Fragment() {
         val btnRooms = v.findViewById<View>(R.id.btn_rooms) as Button
         btnRooms.setBackgroundResource(R.drawable.no_clicked_button)
         btnRooms.setTextColor(Color.parseColor("#EF4B53"))
+
+        cinemaRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this.context)
+            adapter = MovieAdapter(films, this@CinemaFragment)
+        }
+
+
+        btnCinemaMovies.setOnClickListener {
+            cinemaRecyclerView.apply {
+                layoutManager = LinearLayoutManager(this.context)
+                adapter = MovieAdapter(films, this@CinemaFragment)
+            }
+
+            btnCinemaMovies.setBackgroundResource(R.drawable.clicked_button)
+            btnCinemaMovies.setTextColor(Color.parseColor("#ffffff"))
+
+            btnRooms.setBackgroundResource(R.drawable.no_clicked_button)
+            btnRooms.setTextColor(Color.parseColor("#EF4B53"))
+        }
+
+        btnRooms.setOnClickListener {
+            cinemaRecyclerView.apply {
+                layoutManager = LinearLayoutManager(this.context)
+                adapter = CinemaRoomAdapter(cinemas)
+            }
+            btnRooms.setBackgroundResource(R.drawable.clicked_button)
+            btnRooms.setTextColor(Color.parseColor("#ffffff"))
+
+            btnCinemaMovies.setBackgroundResource(R.drawable.no_clicked_button)
+            btnCinemaMovies.setTextColor(Color.parseColor("#EF4B53"))
+        }
+
+
         return v
     }
 
@@ -118,5 +159,11 @@ class CinemaFragment : Fragment() {
                     putSerializable(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onItemClicked(movie: Movie) {
+        val movieDetailsIntent = Intent(this.context, MovieDetails::class.java)
+        movieDetailsIntent.putExtra("movie", movie)
+        startActivity(movieDetailsIntent)
     }
 }

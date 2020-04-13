@@ -27,8 +27,11 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_details)
 
+        //get movie
+        movie = intent.getSerializableExtra("movie") as Movie
+
         //enable back button on the toolbar
-        movie_detail_toolbar.title = ""
+        movie_detail_toolbar.title = movie?.title
         setSupportActionBar(movie_detail_toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -43,8 +46,7 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
         movie_view_pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(movie_tabs))
         movie_tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(movie_view_pager))
 
-        //get movie
-        movie = intent.getSerializableExtra("movie") as Movie
+
 
         //print movie details
         movie_detail_title.text = movie?.title

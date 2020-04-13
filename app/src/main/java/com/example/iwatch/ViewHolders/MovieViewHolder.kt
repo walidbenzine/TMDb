@@ -19,13 +19,12 @@ class MovieViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
     fun bind(movie: Movie, clickListener: OnMovieClickListener){
         movietTitle.text = movie.title
         movieResume.text = movie.resume
-        movieReleasedDate.text = movie.releasedDate
+        movieReleasedDate.text = movie.dateSortie
 
         itemView.setOnClickListener {
             clickListener.onItemClicked(movie)
         }
     }
-    //Button
 
 }
 
