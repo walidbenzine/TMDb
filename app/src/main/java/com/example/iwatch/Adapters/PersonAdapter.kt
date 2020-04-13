@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Entities.Actor
 import com.example.iwatch.R
 import com.example.iwatch.ViewHolders.PersonViewHolder
+import com.squareup.picasso.Picasso
 
 class PersonAdapter(val actorList: ArrayList<Actor>): RecyclerView.Adapter<PersonViewHolder>()  {
 
@@ -25,5 +26,6 @@ class PersonAdapter(val actorList: ArrayList<Actor>): RecyclerView.Adapter<Perso
         holder.birthDay.text = actor.dateOfBirth
         holder.birthPlace.text = actor.cityOfBirth
         holder.popularity.text = actor.popularity?.substring(0,3)
+        Picasso.get().load(actor.picture).into(holder.picture)
     }
 }

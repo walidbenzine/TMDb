@@ -1,6 +1,7 @@
 package com.example.iwatch.ViewHolders
 
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.R
@@ -11,4 +12,5 @@ class PersonViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)  {
     val birthDay = itemView.findViewById<TextView>(R.id.person_birth_day) as TextView
     val birthPlace = itemView.findViewById<TextView>(R.id.person_birth_place) as TextView
     val popularity = itemView.findViewById<TextView>(R.id.person_grade) as TextView
+    val picture = itemView.findViewById<ImageView>(R.id.person_picture) as ImageView
 }
