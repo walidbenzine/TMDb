@@ -24,11 +24,11 @@ class MovieAdapter(
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie: Movie = movieList[position]
-        holder.bind(movie,itemClickListener)
+        holder.bind(movie, itemClickListener)
     }
 
 }
 
 interface OnMovieClickListener{
-    fun onItemClicked(movie: Movie)
+    fun onMovieClicked(movie: Movie)
 }

@@ -25,9 +25,8 @@ class MovieViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
         Picasso.get().load(movie.imgFilm).into(moviePicture)
         movieRate.text = movie?.note
 
-
         itemView.setOnClickListener {
-            clickListener.onItemClicked(movie)
+            clickListener.onMovieClicked(movie)
         }
     }
 
