@@ -2,8 +2,9 @@ package com.example.iwatch.Entities
 import android.widget.ImageView
 import com.example.iwatch.Enumerations.GenreType
 import com.example.iwatch.R
+import java.io.Serializable
 
-data class Genre (var genreType: GenreType) {
+data class Genre (var genreType: GenreType): Serializable{
 
     var toast:String? = null
     var iconId:Int? = null

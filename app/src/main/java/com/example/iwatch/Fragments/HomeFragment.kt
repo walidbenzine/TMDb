@@ -1,6 +1,7 @@
 package com.example.iwatch.Fragments
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -11,7 +12,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Activities.Favorite
+import com.example.iwatch.Activities.MovieDetails
+import com.example.iwatch.Activities.SignUp
 import com.example.iwatch.Adapters.MovieAdapter
+import com.example.iwatch.Adapters.OnMovieClickListener
 import com.example.iwatch.Adapters.SerieAdapter
 import com.example.iwatch.Entities.Movie
 import com.example.iwatch.Entities.Serie
@@ -33,7 +38,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [HomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), OnMovieClickListener {
     // TODO: Rename and change types of parameters
 
     var serie =  ArrayList<Serie>()
@@ -70,19 +75,19 @@ class HomeFragment : Fragment() {
         btnSeries.setBackgroundResource(R.drawable.no_clicked_button)
         btnSeries.setTextColor(Color.parseColor("#EF4B53"))
 
-        val serieRecyclerView = v.findViewById<RecyclerView>(R.id.home_recycler_view)
+        val homeRecyclerView = v.findViewById<RecyclerView>(R.id.home_recycler_view)
 
-        serieRecyclerView.apply {
-            serieRecyclerView!!.layoutManager = LinearLayoutManager(this.context)
+
+        homeRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
-            adapter = MovieAdapter(films)
+            adapter = MovieAdapter(films, this@HomeFragment)
         }
 
         btnMovies.setOnClickListener {
-            serieRecyclerView.apply {
-                serieRecyclerView!!.layoutManager = LinearLayoutManager(this.context)
+            homeRecyclerView.apply {
                 layoutManager = LinearLayoutManager(this.context)
-                adapter = MovieAdapter(films)
+                adapter = MovieAdapter(films, this@HomeFragment)
+
                 btnSeries.setBackgroundResource(R.drawable.no_clicked_button)
                 btnMovies.setBackgroundResource(R.drawable.clicked_button)
                 btnMovies.setTextColor(Color.parseColor("#ffffff"))
@@ -90,11 +95,12 @@ class HomeFragment : Fragment() {
             }
 
         }
+
         btnSeries.setOnClickListener {
-            serieRecyclerView.apply {
-                serieRecyclerView!!.layoutManager = LinearLayoutManager(this.context)
+            homeRecyclerView.apply {
                 layoutManager = LinearLayoutManager(this.context)
                 adapter = SerieAdapter(serie)
+
                 btnMovies.setBackgroundResource(R.drawable.no_clicked_button)
                 btnSeries.setBackgroundResource(R.drawable.clicked_button)
                 btnSeries.setTextColor(Color.parseColor("#ffffff"))
@@ -159,4 +165,11 @@ class HomeFragment : Fragment() {
                 }
             }
     }
+
+    override fun onMovieClicked(movie: Movie) {
+        val movieDetailsIntent = Intent(this.context, MovieDetails::class.java)
+        movieDetailsIntent.putExtra("movie", movie)
+        startActivity(movieDetailsIntent)
+    }
+
 }
