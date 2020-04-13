@@ -163,24 +163,10 @@ class Convert {
         co.text = obj.get("text").toString()
         return co
 
-
-        try {
-            var co = Comment(CommentType.valueOf(obj.get("type").toString()))
-            co.user = obj.get("user").toString()
-            co.text = obj.get("text").toString()
-            return co
-
-        }
-        catch (e:Exception){
-            return Comment(CommentType.nulle)
         }catch (e:Exception){
             return Comment(CommentType.nulle)
         }
-
     }
-    catch (e:Exception){
-        return Comment(CommentType.nulle)
-    } }
 
     fun PostComment(url: String) : ArrayList<Comment> {
         var arrayComment = ArrayList<Comment>()
