@@ -4,19 +4,19 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.telephony.SmsManager
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
 import android.widget.*
 import com.example.iwatch.Activities.ConfirmRegistration
-import com.example.iwatch.Enumerations.GenreType
-import com.example.iwatch.R
-import com.squareup.okhttp.OkHttpClient
-import com.squareup.okhttp.Request
-import kotlinx.android.synthetic.main.fragment_sign_up1.*
 import kotlinx.android.synthetic.main.fragment_sign_up2.*
-import org.jetbrains.anko.doAsync
+import android.widget.Button
+import com.example.iwatch.Entities.User
+import com.example.iwatch.R
+import kotlin.random.Random
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,6 +35,8 @@ class SignUp2 : Fragment(), AdapterView.OnItemSelectedListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    var code = ""
+    var usr = User()
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,42 +51,39 @@ class SignUp2 : Fragment(), AdapterView.OnItemSelectedListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         var v = inflater.inflate(R.layout.fragment_sign_up2, container, false)
 
-        val btnSignUpF = v.findViewById<View>(R.id.signup) as Button
-        btnSignUpF.setOnClickListener() {
-            doAsync {
-                conx(
-                    email.text as String, 0, username.text as String, fname.text as String,
-                    pass.text as String, "null", lname.text as String, phone.text as Int
-                )
-            }
+        var bundle = this.arguments
 
-            var signUpIntent = Intent(this.context, ConfirmRegistration::class.java)
-            startActivity(signUpIntent)
+        if (bundle != null) {
+            usr = bundle.getSerializable("user") as User
+        }
+
+        var btnConfirmSignUp = v.findViewById<View>(R.id.btn_signup_confirm) as Button
+        btnConfirmSignUp.setOnClickListener {
+
+            usr.mobile = phone.text.toString()
+            usr.adresse = add.text.toString()
+
+            val smsManager = SmsManager.getDefault()
+            code = String.format("%04d", Random.nextInt(10000))
+            smsManager.sendTextMessage(
+                usr.mobile,
+                "Verification",
+                "To verify your Iwatch account, please enter this code: " + code,
+                null,
+                null
+            )
+            System.out.println("SMS SENT to" + phone)
+
+            val intent = Intent(activity, ConfirmRegistration::class.java)
+            intent.putExtra("code", code)
+            intent.putExtra("user", usr)
+            startActivity(intent)
         }
 
         return v
-    }
-
-    private fun conx(
-        email: String,
-        jeton: Int,
-        username: String,
-        fname: String,
-        pass: String,
-        addresse: String,
-        lname: String,
-        phone: Int
-    ): String {
-        val url =
-            "http://10.0.2.2:8080/addUser/$email/$jeton/$username/$fname/$pass/$addresse/$lname/$phone"
-        val client = OkHttpClient()
-        val request = Request.Builder().url(url).build()
-        val response = client.newCall(request).execute()
-        val bodystr = response.body().string() // this can be consumed only once
-        return bodystr
-
     }
 
     // TODO: Rename method, update argument and hook method into UI event

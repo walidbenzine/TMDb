@@ -138,8 +138,8 @@ public class Serie {
 	public List<Serie> getSeriesLiees() {
 		return seriesLiees;
 	}
-	public void setSeriesLiees(Serie seriesLiees) {
-		this.seriesLiees.add(seriesLiees);
+	public void setSeriesLiees(List<Serie> seriesLiees) {
+		this.seriesLiees= seriesLiees;
 	}
 	
 	@Override

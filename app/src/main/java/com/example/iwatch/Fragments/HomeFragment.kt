@@ -11,11 +11,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Adapters.MovieAdapter
 import com.example.iwatch.Adapters.SerieAdapter
+import com.example.iwatch.Entities.Movie
 import com.example.iwatch.Entities.Serie
 
 import com.example.iwatch.R
-import fr.upem.myapplication.Film
+
+import kotlinx.android.synthetic.main.activity_main.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,16 +37,17 @@ class HomeFragment : Fragment() {
     // TODO: Rename and change types of parameters
 
     var serie =  ArrayList<Serie>()
-    var films =  ArrayList<Film>()
+    var films =  ArrayList<Movie>()
 
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        @Suppress("UNCHECKED_CAST")
         serie = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Serie>
-        films = arguments?.getSerializable(ARG_PARAM2) as ArrayList<Film>
-
+        @Suppress("UNCHECKED_CAST")
+        films = arguments?.getSerializable(ARG_PARAM2) as ArrayList<Movie>
 
     }
 
@@ -54,7 +58,7 @@ class HomeFragment : Fragment() {
 
 
         System.out.println("FIRST SERIE TITLE = "+ serie.get(0).title)
-        System.out.println("FIRST FILM TITLE =  "+ films.get(0).title)
+        //System.out.println("FIRST FILM TITLE =  "+ films.get(0).title)
 
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_home, container, false)
@@ -73,8 +77,33 @@ class HomeFragment : Fragment() {
         serieRecyclerView.apply {
             serieRecyclerView!!.layoutManager = LinearLayoutManager(this.context)
             layoutManager = LinearLayoutManager(this.context)
-             adapter = SerieAdapter(serie)
-         }
+            adapter = MovieAdapter(films)
+        }
+
+        btnMovies.setOnClickListener {
+            serieRecyclerView.apply {
+                serieRecyclerView!!.layoutManager = LinearLayoutManager(this.context)
+                layoutManager = LinearLayoutManager(this.context)
+                adapter = MovieAdapter(films)
+                btnSeries.setBackgroundResource(R.drawable.no_clicked_button)
+                btnMovies.setBackgroundResource(R.drawable.clicked_button)
+                btnMovies.setTextColor(Color.parseColor("#ffffff"))
+                btnSeries.setTextColor(Color.parseColor("#EF4B53"))
+            }
+
+        }
+        btnSeries.setOnClickListener {
+            serieRecyclerView.apply {
+                serieRecyclerView!!.layoutManager = LinearLayoutManager(this.context)
+                layoutManager = LinearLayoutManager(this.context)
+                adapter = SerieAdapter(serie)
+                btnMovies.setBackgroundResource(R.drawable.no_clicked_button)
+                btnSeries.setBackgroundResource(R.drawable.clicked_button)
+                btnSeries.setTextColor(Color.parseColor("#ffffff"))
+                btnMovies.setTextColor(Color.parseColor("#EF4B53"))
+            }
+
+        }
         return v
     }
 
@@ -124,7 +153,7 @@ class HomeFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: ArrayList<Serie>, param2: ArrayList<Film>) =
+        fun newInstance(param1: ArrayList<Serie>, param2: ArrayList<Movie>) =
             HomeFragment().apply {
                 arguments = Bundle().apply {
                     putSerializable(ARG_PARAM1, param1)

@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.R
 
-class FilmViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
+class MovieViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
 
     val movietitle = itemView.findViewById<TextView>(R.id.movie_title) as TextView
     val movieresume = itemView.findViewById<TextView>(R.id.movie_resume) as TextView

@@ -34,6 +34,6 @@ class SignUp : AppCompatActivity() , SignUp1.OnFragmentInteractionListener, Sign
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragment_container, signUp1Fragment)
         fragmentTransaction.commit()
-    }
 
+    }
 }

@@ -43,7 +43,7 @@ class PersonsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        System.out.println("FIRST ACTOR NAME = "+ actors.get(0).firstName)
+        System.out.println("FIRST ACTOR NAME = "+ actors.get(0).firstName + " " + actors.get(0).popularity)
 
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_persons, container, false)

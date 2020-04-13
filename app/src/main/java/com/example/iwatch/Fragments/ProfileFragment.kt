@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Activities.EditProfile
@@ -63,9 +64,14 @@ class ProfileFragment : Fragment() {
         val v = inflater.inflate(R.layout.fragment_profile, container, false)
 
         //get user attributes
-        user_name.text = user.firstName?.capitalize() + " " + user.firstName?.toUpperCase()
-        user_phone.text = user.mobile
-        user_jeton.text = user.jeton.toString()
+        var userName = v.findViewById<RecyclerView>(R.id.user_name) as TextView
+        userName.text = user.firstName?.capitalize() + " " + user.firstName?.toUpperCase()
+
+        var userPhone = v.findViewById<RecyclerView>(R.id.user_phone) as TextView
+        userPhone.text = user.mobile
+
+        var userJeton = v.findViewById<RecyclerView>(R.id.user_jeton) as TextView
+        userJeton.text = user.jeton.toString()
 
         val genreRecyclerView = v.findViewById<RecyclerView>(R.id.genre_recycler_view)
 

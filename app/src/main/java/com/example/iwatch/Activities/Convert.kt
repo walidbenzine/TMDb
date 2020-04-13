@@ -4,7 +4,6 @@ import com.example.iwatch.Entities.*
 import com.example.iwatch.Enumerations.GenreType
 import fr.upem.myapplication.CommentType
 import org.json.JSONArray
-import fr.upem.myapplication.Film
 import org.json.JSONObject
 import java.lang.Exception
 import java.net.URL
@@ -23,6 +22,8 @@ class Convert {
         usr.mobile = obj.get("tel").toString()
         usr.jeton = obj.get("jeton").toString().toInt()
         usr.picture = obj.get("picture").toString()
+        usr.login = obj.get("login").toString()
+        usr.adresse = obj.get("adresse").toString()
 
         return usr
     }
@@ -49,22 +50,23 @@ class Convert {
         }
         serie.genreList = genres
 
-        serie.commentList = PostComment("http://10.0.2.2:8080/getSerieComment/"+serie.id)
+        serie.commentList = PostComment("http://scirusiwatch.herokuapp.com/getSerieComment/"+serie.id)
         return serie
     }
 
 
-    fun toFilm(obj: JSONObject): Film {
+    fun toFilm(obj: JSONObject): Movie {
 
-        val film = Film()
+        val film = Movie()
         val genres = ArrayList<Genre>()
 
         film.id = obj.get("id").toString().toInt()
         film.dateSortie = obj.get("dateSortie").toString()
         film.duration = obj.get("title").toString()
         film.note = obj.get("note").toString()
-        film.title = obj.get("dateSortie").toString()
+        film.title = obj.get("title").toString()
         film.resume = obj.get("resume").toString()
+        film.imgFilm = obj.get("image").toString()
 
         var genrearray = JSONArray(obj.get("genre").toString())
         for (i in 0 until genrearray.length()) {
@@ -75,7 +77,7 @@ class Convert {
         }
         film.genre = genres
 
-        film.comments = PostComment("http://10.0.2.2:8080/getMovieComment/"+film.id)
+        film.comments = PostComment("https://scirusiwatch.herokuapp.com/getMovieComment/"+film.id)
 
 
         return film
@@ -134,6 +136,21 @@ class Convert {
         ep.trailer = obj.get("bandeAnnonce").toString()
 
         return ep
+    }
+
+
+    fun toCinema(obj: JSONObject): Cinema {
+
+        var cine = Cinema()
+
+        cine.id = obj.get("id").toString().toInt()
+        cine.nom = obj.get("nom").toString()
+        cine.adresse = obj.get("adresse").toString()
+        cine.image = obj.get("image").toString()
+        cine.latitude = obj.get("alt").toString()
+        cine.longitude = obj.get("lang").toString()
+
+        return cine
     }
 
 

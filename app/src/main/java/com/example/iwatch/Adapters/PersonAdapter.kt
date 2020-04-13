@@ -21,9 +21,9 @@ class PersonAdapter(val actorList: ArrayList<Actor>): RecyclerView.Adapter<Perso
     override fun onBindViewHolder(holder: PersonViewHolder, position: Int) {
         val actor: Actor = actorList[position]
 
-        holder.name.text = actor.firstName?.capitalize() + " " + actor.lastName?.toUpperCase()
+        holder.name.text = actor.firstName
         holder.birthDay.text = actor.dateOfBirth
         holder.birthPlace.text = actor.cityOfBirth
-        holder.popularity.text = actor.popularity
+        holder.popularity.text = actor.popularity?.substring(0,3)
     }
 }

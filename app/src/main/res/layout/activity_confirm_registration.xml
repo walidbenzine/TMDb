@@ -30,9 +30,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="20dp"
+                android:text="Please set the confirmation code sent to your phone"
                 android:textColor="@color/white"
-                android:text="Please set the confirmation code sent to your email"/>
+                android:textSize="20dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -44,20 +44,21 @@
                     android:id="@+id/field_one"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
-                    android:gravity="center"
+                    android:backgroundTint="@color/bordo"
                     android:ems="2"
-                    android:maxLength="1"
-                    android:backgroundTint="@color/bordo"/>
+                    android:gravity="center"
+                    android:inputType="numberDecimal"
+                    android:maxLength="1" />
+
                 <EditText
                     android:id="@+id/field_two"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
-                    android:gravity="center"
+                    android:backgroundTint="@color/bordo"
                     android:ems="2"
-                    android:maxLength="1"
-                    android:backgroundTint="@color/bordo"/>
+                    android:gravity="center"
+                    android:inputType="numberDecimal"
+                    android:maxLength="1"/>
 
                 <EditText
                     android:id="@+id/field_three"
@@ -67,29 +68,29 @@
                     android:ems="2"
                     android:gravity="center"
                     android:inputType="numberDecimal"
-                    android:maxLength="1" />
+                    android:maxLength="1"/>
 
                 <EditText
                     android:id="@+id/field_four"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
-                    android:gravity="center"
+                    android:backgroundTint="@color/bordo"
                     android:ems="2"
-                    android:maxLength="1"
-                    android:backgroundTint="@color/bordo"/>
+                    android:gravity="center"
+                    android:inputType="numberDecimal"
+                    android:maxLength="1"/>
 
             </LinearLayout>
 
             <Button
                 android:id="@+id/btn_confirm_signup"
+                style="@style/ButtonCnx"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="32dp"
-                style="@style/ButtonCnx"
                 android:background="@drawable/cnx_button"
-                android:text="Sign Up"/>
+                android:text="Sign Up" />
         </LinearLayout>
 
     </LinearLayout>
