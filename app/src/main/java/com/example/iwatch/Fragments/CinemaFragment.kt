@@ -161,7 +161,7 @@ class CinemaFragment : Fragment(), OnMovieClickListener {
             }
     }
 
-    override fun onItemClicked(movie: Movie) {
+    override fun onMovieClicked(movie: Movie) {
         val movieDetailsIntent = Intent(this.context, MovieDetails::class.java)
         movieDetailsIntent.putExtra("movie", movie)
         startActivity(movieDetailsIntent)
