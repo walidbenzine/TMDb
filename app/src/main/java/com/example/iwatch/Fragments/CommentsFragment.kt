@@ -10,14 +10,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Adapters.CommentAdapter
+import com.example.iwatch.Entities.Cinema
 import com.example.iwatch.Entities.Comment
 
 import com.example.iwatch.R
+import java.lang.Exception
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -26,18 +27,17 @@ private const val ARG_PARAM2 = "param2"
  */
 class CommentsFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
     private var listener: OnFragmentInteractionListener? = null
 
     var comments = ArrayList<Comment>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
+
+        @Suppress("UNCHECKED_CAST")
+        comments = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Comment>
     }
 
     override fun onCreateView(
@@ -48,12 +48,11 @@ class CommentsFragment : Fragment() {
         var v = inflater.inflate(R.layout.fragment_comments, container, false)
         val commentRecyclerView = v.findViewById<RecyclerView>(R.id.comments_recycler_view)
 
-       /* comments.add(Comment("comment 1"))
-        comments.add(Comment("comment 2"))
-        comments.add(Comment("comment 3"))
-        comments.add(Comment("comment 4"))
-        comments.add(Comment("comment 5"))
-        comments.add(Comment("comment 6"))*/
+        try {
+            System.out.println("COMMENTS ==== " + comments)
+        }catch (e: Exception){
+            System.out.println(e)
+        }
 
         commentRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
@@ -111,11 +110,10 @@ class CommentsFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(param1: ArrayList<Comment>) =
             CommentsFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putSerializable(ARG_PARAM1, param1)
                 }
             }
     }

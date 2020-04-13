@@ -87,6 +87,7 @@ class ProfileFragment : Fragment() {
         val btnEditProfile = v.findViewById<View>(R.id.btn_edit_profile) as Button
         btnEditProfile.setOnClickListener {
             val editProfile = Intent(this.context, EditProfile::class.java)
+            editProfile.putExtra("user", user)
             startActivity(editProfile)
         }
 
