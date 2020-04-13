@@ -34,6 +34,7 @@ class SeriesFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        @Suppress("UNCHECKED_CAST")
         serie = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Serie>
     }
 
