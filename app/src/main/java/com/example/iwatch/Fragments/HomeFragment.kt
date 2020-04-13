@@ -72,8 +72,6 @@ class HomeFragment : Fragment() {
 
         val serieRecyclerView = v.findViewById<RecyclerView>(R.id.home_recycler_view)
 
-
-
         serieRecyclerView.apply {
             serieRecyclerView!!.layoutManager = LinearLayoutManager(this.context)
             layoutManager = LinearLayoutManager(this.context)
