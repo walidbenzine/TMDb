@@ -34,6 +34,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class CinemaFragment : Fragment(), OnMovieClickListener {
+
     // TODO: Rename and change types of parameters
     private var films =  ArrayList<Movie>()
     private var cinemas =  ArrayList<Cinema>()
