@@ -16,6 +16,8 @@ class SerieViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
     var seriedetails: TextView?=null
     var datesortie: TextView?=null
     var seriereleazeddate: TextView?=null
+    var seriepicture: ImageView?=null
+
     init {
 
 
@@ -23,7 +25,7 @@ class SerieViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
         seriedetails = itemView.findViewById(R.id.serie_details) as TextView
         datesortie = itemView.findViewById(R.id.date_sortie) as TextView
         seriereleazeddate = itemView.findViewById(R.id.serie_released_date) as TextView
-        //seriepicture = itemView.findViewById(R.id.serie_picture) as ImageView
+        seriepicture = itemView.findViewById(R.id.serie_picture) as ImageView
 
         itemView.setOnClickListener{
             val intent = Intent(itemView.context, SerieDetails::class.java)

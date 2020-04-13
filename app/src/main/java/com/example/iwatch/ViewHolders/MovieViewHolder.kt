@@ -13,6 +13,6 @@ class MovieViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
     val datesortie= itemView.findViewById<TextView> (R.id.date_sortie) as TextView
     val moviereleazeddate = itemView.findViewById<TextView>(R.id.movie_released_date) as TextView
     val moviepicture = itemView.findViewById<ImageView>(R.id.movie_picture) as ImageView
-    //Button
+    var pic = itemView.findViewById(R.id.serie_picture) as ImageView
 
 }

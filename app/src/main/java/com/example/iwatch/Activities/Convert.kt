@@ -156,15 +156,15 @@ class Convert {
 
 
     fun toComment(obj: JSONObject): Comment {
-    try {
-    var co = Comment(CommentType.valueOf(obj.get("type").toString()))
-    co.user = obj.get("user").toString()
-    co.text = obj.get("text").toString()
-    return co
-    }
-    catch (e:Exception){
-        return Comment(CommentType.nulle)
-    }
+        try {
+        var co = Comment(CommentType.valueOf(obj.get("type").toString()))
+        co.user = obj.get("user").toString()
+        co.text = obj.get("text").toString()
+        return co
+        }
+        catch (e:Exception){
+            return Comment(CommentType.nulle)
+        }
 
     }
 

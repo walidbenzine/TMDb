@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Entities.Serie
 import com.example.iwatch.R
 import com.example.iwatch.ViewHolders.SerieViewHolder
+import com.squareup.picasso.Picasso
 
 class SerieAdapter (val serieList: ArrayList<Serie>): RecyclerView.Adapter<SerieViewHolder>() {
 
@@ -25,9 +26,14 @@ class SerieAdapter (val serieList: ArrayList<Serie>): RecyclerView.Adapter<Serie
         holder.seriedetails!!.text =serie.resume
         holder.seriereleazeddate!!.text = serie.dateSortie
         holder.datesortie!!.text= serie.dateSortie
+        var nre: Int =serie.nbrEpisodes
+        if(serie.picture != null){
+            val url = "https://image.tmdb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.svg?fbclid=IwAR2EAzStvjjE91EesjkUJq7sil91_ez3kQHZdTUmLSr2EheVrkEEGS0WOaE"
 
-        //A CORRIGER ICI
-        //holder.seriepicture!!.setImageResource(serie.nbrSaison)
+            Picasso.get().load(url).into(holder.seriepicture)
+
+        }
+
 
     }
 
