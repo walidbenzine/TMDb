@@ -52,7 +52,6 @@ class MovieRoomsFragment : Fragment() {
             System.out.println(e)
         }
 
-
         movieRoomRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
             adapter = MovieRoomAdapter(movieRooms)

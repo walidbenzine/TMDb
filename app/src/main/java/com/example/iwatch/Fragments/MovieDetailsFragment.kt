@@ -10,11 +10,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Activities.MovieDetails
 import com.example.iwatch.Activities.PersonDetails
 import com.example.iwatch.Activities.user
 import com.example.iwatch.Adapters.ActorAdapter
 import com.example.iwatch.Adapters.AssociatedFilmAdapter
 import com.example.iwatch.Adapters.OnActorClickListener
+import com.example.iwatch.Adapters.OnAssociatedFilmClickListener
 import com.example.iwatch.Entities.Actor
 import com.example.iwatch.Entities.Comment
 import com.example.iwatch.Entities.Movie
@@ -30,7 +32,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [MovieDetailsFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class MovieDetailsFragment : Fragment(), OnActorClickListener {
+class MovieDetailsFragment : Fragment(), OnActorClickListener, OnAssociatedFilmClickListener {
     // TODO: Rename and change types of parameters
 
     private var listener: OnFragmentInteractionListener? = null
@@ -67,7 +69,7 @@ class MovieDetailsFragment : Fragment(), OnActorClickListener {
 
         associatedFilmRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
-            adapter = AssociatedFilmAdapter(associatedFilms)
+            adapter = AssociatedFilmAdapter(associatedFilms, this@MovieDetailsFragment)
         }
 
         return v
@@ -132,5 +134,11 @@ class MovieDetailsFragment : Fragment(), OnActorClickListener {
         val actorDetailsIntent = Intent(this.context, PersonDetails::class.java)
         actorDetailsIntent.putExtra("actor", actor)
         startActivity(actorDetailsIntent)
+    }
+
+    override fun onAssociatedMovieClicked(movie: Movie) {
+        val movieDetailsIntent = Intent(this.context, MovieDetails::class.java)
+        movieDetailsIntent.putExtra("movie", movie)
+        startActivity(movieDetailsIntent)
     }
 }
