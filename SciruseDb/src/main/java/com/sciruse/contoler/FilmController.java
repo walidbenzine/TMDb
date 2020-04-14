@@ -102,7 +102,7 @@ public class FilmController {
 	public String addRoom() throws IOException
 	{
 		t =new  ImportFunctions();
-		List<Film>films = (List<Film>) repo.getTopRated();
+		List<Film>films = (List<Film>) repo.findAll();
 		for (Film film : films) {
 			
 			film.setRooms(t.addRoom());
