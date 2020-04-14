@@ -56,11 +56,18 @@ class EditProfile : AppCompatActivity(), ChangePassword.ChangePasswordDialogList
         if (newPassword==confirmPassword){
 
 
-            Post("http://scirusiwatch.herokuapp.com/changepass/" + user.id + "/" + confirmPassword)
+            Post("http://scirusiwatch.herokuapp.com/changepass/" + user?.id + "/" + confirmPassword)
 
             Toast.makeText(
                 applicationContext,
                 "mot de passe a été bien changé",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        else{
+            Toast.makeText(
+                applicationContext,
+                "confirm password is not correct!!",
                 Toast.LENGTH_SHORT
             ).show()
         }
