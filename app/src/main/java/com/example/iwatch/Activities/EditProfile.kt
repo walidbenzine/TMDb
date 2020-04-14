@@ -6,9 +6,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.iwatch.Entities.User
 import com.example.iwatch.R
-import com.example.iwatch.dialogs.ChangePassword
+import com.example.iwatch.Dialogs.ChangePassword
 import kotlinx.android.synthetic.main.activity_edit_profile.*
-import kotlinx.android.synthetic.main.change_password.*
 
 
 class EditProfile : AppCompatActivity(), ChangePassword.ChangePasswordDialogListener{

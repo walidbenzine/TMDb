@@ -14,8 +14,11 @@ import android.widget.*
 import com.example.iwatch.Activities.ConfirmRegistration
 import kotlinx.android.synthetic.main.fragment_sign_up2.*
 import android.widget.Button
+import com.example.iwatch.Dialogs.ChangePassword
+import com.example.iwatch.Dialogs.ChooseGenre
 import com.example.iwatch.Entities.User
 import com.example.iwatch.R
+import kotlinx.android.synthetic.main.activity_edit_profile.*
 import kotlin.random.Random
 
 // TODO: Rename parameter arguments, choose names that match
@@ -53,6 +56,10 @@ class SignUp2 : Fragment(), AdapterView.OnItemSelectedListener {
     ): View? {
 
         var v = inflater.inflate(R.layout.fragment_sign_up2, container, false)
+        var genreSpinner =  v.findViewById<View>(R.id.genre_spinner) as LinearLayout
+        genreSpinner.setOnClickListener {
+            openDialog()
+        }
 
         var bundle = this.arguments
 
@@ -148,4 +155,10 @@ class SignUp2 : Fragment(), AdapterView.OnItemSelectedListener {
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
     }
+
+    fun openDialog() {
+        val genreDialog = ChooseGenre()
+        fragmentManager?.let { genreDialog.show(it, "genre dialog") }
+    }
+
 }
