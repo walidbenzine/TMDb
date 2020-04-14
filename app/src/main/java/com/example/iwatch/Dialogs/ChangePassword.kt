@@ -1,4 +1,4 @@
-package com.example.iwatch.dialogs
+package com.example.iwatch.Dialogs
 
 import com.example.iwatch.R
 import android.app.AlertDialog
@@ -8,7 +8,6 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialogFragment
 
 
@@ -23,7 +22,7 @@ class ChangePassword() : AppCompatDialogFragment() {
         val inflater = activity!!.layoutInflater
         val view: View = inflater.inflate(R.layout.change_password, null)
         builder.setView(view)
-            .setTitle("Changer Mot De Passe")
+            .setTitle("Choisir Genres")
             .setNegativeButton("cancel",
                 DialogInterface.OnClickListener { dialogInterface, i -> })
             .setPositiveButton("Confirmer",

@@ -1,6 +1,7 @@
 package com.example.iwatch.Fragments
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Activities.SerieDetails
+import com.example.iwatch.Adapters.OnSerieClickListener
 import com.example.iwatch.Adapters.SerieAdapter
 import com.example.iwatch.Entities.Serie
 
@@ -27,7 +30,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [SeriesFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SeriesFragment : Fragment() {
+class SeriesFragment : Fragment(),  OnSerieClickListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -54,7 +57,7 @@ class SeriesFragment : Fragment() {
         serieRecyclerView.apply {
             serieRecyclerView!!.layoutManager = LinearLayoutManager(this.context)
             layoutManager = LinearLayoutManager(this.context)
-            adapter = SerieAdapter(serie)
+            adapter = SerieAdapter(serie, this@SeriesFragment)
         }
         return v
     }
@@ -112,5 +115,10 @@ class SeriesFragment : Fragment() {
                     //putString(ARG_PARAM2, param2)
                 }
             }
+    }
+    override fun onSerieClicked(serie: Serie) {
+        val serieDetailsIntent = Intent(this.context, SerieDetails::class.java)
+        serieDetailsIntent.putExtra("serie", serie)
+        startActivity(serieDetailsIntent)
     }
 }

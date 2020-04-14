@@ -43,7 +43,7 @@ class Convert {
         serie.video = "https://www.youtube.com/watch?v=" + obj.get("video").toString()
 
         var genrearray = JSONArray(obj.get("genre").toString())
-        for (i in 0 until genrearray.length()) {
+        for (i in 0 until genrearray.length()) {    
             try {
                 genres.add(Genre(GenreType.valueOf(JSONObject(genrearray.get(i).toString()).get("desig").toString())))
             } catch (e: Exception) {
