@@ -106,6 +106,7 @@ class Convert {
         sais.name = obj.get("nom").toString()
         sais.resume = obj.get("details").toString()
         sais.releasedDate = obj.get("dateSortie").toString()
+        sais.photo = "https://image.tmdb.org/t/p/original"+obj.get("image").toString()
         sais.nbrEpisode = obj.get("nbrEpisodes").toString().toInt()
 
         var episodearray = JSONArray(obj.get("listEpisodes").toString())

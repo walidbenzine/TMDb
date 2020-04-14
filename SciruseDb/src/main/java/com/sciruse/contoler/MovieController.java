@@ -15,9 +15,15 @@ import com.sciruse.models.Room;
 import com.sciruse.repository.ActorRepository;
 import com.sciruse.repository.FilmRepository;
 import com.sciruse.repository.RoomRepository;
+import com.sciruse.test.ImportFunctions;
 
 @RestController
 public class MovieController {
+	
+	private static String Base_url="https://api.themoviedb.org/3/";
+	private static String API_Key="94327dc22a17d2c12b806d241682cd96";
+	ImportFunctions t;
+	
 
 	@Autowired
 	FilmRepository movieRepository;
@@ -58,6 +64,14 @@ public class MovieController {
 	{
 		
 		return movieRepository.getMovie(id).getActors();
+	}
+	
+	
+	@RequestMapping("/getAct/{id}")
+	public List<Actors> getAct(@PathVariable Integer id) throws IOException
+	{
+		
+		return t.Actors(Base_url+"movie/"+id +"/credits?api_key="+API_Key+"&language=en-US");
 	}
 	
 	@RequestMapping("/getFilmLie/{id}")

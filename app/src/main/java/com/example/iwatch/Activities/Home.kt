@@ -196,6 +196,7 @@ fun PostActor(url: String): ArrayList<Actor> {
         System.out.println(e)
     }
     if (!x.toString().isNullOrEmpty() && x.toString() != "null" && x.toString() != "[]") {
+        System.out.println(x.toString())
         var jsonarray = JSONArray(x.toString())
         for (i in 0 until jsonarray.length()) {
             arrayactors.add(convert.toActor(JSONObject(jsonarray.get(i).toString())))
