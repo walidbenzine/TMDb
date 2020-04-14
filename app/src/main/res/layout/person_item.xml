@@ -27,59 +27,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:paddingLeft="16dp"
                 android:paddingTop="24dp"
-                android:paddingBottom="24dp"
                 android:paddingRight="16dp"
-                android:paddingLeft="16dp">
+                android:paddingBottom="24dp">
 
                 <TextView
                     android:id="@+id/person_name"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
+                    android:layout_weight="0.33"
                     android:textColor="@color/white"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/person_birth_day"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="8dp">
+                    android:layout_weight="0.33"
+                    android:textColor="@color/lightGrey" />
 
-                    <TextView
-                        android:id="@+id/person_birth_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Date de naissance: "
-                        android:textColor="@color/white" />
-
-                    <TextView
-                        android:id="@+id/person_birth_day"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:textColor="@color/lightGrey"/>
-                </LinearLayout>
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/person_birth_place"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="8dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:text="Lieu: "/>
-
-                    <TextView
-                        android:id="@+id/person_birth_place"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="8dp"
-                        android:textColor="@color/lightGrey"/>
-                </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.33"
+                    android:textColor="@color/lightGrey" />
 
 
             </LinearLayout>

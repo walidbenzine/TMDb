@@ -75,6 +75,13 @@ public class UserController {
 		return "Ajout user reussi";
 	}
 	
+	@RequestMapping("/changepass/{id}/{pass}")
+	public String changepass(@PathVariable Integer id,@PathVariable String pass) throws IOException
+	{
+		userRepository.changepass(id, pass);
+		return "update password reussi";
+	}
+	
 	@RequestMapping("/addHistSerie/{user_id}/{seriehistory}")
 	public String addHistSerie(@PathVariable Integer user_id, @PathVariable Integer seriehistory) throws IOException
 	{

@@ -75,10 +75,17 @@ class ProfileFragment : Fragment() {
 
         val genreRecyclerView = v.findViewById<RecyclerView>(R.id.genre_recycler_view)
 
-        genres.add(Genre(GenreType.Thriller))
-        genres.add(Genre(GenreType.Action))
-        genres.add(Genre(GenreType.Romance))
-        genres.add(Genre(GenreType.Drama))
+        for (genre in user.genrePref!!){
+            when(genre){
+                "Adventure" -> genres.add(Genre(GenreType.Adventure))
+                "Action" -> genres.add(Genre(GenreType.Action))
+                "Thriller" -> genres.add(Genre(GenreType.Thriller))
+                "Drama" -> genres.add(Genre(GenreType.Drama))
+                "Romance" -> genres.add(Genre(GenreType.Romance))
+                "Documentary" -> genres.add(Genre(GenreType.Documentary))
+                "Comedy" -> genres.add(Genre(GenreType.Comedy))
+            }
+        }
 
         genreRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
@@ -87,6 +94,7 @@ class ProfileFragment : Fragment() {
         val btnEditProfile = v.findViewById<View>(R.id.btn_edit_profile) as Button
         btnEditProfile.setOnClickListener {
             val editProfile = Intent(this.context, EditProfile::class.java)
+            editProfile.putExtra("user", user)
             startActivity(editProfile)
         }
 

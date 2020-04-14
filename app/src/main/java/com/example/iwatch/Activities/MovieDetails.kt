@@ -3,10 +3,12 @@ package com.example.iwatch.Activities
 import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.example.iwatch.Entities.Cinema
 import com.example.iwatch.Entities.Movie
 import com.example.iwatch.Fragments.CommentsFragment
 import com.example.iwatch.Fragments.MovieDetailsFragment
@@ -16,13 +18,18 @@ import com.google.android.material.tabs.TabLayout
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_movie_details.*
 import kotlinx.android.synthetic.main.movie_item.*
+import org.json.JSONArray
+import org.json.JSONObject
+import java.net.URL
 
+private var movie: Movie? = null
+private var conv = Convert()
 
 class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInteractionListener,
     MovieRoomsFragment.OnFragmentInteractionListener, CommentsFragment.OnFragmentInteractionListener{
 
     private var mSectionsPagerAdapter:SectionsPagerAdapter? = null
-    private var movie: Movie? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +55,10 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
         movie_tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(movie_view_pager))
 
 
+        movieFavori.setOnClickListener {
+            Post("https://scirusiwatch.herokuapp.com/addFavFilm/"+user.id+"/"+movie?.id)
+            Toast.makeText(applicationContext, "Ajout résussi", Toast.LENGTH_SHORT).show()
+        }
 
         //print movie details
         movie_detail_title.text = movie?.title
@@ -81,9 +92,15 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
 
         override fun getItem(position: Int): Fragment {
             return when (position){
-                0 -> MovieDetailsFragment()
-                1 -> MovieRoomsFragment()
-                2 -> CommentsFragment()
+                0 -> {
+                    MovieDetailsFragment.newInstance(PostActor("https://scirusiwatch.herokuapp.com/getAct/"+movie?.id.toString()), PostFilm("https://scirusiwatch.herokuapp.com/getLi/"+movie?.id.toString()))
+                    //MovieDetailsFragment.newInstance(PostActor("http://scirusiwatch.herokuapp.com/getMovieActors/"+movie?.id.toString()), PostFilm("https://scirusiwatch.herokuapp.com/getFilmLie/"+movie?.id.toString()))
+                }
+                1 -> MovieRoomsFragment.newInstance(PostCinema("https://scirusiwatch.herokuapp.com/getRoom/"+movie?.id.toString()))
+                2 -> {
+                    CommentsFragment.newInstance(conv.PostComment("https://scirusiwatch.herokuapp.com/getC/"+movie?.id.toString()))
+                    //CommentsFragment.newInstance(conv.PostComment("https://scirusiwatch.herokuapp.com/getMovieComment/"+movie?.id.toString()))
+                }
                 else -> Fragment()
             }
         }
@@ -94,4 +111,17 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
         }
 
     }
+
+    fun Post(url: String) {
+        val x = try {
+            URL(url)
+                    .openStream()
+                    .bufferedReader()
+                    .use { it.readText() }
+        } catch (e: Exception) {
+            System.out.println(e)
+        }
+    }
 }
+
+

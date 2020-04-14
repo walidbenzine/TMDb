@@ -140,5 +140,19 @@ public class SerieController {
 		 
 	return "Series ajoutées !";
 	}
+	
+	@RequestMapping("/addserieVideo")
+	public String addserieVideo() throws IOException
+	{
+		t =new  ImportFunctions();
+		List<Serie>series = (List<Serie>) serieRepository.findAll();
+		for ( Serie serie : series) {
+
+			serie.setVideo(t.getMovieVideo(Base_url+"tv/"+serie.getId()+"/videos?api_key="+API_Key+"&language=en-US"));
+			serieRepository.save(serie);
+		}
+
+		return "done";
+	}
 
 }

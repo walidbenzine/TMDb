@@ -9,9 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Activities.user
 import com.example.iwatch.Adapters.ActorAdapter
 import com.example.iwatch.Adapters.AssociatedFilmAdapter
 import com.example.iwatch.Entities.Actor
+import com.example.iwatch.Entities.Comment
 import com.example.iwatch.Entities.Movie
 import com.example.iwatch.R
 
@@ -27,8 +29,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class MovieDetailsFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
     private var listener: OnFragmentInteractionListener? = null
 
     var actors = ArrayList<Actor>()
@@ -36,10 +37,12 @@ class MovieDetailsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
+        @Suppress("UNCHECKED_CAST")
+        actors = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Actor>
+
+        @Suppress("UNCHECKED_CAST")
+        associatedFilms = arguments?.getSerializable(ARG_PARAM2) as ArrayList<Movie>
     }
 
     override fun onCreateView(
@@ -50,8 +53,7 @@ class MovieDetailsFragment : Fragment() {
         val v = inflater.inflate(R.layout.fragment_movie_details, container, false)
         val actorRecyclerView = v.findViewById<RecyclerView>(R.id.movie_detail_actors)
 
-       /* actors.add(Actor("Amel", "AZZI"))
-        actors.add(Actor("Bob", "MASTIGAS"))*/
+        System.out.println("ACTORS == "+ actors +" FILMS LIES == "+ associatedFilms)
 
         actorRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
@@ -60,13 +62,10 @@ class MovieDetailsFragment : Fragment() {
 
         val associatedFilmRecyclerView = v.findViewById<RecyclerView>(R.id.movie_detail_associated_films)
 
-        /*associatedFilms.add(Movie("Joker", R.mipmap.ic_ghost))
-        associatedFilms.add(Movie("Invisible Guest", R.mipmap.ic_ghost))
-
         associatedFilmRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
             adapter = AssociatedFilmAdapter(associatedFilms)
-        }*/
+        }
 
         return v
     }
@@ -117,11 +116,11 @@ class MovieDetailsFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(param1: ArrayList<Actor>, param2: ArrayList<Movie>) =
             MovieDetailsFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putSerializable(ARG_PARAM1, param1)
+                    putSerializable(ARG_PARAM2, param2)
                 }
             }
     }

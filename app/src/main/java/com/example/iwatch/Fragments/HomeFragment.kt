@@ -61,7 +61,7 @@ class HomeFragment : Fragment(), OnSerieClickListener , OnMovieClickListener{
     ): View? {
 
 
-        System.out.println("FIRST SERIE PICTURE = "+ serie.get(0).picture)
+        System.out.println("FIRST SERIE video = "+ serie.get(0).video+"\u001B[44m")
         //System.out.println("FIRST FILM TITLE =  "+ films.get(0).title)
 
         // Inflate the layout for this fragment

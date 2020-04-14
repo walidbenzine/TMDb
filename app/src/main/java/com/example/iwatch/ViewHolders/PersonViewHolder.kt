@@ -1,9 +1,13 @@
 package com.example.iwatch.ViewHolders
 
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Adapters.PersonAdapter
+import com.example.iwatch.Entities.Actor
 import com.example.iwatch.R
+import com.squareup.picasso.Picasso
 
 class PersonViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)  {
 
@@ -11,4 +15,18 @@ class PersonViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)  {
     val birthDay = itemView.findViewById<TextView>(R.id.person_birth_day) as TextView
     val birthPlace = itemView.findViewById<TextView>(R.id.person_birth_place) as TextView
     val popularity = itemView.findViewById<TextView>(R.id.person_grade) as TextView
+    val picture = itemView.findViewById<ImageView>(R.id.person_picture) as ImageView
+
+    fun bind(actor: Actor, clickListener: PersonAdapter.OnPersonClickListener){
+        name.text = actor.lastName
+        birthDay.text = actor.dateOfBirth
+        birthPlace.text = actor.cityOfBirth
+        popularity.text = actor.popularity?.substring(0,3)
+        Picasso.get().load(actor.picture).into(picture)
+        itemView.setOnClickListener {
+            clickListener.onPersonClicked(actor)
+        }
+    }
+
+
 }

@@ -193,7 +193,7 @@ public class ImportFunctions {
 		Film a =null ;
 		if (FilmArray != null) { 
 			int x=FilmArray.length();
-			if(x>4) { x = 4;}
+			if(x>15) { x = 15;}
 			for (int j=0;j<x;j++){ 
 
 				JSONObject obj =(JSONObject) FilmArray.get(j);
@@ -218,7 +218,7 @@ public class ImportFunctions {
 		Serie a =null ;
 		if (SerieArray != null) { 
 			int x=SerieArray.length();
-			if(x>4) { x = 4;}
+			if(x>15) { x = 15;}
 			for (int j=0;j<x;j++){ 
 
 				JSONObject obj =(JSONObject) SerieArray.get(j);
@@ -325,8 +325,8 @@ public class ImportFunctions {
 			JSONArray serieArray = object.getJSONArray("results");
 			Serie serie = null;
 			if (serieArray != null) { 
-				int x = 10;
-				if (serieArray.length() <= 10) {
+				int x = 30;
+				if (serieArray.length() <= 30) {
 					x = serieArray.length();
 				}
 				for (int j=0;j<x;j++){ 
@@ -355,7 +355,7 @@ public class ImportFunctions {
 
 		if(idsSerie.contains(id)==false) {
 			idsSerie.add(id);
-		
+		try {
 		serie.setId((Integer) object.get("id"));
 		serie.setResume(object.get("overview").toString());
 		serie.setDateSortie(object.get("first_air_date").toString());
@@ -391,6 +391,10 @@ public class ImportFunctions {
 		}
 		
 		serie.setSaisons(saisons);
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
 		}
 		else {
 			return null;
@@ -469,8 +473,8 @@ public static  List<Serie> getSerieLiee(String url) throws IOException {
 		JSONObject object = GetMyJson(url);
 		JSONArray serieArray = object.getJSONArray("results");
 		if (serieArray != null) { 
-			int x = 5;
-			if(serieArray.length()<=5) {
+			int x = 40;
+			if(serieArray.length()<=40) {
 				x = serieArray.length();
 			}
 		for(int i=0;i<x;i++) {

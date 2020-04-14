@@ -39,7 +39,8 @@ class Convert {
         serie.note = obj.get("note").toString()
         serie.nbrEpisodes = obj.get("nbrEpisodes").toString().toInt()
         serie.nbrSaison = obj.get("nbrSaison").toString().toInt()
-        serie.picture = "https://image.tmdb.org/t/p/original"+obj.get("image").toString()
+        serie.picture = "https://image.tmdb.org/t/p/original" + obj.get("image").toString()
+        serie.video = "https://www.youtube.com/watch?v=" + obj.get("video").toString()
 
         var genrearray = JSONArray(obj.get("genre").toString())
         for (i in 0 until genrearray.length()) {    
@@ -50,7 +51,7 @@ class Convert {
         }
         serie.genreList = genres
 
-        serie.commentList = PostComment("http://scirusiwatch.herokuapp.com/getSerieComment/"+serie.id)
+        serie.commentList = PostComment("http://scirusiwatch.herokuapp.com/getSerieComment/" + serie.id)
         return serie
     }
 
@@ -65,7 +66,8 @@ class Convert {
         film.note = obj.get("note").toString()
         film.title = obj.get("title").toString()
         film.resume = obj.get("resume").toString()
-        film.imgFilm = "https://image.tmdb.org/t/p/original"+obj.get("image").toString()
+        film.imgFilm = "https://image.tmdb.org/t/p/original" + obj.get("image").toString()
+        film.video = "https://www.youtube.com/watch?v=" + obj.get("video").toString()
 
         var genrearray = JSONArray(obj.get("genre").toString())
         for (i in 0 until genrearray.length()) {
@@ -76,7 +78,7 @@ class Convert {
         }
         film.genre = genres
 
-        film.comments = PostComment("https://scirusiwatch.herokuapp.com/getMovieComment/"+film.id)
+        film.comments = PostComment("https://scirusiwatch.herokuapp.com/getMovieComment/" + film.id)
 
 
         return film
@@ -87,12 +89,11 @@ class Convert {
         var act = Actor()
         act.id = obj.get("id").toString().toInt()
         act.lastName = obj.get("nom").toString()
-        act.firstName = obj.get("nom").toString()
         act.cityOfBirth = obj.get("lieuNaissance").toString()
         act.bibliography = obj.get("bibliographie").toString()
         act.dateOfBirth = obj.get("dateNaissance").toString()
         act.popularity = obj.get("popularite").toString()
-        act.picture = "https://image.tmdb.org/t/p/original"+obj.get("photo").toString()
+        act.picture = "https://image.tmdb.org/t/p/original" + obj.get("photo").toString()
 
         return act
     }
@@ -106,6 +107,7 @@ class Convert {
         sais.name = obj.get("nom").toString()
         sais.resume = obj.get("details").toString()
         sais.releasedDate = obj.get("dateSortie").toString()
+        sais.photo = "https://image.tmdb.org/t/p/original" + obj.get("image").toString()
         sais.nbrEpisode = obj.get("nbrEpisodes").toString().toInt()
 
         var episodearray = JSONArray(obj.get("listEpisodes").toString())
@@ -131,8 +133,7 @@ class Convert {
         ep.resume = obj.get("resume").toString()
         ep.dateDiffusion = obj.get("Date_Diff").toString()
         ep.number = obj.get("number").toString()
-        ep.picture = "https://image.tmdb.org/t/p/original"+obj.get("image").toString()
-
+        ep.picture = "https://image.tmdb.org/t/p/original" + obj.get("image").toString()
         ep.trailer = obj.get("bandeAnnonce").toString()
 
         return ep
@@ -146,7 +147,7 @@ class Convert {
         cine.id = obj.get("id").toString().toInt()
         cine.nom = obj.get("nom").toString()
         cine.adresse = obj.get("adresse").toString()
-        cine.image = "https://image.tmdb.org/t/p/original"+obj.get("image").toString()
+        cine.image = obj.get("image").toString()
         cine.latitude = obj.get("alt").toString()
         cine.longitude = obj.get("lang").toString()
 
@@ -154,35 +155,42 @@ class Convert {
     }
 
 
-
     fun toComment(obj: JSONObject): Comment {
 
         try {
-        var co = Comment(CommentType.valueOf(obj.get("type").toString()))
-        co.user = obj.get("user").toString()
-        co.text = obj.get("text").toString()
-        return co
+            var co = Comment(CommentType.valueOf(obj.get("type").toString()))
+            co.user = obj.get("user").toString()
+            co.text = obj.get("text").toString()
+            return co
 
-        }catch (e:Exception){
-            return Comment(CommentType.nulle)
+        } catch (e: Exception) {
+            var co = Comment(CommentType.nulle)
+            co.user = obj.get("user").toString()
+            co.text = obj.get("text").toString()
+            return co
         }
     }
 
-    fun PostComment(url: String) : ArrayList<Comment> {
+    fun PostComment(url: String): ArrayList<Comment> {
         var arrayComment = ArrayList<Comment>()
         val x = try {
             URL(url)
-                .openStream()
-                .bufferedReader()
-                .use { it.readText() } }
-        catch(e: Exception){
+                    .openStream()
+                    .bufferedReader()
+                    .use { it.readText() }
+        } catch (e: Exception) {
             System.out.println(e)
         }
-        if(!x.toString().isNullOrEmpty() && x.toString() != "null" && x.toString() != "[]"){
-            var jsonarray = JSONArray(x.toString())
-            for( i in 0 until jsonarray.length()){
-                arrayComment.add(toComment(JSONObject(jsonarray.get(i).toString())))
+        try {
+            if (!x.toString().isNullOrEmpty() && x.toString() != "null" && !x.toString().equals("[]")) {
+                var jsonarray = JSONArray(x.toString())
+                for (i in 0 until jsonarray.length()) {
+                    arrayComment.add(toComment(JSONObject(jsonarray.get(i).toString())))
+                }
+                return arrayComment
             }
+        } catch (e: Exception) {
+            System.out.println(e)
             return arrayComment
         }
         return arrayComment
