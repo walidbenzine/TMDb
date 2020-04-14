@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Activities.user
 import com.example.iwatch.Adapters.ActorAdapter
 import com.example.iwatch.Adapters.AssociatedFilmAdapter
 import com.example.iwatch.Entities.Actor
@@ -53,8 +54,6 @@ class MovieDetailsFragment : Fragment() {
         val actorRecyclerView = v.findViewById<RecyclerView>(R.id.movie_detail_actors)
 
         System.out.println("ACTORS == "+ actors +" FILMS LIES == "+ associatedFilms)
-
-
 
         actorRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)

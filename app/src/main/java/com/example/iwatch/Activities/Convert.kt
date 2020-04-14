@@ -134,7 +134,6 @@ class Convert {
         ep.dateDiffusion = obj.get("Date_Diff").toString()
         ep.number = obj.get("number").toString()
         ep.picture = "https://image.tmdb.org/t/p/original" + obj.get("image").toString()
-
         ep.trailer = obj.get("bandeAnnonce").toString()
 
         return ep
@@ -148,7 +147,7 @@ class Convert {
         cine.id = obj.get("id").toString().toInt()
         cine.nom = obj.get("nom").toString()
         cine.adresse = obj.get("adresse").toString()
-        cine.image = "https://image.tmdb.org/t/p/original" + obj.get("image").toString()
+        cine.image = obj.get("image").toString()
         cine.latitude = obj.get("alt").toString()
         cine.longitude = obj.get("lang").toString()
 
