@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import com.example.iwatch.Dialogs.ChooseGenre
+import com.example.iwatch.Entities.User
 import com.example.iwatch.Fragments.SignUp1
 import com.example.iwatch.Fragments.SignUp2
 import com.example.iwatch.R
@@ -22,11 +23,7 @@ import kotlinx.android.synthetic.main.fragment_sign_up2.*
 import org.json.JSONObject
 
 class SignUp : AppCompatActivity(), SignUp1.OnFragmentInteractionListener,
-    SignUp2.OnFragmentInteractionListener,
-    ChooseGenre.ChooseGenreDialogListener {
-    override fun onFragmentInteraction(uri: Uri) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    SignUp2.OnFragmentInteractionListener{
 
     private val fragmentManager = supportFragmentManager
     private val signUp1Fragment = SignUp1()
@@ -38,14 +35,9 @@ class SignUp : AppCompatActivity(), SignUp1.OnFragmentInteractionListener,
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragment_container, signUp1Fragment)
         fragmentTransaction.commit()
-
     }
 
-    override fun applyTexts(selectedGenre: ArrayList<String>) {
-        Toast.makeText(
-            applicationContext,
-            "choosen genre " + selectedGenre.size,
-            Toast.LENGTH_SHORT
-        ).show()
+    override fun onFragmentInteraction(uri: Uri) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

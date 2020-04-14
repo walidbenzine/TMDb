@@ -1,12 +1,13 @@
 package com.example.iwatch.Activities
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.iwatch.Dialogs.ChangePassword
 import com.example.iwatch.Entities.User
 import com.example.iwatch.R
-import com.example.iwatch.Dialogs.ChangePassword
 import kotlinx.android.synthetic.main.activity_edit_profile.*
 
 
@@ -37,9 +38,18 @@ class EditProfile : AppCompatActivity(), ChangePassword.ChangePasswordDialogList
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.profile_settings, menu)
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId==android.R.id.home){
+        if(item.itemId == android.R.id.home){
             onBackPressed()
+        }
+        else if(item.itemId == R.id.menu_save_profile){
+            //faire ici les modifications pour sauvegarder les changements
         }
         return super.onOptionsItemSelected(item)
     }

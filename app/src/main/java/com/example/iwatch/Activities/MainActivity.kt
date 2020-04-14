@@ -95,7 +95,6 @@ class MainActivity : AppCompatActivity() {
         if (!x.toString().isNullOrEmpty() && x.toString() != "null" && x.toString() != "[]") {
             System.out.println("X.TOSTRING === " + x.toString())
             return JSONArray(x.toString())
-
         }
         return JSONArray()
     }

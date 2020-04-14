@@ -15,7 +15,7 @@ import com.example.iwatch.R
 
 class ChooseGenre : AppCompatDialogFragment() {
     private var selectedGenres = ArrayList<String>()
-    private var listener: ChooseGenreDialogListener? = null
+    var listener: ChooseGenreDialogListener? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
@@ -46,18 +46,6 @@ class ChooseGenre : AppCompatDialogFragment() {
                     listener!!.applyTexts(choosenGenres)
                 })
         return builder.create()
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        listener = try {
-            context as ChooseGenreDialogListener
-        } catch (e: ClassCastException) {
-            throw ClassCastException(
-                context.toString().toString() +
-                        "must implement ChooseGenreDialogListener"
-            )
-        }
     }
 
     interface ChooseGenreDialogListener {
