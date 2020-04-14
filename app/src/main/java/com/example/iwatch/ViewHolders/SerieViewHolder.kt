@@ -19,13 +19,14 @@ class SerieViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
         val datesortie = itemView.findViewById(R.id.date_sortie) as TextView
         val seriereleazeddate = itemView.findViewById(R.id.serie_released_date) as TextView
         val seriepicture = itemView.findViewById(R.id.serie_picture) as ImageView
+        val serierate = itemView.findViewById(R.id.serie_grade) as TextView
 
         fun bind(serie: Serie, clickListener: OnSerieClickListener){
             serietitle!!.text = serie.title
 
             seriedetails!!.text =serie.resume
-            //seriereleazeddate!!.text = serie.dateSortie
             seriereleazeddate!!.text= serie.dateSortie
+            serierate!!.text = serie.note
 
             if(serie.picture != null){
                 val url = serie.picture
