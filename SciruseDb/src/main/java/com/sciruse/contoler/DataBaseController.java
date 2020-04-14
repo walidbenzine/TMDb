@@ -33,12 +33,13 @@ import com.sciruse.service.ImportFunctions;
  * 1)/addTv
  * 2)/addSerieliee
  * 3)/addserieVideo
- * */
+ * 
+ */
 @RestController
 public class DataBaseController {
 	private static String Base_url="https://api.themoviedb.org/3/";
 	private static String API_Key="94327dc22a17d2c12b806d241682cd96";
-	ImportFunctions t;
+	ImportFunctions service =  new  ImportFunctions();;
 	@Autowired
 	FilmRepository filmRepository;
 	@Autowired
@@ -54,33 +55,33 @@ public class DataBaseController {
 	}
 
 	@RequestMapping("/getMovies")
-	public List<Film> addAlien(Film film) throws IOException
+	public List<Film> getMovies(Film film) throws IOException
 	{
-		t =new  ImportFunctions();
+		
 		return (List<Film>) filmRepository.findAll();
 	}
 
 	@RequestMapping("/getTv")
-	public List<Serie> addAlien(Serie serie) throws IOException
+	public List<Serie> getTv(Serie serie) throws IOException
 	{
-		t =new  ImportFunctions();
-		return t.Serie("https://api.themoviedb.org/3/tv/popular?api_key="+API_Key+"&language=en-US&page=1");
+		
+		return service.Serie("https://api.themoviedb.org/3/tv/popular?api_key="+API_Key+"&language=en-US&page=1");
 	}
 
 	//add popular movies include add comments actors each actor has list of movies that we also added them************************************
 	@RequestMapping("/addMovies")
 	public String addMovies() throws IOException
 	{
-		t =new  ImportFunctions();
-		Vector<Film>films= t.MoviesPopular("https://api.themoviedb.org/3/movie/popular?api_key="+API_Key+"&language=en-US&page=1");
+		
+		Vector<Film>films= service.MoviesPopular("https://api.themoviedb.org/3/movie/popular?api_key="+API_Key+"&language=en-US&page=1");
 
 		for (Film film : films) {
 			//add actors to  movie
-			List<Actors> act = t.Actors(Base_url+"movie/"+film.getID() +"/credits?api_key="+API_Key+"&language=en-US");
+			List<Actors> act = service.Actors(Base_url+"movie/"+film.getID() +"/credits?api_key="+API_Key+"&language=en-US");
 			film.setActors(act);
 			//add movie to actors
 			for (Actors actor: act) {
-				actor.setFilmographie(t.getFilmBiblio(Base_url+"person/"+actor.getId()+"/movie_credits?api_key="+API_Key+"&language=en-US"));
+				actor.setFilmographie(service.getFilmBiblio(Base_url+"person/"+actor.getId()+"/movie_credits?api_key="+API_Key+"&language=en-US"));
 			}
 		}
 		filmRepository.saveAll(films);
@@ -92,10 +93,10 @@ public class DataBaseController {
 	@RequestMapping("/addliee")
 	public String getFilmliee() throws IOException
 	{
-		t =new  ImportFunctions();
+		
 		List<Film>films = (List<Film>) filmRepository.getpopular();
 		for (Film film : films) {
-			List<Film>liee= t.getFilmLiee(Base_url+"movie/"+film.getID() +"/similar?api_key="+API_Key+"&language=en-US&page=1");
+			List<Film>liee= service.getFilmLiee(Base_url+"movie/"+film.getID() +"/similar?api_key="+API_Key+"&language=en-US&page=1");
 			film.setFilmsLiees(liee);
 			filmRepository.save(film);
 		}
@@ -107,11 +108,11 @@ public class DataBaseController {
 	@RequestMapping("/addRoom")
 	public String addRoom() throws IOException
 	{
-		t =new  ImportFunctions();
+		
 		List<Film>films = (List<Film>) filmRepository.getLast();
 		for (Film film : films) {
 
-			film.setRooms(t.addRoom());
+			film.setRooms(service.addRoom());
 			filmRepository.save(film);
 		}
 
@@ -123,11 +124,11 @@ public class DataBaseController {
 	@RequestMapping("/addMovieVideo")
 	public String addMovieVideo() throws IOException
 	{
-		t =new  ImportFunctions();
+		
 		List<Film>films = (List<Film>) filmRepository.findAll();
 		for (Film film : films) {
 
-			film.setVideo(t.getMovieVideo(Base_url+"movie/"+film.getID()+"/videos?api_key="+API_Key+"&language=en-US"));
+			film.setVideo(service.getMovieVideo(Base_url+"movie/"+film.getID()+"/videos?api_key="+API_Key+"&language=en-US"));
 			filmRepository.save(film);
 
 		}
@@ -139,16 +140,16 @@ public class DataBaseController {
 	@RequestMapping("/addTv")
 	public String addTv() throws IOException
 	{
-		t =new  ImportFunctions();
-		Vector<Serie> series= (Vector<Serie>) t.Serie(Base_url+"tv/popular?api_key="+API_Key+"&language=en-US&page=1");
+		
+		Vector<Serie> series= (Vector<Serie>) service.Serie(Base_url+"tv/popular?api_key="+API_Key+"&language=en-US&page=1");
 
 		for (Serie serie : series) {
 
-			List<Actors> act = t.Actors(Base_url+"tv/"+serie.getId() +"/credits?api_key="+API_Key+"&language=en-US");
+			List<Actors> act = service.Actors(Base_url+"tv/"+serie.getId() +"/credits?api_key="+API_Key+"&language=en-US");
 			serie.setActors(act);
 
 			for (Actors actor: act) {
-				actor.setSeriegraphie(t.getSerieBiblio(Base_url+"person/"+actor.getId()+"/tv_credits?api_key="+API_Key+"&language=en-US"));
+				actor.setSeriegraphie(service.getSerieBiblio(Base_url+"person/"+actor.getId()+"/tv_credits?api_key="+API_Key+"&language=en-US"));
 			}
 		}
 		serieRepository.saveAll(series);
@@ -159,10 +160,10 @@ public class DataBaseController {
 	@RequestMapping("/addSerieliee")
 	public String addSerieliee() throws IOException
 	{
-		t =new  ImportFunctions();
+		
 		List<Serie>series = (List<Serie>)serieRepository.getSeriePopular();
 		for (Serie serie : series) {
-			serie.setSeriesLiees(t.getSerieLiee( Base_url+"tv/"+serie.getId()+"/similar?api_key="+API_Key+"&language=en-US"));
+			serie.setSeriesLiees(service.getSerieLiee( Base_url+"tv/"+serie.getId()+"/similar?api_key="+API_Key+"&language=en-US"));
 			serieRepository.save(serie);
 		}
 
@@ -173,11 +174,11 @@ public class DataBaseController {
 		@RequestMapping("/addserieVideo")
 		public String addserieVideo() throws IOException
 		{
-			t =new  ImportFunctions();
+			
 			List<Serie>series = (List<Serie>) serieRepository.findAll();
 			for ( Serie serie : series) {
 
-				serie.setVideo(t.getMovieVideo(Base_url+"movie/"+serie.getId()+"/videos?api_key="+API_Key+"&language=en-US"));
+				serie.setVideo(service.getMovieVideo(Base_url+"movie/"+serie.getId()+"/videos?api_key="+API_Key+"&language=en-US"));
 				serieRepository.save(serie);
 			}
 

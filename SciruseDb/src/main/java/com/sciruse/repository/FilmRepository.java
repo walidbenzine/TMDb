@@ -11,7 +11,7 @@ import com.sciruse.models.Film;
 
 public interface FilmRepository extends CrudRepository<Film, Long>{
 	
-	@Query(value = "SELECT  * FROM  sciruse.film  LIMIT 20;", nativeQuery = true)
+	@Query(value = "SELECT * FROM sciruse.film  where date_sortie = 2020 and image !='null' and video != 'null' order by note desc limit 20;", nativeQuery = true)
 	List<Film> getpopular();
 	
 	@Query(value = "SELECT  * FROM  sciruse.film where id =?1", nativeQuery = true)
