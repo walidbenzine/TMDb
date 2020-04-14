@@ -52,6 +52,9 @@ class EditProfile : AppCompatActivity(), ChangePassword.ChangePasswordDialogList
 
     override fun applyTexts(oldPassword: String?, newPassword: String?, confirmPassword: String?) {
         if (newPassword==confirmPassword){
+
+            /changepass/{id}/{pass}
+            user.id
             Toast.makeText(
                 applicationContext,
                 "mot de passe identiques",
