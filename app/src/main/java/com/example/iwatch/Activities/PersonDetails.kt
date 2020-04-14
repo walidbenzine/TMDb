@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.example.iwatch.Entities.Actor
+import com.example.iwatch.Entities.Movie
 import com.example.iwatch.Fragments.FilmographyFragment
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
@@ -15,6 +16,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_favorite.*
 import kotlinx.android.synthetic.main.activity_person_details.*
 private var person: Actor? = null
+private var filmographie = ArrayList<Movie>()
 private var conv = Convert()
 
 class PersonDetails : AppCompatActivity(), FilmographyFragment.OnFragmentInteractionListener {
@@ -51,7 +53,6 @@ class PersonDetails : AppCompatActivity(), FilmographyFragment.OnFragmentInterac
         actor_detail_birth_place.text = person?.cityOfBirth
         actore_detail_biography.text = person?.bibliography
         actor_detail_popularity.text = person?.popularity
-
 
     }
 
