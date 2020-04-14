@@ -12,18 +12,16 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.iwatch.Activities.Favorite
 import com.example.iwatch.Activities.MovieDetails
-import com.example.iwatch.Activities.SignUp
+import com.example.iwatch.Activities.SerieDetails
 import com.example.iwatch.Adapters.MovieAdapter
 import com.example.iwatch.Adapters.OnMovieClickListener
+import com.example.iwatch.Adapters.OnSerieClickListener
 import com.example.iwatch.Adapters.SerieAdapter
 import com.example.iwatch.Entities.Movie
 import com.example.iwatch.Entities.Serie
 
 import com.example.iwatch.R
-
-import kotlinx.android.synthetic.main.activity_main.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,13 +36,14 @@ private const val ARG_PARAM2 = "param2"
  * Use the [HomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HomeFragment : Fragment(), OnMovieClickListener {
+class HomeFragment : Fragment(), OnSerieClickListener , OnMovieClickListener{
     // TODO: Rename and change types of parameters
 
     var serie =  ArrayList<Serie>()
     var films =  ArrayList<Movie>()
 
     private var listener: OnFragmentInteractionListener? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,7 +98,7 @@ class HomeFragment : Fragment(), OnMovieClickListener {
         btnSeries.setOnClickListener {
             homeRecyclerView.apply {
                 layoutManager = LinearLayoutManager(this.context)
-                adapter = SerieAdapter(serie)
+                adapter = SerieAdapter(serie,this@HomeFragment)
 
                 btnMovies.setBackgroundResource(R.drawable.no_clicked_button)
                 btnSeries.setBackgroundResource(R.drawable.clicked_button)
@@ -166,6 +165,12 @@ class HomeFragment : Fragment(), OnMovieClickListener {
             }
     }
 
+
+    override fun onSerieClicked(serie: Serie) {
+        val serieDetailsIntent = Intent(this.context, SerieDetails::class.java)
+        serieDetailsIntent.putExtra("serie", serie)
+        startActivity(serieDetailsIntent)
+    }
     override fun onMovieClicked(movie: Movie) {
         val movieDetailsIntent = Intent(this.context, MovieDetails::class.java)
         movieDetailsIntent.putExtra("movie", movie)
