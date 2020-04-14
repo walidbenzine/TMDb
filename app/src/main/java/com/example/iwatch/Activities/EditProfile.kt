@@ -56,8 +56,8 @@ class EditProfile : AppCompatActivity(), ChangePassword.ChangePasswordDialogList
         if (newPassword==confirmPassword){
 
 
-            val userJson =
-                Post("http://scirusiwatch.herokuapp.com/changepass/" + user.id + "/" + confirmPassword)
+            Post("http://scirusiwatch.herokuapp.com/changepass/" + user.id + "/" + confirmPassword)
+
             Toast.makeText(
                 applicationContext,
                 "mot de passe a été bien changé",
