@@ -132,7 +132,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Favorite Movies/Cinemas"
+                    android:text="Favorite Movies/Series"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="24dp"
                     android:textColor="@color/white"

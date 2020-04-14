@@ -8,7 +8,11 @@ import com.example.iwatch.R
 import com.example.iwatch.ViewHolders.PersonViewHolder
 import com.squareup.picasso.Picasso
 
-class PersonAdapter(val actorList: ArrayList<Actor>): RecyclerView.Adapter<PersonViewHolder>()  {
+class PersonAdapter(
+    val actorList: ArrayList<Actor>,
+    val personClickListener: OnPersonClickListener
+) : RecyclerView.Adapter<PersonViewHolder>()  {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonViewHolder {
         var v = LayoutInflater.from(parent.context).inflate(R.layout.person_item, parent, false)
@@ -21,11 +25,10 @@ class PersonAdapter(val actorList: ArrayList<Actor>): RecyclerView.Adapter<Perso
 
     override fun onBindViewHolder(holder: PersonViewHolder, position: Int) {
         val actor: Actor = actorList[position]
+        holder.bind(actor, personClickListener)
+    }
 
-        holder.name.text = actor.firstName
-        holder.birthDay.text = actor.dateOfBirth
-        holder.birthPlace.text = actor.cityOfBirth
-        holder.popularity.text = actor.popularity?.substring(0,3)
-        Picasso.get().load(actor.picture).into(holder.picture)
+    interface OnPersonClickListener {
+        fun onPersonClicked(actor : Actor)
     }
 }

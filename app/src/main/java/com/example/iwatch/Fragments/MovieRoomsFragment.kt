@@ -47,7 +47,7 @@ class MovieRoomsFragment : Fragment() {
         val movieRoomRecyclerView = v.findViewById<RecyclerView>(R.id.movie_detail_rooms)
 
         try {
-            System.out.println("TEEEST+++++ " + movieRooms.get(0).nom)
+            System.out.println("TEEEST+++++ " + movieRooms.get(0).image)
         }catch (e: Exception){
             System.out.println(e)
         }

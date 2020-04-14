@@ -9,6 +9,7 @@ class Saison {
     internal var releasedDate: String? = null
     internal var nbrEpisode: Int = 0
     internal var episodeList: ArrayList<Episode>? = null
+    internal var photo: String? = null
 
     //A SUPPRIMER
     internal var actorList: List<Actor>? = null
