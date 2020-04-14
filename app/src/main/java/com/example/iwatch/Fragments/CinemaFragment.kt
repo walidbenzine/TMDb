@@ -57,8 +57,6 @@ class CinemaFragment : Fragment(), OnMovieClickListener {
         savedInstanceState: Bundle?
     ): View? {
 
-        System.out.println("FIRST FILM TITLE = "+ films.get(0).title)
-        System.out.println("FIRST CINE NAME = "+ cinemas.get(0).nom)
 
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_cinema, container, false)
