@@ -7,11 +7,15 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.example.iwatch.Entities.Actor
 import com.example.iwatch.Fragments.FilmographyFragment
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_favorite.*
 import kotlinx.android.synthetic.main.activity_person_details.*
+private var person: Actor? = null
+private var conv = Convert()
 
 class PersonDetails : AppCompatActivity(), FilmographyFragment.OnFragmentInteractionListener {
 
@@ -21,8 +25,11 @@ class PersonDetails : AppCompatActivity(), FilmographyFragment.OnFragmentInterac
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_person_details)
 
+        //get person
+        person = intent.getSerializableExtra("actor") as Actor
+
         //enable back button on the toolbar
-        person_detail_toolbar.title = ""
+        person_detail_toolbar.title = person?.firstName
         setSupportActionBar(person_detail_toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -36,6 +43,16 @@ class PersonDetails : AppCompatActivity(), FilmographyFragment.OnFragmentInterac
 
         person_view_pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(person_tabs))
         person_tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(person_view_pager))
+
+        //print persons details
+        actor_detail_name.text = person?.lastName
+        Picasso.get().load(person?.picture).into(person_detail_picture)
+        actor_detail_birth_day.text = person?.dateOfBirth
+        actor_detail_birth_place.text = person?.cityOfBirth
+        actore_detail_biography.text = person?.bibliography
+        actor_detail_popularity.text = person?.popularity
+
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

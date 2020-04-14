@@ -50,4 +50,9 @@ public interface UserRepository extends CrudRepository<User, Long>{
 	@Transactional
 	void changepass(Integer id,String password);
 	
+	@Modifying
+	@Query(value = "UPDATE sciruse.user SET `password`= ?2 WHERE `id`= ?1 ;", nativeQuery = true)
+	@Transactional
+	void changeinfo(Integer id,String password);
+	
 }
