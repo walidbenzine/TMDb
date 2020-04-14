@@ -43,11 +43,7 @@ class HomeFragment : Fragment(), OnSerieClickListener , OnMovieClickListener{
     var films =  ArrayList<Movie>()
 
     private var listener: OnFragmentInteractionListener? = null
-    /*override fun onSerieClicked(serie: Serie) {
-        val serieDetailsIntent = Intent(this.context, SerieDetails::class.java)
-        serieDetailsIntent.putExtra("serie", serie)
-        startActivity(serieDetailsIntent)
-    }*/
+    
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -173,12 +169,12 @@ class HomeFragment : Fragment(), OnSerieClickListener , OnMovieClickListener{
     override fun onSerieClicked(serie: Serie) {
         val serieDetailsIntent = Intent(this.context, SerieDetails::class.java)
         serieDetailsIntent.putExtra("serie", serie)
-        startActivity(serieDetailsIntent)
+        //startActivity(serieDetailsIntent)
     }
     override fun onMovieClicked(movie: Movie) {
         val movieDetailsIntent = Intent(this.context, MovieDetails::class.java)
         movieDetailsIntent.putExtra("movie", movie)
-        startActivity(movieDetailsIntent)
+        //startActivity(movieDetailsIntent)
     }
 
 }

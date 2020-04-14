@@ -3,41 +3,33 @@ package com.example.iwatch.Activities
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
-import android.widget.TextView
-import android.widget.Toast
-
 import android.view.MenuItem
-
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.example.iwatch.Entities.Serie
 import com.example.iwatch.Fragments.AssociatedSeriesFragment
 import com.example.iwatch.Fragments.CommentsFragment
 import com.example.iwatch.Fragments.SeasonFragment
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_serie_details.*
 
 class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionListener,
     AssociatedSeriesFragment.OnFragmentInteractionListener, CommentsFragment.OnFragmentInteractionListener{
 
-    private   var titre_s : TextView?= null
-    private   var date_s:TextView?= null
-    private   var genre_s:TextView?= null
-    private   var nbr_epi:TextView?= null
-    private   var nbr_saison:TextView?= null
-    private   var description_s:TextView?= null
-
-
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
+    private var serie: Serie? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_serie_details)
+        serie = intent.getSerializableExtra("serie") as Serie
+
 
         //enable back button on the toolbar
-        serie_detail_toolbar.title = ""
+        serie_detail_toolbar.title = serie?.title
         setSupportActionBar(serie_detail_toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -49,32 +41,25 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
         serie_view_pager.adapter = mSectionsPagerAdapter
         serie_view_pager.currentItem = 0
 
-         //serie_view_pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(serie_tabs))
-         // serie_tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(serie_view_pager))
+         serie_view_pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(serie_tabs))
+         serie_tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(serie_view_pager))
 
 
-        var titre = intent.getSerializableExtra("titre")
-        var details = intent.getSerializableExtra("details")
-        var datesortie = intent.getSerializableExtra("datesortie")
-        var daterealisation = intent.getSerializableExtra("tidaterealisationtre")
+        //print serie details
+        serie_detail_title.text= serie?.title
+        serie_detail_released_date.text = serie?.dateSortie
+        serie_episodes_nbr.text = serie?.nbrEpisodes!!.toString()
+        serie_saisons_nbr.text = serie?.saisonList!!.size.toString()
+        serie_detail_resume.text = serie?.resume
 
-        titre_s =findViewById( R.id.serie_detail_title)
-        date_s =findViewById( R.id.serie_detail_released_date)
-        //date_r =findViewById( R.id.serie_detail_released_date)
-        genre_s = findViewById( R.id.serie_detail_genre)
-        nbr_epi= findViewById(R.id.serie_episodes_nbr)
-        nbr_saison = findViewById(R.id.serie_saisons_nbr)
-        description_s =findViewById(R.id.serie_detail_resume)
+        serie_detail_genre.text = "hey"
+        serie_rating_bar.rating = (serie?.note+ "F").toFloat()
 
+        if(serie!!.picture != null){
+            val url = serie!!.picture
+            Picasso.get().load(url).into(serie_detail_picture)
 
-
-        titre_s!!.text =titre!!.toString()
-        date_s!!.text =datesortie!!.toString()
-        //genre_s!!.text =
-        description_s!!.text =details!!.toString()
-
-        Toast.makeText(this, "titre "+titre, Toast.LENGTH_LONG).show()
-
+        }
 
     }
 
