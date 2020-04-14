@@ -27,7 +27,15 @@ public class Serie {
 	private String nbrEpisodes;
 	private String nbrSaison ;
 	private String Image;
+	private String video;
 	
+	public String getVideo() {
+		return video;
+	}
+	public void setVideo(String video) {
+		this.video = video;
+	}
+
 	@JsonIgnore
 	@ManyToMany (cascade = {CascadeType.ALL})
 	private List<Saison>saisons ;
