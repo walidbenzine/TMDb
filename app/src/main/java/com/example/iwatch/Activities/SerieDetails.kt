@@ -49,16 +49,18 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
         serie_detail_title.text= serie?.title
         serie_detail_released_date.text = serie?.dateSortie
         serie_episodes_nbr.text = serie?.nbrEpisodes!!.toString()
-        serie_saisons_nbr.text = serie?.saisonList!!.size.toString()
+        serie_saisons_nbr.text = serie?.nbrSaison!!.toString()
         serie_detail_resume.text = serie?.resume
 
-        serie_detail_genre.text = "hey"
         serie_rating_bar.rating = (serie?.note+ "F").toFloat()
 
         if(serie!!.picture != null){
             val url = serie!!.picture
             Picasso.get().load(url).into(serie_detail_picture)
 
+        }
+        for(i in 0..serie!!.genreList?.size!!-1){
+            serie_detail_genre.text = serie!!.genreList?.get(i)?.genreType.toString() + ", "
         }
 
     }

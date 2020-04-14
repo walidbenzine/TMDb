@@ -24,8 +24,8 @@ class SerieViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
             serietitle!!.text = serie.title
 
             seriedetails!!.text =serie.resume
-            seriereleazeddate!!.text = serie.dateSortie
-            datesortie!!.text= serie.dateSortie
+            //seriereleazeddate!!.text = serie.dateSortie
+            seriereleazeddate!!.text= serie.dateSortie
 
             if(serie.picture != null){
                 val url = serie.picture
