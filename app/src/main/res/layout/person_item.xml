@@ -36,6 +36,7 @@
                     android:id="@+id/person_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.33"
                     android:textColor="@color/white"
                     android:textStyle="bold" />
 
@@ -43,12 +44,14 @@
                     android:id="@+id/person_birth_day"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.33"
                     android:textColor="@color/lightGrey" />
 
                 <TextView
                     android:id="@+id/person_birth_place"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.33"
                     android:textColor="@color/lightGrey" />
 
 
