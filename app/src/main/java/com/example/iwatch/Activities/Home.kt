@@ -242,12 +242,18 @@ fun PostCinema(url: String): ArrayList<Cinema> {
     } catch (e: Exception) {
         System.out.println(e)
     }
-    if (!x.toString().isNullOrEmpty() && x.toString() != "null" && x.toString() != "[]") {
-        var jsonarray = JSONArray(x.toString())
-        for (i in 0 until jsonarray.length()) {
-            arrayCinema.add(convert.toCinema(JSONObject(jsonarray.get(i).toString())))
+    try{
+        if (!x.toString().isNullOrEmpty() && x.toString() != "null" && x.toString() != "[]") {
+            var jsonarray = JSONArray(x.toString())
+            for (i in 0 until jsonarray.length()) {
+                arrayCinema.add(convert.toCinema(JSONObject(jsonarray.get(i).toString())))
+            }
+            return arrayCinema
+        }else{
+            return arrayCinema
         }
-        return arrayCinema
+    }catch (e: Exception){
+        System.out.println(e)
     }
     return arrayCinema
 }

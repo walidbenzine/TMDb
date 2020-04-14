@@ -20,6 +20,7 @@ class CommentAdapter(val commentList: ArrayList<Comment>): RecyclerView.Adapter<
     override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
         val comment: Comment = commentList[position]
 
+        holder.commentUserName.text = comment.user
         holder.commentText.text = comment.text
         holder.commentUserPicture.setImageResource(R.mipmap.ic_gun)
     }

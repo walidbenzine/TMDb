@@ -75,7 +75,7 @@ class ProfileFragment : Fragment() {
 
         val genreRecyclerView = v.findViewById<RecyclerView>(R.id.genre_recycler_view)
 
-        for (genre in user.genrePref!!){
+        /*for (genre in user.genrePref!!){
             when(genre){
                 "Adventure" -> genres.add(Genre(GenreType.Adventure))
                 "Action" -> genres.add(Genre(GenreType.Action))
@@ -85,7 +85,12 @@ class ProfileFragment : Fragment() {
                 "Documentary" -> genres.add(Genre(GenreType.Documentary))
                 "Comedy" -> genres.add(Genre(GenreType.Comedy))
             }
-        }
+        }*/
+
+        genres.add(Genre(GenreType.Thriller))
+        genres.add(Genre(GenreType.Action))
+        genres.add(Genre(GenreType.Romance))
+        genres.add(Genre(GenreType.Drama))
 
         genreRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
