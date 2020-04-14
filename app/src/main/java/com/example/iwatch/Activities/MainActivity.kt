@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                 System.out.println(userJson)
                 if (userJson.toString() != "{}" && userJson.toString() != "[]" ) {
 
-                    Toast.makeText(applicationContext, "Connexion résussi", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Connexion réussi", Toast.LENGTH_SHORT).show()
 
                     val user = convert.toUser(userJson.getJSONObject(0))
                     val homeIntent = Intent(this, Home::class.java)
