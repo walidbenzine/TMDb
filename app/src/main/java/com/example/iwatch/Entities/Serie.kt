@@ -14,6 +14,7 @@ class Serie: Serializable {
     internal var nbrSaison: Int = 0
     internal var picture: String? = null
     internal var genreList: ArrayList<Genre>? = null
+    internal var video: String? = null
 
     internal var saisonList: List<Saison>? = null
     internal var associatedSeries: List<Serie>? = null

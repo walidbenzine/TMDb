@@ -87,9 +87,15 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
 
         override fun getItem(position: Int): Fragment {
             return when (position){
-                0 -> MovieDetailsFragment.newInstance(PostActor("https://scirusiwatch.herokuapp.com/getMovieActors/"+movie?.id.toString()), PostFilm("https://scirusiwatch.herokuapp.com/getFilmLie/"+movie?.id.toString()))
+                0 -> {
+                    MovieDetailsFragment.newInstance(PostActor("https://scirusiwatch.herokuapp.com//getAct/"+movie?.id.toString()), PostFilm("https://scirusiwatch.herokuapp.com/getLi/"+movie?.id.toString()))
+                    //MovieDetailsFragment.newInstance(PostActor("http://scirusiwatch.herokuapp.com/getMovieActors/"+movie?.id.toString()), PostFilm("https://scirusiwatch.herokuapp.com/getFilmLie/"+movie?.id.toString()))
+                }
                 1 -> MovieRoomsFragment.newInstance(PostCinema("https://scirusiwatch.herokuapp.com/getRoom/"+movie?.id.toString()))
-                2 -> CommentsFragment.newInstance(conv.PostComment("https://scirusiwatch.herokuapp.com/getMovieComment/"+movie?.id.toString()))
+                2 -> {
+                    CommentsFragment.newInstance(conv.PostComment("https://scirusiwatch.herokuapp.com//getC/"+movie?.id.toString()))
+                    //CommentsFragment.newInstance(conv.PostComment("https://scirusiwatch.herokuapp.com/getMovieComment/"+movie?.id.toString()))
+                }
                 else -> Fragment()
             }
         }
