@@ -45,4 +45,9 @@ public interface UserRepository extends CrudRepository<User, Long>{
 	@Transactional
 	void addUserHistFilm(Integer user_id, Integer filmhistory);
 	
+	@Modifying
+	@Query(value = "UPDATE `user` SET `password`=?2 WHERE `id`=?1;", nativeQuery = true)
+	@Transactional
+	void changepass(Integer id,String password);
+	
 }
