@@ -24,7 +24,6 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
 
     private   var titre_s : TextView?= null
     private   var date_s:TextView?= null
-    private   var date_r:TextView?= null
     private   var genre_s:TextView?= null
     private   var nbr_epi:TextView?= null
     private   var nbr_saison:TextView?= null
@@ -47,11 +46,11 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
 
         // Set up the ViewPager with the sections adapter.
-        //serie_view_pager.adapter = mSectionsPagerAdapter
-        //serie_view_pager.currentItem = 0
+        serie_view_pager.adapter = mSectionsPagerAdapter
+        serie_view_pager.currentItem = 0
 
-       // serie_view_pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(serie_tabs))
-        //serie_tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(serie_view_pager))
+         //serie_view_pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(serie_tabs))
+         // serie_tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(serie_view_pager))
 
 
         var titre = intent.getSerializableExtra("titre")
