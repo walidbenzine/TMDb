@@ -1,6 +1,7 @@
 package com.example.iwatch.Fragments
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Activities.PersonDetails
 import com.example.iwatch.Adapters.PersonAdapter
 import com.example.iwatch.Entities.Actor
 
@@ -27,7 +29,8 @@ private const val ARG_PARAM2 = "param2"
  * Use the [PersonsFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class PersonsFragment : Fragment() {
+class PersonsFragment : Fragment(), PersonAdapter.OnPersonClickListener {
+
     // TODO: Rename and change types of parameters
     private var actors = ArrayList<Actor>()
 
@@ -52,10 +55,15 @@ class PersonsFragment : Fragment() {
         val personRecyclerView = v.findViewById<RecyclerView>(R.id.person_recycler_view)
         personRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
-            adapter = PersonAdapter(actors)
+            adapter = PersonAdapter(actors, this@PersonsFragment)
         }
-
         return v
+    }
+
+    override fun onPersonClicked(actor: Actor) {
+        val personDetailsIntent = Intent(this.context, PersonDetails::class.java)
+        personDetailsIntent.putExtra("actor", actor)
+        startActivity(personDetailsIntent)
     }
 
     // TODO: Rename method, update argument and hook method into UI event
