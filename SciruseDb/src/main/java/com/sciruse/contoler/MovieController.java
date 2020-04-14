@@ -70,10 +70,37 @@ public class MovieController {
 	@RequestMapping("/getAct/{id}")
 	public List<Actors> getAct(@PathVariable Integer id) throws IOException
 	{
-		
-		return t.Actors(Base_url+"movie/"+id +"/credits?api_key="+API_Key+"&language=en-US");
+		List<Actors> act = t.Actors(Base_url+"movie/"+id +"/credits?api_key="+API_Key+"&language=en-US");
+		if(act.size()>5) {
+			return act.subList(0, 4);
+		}else {
+			return act;
+		}
 	}
 	
+	@RequestMapping("/getLi/{id}")
+	public List<Film> getli(@PathVariable Integer id) throws IOException
+	{		
+		List<Film> films = t.getFilmLiee(Base_url+"movie/"+id +"/similar?api_key="+API_Key+"&language=en-US&page=1");
+		if(films.size()>5) {
+			return films.subList(0, 4);
+		}else {
+			return films;
+		}
+	}
+	
+	@RequestMapping("/getC/{id}")
+	public List<Comments> getC(@PathVariable Integer id) throws IOException
+	{		
+		List<Comments> com = t.Comment(Base_url+"movie/"+id+"/reviews?api_key="+API_Key+"&language=en-US&page=1");
+		if(com.size()>5) {
+			return com.subList(0, 4);
+		}else {
+			return com;
+		}
+	}
+	
+		
 	@RequestMapping("/getFilmLie/{id}")
 	public List<Film> getFilmLie(@PathVariable Integer id) throws IOException
 	{
