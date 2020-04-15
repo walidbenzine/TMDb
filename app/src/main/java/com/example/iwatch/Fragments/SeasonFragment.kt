@@ -8,7 +8,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Activities.PersonDetails
+import com.example.iwatch.Adapters.SeasonAdapter
 import com.example.iwatch.Entities.Actor
 import com.example.iwatch.Entities.Saison
 
@@ -43,6 +46,13 @@ class SeasonFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         var v = inflater.inflate(R.layout.fragment_season, container, false)
+        val saisonRecyclerView = v.findViewById<RecyclerView>(R.id.season_view_pager)
+
+        saisonRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = SeasonAdapter(saisons)
+        }
+
         return v
     }
 
