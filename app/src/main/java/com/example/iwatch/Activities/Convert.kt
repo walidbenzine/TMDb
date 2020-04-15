@@ -40,7 +40,7 @@ class Convert {
         serie.nbrEpisodes = obj.get("nbrEpisodes").toString().toInt()
         serie.nbrSaison = obj.get("nbrSaison").toString().toInt()
         serie.picture = "https://image.tmdb.org/t/p/original" + obj.get("image").toString()
-        serie.video = "https://www.youtube.com/watch?v=" + obj.get("video").toString()
+        serie.video = obj.get("video").toString()
 
         var genrearray = JSONArray(obj.get("genre").toString())
         for (i in 0 until genrearray.length()) {    
@@ -67,7 +67,7 @@ class Convert {
         film.title = obj.get("title").toString()
         film.resume = obj.get("resume").toString()
         film.imgFilm = "https://image.tmdb.org/t/p/original" + obj.get("image").toString()
-        film.video = "https://www.youtube.com/watch?v=" + obj.get("video").toString()
+        film.video = obj.get("video").toString()
 
         var genrearray = JSONArray(obj.get("genre").toString())
         for (i in 0 until genrearray.length()) {

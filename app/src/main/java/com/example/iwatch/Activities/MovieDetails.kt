@@ -8,19 +8,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.iwatch.Entities.Cinema
 import com.example.iwatch.Entities.Movie
 import com.example.iwatch.Fragments.CommentsFragment
 import com.example.iwatch.Fragments.MovieDetailsFragment
 import com.example.iwatch.Fragments.MovieRoomsFragment
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_movie_details.*
-import kotlinx.android.synthetic.main.movie_item.*
-import org.json.JSONArray
-import org.json.JSONObject
 import java.net.URL
+
 
 private var movie: Movie? = null
 private var conv = Convert()
@@ -64,6 +64,18 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
             Post("https://scirusiwatch.herokuapp.com/addFavFilm/" + user.id + "/" + movie?.id)
             Toast.makeText(applicationContext, "Ajout résussi", Toast.LENGTH_SHORT).show()
         }
+
+        //play movie trailer
+        val youTubePlayerView: YouTubePlayerView = findViewById(R.id.movie_trailer)
+        lifecycle.addObserver(youTubePlayerView)
+
+        youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                val videoId = movie?.video
+                videoId?.let { youTubePlayer.loadVideo(it, 0f) }
+            }
+        })
+
 
         //print movie details
         movie_detail_title.text = movie?.title
