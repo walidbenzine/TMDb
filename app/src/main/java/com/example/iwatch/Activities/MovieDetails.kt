@@ -59,10 +59,10 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
             )
         )
 
-
-        movieFavori.setOnClickListener {
+        btn_movie_favori.setOnClickListener {
             Post("https://scirusiwatch.herokuapp.com/addFavFilm/" + user.id + "/" + movie?.id)
             Toast.makeText(applicationContext, "Ajout résussi", Toast.LENGTH_SHORT).show()
+            btn_movie_favori.isFavorite = true
         }
 
         //play movie trailer
@@ -85,8 +85,8 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
         }
         movie_detail_released_date.text = movie?.dateSortie
         movie_detail_resume.text = movie?.resume
-        movie_rating_bar.rating = (movie?.note + "F").toFloat()
-        movie_detail_rate.text = movie?.note
+        movie_rating_bar.rating = ((movie?.note + "F").toFloat())/2
+        movie_detail_rate.text = (((movie?.note + "F").toFloat())/2).toString()
 
     }
 
