@@ -2,7 +2,6 @@ package com.example.iwatch.Adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Entities.Movie
 import com.example.iwatch.R

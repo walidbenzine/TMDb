@@ -14,8 +14,11 @@ import android.widget.*
 import com.example.iwatch.Activities.ConfirmRegistration
 import kotlinx.android.synthetic.main.fragment_sign_up2.*
 import android.widget.Button
+import com.example.iwatch.Dialogs.ChangePassword
+import com.example.iwatch.Dialogs.ChooseGenre
 import com.example.iwatch.Entities.User
 import com.example.iwatch.R
+import kotlinx.android.synthetic.main.activity_edit_profile.*
 import kotlin.random.Random
 
 // TODO: Rename parameter arguments, choose names that match
@@ -31,7 +34,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [SignUp2.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SignUp2 : Fragment(), AdapterView.OnItemSelectedListener {
+class SignUp2 : Fragment(){
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -53,6 +56,11 @@ class SignUp2 : Fragment(), AdapterView.OnItemSelectedListener {
     ): View? {
 
         var v = inflater.inflate(R.layout.fragment_sign_up2, container, false)
+
+        var genreSpinner =  v.findViewById<View>(R.id.genre_spinner) as LinearLayout
+        genreSpinner.setOnClickListener {
+            openDialog()
+        }
 
         var bundle = this.arguments
 
@@ -141,11 +149,14 @@ class SignUp2 : Fragment(), AdapterView.OnItemSelectedListener {
             }
     }
 
-    override fun onNothingSelected(parent: AdapterView<*>?) {
-
+    fun openDialog() {
+        val genreDialog = ChooseGenre()
+        genreDialog.listener = object:ChooseGenre.ChooseGenreDialogListener{
+            override fun applyTexts(selectedGenre: ArrayList<String>) {
+                usr.genrePref = selectedGenre
+            }
+        }
+        fragmentManager?.let { genreDialog.show(it, "genre dialog") }
     }
 
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
-    }
 }

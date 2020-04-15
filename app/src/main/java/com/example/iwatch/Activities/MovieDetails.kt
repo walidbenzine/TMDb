@@ -26,9 +26,10 @@ private var movie: Movie? = null
 private var conv = Convert()
 
 class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInteractionListener,
-    MovieRoomsFragment.OnFragmentInteractionListener, CommentsFragment.OnFragmentInteractionListener{
+    MovieRoomsFragment.OnFragmentInteractionListener,
+    CommentsFragment.OnFragmentInteractionListener {
 
-    private var mSectionsPagerAdapter:SectionsPagerAdapter? = null
+    private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,18 +53,22 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
         movie_view_pager.currentItem = 0
 
         movie_view_pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(movie_tabs))
-        movie_tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(movie_view_pager))
+        movie_tabs.addOnTabSelectedListener(
+            TabLayout.ViewPagerOnTabSelectedListener(
+                movie_view_pager
+            )
+        )
 
 
         movieFavori.setOnClickListener {
-            Post("https://scirusiwatch.herokuapp.com/addFavFilm/"+user.id+"/"+movie?.id)
+            Post("https://scirusiwatch.herokuapp.com/addFavFilm/" + user.id + "/" + movie?.id)
             Toast.makeText(applicationContext, "Ajout résussi", Toast.LENGTH_SHORT).show()
         }
 
         //print movie details
         movie_detail_title.text = movie?.title
         Picasso.get().load(movie?.imgFilm).into(movie_detail_picture)
-        for(i in 0..movie!!.genre?.size!!-1){
+        for (i in 0..movie!!.genre?.size!! - 1) {
             movie_detail_genre.text = movie!!.genre?.get(i)?.genreType.toString() + ", "
         }
         movie_detail_released_date.text = movie?.dateSortie
@@ -74,7 +79,7 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId==android.R.id.home){
+        if (item.itemId == android.R.id.home) {
             onBackPressed()
         }
         return super.onOptionsItemSelected(item)
@@ -91,15 +96,16 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
     class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
         override fun getItem(position: Int): Fragment {
-            return when (position){
+            return when (position) {
                 0 -> {
-                    MovieDetailsFragment.newInstance(PostActor("https://scirusiwatch.herokuapp.com/getAct/"+movie?.id.toString()), PostFilm("https://scirusiwatch.herokuapp.com/getLi/"+movie?.id.toString()))
-                    //MovieDetailsFragment.newInstance(PostActor("http://scirusiwatch.herokuapp.com/getMovieActors/"+movie?.id.toString()), PostFilm("https://scirusiwatch.herokuapp.com/getFilmLie/"+movie?.id.toString()))
+                    MovieDetailsFragment.newInstance(
+                        PostActor("https://scirusiwatch.herokuapp.com/getAct/" + movie?.id.toString()),
+                        PostFilm("https://scirusiwatch.herokuapp.com/getLi/" + movie?.id.toString())
+                    )
                 }
-                1 -> MovieRoomsFragment.newInstance(PostCinema("https://scirusiwatch.herokuapp.com/getRoom/"+movie?.id.toString()))
+                1 -> MovieRoomsFragment.newInstance(PostCinema("https://scirusiwatch.herokuapp.com/getRoom/" + movie?.id.toString()))
                 2 -> {
-                    CommentsFragment.newInstance(conv.PostComment("https://scirusiwatch.herokuapp.com/getC/"+movie?.id.toString()))
-                    //CommentsFragment.newInstance(conv.PostComment("https://scirusiwatch.herokuapp.com/getMovieComment/"+movie?.id.toString()))
+                    CommentsFragment.newInstance(conv.PostComment("https://scirusiwatch.herokuapp.com/getC/" + movie?.id.toString()))
                 }
                 else -> Fragment()
             }
@@ -115,9 +121,9 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
     fun Post(url: String) {
         val x = try {
             URL(url)
-                    .openStream()
-                    .bufferedReader()
-                    .use { it.readText() }
+                .openStream()
+                .bufferedReader()
+                .use { it.readText() }
         } catch (e: Exception) {
             System.out.println(e)
         }

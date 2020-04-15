@@ -50,7 +50,8 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/lightGrey"/>
 
-            <!--<LinearLayout
+            <LinearLayout
+                android:id="@+id/genre_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -64,12 +65,10 @@
                     android:text="Choose Genre"/>
 
                 <Spinner
-                    android:id="@+id/genre_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:spinnerMode="dialog"/>
-            </LinearLayout>-->
+                    android:layout_weight="0"/>
+            </LinearLayout>
 
         </LinearLayout>
 

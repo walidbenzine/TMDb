@@ -7,10 +7,14 @@ import com.example.iwatch.Entities.Movie
 import com.example.iwatch.R
 import com.example.iwatch.ViewHolders.AssociatedFilmViewHolder
 
-class AssociatedFilmAdapter(val associatedFilmList: ArrayList<Movie>): RecyclerView.Adapter<AssociatedFilmViewHolder>() {
+class AssociatedFilmAdapter(
+    val associatedFilmList: ArrayList<Movie>,
+    val itemClickListener: OnAssociatedFilmClickListener
+) : RecyclerView.Adapter<AssociatedFilmViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AssociatedFilmViewHolder {
-        var v = LayoutInflater.from(parent.context).inflate(R.layout.movie_associated_film_item, parent, false)
+        var v = LayoutInflater.from(parent.context)
+            .inflate(R.layout.movie_associated_film_item, parent, false)
         return AssociatedFilmViewHolder(v)
     }
 
@@ -20,10 +24,11 @@ class AssociatedFilmAdapter(val associatedFilmList: ArrayList<Movie>): RecyclerV
 
     override fun onBindViewHolder(holder: AssociatedFilmViewHolder, position: Int) {
         val associateFilm: Movie = associatedFilmList[position]
-
-        holder.associatedFilmName.text = associateFilm.title
-        holder.associatedFilmPicture.setImageResource(R.mipmap.ic_ghost)
+        holder.bind(associateFilm, itemClickListener)
 
     }
+}
 
+interface OnAssociatedFilmClickListener {
+    fun onAssociatedMovieClicked(movie: Movie)
 }

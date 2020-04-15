@@ -7,7 +7,8 @@ import com.example.iwatch.Entities.Actor
 import com.example.iwatch.R
 import com.example.iwatch.ViewHolders.ActorViewHolder
 
-class ActorAdapter(val actorList: ArrayList<Actor>): RecyclerView.Adapter<ActorViewHolder>()  {
+class ActorAdapter(val actorList: ArrayList<Actor>, val itemClickListener: OnActorClickListener) :
+    RecyclerView.Adapter<ActorViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorViewHolder {
         var v = LayoutInflater.from(parent.context).inflate(R.layout.actor_item, parent, false)
@@ -20,8 +21,11 @@ class ActorAdapter(val actorList: ArrayList<Actor>): RecyclerView.Adapter<ActorV
 
     override fun onBindViewHolder(holder: ActorViewHolder, position: Int) {
         val actor: Actor = actorList[position]
+        holder.bind(actor, itemClickListener)
 
-        holder.actorName.text = actor.firstName + " " + actor.lastName
-        holder.actorPicture.setImageResource(R.mipmap.ic_clown)
     }
+}
+
+interface OnActorClickListener {
+    fun onActorClicked(actor: Actor)
 }

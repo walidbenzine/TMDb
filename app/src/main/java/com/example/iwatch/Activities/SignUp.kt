@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
+import com.example.iwatch.Dialogs.ChooseGenre
+import com.example.iwatch.Entities.User
 import com.example.iwatch.Fragments.SignUp1
 import com.example.iwatch.Fragments.SignUp2
 import com.example.iwatch.R
@@ -19,10 +22,8 @@ import kotlinx.android.synthetic.main.fragment_sign_up1.pass
 import kotlinx.android.synthetic.main.fragment_sign_up2.*
 import org.json.JSONObject
 
-class SignUp : AppCompatActivity() , SignUp1.OnFragmentInteractionListener, SignUp2.OnFragmentInteractionListener {
-    override fun onFragmentInteraction(uri: Uri) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+class SignUp : AppCompatActivity(), SignUp1.OnFragmentInteractionListener,
+    SignUp2.OnFragmentInteractionListener{
 
     private val fragmentManager = supportFragmentManager
     private val signUp1Fragment = SignUp1()
@@ -34,6 +35,9 @@ class SignUp : AppCompatActivity() , SignUp1.OnFragmentInteractionListener, Sign
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragment_container, signUp1Fragment)
         fragmentTransaction.commit()
+    }
 
+    override fun onFragmentInteraction(uri: Uri) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

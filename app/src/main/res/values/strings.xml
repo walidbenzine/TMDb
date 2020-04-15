@@ -19,4 +19,15 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    
+    
+    <string-array name="genre_array">
+        <item> Action </item>
+        <item> Adventure </item>
+        <item> Drama </item>
+        <item> Comedy </item>
+        <item> Thriller </item>
+        <item> Documentary </item>
+        <item> Romance </item>
+    </string-array>
 </resources>
