@@ -14,6 +14,6 @@ class Actor: Serializable{
     internal var dateOfBirth: String? = null
     internal var picture: String? = null
 
-    internal var filmography: List<Movie>? = null
+    internal var filmography = ArrayList<Movie>()
 
 }

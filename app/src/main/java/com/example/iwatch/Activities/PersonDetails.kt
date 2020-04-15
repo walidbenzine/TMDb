@@ -15,9 +15,7 @@ import com.google.android.material.tabs.TabLayout
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_favorite.*
 import kotlinx.android.synthetic.main.activity_person_details.*
-private var person: Actor? = null
-private var filmographie = ArrayList<Movie>()
-private var conv = Convert()
+private var person = Actor()
 
 class PersonDetails : AppCompatActivity(), FilmographyFragment.OnFragmentInteractionListener {
 
@@ -29,10 +27,9 @@ class PersonDetails : AppCompatActivity(), FilmographyFragment.OnFragmentInterac
 
         //get person
         person = intent.getSerializableExtra("actor") as Actor
-        System.out.println("ACTOR FILMOGRAPHIE ==== "+ person?.filmography)
 
         //enable back button on the toolbar
-        person_detail_toolbar.title = person?.firstName
+        person_detail_toolbar.title = person.firstName
         setSupportActionBar(person_detail_toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -48,12 +45,12 @@ class PersonDetails : AppCompatActivity(), FilmographyFragment.OnFragmentInterac
         person_tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(person_view_pager))
 
         //print persons details
-        actor_detail_name.text = person?.lastName
-        Picasso.get().load(person?.picture).into(person_detail_picture)
-        actor_detail_birth_day.text = person?.dateOfBirth
-        actor_detail_birth_place.text = person?.cityOfBirth
-        actore_detail_biography.text = person?.bibliography
-        actor_detail_popularity.text = person?.popularity
+        actor_detail_name.text = person.lastName
+        Picasso.get().load(person.picture).into(person_detail_picture)
+        actor_detail_birth_day.text = person.dateOfBirth
+        actor_detail_birth_place.text = person.cityOfBirth
+        actore_detail_biography.text = person.bibliography
+        actor_detail_popularity.text = person.popularity
 
     }
 
@@ -72,7 +69,7 @@ class PersonDetails : AppCompatActivity(), FilmographyFragment.OnFragmentInterac
 
         override fun getItem(position: Int): Fragment {
             return when (position){
-                0 -> FilmographyFragment()
+                0 -> FilmographyFragment.newInstance(post.PostFilm("http://scirusiwatch.herokuapp.com/getActorFilm/"+ person.id.toString()))
                 else -> Fragment()
             }
         }

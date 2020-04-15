@@ -63,7 +63,6 @@ class PersonsFragment : Fragment(), PersonAdapter.OnPersonClickListener {
 
     override fun onPersonClicked(actor: Actor) {
         val personDetailsIntent = Intent(this.context, PersonDetails::class.java)
-        actor.filmography=post.PostFilm("http://scirusiwatch.herokuapp.com/getActorFilm/"+ actor.id.toString())
         personDetailsIntent.putExtra("actor", actor)
         startActivity(personDetailsIntent)
     }
