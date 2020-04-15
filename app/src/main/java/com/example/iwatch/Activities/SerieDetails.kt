@@ -33,9 +33,11 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
         setContentView(R.layout.activity_serie_details)
         serie = intent.getSerializableExtra("serie") as Serie
 
+        user.FavoriteSeries = post.PostSerie("http://scirusiwatch.herokuapp.com/getFavSerie/"+ user.id)
+
 
         serieFavori.setOnClickListener {
-            post.PostVoid("http://scirusiwatch.herokuapp.com/addFavSerie/" + user.id + "/" + serie?.id)
+            post.PostVoid("http://scirusiwatch.herokuapp.com/addFavSerie/" + user.id + "/" + serie.id)
             Toast.makeText(applicationContext, "Ajout résussi", Toast.LENGTH_SHORT).show()
         }
 
@@ -62,26 +64,26 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
 
         youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
-                val videoId = serie?.video
+                val videoId = serie.video
                 videoId?.let { youTubePlayer.loadVideo(it, 0f) }
             }
         })
 
 
         //print serie details
-        serie_detail_title.text= serie?.title
-        Picasso.get().load(serie?.picture).into(serie_detail_picture)
+        serie_detail_title.text= serie.title
+        Picasso.get().load(serie.picture).into(serie_detail_picture)
 
-        for (i in 0..serie!!.genreList?.size!! - 1) {
-            serie_detail_genre.text = serie!!.genreList?.get(i)?.genreType.toString() + ", "
+        for (i in 0..serie.genreList?.size!! - 1) {
+            serie_detail_genre.text = serie.genreList?.get(i)?.genreType.toString() + ", "
         }
 
-        serie_detail_released_date.text = serie?.dateSortie
-        serie_episodes_nbr.text = serie?.nbrEpisodes!!.toString()
-        serie_saisons_nbr.text = serie?.nbrSaison!!.toString()
-        serie_detail_resume.text = serie?.resume
-        serie_rating_bar.rating = ((serie?.note+ "F").toFloat())/2
-        serie_detail_rate.text = (((serie?.note + "F").toFloat())/2).toString().take(3)
+        serie_detail_released_date.text = serie.dateSortie
+        serie_episodes_nbr.text = serie.nbrEpisodes.toString()
+        serie_saisons_nbr.text = serie.nbrSaison.toString()
+        serie_detail_resume.text = serie.resume
+        serie_rating_bar.rating = ((serie.note+ "F").toFloat())/2
+        serie_detail_rate.text = (((serie.note + "F").toFloat())/2).toString().take(3)
 
     }
 
@@ -113,11 +115,11 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
                     //SeasonFragment()
                 }
                 1 -> {
-                    AssociatedSeriesFragment.newInstance(post.PostSerie("http://scirusiwatch.herokuapp.com/getSerieLi/"+serie?.id.toString()))
+                    AssociatedSeriesFragment.newInstance(post.PostSerie("http://scirusiwatch.herokuapp.com/getSerieLi/"+serie.id.toString()))
                     //AssociatedSeriesFragment()
                 }
                 2 -> {
-                    CommentsFragment.newInstance(post.PostComment("http://scirusiwatch.herokuapp.com/getCSer/" + serie?.id.toString()))
+                    CommentsFragment.newInstance(post.PostComment("http://scirusiwatch.herokuapp.com/getCSer/" + serie.id.toString()))
                     //CommentsFragment()
                 }
                 else -> Fragment()

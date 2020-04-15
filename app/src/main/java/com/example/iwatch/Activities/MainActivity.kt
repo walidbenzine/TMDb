@@ -65,6 +65,8 @@ class MainActivity : AppCompatActivity() {
 
                     val user = convert.toUser(userJson.getJSONObject(0))
                     val homeIntent = Intent(this, Home::class.java)
+                    user.FavoriteMovies = post.PostFilm("http://scirusiwatch.herokuapp.com/getFavFilm/"+ user.id)
+                    user.FavoriteSeries = post.PostSerie("http://scirusiwatch.herokuapp.com/getFavSerie/"+ user.id)
                     homeIntent.putExtra("user", user)
                     startActivity(homeIntent)
                 } else {

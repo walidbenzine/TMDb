@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.activity_movie_details.*
 import java.net.URL
 
 
-private var movie: Movie? = null
+private var movie = Movie()
 private var conv = Convert()
 
 class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInteractionListener,
@@ -38,9 +38,11 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
 
         //get movie
         movie = intent.getSerializableExtra("movie") as Movie
+        user.FavoriteMovies = post.PostFilm("http://scirusiwatch.herokuapp.com/getFavFilm/"+ user.id)
+
 
         //enable back button on the toolbar
-        movie_detail_toolbar.title = movie?.title
+        movie_detail_toolbar.title = movie.title
         setSupportActionBar(movie_detail_toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -61,7 +63,7 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
 
 
         btn_movie_favori.setOnClickListener {
-            post.PostVoid("http://scirusiwatch.herokuapp.com/addFavFilm/" + user.id + "/" + movie?.id)
+            post.PostVoid("http://scirusiwatch.herokuapp.com/addFavFilm/" + user.id + "/" + movie.id)
             Toast.makeText(applicationContext, "Ajout résussi", Toast.LENGTH_SHORT).show()
             btn_movie_favori.isFavorite = true
         }
@@ -72,22 +74,22 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
 
         youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
-                val videoId = movie?.video
+                val videoId = movie.video
                 videoId?.let { youTubePlayer.loadVideo(it, 0f) }
             }
         })
 
 
         //print movie details
-        movie_detail_title.text = movie?.title
-        Picasso.get().load(movie?.imgFilm).into(movie_detail_picture)
-        for (i in 0..movie!!.genre?.size!! - 1) {
-            movie_detail_genre.text = movie!!.genre?.get(i)?.genreType.toString() + ", "
+        movie_detail_title.text = movie.title
+        Picasso.get().load(movie.imgFilm).into(movie_detail_picture)
+        for (i in 0..movie.genre?.size!! - 1) {
+            movie_detail_genre.text = movie.genre?.get(i)?.genreType.toString() + ", "
         }
-        movie_detail_released_date.text = movie?.dateSortie
-        movie_detail_resume.text = movie?.resume
-        movie_rating_bar.rating = ((movie?.note + "F").toFloat())/2
-        movie_detail_rate.text = (((movie?.note + "F").toFloat())/2).toString().take(3)
+        movie_detail_released_date.text = movie.dateSortie
+        movie_detail_resume.text = movie.resume
+        movie_rating_bar.rating = ((movie.note + "F").toFloat())/2
+        movie_detail_rate.text = (((movie.note + "F").toFloat())/2).toString().take(3)
 
     }
 
@@ -112,13 +114,13 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
             return when (position) {
                 0 -> {
                     MovieDetailsFragment.newInstance(
-                        post.PostActor("http://scirusiwatch.herokuapp.com/getAct/" + movie?.id.toString()),
-                        post.PostFilm("http://scirusiwatch.herokuapp.com/getLi/" + movie?.id.toString())
+                        post.PostActor("http://scirusiwatch.herokuapp.com/getAct/" + movie.id.toString()),
+                        post.PostFilm("http://scirusiwatch.herokuapp.com/getLi/" + movie.id.toString())
                     )
                 }
-                1 -> MovieRoomsFragment.newInstance(post.PostCinema("http://scirusiwatch.herokuapp.com/getRoom/" + movie?.id.toString()))
+                1 -> MovieRoomsFragment.newInstance(post.PostCinema("http://scirusiwatch.herokuapp.com/getRoom/" + movie.id.toString()))
                 2 -> {
-                    CommentsFragment.newInstance(post.PostComment("http://scirusiwatch.herokuapp.com/getC/" + movie?.id.toString()))
+                    CommentsFragment.newInstance(post.PostComment("http://scirusiwatch.herokuapp.com/getC/" + movie.id.toString()))
                 }
                 else -> Fragment()
             }
