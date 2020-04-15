@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cinema_card_view"
@@ -37,8 +37,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="20dp"
                     android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:text="Cinema Village "/>
+                    android:textStyle="bold"/>
             </LinearLayout>
 
             <TextView
@@ -46,8 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:layout_marginLeft="16dp"
-                android:text="22 E 12th St, New York, NY 10003, États-Unis"/>
+                android:layout_marginLeft="16dp"/>
 
         </LinearLayout>
 
