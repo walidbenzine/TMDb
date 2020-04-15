@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Activities.EditProfile
 import com.example.iwatch.Activities.Favorite
+import com.example.iwatch.Activities.post
 import com.example.iwatch.Adapters.GenreAdapter
 import com.example.iwatch.Entities.Actor
 import com.example.iwatch.Entities.Genre
@@ -106,7 +107,9 @@ class ProfileFragment : Fragment() {
         val btnFavorite = v.findViewById<View>(R.id.btn_favorite) as LinearLayout
         btnFavorite.setOnClickListener {
             val favoriteIntent = Intent(this.context, Favorite::class.java)
-
+            user.FavoriteMovies = post.PostFilm("http://scirusiwatch.herokuapp.com/getFavFilm/"+ user.id)
+            user.FavoriteSeries = post.PostSerie("http://scirusiwatch.herokuapp.com/getFavSerie/"+ user.id)
+            favoriteIntent.putExtra("user", user)
             startActivity(favoriteIntent)
         }
 

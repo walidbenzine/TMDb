@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_edit_profile.*
 
 class EditProfile : AppCompatActivity(), ChangePassword.ChangePasswordDialogListener{
 
-    private var user: User?=null
+    private var user = User()
     private var post = PostClass()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,12 +26,13 @@ class EditProfile : AppCompatActivity(), ChangePassword.ChangePasswordDialogList
 
         //get user information
         user = intent.getSerializableExtra("user") as User
-        edit_login.setText(user?.login)
-        edit_first_name.setText(user?.firstName)
-        edit_last_name.setText(user?.lastName)
-        edit_email.setText(user?.email)
-        edit_phone_number.setText(user?.mobile)
-        edit_address.setText(user?.adresse)
+
+        edit_login.setText(user.login)
+        edit_first_name.setText(user.firstName)
+        edit_last_name.setText(user.lastName)
+        edit_email.setText(user.email)
+        edit_phone_number.setText(user.mobile)
+        edit_address.setText(user.adresse)
 
         change_pwd.setOnClickListener {
             openDialog()
@@ -63,7 +64,7 @@ class EditProfile : AppCompatActivity(), ChangePassword.ChangePasswordDialogList
     override fun applyTexts(oldPassword: String?, newPassword: String?, confirmPassword: String?) {
         if (newPassword==confirmPassword){
 
-            post.PostArray("http://scirusiwatch.herokuapp.com/changepass/" + user?.id + "/" + confirmPassword)
+            post.PostArray("http://scirusiwatch.herokuapp.com/changepass/" + user.id + "/" + confirmPassword)
             Toast.makeText(
                 applicationContext,
                 "mot de passe a été bien changé",

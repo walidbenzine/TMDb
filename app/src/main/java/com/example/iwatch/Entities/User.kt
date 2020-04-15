@@ -14,13 +14,13 @@ class User :Serializable{
     internal var login: String? = null
     internal var adresse: String? = null
     internal var jeton: Int = 0
-    internal var picture: String? = null //TYPE DE VARIABLE A CHANGER
+    internal var picture: String? = null
 
-    internal var FavoriteMovies: List<Movie>? = null  //A CHANGER
-    internal var MovieHistory: List<Movie>? = null  //peut etre
-    internal var FavoriteSeries: List<Serie>? = null //en hashmap
-    internal var SerieHistory: List<Serie>? = null  //pour les favoris
-    internal var genrePref = ArrayList<Genre>()  //PEUT ETRE A CHANGER
+    internal var FavoriteMovies = ArrayList<Movie>()
+    internal var MovieHistory: List<Movie>? = null
+    internal var FavoriteSeries = ArrayList<Serie>()
+    internal var SerieHistory: List<Serie>? = null
+    internal var genrePref = ArrayList<Genre>()
 
 
 }

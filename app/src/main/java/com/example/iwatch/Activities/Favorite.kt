@@ -7,6 +7,7 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.example.iwatch.Entities.User
 import com.example.iwatch.Fragments.FavoriteMovieFragment
 import com.example.iwatch.Fragments.FavoriteRoomFragment
 import com.example.iwatch.R
@@ -22,6 +23,7 @@ class Favorite : AppCompatActivity(), FavoriteMovieFragment.OnFragmentInteractio
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_favorite)
 
+        user = intent.getSerializableExtra("user") as User
 
         favorite_toolbar.title = "Favorite"
         setSupportActionBar(favorite_toolbar)
@@ -55,8 +57,8 @@ class Favorite : AppCompatActivity(), FavoriteMovieFragment.OnFragmentInteractio
 
         override fun getItem(position: Int): Fragment {
             return when (position){
-                0 -> FavoriteMovieFragment.newInstance(post.PostFilm("http://scirusiwatch.herokuapp.com/getFavFilm/"+ user.id))
-                1 -> FavoriteRoomFragment.newInstance(post.PostSerie("http://scirusiwatch.herokuapp.com/getFavSerie/"+ user.id))
+                0 -> FavoriteMovieFragment.newInstance(user.FavoriteMovies)
+                1 -> FavoriteRoomFragment.newInstance(user.FavoriteSeries)
                 else -> Fragment()
             }
         }
