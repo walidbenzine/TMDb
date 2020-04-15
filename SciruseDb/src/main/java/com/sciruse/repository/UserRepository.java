@@ -51,8 +51,12 @@ public interface UserRepository extends CrudRepository<User, Long>{
 	void changepass(Integer id,String password);
 	
 	@Modifying
-	@Query(value = "UPDATE sciruse.user SET `password`= ?2 WHERE `id`= ?1 ;", nativeQuery = true)
+	@Query(value = "UPDATE `user` SET `adresse`= ?5 ,`email`= ?4 ,`login`= ?7 ,`nom`= ?3 ,`prenom`= ?2 ,`tel`= ?6 WHERE `id`= ?1 ;", nativeQuery = true)
 	@Transactional
-	void changeinfo(Integer id,String password);
+	void changeinfo(Integer id,String Fn,String Ln,String email, String addr, String phone, String login);
 	
+	@Modifying
+	@Query(value = "INSERT INTO `user_genre_pref`(`user_id`, `genre_pref`) VALUES ( ?1 , ?2 ) ;", nativeQuery = true)
+	@Transactional
+	void addgenreuser(Integer iduser,Integer idgenre);
 }

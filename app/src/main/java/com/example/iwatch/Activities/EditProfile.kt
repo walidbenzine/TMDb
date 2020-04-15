@@ -28,7 +28,7 @@ class EditProfile : AppCompatActivity(), ChangePassword.ChangePasswordDialogList
 
         //get user information
         user = intent.getSerializableExtra("user") as User
-
+        edit_login.setText(user?.login)
         edit_first_name.setText(user?.firstName)
         edit_last_name.setText(user?.lastName)
         edit_email.setText(user?.email)
@@ -52,7 +52,7 @@ class EditProfile : AppCompatActivity(), ChangePassword.ChangePasswordDialogList
             onBackPressed()
         }
         else if(item.itemId == R.id.menu_save_profile){
-            //faire ici les modifications pour sauvegarder les changements
+           // Post("http://scirusiwatch.herokuapp.com/changeinfo/" + user?.id + "/" + +"/" + +"/" + +"/" + +"/" + )
         }
         return super.onOptionsItemSelected(item)
     }
