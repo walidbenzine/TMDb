@@ -66,8 +66,7 @@
                         android:layout_width="118dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
-                        android:textColor="@color/lightGrey"
-                        android:textSize="12sp" />
+                        android:textColor="@color/lightGrey"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -81,8 +80,7 @@
             android:layout_marginTop="16dp"
             android:background="@color/darkGrey"
             android:elevation="2dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/theprotector" />
+            android:scaleType="fitXY"/>
 
         <Button
             android:id="@+id/serie_grade"
