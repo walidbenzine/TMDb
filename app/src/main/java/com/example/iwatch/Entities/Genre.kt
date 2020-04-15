@@ -12,7 +12,7 @@ data class Genre (var genreType: GenreType): Serializable{
     init {
         when(genreType){
             GenreType.Action -> {
-                toast = "Let catch bad boys"
+                toast = "Let's catch bad boys"
                 iconId = R.mipmap.ic_gun
                 id=28
             }

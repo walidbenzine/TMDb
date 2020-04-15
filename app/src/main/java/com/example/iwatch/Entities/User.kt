@@ -20,7 +20,7 @@ class User :Serializable{
     internal var MovieHistory: List<Movie>? = null  //peut etre
     internal var FavoriteSeries: List<Serie>? = null //en hashmap
     internal var SerieHistory: List<Serie>? = null  //pour les favoris
-    internal var genrePref: List<String>? = null  //PEUT ETRE A CHANGER
+    internal var genrePref = ArrayList<Genre>()  //PEUT ETRE A CHANGER
 
 
 }

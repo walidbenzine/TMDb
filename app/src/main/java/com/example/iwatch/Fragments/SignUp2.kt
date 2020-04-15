@@ -16,7 +16,9 @@ import kotlinx.android.synthetic.main.fragment_sign_up2.*
 import android.widget.Button
 import com.example.iwatch.Dialogs.ChangePassword
 import com.example.iwatch.Dialogs.ChooseGenre
+import com.example.iwatch.Entities.Genre
 import com.example.iwatch.Entities.User
+import com.example.iwatch.Enumerations.GenreType
 import com.example.iwatch.R
 import kotlinx.android.synthetic.main.activity_edit_profile.*
 import kotlin.random.Random
@@ -153,7 +155,18 @@ class SignUp2 : Fragment(){
         val genreDialog = ChooseGenre()
         genreDialog.listener = object:ChooseGenre.ChooseGenreDialogListener{
             override fun applyTexts(selectedGenre: ArrayList<String>) {
-                usr.genrePref = selectedGenre
+                usr.genrePref.clear()
+                for(genre in selectedGenre){
+                    when(genre){
+                        "Adventure" -> usr.genrePref?.add(Genre(GenreType.Adventure))
+                        "Action" -> usr.genrePref?.add(Genre(GenreType.Action))
+                        "Thriller" -> usr.genrePref?.add(Genre(GenreType.Thriller))
+                        "Drama" -> usr.genrePref?.add(Genre(GenreType.Drama))
+                        "Romance" -> usr.genrePref?.add(Genre(GenreType.Romance))
+                        "War" -> usr.genrePref?.add(Genre(GenreType.War))
+                        "Comedy" -> usr.genrePref?.add(Genre(GenreType.Comedy))
+                    }
+                }
             }
         }
         fragmentManager?.let { genreDialog.show(it, "genre dialog") }
