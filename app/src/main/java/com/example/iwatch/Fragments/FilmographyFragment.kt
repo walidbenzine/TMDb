@@ -1,12 +1,20 @@
 package com.example.iwatch.Fragments
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Activities.MovieDetails
+import com.example.iwatch.Adapters.MovieAdapter
+import com.example.iwatch.Adapters.OnMovieClickListener
+
 import com.example.iwatch.Entities.Movie
 
 import com.example.iwatch.R
@@ -17,8 +25,19 @@ private const val ARG_PARAM1 = "param1"
 private var filmography = ArrayList<Movie>()
 
 
-class FilmographyFragment : Fragment() {
+
+/**
+ * A simple [Fragment] subclass.
+ * Use the [FilmographyFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
+class FilmographyFragment : Fragment(), OnMovieClickListener {
     // TODO: Rename and change types of parameters
+    private var param1: String? = null
+    private var param2: String? = null
+    var films =  ArrayList<Movie>()
+
+
 
     private var listener: OnFragmentInteractionListener? = null
 
@@ -36,6 +55,13 @@ class FilmographyFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         var v = inflater.inflate(R.layout.fragment_filmography, container, false)
+        val filmoRecyclerView = v.findViewById<RecyclerView>(R.id.filmography_recycler_view)
+
+
+        filmoRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this.context)
+            adapter = MovieAdapter(filmography, this@FilmographyFragment)
+        }
         return v
     }
 
@@ -43,6 +69,8 @@ class FilmographyFragment : Fragment() {
     fun onButtonPressed(uri: Uri) {
         listener?.onFragmentInteraction(uri)
     }
+
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -92,4 +120,11 @@ class FilmographyFragment : Fragment() {
                 }
             }
     }
+    override fun onMovieClicked(movie: Movie) {
+        val movieDetailsIntent = Intent(this.context, MovieDetails::class.java)
+        movieDetailsIntent.putExtra("movie", movie)
+        startActivity(movieDetailsIntent)
+    }
 }
+
+
