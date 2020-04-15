@@ -30,10 +30,12 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="250dp">
-                <VideoView
+                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
                     android:id="@+id/movie_trailer"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="match_parent"
+                    app:autoPlay="false"
+                    app:showFullScreenButton="false"/>
             </FrameLayout>
 
             <LinearLayout
@@ -107,7 +109,7 @@
                             style="?android:attr/ratingBarStyleSmall"
                             android:layout_gravity="center_vertical"
                             android:saveEnabled="true"
-                            android:numStars="10"
+                            android:numStars="5"
                             android:stepSize=".5"/>
 
                         <LinearLayout
@@ -122,18 +124,19 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/white"
-                                android:textSize="7pt" />
+                                android:textSize="9pt"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:text="/10"/>
+                                android:layout_marginLeft="4dp"
+                                android:text="/5"/>
 
                         </LinearLayout>
 
                         <com.github.ivbaranov.mfb.MaterialFavoriteButton
-                            android:id="@+id/movieFavori"
+                            android:id="@+id/btn_movie_favori"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:mfb_type="heart"
