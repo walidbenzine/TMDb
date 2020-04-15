@@ -106,6 +106,7 @@ class ProfileFragment : Fragment() {
         val btnFavorite = v.findViewById<View>(R.id.btn_favorite) as LinearLayout
         btnFavorite.setOnClickListener {
             val favoriteIntent = Intent(this.context, Favorite::class.java)
+
             startActivity(favoriteIntent)
         }
 

@@ -43,7 +43,7 @@ class Convert {
         serie.video = obj.get("video").toString()
 
         var genrearray = JSONArray(obj.get("genre").toString())
-        for (i in 0 until genrearray.length()) {    
+        for (i in 0 until genrearray.length()) {
             try {
                 genres.add(Genre(GenreType.valueOf(JSONObject(genrearray.get(i).toString()).get("desig").toString())))
             } catch (e: Exception) {
@@ -51,7 +51,7 @@ class Convert {
         }
         serie.genreList = genres
 
-        serie.commentList = PostComment("http://scirusiwatch.herokuapp.com/getSerieComment/" + serie.id)
+        serie.commentList = post.PostComment("http://scirusiwatch.herokuapp.com/getSerieComment/" + serie.id)
         return serie
     }
 
@@ -78,7 +78,7 @@ class Convert {
         }
         film.genre = genres
 
-        film.comments = PostComment("https://scirusiwatch.herokuapp.com/getMovieComment/" + film.id)
+        film.comments = post.PostComment("http://scirusiwatch.herokuapp.com/getMovieComment/" + film.id)
 
 
         return film
@@ -171,29 +171,24 @@ class Convert {
         }
     }
 
-    fun PostComment(url: String): ArrayList<Comment> {
-        var arrayComment = ArrayList<Comment>()
-        val x = try {
-            URL(url)
-                    .openStream()
-                    .bufferedReader()
-                    .use { it.readText() }
-        } catch (e: Exception) {
-            System.out.println(e)
-        }
-        try {
-            if (!x.toString().isNullOrEmpty() && x.toString() != "null" && !x.toString().equals("[]")) {
-                var jsonarray = JSONArray(x.toString())
-                for (i in 0 until jsonarray.length()) {
-                    arrayComment.add(toComment(JSONObject(jsonarray.get(i).toString())))
-                }
-                return arrayComment
-            }
-        } catch (e: Exception) {
-            System.out.println(e)
-            return arrayComment
-        }
-        return arrayComment
-    }
 
+
+    fun usrURL(usr: User) : String {
+
+        var sb = StringBuffer()
+
+        sb.append("http://scirusiwatch.herokuapp.com/addUser/")
+        sb.append(usr.email+"/")
+        sb.append(usr.jeton.toString()+"/")
+        sb.append(usr.login+"/")
+        sb.append(usr.lastName+"/")
+        sb.append(usr.password+"/")
+        sb.append(usr.picture+"/")
+        sb.append(usr.firstName+"/")
+        sb.append(usr.mobile+"/")
+        sb.append(usr.adresse)
+
+        val url = sb.toString()
+        return url
+    }
 }

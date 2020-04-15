@@ -62,6 +62,7 @@ class PersonsFragment : Fragment(), PersonAdapter.OnPersonClickListener {
 
     override fun onPersonClicked(actor: Actor) {
         val personDetailsIntent = Intent(this.context, PersonDetails::class.java)
+        //actor.filmography=PostFilm("http://10.0.2.2:8080/getActorFilm/"+ actor.id.toString())
         personDetailsIntent.putExtra("actor", actor)
         startActivity(personDetailsIntent)
     }

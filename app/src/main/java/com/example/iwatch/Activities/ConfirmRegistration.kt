@@ -18,6 +18,9 @@ class ConfirmRegistration : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_registration)
 
+        val post = PostClass()
+        val conv = Convert()
+
         field_one.addTextChangedListener(
             object: TextWatcher{
                 override fun afterTextChanged(s: Editable?) {
@@ -94,7 +97,11 @@ class ConfirmRegistration : AppCompatActivity() {
             var res = sb.toString()
             if (res.equals(code)) {
 
-                val result = Post(usrURL(usr))
+
+                val result = post.Post(conv.usrURL(usr))
+               /* for (i in 0 until usr.genrePref!!.size) {
+                    System.out.print("yaaaaaaaw"+usr.genrePref?.get(i)?.id)
+                }*/
                 if(!result.equals("null")){
                     Toast.makeText(applicationContext,"Inscription réussie ! vous pouvez à présent vous connecter", Toast.LENGTH_LONG).show()
                     val intent = Intent(this, MainActivity::class.java)
@@ -106,41 +113,5 @@ class ConfirmRegistration : AppCompatActivity() {
                 Toast.makeText(applicationContext,"CODE incorrect !", Toast.LENGTH_SHORT).show()
             }
         }
-    }
-
-    fun Post(url: String) : String {
-
-        val x = try {
-            URL(url)
-                    .openStream()
-                    .bufferedReader()
-                    .use { it.readText() } }
-        catch(e: Exception){
-            System.out.println(e)
-        }
-        if(!x.toString().isNullOrEmpty() && x.toString() != "null"){
-            return x.toString()
-
-        }
-        return "null"
-    }
-
-    fun usrURL(usr: User) : String {
-
-        var sb = StringBuffer()
-
-        sb.append("http://scirusiwatch.herokuapp.com//addUser/")
-        sb.append(usr.email+"/")
-        sb.append(usr.jeton.toString()+"/")
-        sb.append(usr.login+"/")
-        sb.append(usr.lastName+"/")
-        sb.append(usr.password+"/")
-        sb.append(usr.picture+"/")
-        sb.append(usr.firstName+"/")
-        sb.append(usr.mobile+"/")
-        sb.append(usr.adresse)
-
-        val url = sb.toString()
-        return url
     }
 }

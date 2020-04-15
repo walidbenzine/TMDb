@@ -75,10 +75,24 @@ public class UserController {
 		return "Ajout user reussi";
 	}
 	
+	@RequestMapping("/addUser/{iduser}/{idgenre}")
+	public String addgenreuser(@PathVariable Integer iduser, @PathVariable Integer idgenre) throws IOException
+	{			
+		userRepository.addgenreuser(iduser,idgenre);
+		return "Ajout user reussi";
+	}
+	
 	@RequestMapping("/changepass/{id}/{pass}")
 	public String changepass(@PathVariable Integer id,@PathVariable String pass) throws IOException
 	{
 		userRepository.changepass(id, pass);
+		return "update password reussi";
+	}
+	
+	@RequestMapping("/changeinfo/{id}/{Fn}/{Ln}/{email}/{addr}/{phone}/{login}")
+	public String changeinfo(@PathVariable Integer id,@PathVariable String Fn,@PathVariable String Ln,@PathVariable String email, @PathVariable String addr, @PathVariable String phone, @PathVariable String login) throws IOException
+	{
+		userRepository.changeinfo( id, Fn, Ln, email,  addr,  phone,  login);
 		return "update password reussi";
 	}
 	

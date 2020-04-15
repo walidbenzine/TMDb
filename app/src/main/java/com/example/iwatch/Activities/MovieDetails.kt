@@ -59,8 +59,9 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
             )
         )
 
+
         btn_movie_favori.setOnClickListener {
-            Post("https://scirusiwatch.herokuapp.com/addFavFilm/" + user.id + "/" + movie?.id)
+            post.PostVoid("http://scirusiwatch.herokuapp.com/addFavFilm/" + user.id + "/" + movie?.id)
             Toast.makeText(applicationContext, "Ajout résussi", Toast.LENGTH_SHORT).show()
             btn_movie_favori.isFavorite = true
         }
@@ -111,13 +112,13 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
             return when (position) {
                 0 -> {
                     MovieDetailsFragment.newInstance(
-                        PostActor("https://scirusiwatch.herokuapp.com/getAct/" + movie?.id.toString()),
-                        PostFilm("https://scirusiwatch.herokuapp.com/getLi/" + movie?.id.toString())
+                        post.PostActor("http://scirusiwatch.herokuapp.com/getAct/" + movie?.id.toString()),
+                        post.PostFilm("http://scirusiwatch.herokuapp.com/getLi/" + movie?.id.toString())
                     )
                 }
-                1 -> MovieRoomsFragment.newInstance(PostCinema("https://scirusiwatch.herokuapp.com/getRoom/" + movie?.id.toString()))
+                1 -> MovieRoomsFragment.newInstance(post.PostCinema("http://scirusiwatch.herokuapp.com/getRoom/" + movie?.id.toString()))
                 2 -> {
-                    CommentsFragment.newInstance(conv.PostComment("https://scirusiwatch.herokuapp.com/getC/" + movie?.id.toString()))
+                    CommentsFragment.newInstance(post.PostComment("http://scirusiwatch.herokuapp.com/getC/" + movie?.id.toString()))
                 }
                 else -> Fragment()
             }
@@ -128,17 +129,6 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
             return 3
         }
 
-    }
-
-    fun Post(url: String) {
-        val x = try {
-            URL(url)
-                .openStream()
-                .bufferedReader()
-                .use { it.readText() }
-        } catch (e: Exception) {
-            System.out.println(e)
-        }
     }
 }
 

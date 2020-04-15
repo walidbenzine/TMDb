@@ -473,8 +473,8 @@ public static  List<Serie> getSerieLiee(String url) throws IOException {
 		JSONObject object = GetMyJson(url);
 		JSONArray serieArray = object.getJSONArray("results");
 		if (serieArray != null) { 
-			int x = 40;
-			if(serieArray.length()<=40) {
+			int x = 5;
+			if(serieArray.length()<=5) {
 				x = serieArray.length();
 			}
 		for(int i=0;i<x;i++) {
@@ -494,7 +494,7 @@ public static  List<Serie> getSerieLiee(String url) throws IOException {
 			
 			serie = setSaisonEpisodeCount(id, serie);
 
-			Vector<Comments> Comments = Comment(Base_url+"tv/"+id+"/reviews?api_key="+API_Key+"&language=en-US&page=1");
+			/*Vector<Comments> Comments = Comment(Base_url+"tv/"+id+"/reviews?api_key="+API_Key+"&language=en-US&page=1");
 			Iterator<Comments> value = Comments.iterator();
 	        while (value.hasNext()) { 
 	            value.next().setType("Tv");
@@ -504,7 +504,7 @@ public static  List<Serie> getSerieLiee(String url) throws IOException {
 			
 			serie.setGenre(genre(GetMyJson(Base_url+"tv/"+id+"?api_key="+API_Key+"&language=fr&page=1")));
 			
-			serie.setActors(Actors(Base_url+"tv/"+id+"/credits?api_key="+API_Key+"&language=en-US"));
+			serie.setActors(Actors(Base_url+"tv/"+id+"/credits?api_key="+API_Key+"&language=en-US"));*/
 		
 			seriesLies.add(serie);
 			

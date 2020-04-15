@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONArray
 import java.net.URL
 import android.util.Log
+import java.lang.Exception
 
 
 class MainActivity : AppCompatActivity() {
@@ -51,11 +52,13 @@ class MainActivity : AppCompatActivity() {
             val password = pass.text
 
             if (!login.isNullOrEmpty() && !password.isNullOrEmpty()) {
-
-                //URL A CHANGER APRES HEBERGEMENT
-                val userJson =
-                    Post("http://scirusiwatch.herokuapp.com/getUser/" + login + "/" + password)
-                System.out.println(userJson)
+                try{
+                var userJson = JSONArray()
+                //Thread(Runnable {
+                    userJson = post.PostArray("http://scirusiwatch.herokuapp.com/getUser/" + login + "/" + password)
+                    System.out.println(userJson)
+                //}).start()
+                //Thread.sleep(1000)
                 if (userJson.toString() != "{}" && userJson.toString() != "[]" ) {
 
                     Toast.makeText(applicationContext, "Connexion réussi", Toast.LENGTH_SHORT).show()
@@ -71,6 +74,9 @@ class MainActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+                }catch(e: Exception){
+                    System.out.println(e)
+                }
             } else {
                 Toast.makeText(
                     applicationContext,
@@ -78,29 +84,6 @@ class MainActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-        }
-    }
-
-
-    fun Post(url: String): JSONArray {
-
-        val x = try {
-            URL(url)
-                .openStream()
-                .bufferedReader()
-                .use { it.readText() }
-        } catch (e: Exception) {
-            System.out.println(e)
-        }
-        try {
-            if (!x.toString().isNullOrEmpty() && x.toString() != "null" && x.toString() != "[]") {
-                return JSONArray(x.toString())
-
-            }
-            return JSONArray()
-        }catch(e: Exception){
-            System.out.println(e)
-            return JSONArray()
         }
     }
 }
