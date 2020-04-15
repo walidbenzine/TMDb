@@ -32,7 +32,7 @@ class SeasonFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        saisons = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Saison>
+        //saisons = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Saison>
         System.out.println("SAISONS  ====== " +saisons)
 
     }

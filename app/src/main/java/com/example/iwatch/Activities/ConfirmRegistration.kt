@@ -97,7 +97,11 @@ class ConfirmRegistration : AppCompatActivity() {
             var res = sb.toString()
             if (res.equals(code)) {
 
+
                 val result = post.Post(conv.usrURL(usr))
+               /* for (i in 0 until usr.genrePref!!.size) {
+                    System.out.print("yaaaaaaaw"+usr.genrePref?.get(i)?.id)
+                }*/
                 if(!result.equals("null")){
                     Toast.makeText(applicationContext,"Inscription réussie ! vous pouvez à présent vous connecter", Toast.LENGTH_LONG).show()
                     val intent = Intent(this, MainActivity::class.java)

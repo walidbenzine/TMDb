@@ -78,7 +78,7 @@ class Convert {
         }
         film.genre = genres
 
-        film.comments = post.PostComment("https://10.0.2.2:8080/getMovieComment/" + film.id)
+        film.comments = post.PostComment("http://scirusiwatch.herokuapp.com/getMovieComment/" + film.id)
 
 
         return film
