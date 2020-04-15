@@ -86,7 +86,7 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
         movie_detail_released_date.text = movie?.dateSortie
         movie_detail_resume.text = movie?.resume
         movie_rating_bar.rating = ((movie?.note + "F").toFloat())/2
-        movie_detail_rate.text = (((movie?.note + "F").toFloat())/2).toString()
+        movie_detail_rate.text = (((movie?.note + "F").toFloat())/2).toString().take(3)
 
     }
 

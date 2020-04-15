@@ -23,7 +23,7 @@ class MovieViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
         movieResume.text = movie.resume
         movieReleasedDate.text = movie.dateSortie
         Picasso.get().load(movie.imgFilm).into(moviePicture)
-        movieRate.text = movie?.note
+        movieRate.text = (((movie.note + "F").toFloat())/2).toString().take(3)
 
         itemView.setOnClickListener {
             clickListener.onMovieClicked(movie)
