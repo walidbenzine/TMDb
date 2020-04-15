@@ -101,7 +101,7 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
         override fun getItem(position: Int): Fragment {
             return when (position){
                 0 -> {
-                   /* var saisons = ArrayList<Saison>()
+                   var saisons = ArrayList<Saison>()
                     for(i in 1..serie.nbrSaison){
                         try {
                             saisons.add(convert.toSaison(post.PostObject("http://scirusiwatch.herokuapp.com/getSerieSais/" + serie.id.toString() + "/" + i)))
@@ -109,16 +109,16 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
                             System.out.println(e)
                         }
                     }
-                    SeasonFragment.newInstance(saisons)*/
-                    SeasonFragment()
+                    SeasonFragment.newInstance(saisons)
+                    //SeasonFragment()
                 }
                 1 -> {
-                    //AssociatedSeriesFragment.newInstance(post.PostSerie("http://scirusiwatch.herokuapp.com/getSerieLi/"+serie?.id.toString()))
-                    AssociatedSeriesFragment()
+                    AssociatedSeriesFragment.newInstance(post.PostSerie("http://scirusiwatch.herokuapp.com/getSerieLi/"+serie?.id.toString()))
+                    //AssociatedSeriesFragment()
                 }
                 2 -> {
-                    //CommentsFragment.newInstance(post.PostComment("http://scirusiwatch.herokuapp.com/getCSer/" + serie?.id.toString()))
-                    CommentsFragment()
+                    CommentsFragment.newInstance(post.PostComment("http://scirusiwatch.herokuapp.com/getCSer/" + serie?.id.toString()))
+                    //CommentsFragment()
                 }
                 else -> Fragment()
             }

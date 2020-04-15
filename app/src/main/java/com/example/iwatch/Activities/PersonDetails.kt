@@ -29,6 +29,7 @@ class PersonDetails : AppCompatActivity(), FilmographyFragment.OnFragmentInterac
 
         //get person
         person = intent.getSerializableExtra("actor") as Actor
+        System.out.println("ACTOR FILMOGRAPHIE ==== "+ person?.filmography)
 
         //enable back button on the toolbar
         person_detail_toolbar.title = person?.firstName

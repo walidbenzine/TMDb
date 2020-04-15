@@ -29,7 +29,7 @@ class AssociatedSeriesFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //series = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Serie>
+        series = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Serie>
         System.out.println("SERIES LIEES ==== " + series)
 
     }
