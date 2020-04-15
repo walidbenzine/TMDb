@@ -68,6 +68,7 @@ class PersonDetails : AppCompatActivity(), FilmographyFragment.OnFragmentInterac
      * A [FragmentPagerAdapter] that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
+
     class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
         override fun getItem(position: Int): Fragment {
