@@ -10,13 +10,11 @@ import com.example.iwatch.Entities.User
 import com.example.iwatch.R
 import kotlinx.android.synthetic.main.activity_edit_profile.*
 
-import org.json.JSONArray
-import java.net.URL
-
 
 class EditProfile : AppCompatActivity(), ChangePassword.ChangePasswordDialogListener{
 
     private var user: User?=null
+    private var post = PostClass()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,9 +63,7 @@ class EditProfile : AppCompatActivity(), ChangePassword.ChangePasswordDialogList
     override fun applyTexts(oldPassword: String?, newPassword: String?, confirmPassword: String?) {
         if (newPassword==confirmPassword){
 
-
-            Post("http://scirusiwatch.herokuapp.com/changepass/" + user?.id + "/" + confirmPassword)
-
+            post.PostArray("http://scirusiwatch.herokuapp.com/changepass/" + user?.id + "/" + confirmPassword)
             Toast.makeText(
                 applicationContext,
                 "mot de passe a été bien changé",
@@ -82,27 +78,4 @@ class EditProfile : AppCompatActivity(), ChangePassword.ChangePasswordDialogList
             ).show()
         }
     }
-
-    fun Post(url: String): JSONArray {
-
-        val x = try {
-            URL(url)
-                .openStream()
-                .bufferedReader()
-                .use { it.readText() }
-        } catch (e: Exception) {
-            System.out.println(e)
-        }
-        try {
-            if (!x.toString().isNullOrEmpty() && x.toString() != "null" && x.toString() != "[]") {
-                return JSONArray(x.toString())
-
-            }
-            return JSONArray()
-        }catch(e: Exception){
-            System.out.println(e)
-            return JSONArray()
-        }
-    }
-
 }

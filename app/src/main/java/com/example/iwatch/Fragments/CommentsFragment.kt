@@ -10,11 +10,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Adapters.CommentAdapter
-import com.example.iwatch.Entities.Cinema
 import com.example.iwatch.Entities.Comment
-
 import com.example.iwatch.R
-import java.lang.Exception
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Activities.PersonDetails
-import com.example.iwatch.Activities.PostFilm
 import com.example.iwatch.Adapters.PersonAdapter
 import com.example.iwatch.Entities.Actor
 

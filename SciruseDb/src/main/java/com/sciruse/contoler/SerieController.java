@@ -85,7 +85,32 @@ public class SerieController {
 		return serieRepository.getSerie(id).getSeriesLiees();
 	}
 	
+	@RequestMapping("/getSerieLi/{id}")
+	public List<Serie> getSerieLi(@PathVariable Integer id) throws IOException
+	{
+		
+		return t.getSerieLiee(Base_url+"tv/"+id+"/similar?api_key="+API_Key+"&language=en-US");
+	}
 	
+	@RequestMapping("/getSerieSais/{id}/{number}")
+	public Saison getSerieSais(@PathVariable Integer id,@PathVariable Integer number) throws IOException
+	{
+		
+		return t.getSaisonInfo(Base_url+"tv/"+id+"/season/"+number+"?api_key="+API_Key+"&language=en-US");
+	}
+	
+	@RequestMapping("/getCSer/{id}")
+	public List<Comments> getC(@PathVariable Integer id) throws IOException
+	{		
+		List<Comments> com = t.Comment(Base_url+"tv/"+id+"/reviews?api_key="+API_Key+"&language=en-US&page=1");
+		if(com.size()>5) {
+			return com.subList(0, 4);
+		}else {
+			return com;
+		}
+	}
+	
+		
 	@RequestMapping("/getSerieLast")
 	public List<Serie> getSerieLast() throws IOException
 	{

@@ -55,8 +55,8 @@ class Favorite : AppCompatActivity(), FavoriteMovieFragment.OnFragmentInteractio
 
         override fun getItem(position: Int): Fragment {
             return when (position){
-                0 -> FavoriteMovieFragment()
-                1 -> FavoriteRoomFragment()
+                0 -> FavoriteMovieFragment.newInstance(post.PostFilm("http://scirusiwatch.herokuapp.com/getFavFilm/"+ user.id))
+                1 -> FavoriteRoomFragment.newInstance(post.PostSerie("http://scirusiwatch.herokuapp.com/getFavSerie/"+ user.id))
                 else -> Fragment()
             }
         }

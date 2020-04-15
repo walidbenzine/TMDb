@@ -11,7 +11,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatDialogFragment
 
 
-class ChangePassword() : AppCompatDialogFragment() {
+class ChangePassword : AppCompatDialogFragment() {
     private var oldPassword: EditText? = null
     private var newPassword: EditText? = null
     private var confirmPassword: EditText? = null
