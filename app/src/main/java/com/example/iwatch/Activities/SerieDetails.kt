@@ -13,8 +13,12 @@ import com.example.iwatch.Fragments.CommentsFragment
 import com.example.iwatch.Fragments.SeasonFragment
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_serie_details.*
+import kotlinx.android.synthetic.main.serie_item.*
 
 class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionListener,
     AssociatedSeriesFragment.OnFragmentInteractionListener, CommentsFragment.OnFragmentInteractionListener{
@@ -45,23 +49,32 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
          serie_tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(serie_view_pager))
 
 
+        //play serie trailer
+        val youTubePlayerView: YouTubePlayerView = findViewById(R.id.serie_trailer)
+        lifecycle.addObserver(youTubePlayerView)
+
+        youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                val videoId = serie?.video
+                videoId?.let { youTubePlayer.loadVideo(it, 0f) }
+            }
+        })
+
+
         //print serie details
         serie_detail_title.text= serie?.title
+        Picasso.get().load(serie?.picture).into(serie_detail_picture)
+
+        for (i in 0..serie!!.genreList?.size!! - 1) {
+            serie_detail_genre.text = serie!!.genreList?.get(i)?.genreType.toString() + ", "
+        }
+
         serie_detail_released_date.text = serie?.dateSortie
         serie_episodes_nbr.text = serie?.nbrEpisodes!!.toString()
         serie_saisons_nbr.text = serie?.nbrSaison!!.toString()
         serie_detail_resume.text = serie?.resume
-
-        serie_rating_bar.rating = (serie?.note+ "F").toFloat()
-
-        if(serie!!.picture != null){
-            val url = serie!!.picture
-            Picasso.get().load(url).into(serie_detail_picture)
-
-        }
-        for(i in 0..serie!!.genreList?.size!!-1){
-            serie_detail_genre.text = serie!!.genreList?.get(i)?.genreType.toString() + ", "
-        }
+        serie_rating_bar.rating = ((serie?.note+ "F").toFloat())/2
+        serie_detail_rate.text = (((serie?.note + "F").toFloat())/2).toString().take(3)
 
     }
 

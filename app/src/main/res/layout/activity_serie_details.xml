@@ -27,14 +27,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <VideoView
-                android:id="@+id/serie_trailer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="250dp"></FrameLayout>
+                android:layout_height="250dp">
+                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                    android:id="@+id/serie_trailer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:autoPlay="false"
+                    app:showFullScreenButton="false"/>
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -109,7 +111,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:numStars="10"
+                                android:numStars="5"
                                 android:saveEnabled="true"
                                 android:stepSize=".5" />
 
@@ -131,7 +133,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
-                                    android:text="/10"/>
+                                    android:layout_marginLeft="4dp"
+                                    android:text="/5"/>
 
                             </LinearLayout>
 
