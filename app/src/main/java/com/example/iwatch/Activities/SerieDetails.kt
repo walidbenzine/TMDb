@@ -19,6 +19,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_movie_details.*
 import kotlinx.android.synthetic.main.activity_serie_details.*
 
 var serie = Serie()
@@ -39,7 +40,8 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
 
         serieFavori.setOnClickListener {
             post.PostVoid("http://scirusiwatch.herokuapp.com/addFavSerie/" + user.id + "/" + serie.id)
-            Toast.makeText(applicationContext, "Ajout résussi", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Ajout réussi", Toast.LENGTH_SHORT).show()
+            serieFavori.isFavorite = true
         }
 
         //enable back button on the toolbar

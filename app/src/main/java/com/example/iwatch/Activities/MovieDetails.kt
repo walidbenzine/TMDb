@@ -64,7 +64,7 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
 
         btn_movie_favori.setOnClickListener {
             post.PostVoid("http://scirusiwatch.herokuapp.com/addFavFilm/" + user.id + "/" + movie.id)
-            Toast.makeText(applicationContext, "Ajout résussi", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Ajout réussi", Toast.LENGTH_SHORT).show()
             btn_movie_favori.isFavorite = true
         }
 
