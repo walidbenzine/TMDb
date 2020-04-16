@@ -10,9 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.iwatch.Activities.PersonDetails
+import com.example.iwatch.Activities.SeasonDetails
 import com.example.iwatch.Adapters.SeasonAdapter
-import com.example.iwatch.Entities.Actor
 import com.example.iwatch.Entities.Saison
 
 import com.example.iwatch.R
@@ -26,7 +25,15 @@ private const val ARG_PARAM1 = "param1"
  * Use the [SeasonFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SeasonFragment : Fragment() {
+class SeasonFragment : Fragment(), SeasonAdapter.OnSeasonClickListener {
+
+    override fun onSeasonClicked(season: Saison) {
+        val seasonDetailsIntent = Intent(this.context, SeasonDetails::class.java)
+        seasonDetailsIntent.putExtra("season", season)
+        startActivity(seasonDetailsIntent)
+    }
+
+
     // TODO: Rename and change types of parameters
     private var saisons = ArrayList<Saison>()
 
@@ -50,11 +57,13 @@ class SeasonFragment : Fragment() {
 
         saisonRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
-            adapter = SeasonAdapter(saisons)
+            adapter = SeasonAdapter(saisons, this@SeasonFragment)
         }
 
         return v
     }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {

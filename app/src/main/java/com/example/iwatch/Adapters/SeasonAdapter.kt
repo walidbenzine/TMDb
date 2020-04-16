@@ -6,10 +6,10 @@ import com.example.iwatch.ViewHolders.SeasonViewHolder
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Entities.Saison
 import com.example.iwatch.R
-import com.squareup.picasso.Picasso
 
+class SeasonAdapter (val seasonList: ArrayList<Saison>, val seasonClickListener: OnSeasonClickListener)
+    : RecyclerView.Adapter<SeasonViewHolder>() {
 
-class SeasonAdapter (val seasonList: ArrayList<Saison>): RecyclerView.Adapter<SeasonViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeasonViewHolder {
         var v = LayoutInflater.from(parent.context).inflate(R.layout.serie_season_item, parent, false)
@@ -22,10 +22,12 @@ class SeasonAdapter (val seasonList: ArrayList<Saison>): RecyclerView.Adapter<Se
 
     override fun onBindViewHolder(holder: SeasonViewHolder, position: Int) {
         val season: Saison = seasonList[position]
+        holder.bind(season, seasonClickListener)
+    }
 
-        holder.serieSaisonTitre.text = season.name
-        holder.serieSaisonDate.text = season.releasedDate
-        holder.serieSaisonNbr.text = season.nbrEpisode.toString()
-        Picasso.get().load(season.photo).into(holder.serieSaisonPicture)
+    interface OnSeasonClickListener {
+        fun onSeasonClicked(season : Saison)
     }
 }
+
+

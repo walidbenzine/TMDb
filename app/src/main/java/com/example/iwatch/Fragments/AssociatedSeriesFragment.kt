@@ -28,11 +28,6 @@ private const val ARG_PARAM1 = "param1"
  */
 class AssociatedSeriesFragment : Fragment(), OnSerieClickListener {
 
-    override fun onSerieClicked(serie: Serie) {
-        val serieDetailsIntent = Intent(this.context, SerieDetails::class.java)
-        serieDetailsIntent.putExtra("serie", serie)
-        startActivity(serieDetailsIntent)
-    }
 
     // TODO: Rename and change types of parameters
     private var series = ArrayList<Serie>()
@@ -115,5 +110,11 @@ class AssociatedSeriesFragment : Fragment(), OnSerieClickListener {
                     putSerializable(ARG_PARAM1, param1)
                 }
             }
+    }
+
+    override fun onSerieClicked(serie: Serie) {
+        val serieDetailsIntent = Intent(this.context, SerieDetails::class.java)
+        serieDetailsIntent.putExtra("serie", serie)
+        startActivity(serieDetailsIntent)
     }
 }

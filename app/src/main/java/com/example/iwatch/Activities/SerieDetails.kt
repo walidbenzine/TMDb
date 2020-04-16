@@ -31,6 +31,7 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_serie_details)
+
         serie = intent.getSerializableExtra("serie") as Serie
 
         user.FavoriteSeries = post.PostSerie("http://scirusiwatch.herokuapp.com/getFavSerie/"+ user.id)
