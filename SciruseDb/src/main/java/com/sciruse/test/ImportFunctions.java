@@ -115,8 +115,11 @@ public class ImportFunctions {
 		JSONArray actorArray = object.getJSONArray("cast");
 		Actors act = null;
 		if (actorArray != null) { 
-			
-			for (int j=0;j<actorArray.length();j++){ 
+			int x = actorArray.length();
+			if( actorArray.length() > 5) {
+				x = 5;
+			}
+			for (int j=0;j<x;j++){ 
 				
 				JSONObject obj =(JSONObject) actorArray.get(j);
 				id = obj.get("id").toString();
@@ -193,7 +196,7 @@ public class ImportFunctions {
 		Film a =null ;
 		if (FilmArray != null) { 
 			int x=FilmArray.length();
-			if(x>15) { x = 15;}
+			if(x>5) { x = 5;}
 			for (int j=0;j<x;j++){ 
 
 				JSONObject obj =(JSONObject) FilmArray.get(j);

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sciruse.models.Film;
 import com.sciruse.models.Serie;
 import com.sciruse.models.User;
-import com.sciruse.repository.FilmRepository;
 import com.sciruse.repository.SerieRepository;
 import com.sciruse.repository.UserRepository;
 import com.sciruse.test.ImportFunctions;
@@ -76,26 +75,10 @@ public class UserController {
 		return "Ajout user reussi";
 	}
 	
-	@RequestMapping("/addgenreuser/{iduser}/{idgenre}")
-	public String addgenreuser(@PathVariable Integer iduser, @PathVariable Integer idgenre) throws IOException
-	{			
-		userRepository.addgenreuser(iduser,idgenre);
-		return "Ajout user reussi";
-	}
-	
 	@RequestMapping("/changepass/{id}/{pass}")
 	public String changepass(@PathVariable Integer id,@PathVariable String pass) throws IOException
 	{
 		userRepository.changepass(id, pass);
-		return "update password reussi";
-	}
-	
-	
-	
-	@RequestMapping("/changeinfo/{id}/{Fn}/{Ln}/{email}/{addr}/{phone}/{login}")
-	public String changeinfo(@PathVariable Integer id,@PathVariable String Fn,@PathVariable String Ln,@PathVariable String email, @PathVariable String addr, @PathVariable String phone, @PathVariable String login) throws IOException
-	{
-		userRepository.changeinfo( id, Fn, Ln, email,  addr,  phone,  login);
 		return "update password reussi";
 	}
 	
@@ -113,30 +96,6 @@ public class UserController {
 	{
 		userRepository.addUserHistFilm(user_id,filmhistory);
 		return "Ajout history film reussi";
-	}
-	
-	@RequestMapping("/addcomm/{id}/{comm}/{type}/{user}")
-	public String addcomm(@PathVariable Integer id,@PathVariable String comm,@PathVariable String type, @PathVariable String user) throws IOException
-	{
-		userRepository.addcomm( id, comm, type, user);
-
-		return "Ajout du commentaire reussi";
-	}
-	
-	@RequestMapping("/addcommfilm/{iduser}/{idcomm}")
-	public String addcommfilm(@PathVariable Integer iduser,@PathVariable Integer idcomm) throws IOException
-	{
-		 userRepository.addcommfilm( iduser,idcomm);
-		return "Ajout du commentaire film reussi";
-
-	}
-	
-	@RequestMapping("/addcommserie/{iduser}/{idcomm}")
-	public String addcommserie(@PathVariable Integer iduser,@PathVariable Integer idcomm) throws IOException
-	{
-		 userRepository.addcommserie( iduser,idcomm);
-		return "Ajout du commentaire serie reussi";
-
 	}
 	
 	
