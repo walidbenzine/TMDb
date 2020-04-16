@@ -44,11 +44,16 @@ class CinemaFragment : Fragment(), OnMovieClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        @Suppress("UNCHECKED_CAST")
+        arguments?.let {
+            films = it.getSerializable(ARG_PARAM1) as ArrayList<Movie>
+            cinemas = it.getSerializable(ARG_PARAM2) as ArrayList<Cinema>
+        }
+
+        /*@Suppress("UNCHECKED_CAST")
         films = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Movie>
 
         @Suppress("UNCHECKED_CAST")
-        cinemas = arguments?.getSerializable(ARG_PARAM2) as ArrayList<Cinema>
+        cinemas = arguments?.getSerializable(ARG_PARAM2) as ArrayList<Cinema>*/
 
     }
 
