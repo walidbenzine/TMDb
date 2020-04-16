@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Activities.EditProfile
 import com.example.iwatch.Activities.Favorite
+import com.example.iwatch.Activities.UserGenres
 import com.example.iwatch.Adapters.GenreAdapter
 import com.example.iwatch.Entities.Actor
 import com.example.iwatch.Entities.Genre
@@ -40,10 +41,8 @@ private const val ARG_PARAM2 = "param2"
 class ProfileFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var user = User()
-
     private var listener: OnFragmentInteractionListener? = null
 
-    var genres = ArrayList<Genre>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,7 +72,7 @@ class ProfileFragment : Fragment() {
         var userJeton = v.findViewById<RecyclerView>(R.id.user_jeton) as TextView
         userJeton.text = user.jeton.toString()
 
-
+        //open edit profile activity
         val btnEditProfile = v.findViewById<View>(R.id.btn_edit_profile) as Button
         btnEditProfile.setOnClickListener {
             val editProfile = Intent(this.context, EditProfile::class.java)
@@ -81,11 +80,20 @@ class ProfileFragment : Fragment() {
             startActivity(editProfile)
         }
 
+        //open favorite activity
         val btnFavorite = v.findViewById<View>(R.id.btn_favorite) as LinearLayout
         btnFavorite.setOnClickListener {
             val favoriteIntent = Intent(this.context, Favorite::class.java)
 
             startActivity(favoriteIntent)
+        }
+
+        //open user genre activity
+        val btnGenres = v.findViewById<View>(R.id.btn_genre) as LinearLayout
+        btnGenres.setOnClickListener {
+            val genreIntent = Intent(this.context, UserGenres::class.java)
+
+            startActivity(genreIntent)
         }
 
         return v

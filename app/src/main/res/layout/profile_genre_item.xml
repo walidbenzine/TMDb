@@ -8,9 +8,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
-        android:background="@color/darkGrey">
+        android:padding="16dp"
+        android:background="@color/grey"
+        android:showDividers="middle"
+        android:divider="@color/white">
         <ImageView
             android:id="@+id/genre_icon"
             android:layout_width="54dp"
