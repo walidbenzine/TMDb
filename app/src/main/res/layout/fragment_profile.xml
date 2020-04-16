@@ -16,10 +16,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:orientation="vertical"
-            android:paddingTop="32dp"
-            android:paddingBottom="32dp"
-            android:paddingRight="16dp"
-            android:paddingLeft="16dp">
+            android:gravity="center_vertical"
+            android:padding="16dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -27,8 +25,8 @@
                 android:gravity="center">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="98dp"
+                    android:layout_height="98dp"
                     android:layout_weight="0"
                     android:layout_marginLeft="16dp"
                     app:cardBackgroundColor="@color/bordo"
@@ -106,73 +104,177 @@
                 android:text="Edit Profile"
                 android:textSize="16dp"
                 android:textColor="@color/white"
-                android:layout_marginTop="16dp"/>
+                android:layout_marginTop="8dp"/>
         </LinearLayout>
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:elevation="16dp"
-            android:background="@color/grey">
-            <LinearLayout
-                android:id="@+id/btn_favorite"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@color/darkGrey"
-                android:padding="16dp">
-                <ImageView
-                    android:layout_width="58dp"
-                    android:layout_height="58dp"
-                    android:background="@mipmap/ic_heart"/>
-                <TextView
-                    android:id="@+id/genre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Favorite Movies/Series"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="24dp"
-                    android:textColor="@color/white"
-                    android:textSize="18dp"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right|center"
-                    android:layout_weight="0"
-                    android:background="@mipmap/ic_chevron_right"/>
-
-            </LinearLayout>
-
+            android:layout_weight="1">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="0"
                 android:orientation="vertical"
-                android:layout_marginTop="4dp"
-                android:paddingTop="16dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:background="@color/darkGrey">
+                android:elevation="16dp"
+                android:background="@color/grey">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Genre"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:textSize="20dp"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/genre_recycler_view"
+                <LinearLayout
+                    android:id="@+id/btn_favorite"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:listitem="@layout/profile_genre_item"
-                    android:scrollbars="none"
-                    android:layout_marginTop="16dp"/>
+                    android:orientation="horizontal"
+                    android:background="@color/darkGrey"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:background="@mipmap/ic_heart"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Favorite Movies/Series"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="24dp"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center"
+                        android:layout_weight="0"
+                        android:background="@mipmap/ic_chevron_right"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_genre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@color/darkGrey"
+                    android:padding="16dp"
+                    android:layout_marginTop="4dp">
+
+                    <ImageView
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:background="@mipmap/ic_heart"/>
+
+                    <TextView
+                        android:id="@+id/genre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Genres Préférés"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="24dp"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center"
+                        android:layout_weight="0"
+                        android:background="@mipmap/ic_chevron_right"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_invite_friend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@color/darkGrey"
+                    android:padding="16dp"
+                    android:layout_marginTop="4dp">
+
+                    <ImageView
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:background="@mipmap/ic_heart"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Inviter un ami"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="24dp"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center"
+                        android:layout_weight="0"
+                        android:background="@mipmap/ic_chevron_right"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_disconnection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@color/darkGrey"
+                    android:padding="16dp"
+                    android:layout_marginTop="4dp">
+
+                    <ImageView
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:background="@mipmap/ic_heart"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Déconnexion"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="24dp"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center"
+                        android:layout_weight="0"
+                        android:background="@mipmap/ic_chevron_right"/>
+
+                </LinearLayout>
+
+                <!--<LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="4dp"
+                    android:paddingTop="16dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:background="@color/darkGrey">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Genre"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="20dp"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/genre_recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        android:layout_marginTop="16dp"/>
+                </LinearLayout>-->
             </LinearLayout>
-        </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
     </LinearLayout>
 
 </FrameLayout>
