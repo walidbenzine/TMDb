@@ -7,12 +7,15 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.example.iwatch.Entities.Movie
 import com.example.iwatch.Entities.User
 import com.example.iwatch.Fragments.FavoriteMovieFragment
 import com.example.iwatch.Fragments.FavoriteRoomFragment
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_favorite.*
+
+private var movie = Movie()
 
 class Favorite : AppCompatActivity(), FavoriteMovieFragment.OnFragmentInteractionListener,
     FavoriteRoomFragment.OnFragmentInteractionListener{
@@ -24,6 +27,8 @@ class Favorite : AppCompatActivity(), FavoriteMovieFragment.OnFragmentInteractio
         setContentView(R.layout.activity_favorite)
 
         user = intent.getSerializableExtra("user") as User
+
+        user.FavoriteMovies = post.PostFilm("http://scirusiwatch.herokuapp.com/getFavFilm/"+ user.id)
 
         favorite_toolbar.title = "Favorite"
         setSupportActionBar(favorite_toolbar)

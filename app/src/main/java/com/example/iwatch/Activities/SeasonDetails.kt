@@ -25,7 +25,7 @@ class SeasonDetails : AppCompatActivity(), EpisodesFragment.OnFragmentInteractio
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_season_details)
 
-        //get person
+        //get season
         season = intent.getSerializableExtra("season") as Saison
 
         //enable back button on the toolbar
