@@ -8,13 +8,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Adapters.GenreAdapter
 import com.example.iwatch.Entities.Genre
+import com.example.iwatch.Entities.User
 import com.example.iwatch.Enumerations.GenreType
 import com.example.iwatch.R
 import kotlinx.android.synthetic.main.activity_user_genres.*
 
 class UserGenres : AppCompatActivity() {
-
-    var genres = ArrayList<Genre>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,16 +23,18 @@ class UserGenres : AppCompatActivity() {
         setSupportActionBar(genre_toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        user = intent.getSerializableExtra("user") as User
+
         val genreRecyclerView = findViewById<RecyclerView>(R.id.genre_recycler_view)
-
-        genres.add(Genre(GenreType.Thriller))
-        genres.add(Genre(GenreType.Action))
-        genres.add(Genre(GenreType.Romance))
-        genres.add(Genre(GenreType.Drama))
-
+        genreRecyclerView.addItemDecoration(
+            DividerItemDecoration(
+                this,
+                LinearLayoutManager.VERTICAL
+            )
+        )
         genreRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
-            adapter = GenreAdapter(genres)
+            adapter = GenreAdapter(user.genrePref)
         }
     }
 

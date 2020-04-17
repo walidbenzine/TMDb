@@ -96,14 +96,15 @@ class ProfileFragment : Fragment() {
         //open user genre activity
         val btnGenres = v.findViewById<View>(R.id.btn_genre) as LinearLayout
         btnGenres.setOnClickListener {
-            user.genrePref= convert.togenrePref(post.PostArray("http://scirusiwatch.herokuapp.com/getuserGenre/2"))
+            user.genrePref = convert.togenrePref(post.PostArray("http://scirusiwatch.herokuapp.com/getuserGenre/2"))
 
             for (i in 0 until user.genrePref!!.size) {
-//liste des genres
+                //liste des genres
                 System.out.println("cc"+ user.genrePref.get(i))
 
                 }
             val genreIntent = Intent(this.context, UserGenres::class.java)
+            genreIntent.putExtra("user", user)
             startActivity(genreIntent)
         }
 
