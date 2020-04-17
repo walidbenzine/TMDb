@@ -7,11 +7,14 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.example.iwatch.Entities.Saison
 import com.example.iwatch.Fragments.EpisodesFragment
 import com.example.iwatch.Fragments.SeasonActorsFragment
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_season_details.*
+
+private var season = Saison()
 
 class SeasonDetails : AppCompatActivity(), EpisodesFragment.OnFragmentInteractionListener,
     SeasonActorsFragment.OnFragmentInteractionListener{
@@ -21,6 +24,9 @@ class SeasonDetails : AppCompatActivity(), EpisodesFragment.OnFragmentInteractio
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_season_details)
+
+        //get season
+        season = intent.getSerializableExtra("season") as Saison
 
         //enable back button on the toolbar
         season_detail_toolbar.title = ""

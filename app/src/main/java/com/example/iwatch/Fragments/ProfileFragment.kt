@@ -15,15 +15,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Activities.EditProfile
 import com.example.iwatch.Activities.Favorite
+
 import com.example.iwatch.Activities.UserGenres
-import com.example.iwatch.Adapters.GenreAdapter
-import com.example.iwatch.Entities.Actor
-import com.example.iwatch.Entities.Genre
+import com.example.iwatch.Activities.post
 import com.example.iwatch.Entities.User
-import com.example.iwatch.Enumerations.GenreType
 
 import com.example.iwatch.R
-import kotlinx.android.synthetic.main.fragment_profile.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -84,7 +81,9 @@ class ProfileFragment : Fragment() {
         val btnFavorite = v.findViewById<View>(R.id.btn_favorite) as LinearLayout
         btnFavorite.setOnClickListener {
             val favoriteIntent = Intent(this.context, Favorite::class.java)
-
+            user.FavoriteMovies = post.PostFilm("http://scirusiwatch.herokuapp.com/getFavFilm/"+ user.id)
+            user.FavoriteSeries = post.PostSerie("http://scirusiwatch.herokuapp.com/getFavSerie/"+ user.id)
+            favoriteIntent.putExtra("user", user)
             startActivity(favoriteIntent)
         }
 
@@ -92,7 +91,7 @@ class ProfileFragment : Fragment() {
         val btnGenres = v.findViewById<View>(R.id.btn_genre) as LinearLayout
         btnGenres.setOnClickListener {
             val genreIntent = Intent(this.context, UserGenres::class.java)
-
+            //do the post here to get user genres
             startActivity(genreIntent)
         }
 

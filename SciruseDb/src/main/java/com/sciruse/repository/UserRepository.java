@@ -50,8 +50,7 @@ public interface UserRepository extends CrudRepository<User, Long>{
 	@Transactional
 	void changepass(Integer id,String password);
 	
-<<<<<<< HEAD
-=======
+
 	@Modifying
 	@Query(value = "UPDATE `user` SET `adresse`= ?5 ,`email`= ?4 ,`login`= ?7 ,`nom`= ?3 ,`prenom`= ?2 ,`tel`= ?6 WHERE `id`= ?1 ;", nativeQuery = true)
 	@Transactional
@@ -61,5 +60,14 @@ public interface UserRepository extends CrudRepository<User, Long>{
 	@Query(value = "INSERT INTO `user_genre_pref`(`user_id`, `genre_pref`) VALUES ( ?1 , ?2 ) ;", nativeQuery = true)
 	@Transactional
 	void addgenreuser(Integer iduser,Integer idgenre);
->>>>>>> eb02d475c5b3469cfd142a7cd6d6b3adb0a480c2
+	
+	@Query(value = "INSERT INTO sciruse.comments(`id`, `text`, `type`, `user`) VALUES ( ?1 , ?2 , ?3 , ?4 );", nativeQuery = true)
+	void addcomm(Integer id, String comm, String type, String user);
+	
+	@Query(value = "INSERT INTO `film_comments`(`film_id`, `comments`) VALUES ( ?1 , ?2 );", nativeQuery = true)
+	void addcommfilm(Integer iduser, Integer idcomm);
+	
+	@Query(value = "INSERT INTO `serie_comments`(`film_id`, `comments`) VALUES ( ?1 , ?2 );", nativeQuery = true)
+	void addcommserie(Integer iduser, Integer idcomm);
+
 }

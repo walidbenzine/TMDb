@@ -41,6 +41,7 @@ class Home : AppCompatActivity(),
 
         user = intent.getSerializableExtra("user") as User
 
+
         // set the toolbar
         setSupportActionBar(toolbar)
 

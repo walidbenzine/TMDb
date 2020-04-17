@@ -1,7 +1,9 @@
 package com.example.iwatch.Entities
 
+import java.io.Serializable
 
-class Saison {
+
+class Saison : Serializable {
 
     internal var id: Int = 0
     internal var name: String? = null

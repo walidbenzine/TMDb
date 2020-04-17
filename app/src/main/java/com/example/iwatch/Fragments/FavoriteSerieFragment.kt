@@ -1,12 +1,18 @@
 package com.example.iwatch.Fragments
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Activities.SerieDetails
+import com.example.iwatch.Adapters.OnSerieClickListener
+import com.example.iwatch.Adapters.SerieAdapter
 import com.example.iwatch.Entities.Serie
 
 import com.example.iwatch.R
@@ -22,7 +28,9 @@ private var series = ArrayList<Serie>()
  * Use the [FavoriteRoomFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class FavoriteRoomFragment : Fragment() {
+class FavoriteRoomFragment : Fragment(), OnSerieClickListener {
+
+
     // TODO: Rename and change types of parameters
     private var listener: OnFragmentInteractionListener? = null
 
@@ -39,7 +47,23 @@ class FavoriteRoomFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorite_room, container, false)
+        val v = inflater.inflate(R.layout.fragment_favorite_room, container, false)
+
+        val serieFavRecyclerView = v.findViewById<RecyclerView>(R.id.favorite_room_recycler_view)
+
+        serieFavRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
+            adapter = SerieAdapter(series , this@FavoriteRoomFragment)
+        }
+
+        return v
+
+    }
+
+    override fun onSerieClicked(serie: Serie) {
+        val serieDetailsIntent = Intent(this.context, SerieDetails::class.java)
+        serieDetailsIntent.putExtra("serie", serie)
+        startActivity(serieDetailsIntent)
     }
 
     companion object {

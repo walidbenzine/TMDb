@@ -1,12 +1,18 @@
 package com.example.iwatch.Fragments
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Activities.SerieDetails
+import com.example.iwatch.Adapters.OnSerieClickListener
+import com.example.iwatch.Adapters.SerieAdapter
 import com.example.iwatch.Entities.Serie
 
 import com.example.iwatch.R
@@ -20,7 +26,9 @@ private const val ARG_PARAM1 = "param1"
  * Use the [AssociatedSeriesFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class AssociatedSeriesFragment : Fragment() {
+class AssociatedSeriesFragment : Fragment(), OnSerieClickListener {
+
+
     // TODO: Rename and change types of parameters
     private var series = ArrayList<Serie>()
 
@@ -29,8 +37,9 @@ class AssociatedSeriesFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //series = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Serie>
+        series = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Serie>
         System.out.println("SERIES LIEES ==== " + series)
+        System.out.println("SERIES Tailles ==== " + series.size)
 
     }
 
@@ -40,6 +49,18 @@ class AssociatedSeriesFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         var v = inflater.inflate(R.layout.fragment_associated_series, container, false)
+        val serieRecyclerView = v.findViewById<RecyclerView>(R.id.associated_series_recycler_view)
+
+        try {
+            System.out.println("SERIES ==== " + series.size)
+        }catch (e: Exception){
+            System.out.println(e)
+        }
+
+        serieRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
+            adapter = SerieAdapter(series, this@AssociatedSeriesFragment)
+        }
         return v
     }
 
@@ -96,5 +117,11 @@ class AssociatedSeriesFragment : Fragment() {
                     putSerializable(ARG_PARAM1, param1)
                 }
             }
+    }
+
+    override fun onSerieClicked(serie: Serie) {
+        val serieDetailsIntent = Intent(this.context, SerieDetails::class.java)
+        serieDetailsIntent.putExtra("serie", serie)
+        startActivity(serieDetailsIntent)
     }
 }

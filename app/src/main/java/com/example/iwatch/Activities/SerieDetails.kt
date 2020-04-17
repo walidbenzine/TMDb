@@ -19,6 +19,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_movie_details.*
 import kotlinx.android.synthetic.main.activity_serie_details.*
 
 var serie = Serie()
@@ -31,12 +32,16 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_serie_details)
+
         serie = intent.getSerializableExtra("serie") as Serie
+
+        user.FavoriteSeries = post.PostSerie("http://scirusiwatch.herokuapp.com/getFavSerie/"+ user.id)
 
 
         serieFavori.setOnClickListener {
-            post.PostVoid("http://scirusiwatch.herokuapp.com/addFavSerie/" + user.id + "/" + serie?.id)
-            Toast.makeText(applicationContext, "Ajout résussi", Toast.LENGTH_SHORT).show()
+            post.PostVoid("http://scirusiwatch.herokuapp.com/addFavSerie/" + user.id + "/" + serie.id)
+            Toast.makeText(applicationContext, "Ajout réussi", Toast.LENGTH_SHORT).show()
+            serieFavori.isFavorite = true
         }
 
         //enable back button on the toolbar
@@ -62,26 +67,26 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
 
         youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
-                val videoId = serie?.video
+                val videoId = serie.video
                 videoId?.let { youTubePlayer.loadVideo(it, 0f) }
             }
         })
 
 
         //print serie details
-        serie_detail_title.text= serie?.title
-        Picasso.get().load(serie?.picture).into(serie_detail_picture)
+        serie_detail_title.text= serie.title
+        Picasso.get().load(serie.picture).into(serie_detail_picture)
 
-        for (i in 0..serie!!.genreList?.size!! - 1) {
-            serie_detail_genre.text = serie!!.genreList?.get(i)?.genreType.toString() + ", "
+        for (i in 0..serie.genreList?.size!! - 1) {
+            serie_detail_genre.text = serie.genreList?.get(i)?.genreType.toString() + ", "
         }
 
-        serie_detail_released_date.text = serie?.dateSortie
-        serie_episodes_nbr.text = serie?.nbrEpisodes!!.toString()
-        serie_saisons_nbr.text = serie?.nbrSaison!!.toString()
-        serie_detail_resume.text = serie?.resume
-        serie_rating_bar.rating = ((serie?.note+ "F").toFloat())/2
-        serie_detail_rate.text = (((serie?.note + "F").toFloat())/2).toString().take(3)
+        serie_detail_released_date.text = serie.dateSortie
+        serie_episodes_nbr.text = serie.nbrEpisodes.toString()
+        serie_saisons_nbr.text = serie.nbrSaison.toString()
+        serie_detail_resume.text = serie.resume
+        serie_rating_bar.rating = ((serie.note+ "F").toFloat())/2
+        serie_detail_rate.text = (((serie.note + "F").toFloat())/2).toString().take(3)
 
     }
 
@@ -101,7 +106,7 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
         override fun getItem(position: Int): Fragment {
             return when (position){
                 0 -> {
-                   /* var saisons = ArrayList<Saison>()
+                   var saisons = ArrayList<Saison>()
                     for(i in 1..serie.nbrSaison){
                         try {
                             saisons.add(convert.toSaison(post.PostObject("http://scirusiwatch.herokuapp.com/getSerieSais/" + serie.id.toString() + "/" + i)))
@@ -109,16 +114,16 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
                             System.out.println(e)
                         }
                     }
-                    SeasonFragment.newInstance(saisons)*/
-                    SeasonFragment()
+                    SeasonFragment.newInstance(saisons)
+                    //SeasonFragment()
                 }
                 1 -> {
-                    //AssociatedSeriesFragment.newInstance(post.PostSerie("http://scirusiwatch.herokuapp.com/getSerieLi/"+serie?.id.toString()))
-                    AssociatedSeriesFragment()
+                    AssociatedSeriesFragment.newInstance(post.PostSerie("http://scirusiwatch.herokuapp.com/getSerieLi/"+serie.id.toString()))
+                    //AssociatedSeriesFragment()
                 }
                 2 -> {
-                    //CommentsFragment.newInstance(post.PostComment("http://scirusiwatch.herokuapp.com/getCSer/" + serie?.id.toString()))
-                    CommentsFragment()
+                    CommentsFragment.newInstance(post.PostComment("http://scirusiwatch.herokuapp.com/getCSer/" + serie.id.toString()))
+                    //CommentsFragment()
                 }
                 else -> Fragment()
             }
