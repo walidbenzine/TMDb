@@ -115,8 +115,7 @@ public class SerieController {
 	{
 		return t.Actors(Base_url+"tv/"+id+"/season/"+number+"/credits?api_key="+API_Key+"&language=en-US");
 	}
-	
-	
+		
 	
 		
 	@RequestMapping("/getSerieLast")
