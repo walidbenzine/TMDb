@@ -48,10 +48,15 @@ class HomeFragment : Fragment(), OnSerieClickListener , OnMovieClickListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        arguments?.let {
+            serie = (it.getSerializable(ARG_PARAM1) as ArrayList<Serie>)
+            films = (it.getSerializable(ARG_PARAM2) as ArrayList<Movie>)
+        }
+
+        /*@Suppress("UNCHECKED_CAST")
+        serie = (arguments?.getSerializable(ARG_PARAM1) as ArrayList<Serie>)
         @Suppress("UNCHECKED_CAST")
-        serie = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Serie>
-        @Suppress("UNCHECKED_CAST")
-        films = arguments?.getSerializable(ARG_PARAM2) as ArrayList<Movie>
+        films = (arguments?.getSerializable(ARG_PARAM2) as ArrayList<Movie>)*/
 
     }
 
@@ -59,10 +64,6 @@ class HomeFragment : Fragment(), OnSerieClickListener , OnMovieClickListener{
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
-        System.out.println("FIRST SERIE video = "+ serie.get(0).video+"\u001B[44m")
-        //System.out.println("FIRST FILM TITLE =  "+ films.get(0).title)
 
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_home, container, false)

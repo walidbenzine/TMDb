@@ -10,6 +10,7 @@ import com.example.iwatch.R
 import kotlinx.android.synthetic.main.activity_confirm_registration.*
 import android.widget.Toast
 import com.example.iwatch.Entities.User
+import org.jetbrains.anko.doAsync
 import java.net.URL
 
 class ConfirmRegistration : AppCompatActivity() {
@@ -101,11 +102,19 @@ class ConfirmRegistration : AppCompatActivity() {
                 val result = post.Post(conv.usrURL(usr))
 
 
-                for (i in 0 until usr.genrePref!!.size) {
-                    post.PostVoid("http://scirusiwatch.herokuapp.com/addgenreuser/${usr.id}/${usr.genrePref?.get(i)?.id}")
-                }
+
                 if(!result.equals("null")){
                     Toast.makeText(applicationContext,"Inscription réussie ! vous pouvez à présent vous connecter", Toast.LENGTH_LONG).show()
+                    var ress = post.PostInt("http://scirusiwatch.herokuapp.com/maxid")
+                    for (i in 0 until usr.genrePref!!.size) {
+                        System.out.println("yaaaaw1")
+                        System.out.println("yaaaaw"+usr.genrePref?.get(i)?.id)
+                        doAsync {
+                            post.PostVoid("http://scirusiwatch.herokuapp.com/addgenreuser/${ress}/${usr.genrePref?.get(i)?.id}")
+
+                        }
+
+                    }
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 }else{

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.os.StrictMode
 import android.view.View
 import android.widget.Button
@@ -12,8 +13,9 @@ import android.widget.Toast
 import com.example.iwatch.R
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONArray
-import java.net.URL
 import android.util.Log
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import java.lang.Exception
 
 
@@ -21,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     var id = ""
     val PERMISSION_REQUEST_CODE = 1
+    var mHandler: Handler? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,31 +55,34 @@ class MainActivity : AppCompatActivity() {
             val password = pass.text
 
             if (!login.isNullOrEmpty() && !password.isNullOrEmpty()) {
+                Toast.makeText(applicationContext, "Connexion en cours", Toast.LENGTH_SHORT).show()
                 try{
                 var userJson = JSONArray()
-                //Thread(Runnable {
-                    userJson = post.PostArray("http://scirusiwatch.herokuapp.com/getUser/" + login + "/" + password)
-                    System.out.println(userJson)
-                //}).start()
-                //Thread.sleep(1000)
-                if (userJson.toString() != "{}" && userJson.toString() != "[]" ) {
 
-                    Toast.makeText(applicationContext, "Connexion réussi", Toast.LENGTH_SHORT).show()
-
-                    val user = convert.toUser(userJson.getJSONObject(0))
                     val homeIntent = Intent(this, Home::class.java)
-                    user.FavoriteMovies = post.PostFilm("http://scirusiwatch.herokuapp.com/getFavFilm/"+ user.id)
-                    user.FavoriteSeries = post.PostSerie("http://scirusiwatch.herokuapp.com/getFavSerie/"+ user.id)
-                    homeIntent.putExtra("user", user)
-                    startActivity(homeIntent)
-                } else {
-                    Toast.makeText(
-                        applicationContext,
-                        "Identifiants incorrects",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                }catch(e: Exception){
+                    doAsync {
+                        userJson = post.PostArray("http://scirusiwatch.herokuapp.com/getUser/" + login + "/" + password)
+                        if (userJson.toString() != "{}" && userJson.toString() != "[]" ) {
+
+                            val user = convert.toUser(userJson.getJSONObject(0))
+                            user.FavoriteMovies = post.PostFilm("http://scirusiwatch.herokuapp.com/getFavFilm/"+ user.id)
+                            user.FavoriteSeries = post.PostSerie("http://scirusiwatch.herokuapp.com//getFavSerie/"+ user.id)
+
+                            uiThread {
+                                Toast.makeText(applicationContext, "Connexion réussi", Toast.LENGTH_SHORT).show()
+                                homeIntent.putExtra("user", user)
+                                startActivity(homeIntent)
+                            }
+
+                    }else {
+                            Toast.makeText(
+                                    applicationContext,
+                                    "Identifiants incorrects",
+                                    Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                } catch(e: Exception){
                     System.out.println(e)
                 }
             } else {

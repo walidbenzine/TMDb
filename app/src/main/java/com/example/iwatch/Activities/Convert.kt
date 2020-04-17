@@ -129,12 +129,11 @@ class Convert {
         var ep = Episode()
 
         ep.id = obj.get("id").toString().toInt()
-        ep.name = obj.get("Name").toString()
+        ep.name = obj.get("name").toString()
         ep.resume = obj.get("resume").toString()
-        ep.dateDiffusion = obj.get("Date_Diff").toString()
+        ep.dateDiffusion = obj.get("date_Diff").toString()
         ep.number = obj.get("number").toString()
         ep.picture = "https://image.tmdb.org/t/p/original" + obj.get("image").toString()
-        ep.trailer = obj.get("bandeAnnonce").toString()
 
         return ep
     }

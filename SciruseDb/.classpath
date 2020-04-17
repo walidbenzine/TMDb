@@ -28,6 +28,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/islam/Desktop/mariadb-java-client-1.5.7.tar.gz"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

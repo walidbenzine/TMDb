@@ -15,6 +15,7 @@ import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_season_details.*
 
 private var season = Saison()
+private var number =""
 
 class SeasonDetails : AppCompatActivity(), EpisodesFragment.OnFragmentInteractionListener,
     SeasonActorsFragment.OnFragmentInteractionListener{
@@ -27,6 +28,8 @@ class SeasonDetails : AppCompatActivity(), EpisodesFragment.OnFragmentInteractio
 
         //get season
         season = intent.getSerializableExtra("season") as Saison
+        number = intent.getSerializableExtra("number") as String
+
 
         //enable back button on the toolbar
         season_detail_toolbar.title = ""
@@ -59,8 +62,13 @@ class SeasonDetails : AppCompatActivity(), EpisodesFragment.OnFragmentInteractio
 
         override fun getItem(position: Int): Fragment {
             return when (position){
-                0 -> EpisodesFragment()
-                1 -> SeasonActorsFragment()
+                0 -> {
+                    EpisodesFragment.newInstance(season.episodeList)
+                }
+                1 -> {
+                    SeasonActorsFragment.newInstance(post.PostActor("http://scirusiwatch.herokuapp.com/getSaisonActs/" + season.id.toString() + "/" + number))
+                    //SeasonActorsFragment()
+                }
                 else -> Fragment()
             }
         }

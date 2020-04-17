@@ -1,5 +1,8 @@
 package com.example.iwatch.Entities
-class Episode {
+
+import java.io.Serializable
+
+class Episode :Serializable{
 
     internal var id: Int? = 0
     internal var number: String? = null

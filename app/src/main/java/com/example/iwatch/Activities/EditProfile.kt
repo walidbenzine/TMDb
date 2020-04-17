@@ -59,7 +59,8 @@ class EditProfile : AppCompatActivity(), ChangePassword.ChangePasswordDialogList
             user?.email = edit_email.text.toString()
             user?.mobile = edit_phone_number.text.toString()
             user?.adresse = edit_address.text.toString()
-           // Post("http://scirusiwatch.herokuapp.com/changeinfo/" + user?.id + "/" + +"/" + +"/" + +"/" + +"/" + )
+
+           post.PostVoid("http://scirusiwatch.herokuapp.com/changeinfo/" + user?.id + "/" + user?.firstName+"/" + user?.lastName+"/" +user?.email +"/" +user?.adresse +"/" + user?.mobile+"/" +user?.login )
         }
         return super.onOptionsItemSelected(item)
     }

@@ -39,7 +39,6 @@ class AssociatedSeriesFragment : Fragment(), OnSerieClickListener {
 
         series = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Serie>
         System.out.println("SERIES LIEES ==== " + series)
-        System.out.println("SERIES Tailles ==== " + series.size)
 
     }
 
@@ -51,11 +50,6 @@ class AssociatedSeriesFragment : Fragment(), OnSerieClickListener {
         var v = inflater.inflate(R.layout.fragment_associated_series, container, false)
         val serieRecyclerView = v.findViewById<RecyclerView>(R.id.associated_series_recycler_view)
 
-        try {
-            System.out.println("SERIES ==== " + series.size)
-        }catch (e: Exception){
-            System.out.println(e)
-        }
 
         serieRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)

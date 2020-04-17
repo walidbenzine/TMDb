@@ -19,6 +19,7 @@ import com.example.iwatch.R
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -29,13 +30,17 @@ class SeasonFragment : Fragment(), SeasonAdapter.OnSeasonClickListener {
 
     override fun onSeasonClicked(season: Saison) {
         val seasonDetailsIntent = Intent(this.context, SeasonDetails::class.java)
+        System.out.println("EPISODES ====== " +season.episodeList)
+        var position = saisons.indexOf(season)
         seasonDetailsIntent.putExtra("season", season)
+        seasonDetailsIntent.putExtra("number", numbers.get(position))
         startActivity(seasonDetailsIntent)
     }
 
 
     // TODO: Rename and change types of parameters
     private var saisons = ArrayList<Saison>()
+    private var numbers = ArrayList<String>()
 
     private var listener: OnFragmentInteractionListener? = null
 
@@ -43,7 +48,7 @@ class SeasonFragment : Fragment(), SeasonAdapter.OnSeasonClickListener {
         super.onCreate(savedInstanceState)
 
         saisons = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Saison>
-        System.out.println("SAISONS  ====== " +saisons)
+        numbers = arguments?.getSerializable(ARG_PARAM2) as ArrayList<String>
 
     }
 
@@ -54,8 +59,6 @@ class SeasonFragment : Fragment(), SeasonAdapter.OnSeasonClickListener {
         // Inflate the layout for this fragment
         var v = inflater.inflate(R.layout.fragment_season, container, false)
         val saisonRecyclerView = v.findViewById<RecyclerView>(R.id.season_view_pager)
-
-        System.out.println("SAISONS  TAILLES ====== " +saisons.size)
 
         saisonRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
@@ -113,11 +116,11 @@ class SeasonFragment : Fragment(), SeasonAdapter.OnSeasonClickListener {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: ArrayList<Saison>) =
+        fun newInstance(param1: ArrayList<Saison>, param2 :ArrayList<String>) =
             SeasonFragment().apply {
                 arguments = Bundle().apply {
                     putSerializable(ARG_PARAM1, param1)
-
+                    putSerializable(ARG_PARAM2, param2)
                 }
             }
     }

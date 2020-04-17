@@ -53,6 +53,25 @@ class PostClass {
         return "null"
     }
 
+    fun PostInt(url: String) : Int {
+
+        val x = try {
+            URL(url)
+                .openStream()
+                .bufferedReader()
+                .use { it.readText() } }
+        catch(e: Exception){
+            System.out.println(e)
+        }
+        if(!x.toString().isNullOrEmpty() && x.toString() != "null"){
+            System.out.println(x.toString())
+            System.out.println(x.toString().toInt())
+            return x.toString().toInt()
+
+        }
+        return 0
+    }
+
 
     fun PostVoid(url: String) {
         val x = try {

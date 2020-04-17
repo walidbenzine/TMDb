@@ -110,6 +110,13 @@ public class SerieController {
 		}
 	}
 	
+	@RequestMapping("/getSaisonActs/{id}/{number}")
+	public List<Actors> getSaisonActs(@PathVariable Integer id,@PathVariable Integer number) throws IOException
+	{
+		return t.Actors(Base_url+"tv/"+id+"/season/"+number+"/credits?api_key="+API_Key+"&language=en-US");
+	}
+		
+	
 		
 	@RequestMapping("/getSerieLast")
 	public List<Serie> getSerieLast() throws IOException

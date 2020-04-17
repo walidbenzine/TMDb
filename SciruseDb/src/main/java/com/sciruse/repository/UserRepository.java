@@ -49,7 +49,7 @@ public interface UserRepository extends CrudRepository<User, Long>{
 	@Query(value = "UPDATE sciruse.user SET `password`= ?2 WHERE `id`= ?1 ;", nativeQuery = true)
 	@Transactional
 	void changepass(Integer id,String password);
-	
+
 
 	@Modifying
 	@Query(value = "UPDATE `user` SET `adresse`= ?5 ,`email`= ?4 ,`login`= ?7 ,`nom`= ?3 ,`prenom`= ?2 ,`tel`= ?6 WHERE `id`= ?1 ;", nativeQuery = true)
@@ -69,5 +69,10 @@ public interface UserRepository extends CrudRepository<User, Long>{
 	
 	@Query(value = "INSERT INTO `serie_comments`(`film_id`, `comments`) VALUES ( ?1 , ?2 );", nativeQuery = true)
 	void addcommserie(Integer iduser, Integer idcomm);
-
+	
+	@Query(value = "SELECT MAX(ID) FROM user;", nativeQuery = true)
+	Integer maxid();
+	
+	
+	
 }

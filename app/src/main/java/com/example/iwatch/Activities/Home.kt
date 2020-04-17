@@ -16,6 +16,8 @@ import com.example.iwatch.Fragments.*
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_home.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import org.json.JSONArray
 import org.json.JSONObject
 import java.net.URL
@@ -101,17 +103,24 @@ class Home : AppCompatActivity(),
 
                 0 -> {
                     System.out.println("CASE 0")
-                    HomeFragment.newInstance(
-                        post.PostSerie("http://scirusiwatch.herokuapp.com/getSerieLast"),
-                        post.PostFilm("http://scirusiwatch.herokuapp.com/getlast")
-                    )
+                    /*doAsync {
+                        var res = post.PostSerie("http://scirusiwatch.herokuapp.com/getSerieLast")
+                        var res2 = post.PostFilm("http://scirusiwatch.herokuapp.com/getlast")
+                        uiThread { HomeFragment.newInstance(res,res2)
+                        System.out.println("DONE!!!!")}
+                    }
+                    HomeFragment() */
+                    HomeFragment.newInstance(post.PostSerie("http://scirusiwatch.herokuapp.com/getSerieLast"),post.PostFilm("http://scirusiwatch.herokuapp.com/getlast"))
                 }
                 1 -> {
                     System.out.println("CASE 1")
-                    CinemaFragment.newInstance(
-                        post.PostFilm("http://scirusiwatch.herokuapp.com/getTopRated"),
-                        post.PostCinema("http://scirusiwatch.herokuapp.com/getAllRooms")
-                    )
+                    /* doAsync {
+                        var res = post.PostFilm("http://scirusiwatch.herokuapp.com/getTopRated")
+                        var res2 = post.PostCinema("http://scirusiwatch.herokuapp.com/getAllRooms")
+                        uiThread { CinemaFragment.newInstance(res,res2) }
+                    }
+                    CinemaFragment() */
+                    CinemaFragment.newInstance(post.PostFilm("http://scirusiwatch.herokuapp.com/getTopRated"),post.PostCinema("http://scirusiwatch.herokuapp.com/getAllRooms"))
                 }
                 2 -> {
                     System.out.println("CASE 2")
