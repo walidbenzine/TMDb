@@ -113,7 +113,7 @@ class ConfirmRegistration : AppCompatActivity() {
                             post.PostVoid("http://scirusiwatch.herokuapp.com/addgenreuser/${ress}/${usr.genrePref?.get(i)?.id}")
 
                         }
-                       // post.PostVoid("http://scirusiwatch.herokuapp.com/addgenreuser/${ress}/${usr.genrePref?.get(i)?.id}")
+
                     }
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)

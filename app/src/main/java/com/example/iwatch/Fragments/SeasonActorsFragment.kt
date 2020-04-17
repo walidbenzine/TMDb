@@ -28,8 +28,9 @@ class SeasonActorsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //actors = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Actor>
+        actors = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Actor>
         System.out.println("ACTOOORS ==== "+actors)
+
     }
 
     override fun onCreateView(
