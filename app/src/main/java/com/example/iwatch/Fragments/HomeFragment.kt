@@ -52,12 +52,6 @@ class HomeFragment : Fragment(), OnSerieClickListener , OnMovieClickListener{
             serie = (it.getSerializable(ARG_PARAM1) as ArrayList<Serie>)
             films = (it.getSerializable(ARG_PARAM2) as ArrayList<Movie>)
         }
-
-        /*@Suppress("UNCHECKED_CAST")
-        serie = (arguments?.getSerializable(ARG_PARAM1) as ArrayList<Serie>)
-        @Suppress("UNCHECKED_CAST")
-        films = (arguments?.getSerializable(ARG_PARAM2) as ArrayList<Movie>)*/
-
     }
 
     override fun onCreateView(

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.sciruse.models.Film;
+import com.sciruse.models.Genre;
 import com.sciruse.models.Serie;
 import com.sciruse.models.User;
 import com.sciruse.repository.SerieRepository;
@@ -76,7 +77,7 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping("/changeinfo/{id}/{Fn}/{Ls}/{email}/{addr}/{phone}/{login}")
+	@RequestMapping("/changeinfo/{id}/{Fn}/{Ln}/{email}/{addr}/{phone}/{login}")
 	public String changeinfo(@PathVariable Integer id,@PathVariable String Fn,@PathVariable String Ln,@PathVariable String email,@PathVariable String addr,@PathVariable String phone,@PathVariable String login) throws IOException
 	{			
 		userRepository.changeinfo( id, Fn, Ln, email,  addr,  phone,  login);
@@ -144,6 +145,13 @@ public class UserController {
 		 
 		return userRepository.maxid();
 
+	}
+	
+	@RequestMapping("/getuserGenre/{id}")
+	public List<Genre> getuserGenre(@PathVariable Integer id) throws IOException
+	{
+		
+		return userRepository.getUser(id).getGenrePref();
 	}
 	
 
