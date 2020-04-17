@@ -49,7 +49,6 @@ class SeasonFragment : Fragment(), SeasonAdapter.OnSeasonClickListener {
 
         saisons = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Saison>
         numbers = arguments?.getSerializable(ARG_PARAM2) as ArrayList<String>
-        System.out.println("SAISONS  ====== " +saisons)
 
     }
 
@@ -60,8 +59,6 @@ class SeasonFragment : Fragment(), SeasonAdapter.OnSeasonClickListener {
         // Inflate the layout for this fragment
         var v = inflater.inflate(R.layout.fragment_season, container, false)
         val saisonRecyclerView = v.findViewById<RecyclerView>(R.id.season_view_pager)
-
-        System.out.println("SAISONS  TAILLES ====== " +saisons.size)
 
         saisonRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)

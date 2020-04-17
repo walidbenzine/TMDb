@@ -30,7 +30,6 @@ class SeasonDetails : AppCompatActivity(), EpisodesFragment.OnFragmentInteractio
         season = intent.getSerializableExtra("season") as Saison
         number = intent.getSerializableExtra("number") as String
 
-        System.out.println("SAISON ==== " + season)
 
         //enable back button on the toolbar
         season_detail_toolbar.title = ""
@@ -64,12 +63,11 @@ class SeasonDetails : AppCompatActivity(), EpisodesFragment.OnFragmentInteractio
         override fun getItem(position: Int): Fragment {
             return when (position){
                 0 -> {
-
-                    EpisodesFragment()
+                    EpisodesFragment.newInstance(season.episodeList)
                 }
                 1 -> {
-                    //SeasonActorsFragment.newInstance(post.PostActor("http://http://scirusiwatch.herokuapp.com/getSaisonActs/" + season.id.toString() + "/" + number))
-                    SeasonActorsFragment()
+                    SeasonActorsFragment.newInstance(post.PostActor("http://scirusiwatch.herokuapp.com/getSaisonActs/" + season.id.toString() + "/" + number))
+                    //SeasonActorsFragment()
                 }
                 else -> Fragment()
             }
