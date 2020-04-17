@@ -73,4 +73,6 @@ public interface UserRepository extends CrudRepository<User, Long>{
 	@Query(value = "SELECT MAX(ID) FROM user;", nativeQuery = true)
 	Integer maxid();
 	
+	
+	
 }

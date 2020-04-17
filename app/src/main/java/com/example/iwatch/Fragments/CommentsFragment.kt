@@ -10,10 +10,13 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Activities.user
 import com.example.iwatch.Adapters.CommentAdapter
 import com.example.iwatch.Entities.Comment
+import com.example.iwatch.Entities.User
 import com.example.iwatch.R
 import kotlinx.android.synthetic.main.fragment_comments.*
+import java.net.URL
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -60,8 +63,10 @@ class CommentsFragment : Fragment() {
 
         add_comment.setOnEditorActionListener { v, actionId, event ->
             if(actionId==EditorInfo.IME_ACTION_SEND){
+
                 System.out.println("comment content: " + add_comment.text.toString())
-                //Do here the function to register the comment
+                PostVoid("http://scirusiwatch.herokuapp.com/addcomm/${user.id}/${add_comment.text.toString()}/movie/${user.login}")
+
                 true
             }
             false
@@ -87,6 +92,17 @@ class CommentsFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         listener = null
+    }
+
+    fun PostVoid(url: String) {
+        val x = try {
+            URL(url)
+                .openStream()
+                .bufferedReader()
+                .use { it.readText() }
+        } catch (e: java.lang.Exception) {
+            System.out.println(e)
+        }
     }
 
     /**

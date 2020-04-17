@@ -75,6 +75,14 @@ public class UserController {
 		return "Ajout user reussi";
 	}
 	
+	
+	@RequestMapping("/changeinfo/{id}/{Fn}/{Ls}/{email}/{addr}/{phone}/{login}")
+	public String changeinfo(@PathVariable Integer id,@PathVariable String Fn,@PathVariable String Ln,@PathVariable String email,@PathVariable String addr,@PathVariable String phone,@PathVariable String login) throws IOException
+	{			
+		userRepository.changeinfo( id, Fn, Ln, email,  addr,  phone,  login);
+		return "change info user reussi";
+	}
+	
 	@RequestMapping("/changepass/{id}/{pass}")
 	public String changepass(@PathVariable Integer id,@PathVariable String pass) throws IOException
 	{
@@ -114,6 +122,13 @@ public class UserController {
 		return "Ajout du commentaire film reussi";
 
 	}
+	
+	@RequestMapping("/addgenreuser/{iduser}/{idgenre}")
+	public String addgenreuser(@PathVariable Integer iduser, @PathVariable Integer idgenre) throws IOException
+	{			
+		userRepository.addgenreuser(iduser,idgenre);
+		return "add genre user reussi";
+		}
 	
 	@RequestMapping("/addcommserie/{iduser}/{idcomm}")
 	public String addcommserie(@PathVariable Integer iduser,@PathVariable Integer idcomm) throws IOException
