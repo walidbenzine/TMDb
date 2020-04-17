@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.EditText
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Activities.user
@@ -15,6 +17,7 @@ import com.example.iwatch.Adapters.CommentAdapter
 import com.example.iwatch.Entities.Comment
 import com.example.iwatch.Entities.User
 import com.example.iwatch.R
+import kotlinx.android.synthetic.main.comment_item.*
 import kotlinx.android.synthetic.main.fragment_comments.*
 import java.net.URL
 
@@ -49,6 +52,8 @@ class CommentsFragment : Fragment() {
         // Inflate the layout for this fragment
         var v = inflater.inflate(R.layout.fragment_comments, container, false)
         val commentRecyclerView = v.findViewById<RecyclerView>(R.id.comments_recycler_view)
+        var userPicture = v.findViewById<ImageView>(R.id.add_comment_user_picture)
+        var btnAddComment = v.findViewById<EditText>(R.id.add_comment)
 
         try {
             System.out.println("COMMENTS ==== " + comments)
@@ -61,7 +66,9 @@ class CommentsFragment : Fragment() {
             adapter = CommentAdapter(comments)
         }
 
-        add_comment.setOnEditorActionListener { v, actionId, event ->
+        userPicture.setImageResource(R.mipmap.ic_drama)
+
+        btnAddComment.setOnEditorActionListener { v, actionId, event ->
             if(actionId==EditorInfo.IME_ACTION_SEND){
 
                 System.out.println("comment content: " + add_comment.text.toString())

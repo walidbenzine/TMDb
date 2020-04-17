@@ -103,14 +103,15 @@ class Home : AppCompatActivity(),
 
                 0 -> {
                     System.out.println("CASE 0")
-                    /*doAsync {
+                    var fragment = HomeFragment()
+                    doAsync {
                         var res = post.PostSerie("http://scirusiwatch.herokuapp.com/getSerieLast")
                         var res2 = post.PostFilm("http://scirusiwatch.herokuapp.com/getlast")
                         uiThread { HomeFragment.newInstance(res,res2)
                         System.out.println("DONE!!!!")}
                     }
-                    HomeFragment() */
-                    HomeFragment.newInstance(post.PostSerie("http://scirusiwatch.herokuapp.com/getSerieLast"),post.PostFilm("http://scirusiwatch.herokuapp.com/getlast"))
+                    HomeFragment()
+                    //HomeFragment.newInstance(post.PostSerie("http://scirusiwatch.herokuapp.com/getSerieLast"),post.PostFilm("http://scirusiwatch.herokuapp.com/getlast"))
                 }
                 1 -> {
                     System.out.println("CASE 1")

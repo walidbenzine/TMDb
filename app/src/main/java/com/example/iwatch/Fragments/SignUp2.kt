@@ -2,26 +2,33 @@ package com.example.iwatch.Fragments
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.telephony.SmsManager
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import android.widget.*
-import com.example.iwatch.Activities.ConfirmRegistration
-import kotlinx.android.synthetic.main.fragment_sign_up2.*
 import android.widget.Button
-import com.example.iwatch.Dialogs.ChangePassword
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.fragment.app.Fragment
+import com.esafirm.imagepicker.features.ImagePicker
+import com.esafirm.imagepicker.features.ReturnMode
+import com.example.iwatch.Activities.ConfirmRegistration
+import com.example.iwatch.Activities.user
 import com.example.iwatch.Dialogs.ChooseGenre
 import com.example.iwatch.Entities.Genre
 import com.example.iwatch.Entities.User
 import com.example.iwatch.Enumerations.GenreType
 import com.example.iwatch.R
-import kotlinx.android.synthetic.main.activity_edit_profile.*
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_sign_up2.*
+import java.io.File
+import java.util.*
 import kotlin.random.Random
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -93,6 +100,16 @@ class SignUp2 : Fragment(){
             startActivity(intent)
         }
 
+
+        var btnTakePicture = v.findViewById<View>(R.id.btn_take_pic) as Button
+        btnTakePicture.setOnClickListener {
+            ImagePicker.create(this)
+                .single()
+                .includeVideo(false)
+                .returnMode(ReturnMode.ALL)
+                .start()
+        }
+
         return v
     }
 
@@ -108,6 +125,16 @@ class SignUp2 : Fragment(){
         } else {
             throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
+            var image = ImagePicker.getFirstImageOrNull(data)
+            var imageFile =  File(image.path)
+            Picasso.get().load(imageFile).into(picture)
+            usr.picture = encodeImage(image.path)
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onDetach() {
@@ -170,6 +197,14 @@ class SignUp2 : Fragment(){
             }
         }
         fragmentManager?.let { genreDialog.show(it, "genre dialog") }
+    }
+
+    fun encodeImage(imagePath: String): String{
+
+        val bytes = File(imagePath).readBytes()
+        val base64 = Base64.getEncoder().encodeToString(bytes)
+
+        return base64
     }
 
 }

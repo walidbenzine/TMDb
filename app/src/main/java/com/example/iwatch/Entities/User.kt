@@ -14,7 +14,7 @@ class User :Serializable{
     internal var login: String? = null
     internal var adresse: String? = null
     internal var jeton: Int = 0
-    internal var picture: String? = null
+    internal var picture = ""
 
     internal var FavoriteMovies = ArrayList<Movie>()
     internal var MovieHistory: List<Movie>? = null
