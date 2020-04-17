@@ -15,7 +15,6 @@ import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_favorite.*
 
-private var movie = Movie()
 
 class Favorite : AppCompatActivity(), FavoriteMovieFragment.OnFragmentInteractionListener,
     FavoriteRoomFragment.OnFragmentInteractionListener{
