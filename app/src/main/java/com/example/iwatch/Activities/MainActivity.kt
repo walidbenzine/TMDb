@@ -2,7 +2,9 @@ package com.example.iwatch.Activities
 
 import android.Manifest
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -14,6 +16,7 @@ import com.example.iwatch.R
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONArray
 import android.util.Log
+import androidx.constraintlayout.widget.ConstraintLayout
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import java.lang.Exception
@@ -25,9 +28,17 @@ class MainActivity : AppCompatActivity() {
     val PERMISSION_REQUEST_CODE = 1
     var mHandler: Handler? = null
 
+    private var PRIVATE_MODE = 0
+    private val PREF_NAME = "Scirus-Y"
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
+
+        val  SharedPreferences = getSharedPreferences(PREF_NAME, this.PRIVATE_MODE)
+        val layoout = findViewById<View>(R.id.wait) as ConstraintLayout
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
@@ -42,6 +53,25 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+       //SharedPreferences.edit().clear().commit()
+        if (SharedPreferences.getString("login", "login").equals("login")) {
+
+
+            connect()
+
+
+        } else {
+
+          //  layoout.visibility = View.VISIBLE
+            Toast.makeText(this,"Please Wait im Slower Than a Snail ",Toast.LENGTH_LONG).show()
+            Next()
+            }
+
+    }
+
+    fun connect(){
+        val  SharedPreferences = getSharedPreferences(PREF_NAME, this.PRIVATE_MODE)
+        val homeIntent = Intent(this, Home::class.java)
         val convert = Convert()
 
         val btnSignUp = findViewById<View>(R.id.btn_signUp) as Button
@@ -57,9 +87,9 @@ class MainActivity : AppCompatActivity() {
             if (!login.isNullOrEmpty() && !password.isNullOrEmpty()) {
                 Toast.makeText(applicationContext, "Connexion en cours", Toast.LENGTH_SHORT).show()
                 try{
-                var userJson = JSONArray()
+                    var userJson = JSONArray()
 
-                    val homeIntent = Intent(this, Home::class.java)
+
                     doAsync {
                         userJson = post.PostArray("http://scirusiwatch.herokuapp.com/getUser/" + login + "/" + password)
                         if (userJson.toString() != "{}" && userJson.toString() != "[]" ) {
@@ -69,16 +99,26 @@ class MainActivity : AppCompatActivity() {
                             user.FavoriteSeries = post.PostSerie("http://scirusiwatch.herokuapp.com//getFavSerie/"+ user.id)
 
                             uiThread {
+
                                 Toast.makeText(applicationContext, "Connexion réussi", Toast.LENGTH_SHORT).show()
+
                                 homeIntent.putExtra("user", user)
+
+                                var editor = SharedPreferences.edit()
+                                editor.putString("login",login)
+                                editor.putString("password",password.toString())
+                                editor.commit()
+
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(homeIntent)
+                                finish()
                             }
 
-                    }else {
+                        }else {
                             Toast.makeText(
-                                    applicationContext,
-                                    "Identifiants incorrects",
-                                    Toast.LENGTH_SHORT
+                                applicationContext,
+                                "Identifiants incorrects",
+                                Toast.LENGTH_SHORT
                             ).show()
                         }
                     }
@@ -94,4 +134,42 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+     fun Next(){
+         val  SharedPreferences = getSharedPreferences(PREF_NAME, this.PRIVATE_MODE)
+         val homeIntent = Intent(this, Home::class.java)
+         var login  =  SharedPreferences.getString("login","")
+         var password = SharedPreferences.getString("password", "")
+         try{
+             var userJson = JSONArray()
+
+
+             doAsync {
+                 userJson = post.PostArray("http://scirusiwatch.herokuapp.com/getUser/" + login + "/" + password)
+                 if (userJson.toString() != "{}" && userJson.toString() != "[]" ) {
+
+                     val user = convert.toUser(userJson.getJSONObject(0))
+                     user.FavoriteMovies = post.PostFilm("http://scirusiwatch.herokuapp.com/getFavFilm/"+ user.id)
+                     user.FavoriteSeries = post.PostSerie("http://scirusiwatch.herokuapp.com//getFavSerie/"+ user.id)
+
+                     uiThread {
+                        // Toast.makeText(applicationContext, "Connexion réussi", Toast.LENGTH_SHORT).show()
+                         homeIntent.putExtra("user", user)
+                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                         startActivity(homeIntent)
+                         finish()
+                     }
+
+                 }else {
+                     Toast.makeText(
+                         applicationContext,
+                         "Identifiants incorrects",
+                         Toast.LENGTH_SHORT
+                     ).show()
+                 }
+             }
+         } catch(e: Exception){
+             System.out.println(e)
+         }
+
+     }
 }
