@@ -97,9 +97,11 @@ class PostClass {
         }
         try {
             if (!x.toString().isNullOrEmpty() && x.toString() != "null" && x.toString() != "[]") {
+
                 return JSONArray(x.toString())
 
             }
+
             return JSONArray()
         }catch(e: Exception){
             System.out.println(e)

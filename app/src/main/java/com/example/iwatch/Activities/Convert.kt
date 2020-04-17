@@ -171,6 +171,23 @@ class Convert {
     }
 
 
+    fun togenrePref(obj: JSONArray): ArrayList<Genre> {
+        var genrearray = ArrayList<Genre>()
+        try {
+            for (i in 0 until obj.length()) {
+
+                    genrearray.add(Genre(GenreType.valueOf(JSONObject(obj.get(i).toString()).get("desig").toString())))
+
+            }
+            return genrearray
+
+        } catch (e: Exception) {
+            System.out.println(e)
+            return genrearray
+        }
+    }
+
+
 
     fun usrURL(usr: User) : String {
 

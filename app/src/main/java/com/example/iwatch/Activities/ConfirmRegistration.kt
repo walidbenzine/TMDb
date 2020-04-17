@@ -107,8 +107,6 @@ class ConfirmRegistration : AppCompatActivity() {
                     Toast.makeText(applicationContext,"Inscription réussie ! vous pouvez à présent vous connecter", Toast.LENGTH_LONG).show()
                     var ress = post.PostInt("http://scirusiwatch.herokuapp.com/maxid")
                     for (i in 0 until usr.genrePref!!.size) {
-                        System.out.println("yaaaaw1")
-                        System.out.println("yaaaaw"+usr.genrePref?.get(i)?.id)
                         doAsync {
                             post.PostVoid("http://scirusiwatch.herokuapp.com/addgenreuser/${ress}/${usr.genrePref?.get(i)?.id}")
 

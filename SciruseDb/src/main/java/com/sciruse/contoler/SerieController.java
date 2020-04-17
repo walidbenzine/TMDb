@@ -78,6 +78,8 @@ public class SerieController {
 	}
 	
 	
+	
+	
 	@RequestMapping("/getSerieLiees/{id}")
 	public List<Serie> getSerieLiees(@PathVariable Integer id) throws IOException
 	{

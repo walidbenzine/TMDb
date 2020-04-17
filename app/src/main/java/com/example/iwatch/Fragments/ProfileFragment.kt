@@ -13,14 +13,12 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.iwatch.Activities.EditProfile
-import com.example.iwatch.Activities.Favorite
+import com.example.iwatch.Activities.*
 
-import com.example.iwatch.Activities.UserGenres
-import com.example.iwatch.Activities.post
 import com.example.iwatch.Entities.User
 
 import com.example.iwatch.R
+import org.jetbrains.anko.doAsync
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -83,6 +81,8 @@ class ProfileFragment : Fragment() {
             val favoriteIntent = Intent(this.context, Favorite::class.java)
             user.FavoriteMovies = post.PostFilm("http://scirusiwatch.herokuapp.com/getFavFilm/"+ user.id)
             user.FavoriteSeries = post.PostSerie("http://scirusiwatch.herokuapp.com/getFavSerie/"+ user.id)
+
+            System.out.println("yaaaw"+user.genrePref)
             favoriteIntent.putExtra("user", user)
             startActivity(favoriteIntent)
         }
@@ -90,8 +90,14 @@ class ProfileFragment : Fragment() {
         //open user genre activity
         val btnGenres = v.findViewById<View>(R.id.btn_genre) as LinearLayout
         btnGenres.setOnClickListener {
+            user.genrePref= convert.togenrePref(post.PostArray("http://scirusiwatch.herokuapp.com/getuserGenre/2"))
+
+            for (i in 0 until user.genrePref!!.size) {
+//liste des genres
+                System.out.println("cc"+ user.genrePref.get(i))
+
+                }
             val genreIntent = Intent(this.context, UserGenres::class.java)
-            //do the post here to get user genres
             startActivity(genreIntent)
         }
 
