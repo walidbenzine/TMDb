@@ -15,15 +15,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Activities.EditProfile
 import com.example.iwatch.Activities.Favorite
+
+import com.example.iwatch.Activities.UserGenres
 import com.example.iwatch.Activities.post
-import com.example.iwatch.Adapters.GenreAdapter
-import com.example.iwatch.Entities.Actor
-import com.example.iwatch.Entities.Genre
 import com.example.iwatch.Entities.User
-import com.example.iwatch.Enumerations.GenreType
 
 import com.example.iwatch.R
-import kotlinx.android.synthetic.main.fragment_profile.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,10 +38,8 @@ private const val ARG_PARAM2 = "param2"
 class ProfileFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var user = User()
-
     private var listener: OnFragmentInteractionListener? = null
 
-    var genres = ArrayList<Genre>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,29 +69,7 @@ class ProfileFragment : Fragment() {
         var userJeton = v.findViewById<RecyclerView>(R.id.user_jeton) as TextView
         userJeton.text = user.jeton.toString()
 
-        val genreRecyclerView = v.findViewById<RecyclerView>(R.id.genre_recycler_view)
-
-        /*for (genre in user.genrePref!!){
-            when(genre){
-                "Adventure" -> genres.add(Genre(GenreType.Adventure))
-                "Action" -> genres.add(Genre(GenreType.Action))
-                "Thriller" -> genres.add(Genre(GenreType.Thriller))
-                "Drama" -> genres.add(Genre(GenreType.Drama))
-                "Romance" -> genres.add(Genre(GenreType.Romance))
-                "Documentary" -> genres.add(Genre(GenreType.Documentary))
-                "Comedy" -> genres.add(Genre(GenreType.Comedy))
-            }
-        }*/
-
-        genres.add(Genre(GenreType.Thriller))
-        genres.add(Genre(GenreType.Action))
-        genres.add(Genre(GenreType.Romance))
-        genres.add(Genre(GenreType.Drama))
-
-        genreRecyclerView.apply {
-            layoutManager = LinearLayoutManager(this.context)
-            adapter = GenreAdapter(genres)
-        }
+        //open edit profile activity
         val btnEditProfile = v.findViewById<View>(R.id.btn_edit_profile) as Button
         btnEditProfile.setOnClickListener {
             val editProfile = Intent(this.context, EditProfile::class.java)
@@ -104,6 +77,7 @@ class ProfileFragment : Fragment() {
             startActivity(editProfile)
         }
 
+        //open favorite activity
         val btnFavorite = v.findViewById<View>(R.id.btn_favorite) as LinearLayout
         btnFavorite.setOnClickListener {
             val favoriteIntent = Intent(this.context, Favorite::class.java)
@@ -111,6 +85,14 @@ class ProfileFragment : Fragment() {
             user.FavoriteSeries = post.PostSerie("http://scirusiwatch.herokuapp.com/getFavSerie/"+ user.id)
             favoriteIntent.putExtra("user", user)
             startActivity(favoriteIntent)
+        }
+
+        //open user genre activity
+        val btnGenres = v.findViewById<View>(R.id.btn_genre) as LinearLayout
+        btnGenres.setOnClickListener {
+            val genreIntent = Intent(this.context, UserGenres::class.java)
+            //do the post here to get user genres
+            startActivity(genreIntent)
         }
 
         return v

@@ -7,11 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Adapters.CommentAdapter
 import com.example.iwatch.Entities.Comment
 import com.example.iwatch.R
+import kotlinx.android.synthetic.main.fragment_comments.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -33,7 +35,6 @@ class CommentsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         @Suppress("UNCHECKED_CAST")
         comments = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Comment>
     }
@@ -48,15 +49,23 @@ class CommentsFragment : Fragment() {
 
         try {
             System.out.println("COMMENTS ==== " + comments)
-        }catch (e: Exception){
+        } catch (e: Exception) {
             System.out.println(e)
         }
 
         commentRecyclerView.apply {
-            layoutManager = LinearLayoutManager(this.context)
+            layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
             adapter = CommentAdapter(comments)
         }
 
+        add_comment.setOnEditorActionListener { v, actionId, event ->
+            if(actionId==EditorInfo.IME_ACTION_SEND){
+                System.out.println("comment content: " + add_comment.text.toString())
+                //Do here the function to register the comment
+                true
+            }
+            false
+        }
 
         return v
     }

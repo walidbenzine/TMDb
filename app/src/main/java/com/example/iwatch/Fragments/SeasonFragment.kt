@@ -61,8 +61,10 @@ class SeasonFragment : Fragment(), SeasonAdapter.OnSeasonClickListener {
         var v = inflater.inflate(R.layout.fragment_season, container, false)
         val saisonRecyclerView = v.findViewById<RecyclerView>(R.id.season_view_pager)
 
+        System.out.println("SAISONS  TAILLES ====== " +saisons.size)
+
         saisonRecyclerView.apply {
-            layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
             adapter = SeasonAdapter(saisons, this@SeasonFragment)
         }
 

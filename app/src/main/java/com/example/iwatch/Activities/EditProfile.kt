@@ -47,10 +47,18 @@ class EditProfile : AppCompatActivity(), ChangePassword.ChangePasswordDialogList
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        //go back to profil fragment
         if(item.itemId == android.R.id.home){
             onBackPressed()
         }
+        //save modifications
         else if(item.itemId == R.id.menu_save_profile){
+            user?.login = edit_login.text.toString()
+            user?.firstName = edit_first_name.text.toString()
+            user?.lastName = edit_last_name.text.toString()
+            user?.email = edit_email.text.toString()
+            user?.mobile = edit_phone_number.text.toString()
+            user?.adresse = edit_address.text.toString()
            // Post("http://scirusiwatch.herokuapp.com/changeinfo/" + user?.id + "/" + +"/" + +"/" + +"/" + +"/" + )
         }
         return super.onOptionsItemSelected(item)
