@@ -139,6 +139,17 @@ public class UserController {
 
 	}
 	
+	@RequestMapping("/maxid")
+	public Integer maxid() throws IOException
+	{
+		 
+		return userRepository.maxid();
+
+	}
+	
+	
+	
+	
 	
 
 	

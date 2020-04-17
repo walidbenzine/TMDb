@@ -69,5 +69,9 @@ public interface UserRepository extends CrudRepository<User, Long>{
 	
 	@Query(value = "INSERT INTO `serie_comments`(`film_id`, `comments`) VALUES ( ?1 , ?2 );", nativeQuery = true)
 	void addcommserie(Integer iduser, Integer idcomm);
+	
+	@Query(value = "SELECT MAX(ID) FROM user;", nativeQuery = true)
+	Integer maxid();
+	
 
 }

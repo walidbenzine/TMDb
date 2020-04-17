@@ -95,25 +95,29 @@ class ConfirmRegistration : AppCompatActivity() {
             sb.append(field_three.text.toString())
             sb.append(field_four.text.toString())
             var res = sb.toString()
-            if (res.equals(code)) {
+           // if (res.equals(code)) {
 
 
                 val result = post.Post(conv.usrURL(usr))
-
-
-                for (i in 0 until usr.genrePref!!.size) {
-                    post.PostVoid("http://scirusiwatch.herokuapp.com/addgenreuser/${usr.id}/${usr.genrePref?.get(i)?.id}")
-                }
+                //Thread.sleep(5000)
+                var ress = conv.toUser(post.PostObject("http://scirusiwatch.herokuapp.com/getUser/" + usr.login + "/" + usr.password))
+                Thread.sleep(5000)
                 if(!result.equals("null")){
                     Toast.makeText(applicationContext,"Inscription réussie ! vous pouvez à présent vous connecter", Toast.LENGTH_LONG).show()
+                    for (i in 0 until ress.genrePref!!.size) {
+                       // Thread.sleep(10000)
+                        System.out.println("yaaaaw1")
+                        System.out.println("yaaaaw"+ress.genrePref?.get(i)?.id)
+                        post.PostVoid("http://scirusiwatch.herokuapp.com/addgenreuser/${ress.id}/${ress.genrePref?.get(i)?.id}")
+                    }
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 }else{
                     Toast.makeText(applicationContext,"Erreur lors de l'inscription", Toast.LENGTH_SHORT).show()
                 }
-            }else{
-                Toast.makeText(applicationContext,"CODE incorrect !", Toast.LENGTH_SHORT).show()
-            }
+           // }else{
+             //   Toast.makeText(applicationContext,"CODE incorrect !", Toast.LENGTH_SHORT).show()
+           // }
         }
     }
 }
