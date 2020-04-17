@@ -98,6 +98,38 @@ public class UserController {
 		return "Ajout history film reussi";
 	}
 	
+
+	@RequestMapping("/addcomm/{id}/{comm}/{type}/{user}")
+	public String addcomm(@PathVariable Integer id,@PathVariable String comm,@PathVariable String type, @PathVariable String user) throws IOException
+	{
+		userRepository.addcomm( id, comm, type, user);
+
+		return "Ajout du commentaire reussi";
+	}
+	
+	@RequestMapping("/addcommfilm/{iduser}/{idcomm}")
+	public String addcommfilm(@PathVariable Integer iduser,@PathVariable Integer idcomm) throws IOException
+	{
+		 userRepository.addcommfilm( iduser,idcomm);
+		return "Ajout du commentaire film reussi";
+
+	}
+	
+	@RequestMapping("/addcommserie/{iduser}/{idcomm}")
+	public String addcommserie(@PathVariable Integer iduser,@PathVariable Integer idcomm) throws IOException
+	{
+		 userRepository.addcommserie( iduser,idcomm);
+		return "Ajout du commentaire serie reussi";
+
+	}
+	
+	@RequestMapping("/maxid")
+	public Integer maxid() throws IOException
+	{
+		 
+		return userRepository.maxid();
+
+	}
 	
 
 	

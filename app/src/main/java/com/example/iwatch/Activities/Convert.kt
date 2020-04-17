@@ -177,7 +177,7 @@ class Convert {
 
         var sb = StringBuffer()
 
-        sb.append("http://scirusiwatch.herokuapp.com/addUser/")
+        sb.append("http://10.0.2.2:8080/addUser/")
         sb.append(usr.email+"/")
         sb.append(usr.jeton.toString()+"/")
         sb.append(usr.login+"/")

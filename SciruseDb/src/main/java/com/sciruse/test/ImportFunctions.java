@@ -221,7 +221,7 @@ public class ImportFunctions {
 		Serie a =null ;
 		if (SerieArray != null) { 
 			int x=SerieArray.length();
-			if(x>15) { x = 15;}
+			if(x>5) { x = 5;}
 			for (int j=0;j<x;j++){ 
 
 				JSONObject obj =(JSONObject) SerieArray.get(j);
