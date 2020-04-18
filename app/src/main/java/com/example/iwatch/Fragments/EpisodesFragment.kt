@@ -1,6 +1,7 @@
 package com.example.iwatch.Fragments
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,30 +9,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Adapters.EpisodeAdapter
+import com.example.iwatch.Adapters.OnEpisodeClickListener
 import com.example.iwatch.Entities.Episode
 
 import com.example.iwatch.R
-import kotlinx.android.synthetic.main.fragment_episodes.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
-private var episodes = ArrayList<Episode>()
+
 
 /**
  * A simple [Fragment] subclass.
  * Use the [EpisodesFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class EpisodesFragment : Fragment() {
+class EpisodesFragment : Fragment(), OnEpisodeClickListener{
     // TODO: Rename and change types of parameters
+    var episodes = ArrayList<Episode>()
 
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        @Suppress("UNCHECKED_CAST")
         episodes = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Episode>
         System.out.println("EPISOODES == "+ episodes)
 
@@ -43,6 +46,7 @@ class EpisodesFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         var v = inflater.inflate(R.layout.fragment_episodes, container, false)
+        val episode_recycler_view = v.findViewById<RecyclerView>(R.id.episode_recycler_view)
         episode_recycler_view.apply {
             episode_recycler_view!!.layoutManager = LinearLayoutManager(this.context)
             layoutManager = LinearLayoutManager(this.context)
@@ -60,9 +64,7 @@ class EpisodesFragment : Fragment() {
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
             listener = context
-        } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
-        }
+        } else throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
     }
 
     override fun onDetach() {
@@ -103,5 +105,8 @@ class EpisodesFragment : Fragment() {
                     putSerializable(ARG_PARAM1, param1)
                 }
             }
+    }
+    override fun onEpisodeClicked(episode: Episode) {
+
     }
 }

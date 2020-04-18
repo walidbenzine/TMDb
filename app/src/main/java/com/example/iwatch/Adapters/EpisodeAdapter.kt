@@ -8,9 +8,7 @@ import com.example.iwatch.R
 import com.example.iwatch.ViewHolders.EpisodeViewHolder
 
 class EpisodeAdapter(
-    val episodelist: ArrayList<Episode>,
-    val itemClickListener: OnMovieClickListener
-) : RecyclerView.Adapter<EpisodeViewHolder>() {
+    val episodelist: ArrayList<Episode>,  val itemClickListener: OnEpisodeClickListener) : RecyclerView.Adapter<EpisodeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeViewHolder {
         var v = LayoutInflater.from(parent.context).inflate(R.layout.episode_item, parent, false)
@@ -28,5 +26,5 @@ class EpisodeAdapter(
 }
 
 interface OnEpisodeClickListener{
-    fun onMovieClicked(episode: Episode)
+    fun onEpisodeClicked(episode: Episode)
 }
