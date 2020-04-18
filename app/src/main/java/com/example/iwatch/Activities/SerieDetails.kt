@@ -19,7 +19,6 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_movie_details.*
 import kotlinx.android.synthetic.main.activity_serie_details.*
 
 var serie = Serie()
@@ -35,11 +34,11 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
 
         serie = intent.getSerializableExtra("serie") as Serie
 
-        user.FavoriteSeries = post.PostSerie("http://scirusiwatch.herokuapp.com/getFavSerie/"+ user.id)
+        user.FavoriteSeries = post.PostSerie(Base_URL+"getFavSerie/"+ user.id)
 
 
         serieFavori.setOnClickListener {
-            post.PostVoid("http://scirusiwatch.herokuapp.com/addFavSerie/" + user.id + "/" + serie.id)
+            post.PostVoid(Base_URL+"addFavSerie/" + user.id + "/" + serie.id)
             Toast.makeText(applicationContext, "Ajout réussi", Toast.LENGTH_SHORT).show()
             serieFavori.isFavorite = true
         }
@@ -74,7 +73,7 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
 
 
         //print serie details
-        serie_detail_title.text= serie.title
+        serie_detail_title.text = serie.title
         Picasso.get().load(serie.picture).into(serie_detail_picture)
 
         for (i in 0..serie.genreList?.size!! - 1) {
@@ -110,7 +109,7 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
                     var numbers = ArrayList<String>()
                     for(i in 1..serie.nbrSaison){
                         try {
-                            saisons.add(convert.toSaison(post.PostObject("http://scirusiwatch.herokuapp.com/getSerieSais/" + serie.id.toString() + "/" + i)))
+                            saisons.add(convert.toSaison(post.PostObject(Base_URL+"getSerieSais/" + serie.id.toString() + "/" + i)))
                             numbers.add(i.toString())
                         }catch(e: Exception){
                             System.out.println(e)
@@ -120,11 +119,11 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
                     //SeasonFragment()
                 }
                 1 -> {
-                    AssociatedSeriesFragment.newInstance(post.PostSerie("http://scirusiwatch.herokuapp.com/getSerieLi/"+serie.id.toString()))
+                    AssociatedSeriesFragment.newInstance(post.PostSerie(Base_URL+"getSerieLi/"+serie.id.toString()))
                     //AssociatedSeriesFragment()
                 }
                 2 -> {
-                    CommentsFragment.newInstance(post.PostComment("http://scirusiwatch.herokuapp.com/getCSer/" + serie.id.toString()))
+                    CommentsFragment.newInstance(post.PostComment(Base_URL+"getCSer/" + serie.id.toString()))
                     //CommentsFragment()
                 }
                 else -> Fragment()

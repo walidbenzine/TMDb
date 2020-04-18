@@ -70,7 +70,7 @@ class PersonDetails : AppCompatActivity(), FilmographyFragment.OnFragmentInterac
 
         override fun getItem(position: Int): Fragment {
             return when (position){
-                0 -> FilmographyFragment.newInstance(post.PostFilm("http://scirusiwatch.herokuapp.com/getActorFilm/"+ person.id.toString()))
+                0 -> FilmographyFragment.newInstance(post.PostFilm(Base_URL+"getActorFilm/"+ person.id.toString()))
                 else -> Fragment()
             }
         }

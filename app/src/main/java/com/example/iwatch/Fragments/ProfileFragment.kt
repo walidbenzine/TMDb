@@ -90,7 +90,7 @@ class ProfileFragment : Fragment() {
             startActivity(favoriteIntent)
         }
 
-        val btndec = v.findViewById<View>(R.id.btn_disconnection) as LinearLayout
+        val btndec = v.findViewById<View>(R.id.btn_disconnect) as LinearLayout
         btndec.setOnClickListener {
            // Toast.makeText("See you later :)", Toast.LENGTH_LONG).show()
 
@@ -103,15 +103,14 @@ class ProfileFragment : Fragment() {
         val btnGenres = v.findViewById<View>(R.id.btn_genre) as LinearLayout
         btnGenres.setOnClickListener {
             user.genrePref = convert.togenrePref(post.PostArray("http://scirusiwatch.herokuapp.com/getuserGenre/2"))
-
-            for (i in 0 until user.genrePref!!.size) {
-                //liste des genres
-                System.out.println("cc"+ user.genrePref.get(i))
-
-                }
             val genreIntent = Intent(this.context, UserGenres::class.java)
             genreIntent.putExtra("user", user)
             startActivity(genreIntent)
+        }
+
+        val btnDisconnect = v.findViewById<View>(R.id.btn_disconnect) as LinearLayout
+        btnDisconnect.setOnClickListener {
+
         }
 
         return v
