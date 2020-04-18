@@ -19,10 +19,10 @@ class SeasonViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
 
     fun bind(season: Saison, clickListener:  SeasonAdapter.OnSeasonClickListener  ){
 
-        serieSaisonTitre.text = season.name
-        serieSaisonDate.text = season.releasedDate
-        serieSaisonNbr.text = season.nbrEpisode.toString()
-        Picasso.get().load(season.photo).into(serieSaisonPicture)
+        serieSaisonTitre.text = season!!.name
+        serieSaisonDate.text = season!!.releasedDate
+        serieSaisonNbr.text = season!!.nbrEpisode.toString()
+        Picasso.get().load(season!!.photo).into(serieSaisonPicture)
 
         itemView.setOnClickListener {
             clickListener.onSeasonClicked(season)

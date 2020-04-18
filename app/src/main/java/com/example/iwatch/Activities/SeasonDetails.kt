@@ -12,6 +12,7 @@ import com.example.iwatch.Fragments.EpisodesFragment
 import com.example.iwatch.Fragments.SeasonActorsFragment
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_season_details.*
 
 private var season = Saison()
@@ -54,6 +55,8 @@ class SeasonDetails : AppCompatActivity(), EpisodesFragment.OnFragmentInteractio
         season_detail_episode_nbr.text= season.nbrEpisode.toString()
         season_detail_released_date.text = season.releasedDate
         season_detail_resume.text = season.resume
+        Picasso.get().load(season.photo).into(season_detail_picture)
+
 
     }
 
