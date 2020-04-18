@@ -10,5 +10,6 @@ class Episode :Serializable{
     internal var picture: String? = null
     internal var name: String? = null
     internal var resume: String? = null
+    internal var popularity: String?= null
     internal var trailer: String? = null
 }

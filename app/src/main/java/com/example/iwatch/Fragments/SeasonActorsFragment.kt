@@ -1,12 +1,18 @@
 package com.example.iwatch.Fragments
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Activities.PersonDetails
+import com.example.iwatch.Adapters.ActorAdapter
+import com.example.iwatch.Adapters.OnActorClickListener
 import com.example.iwatch.Entities.Actor
 
 import com.example.iwatch.R
@@ -21,7 +27,7 @@ private var actors = ArrayList<Actor>()
  * Use the [SeasonActorsFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SeasonActorsFragment : Fragment() {
+class SeasonActorsFragment : Fragment(), OnActorClickListener {
     // TODO: Rename and change types of parameters
 
     private var listener: OnFragmentInteractionListener? = null
@@ -39,6 +45,12 @@ class SeasonActorsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         var v = inflater.inflate(R.layout.fragment_season_actors, container, false)
+        val episode_actors_recycler_view = v.findViewById<RecyclerView>(R.id.episode_actors_recycler_view)
+        episode_actors_recycler_view.apply {
+            episode_actors_recycler_view!!.layoutManager = LinearLayoutManager(this.context)
+            layoutManager = LinearLayoutManager(this.context)
+            adapter = ActorAdapter(actors, this@SeasonActorsFragment)
+        }
         return v
     }
 
@@ -94,5 +106,10 @@ class SeasonActorsFragment : Fragment() {
                     putSerializable(ARG_PARAM1, param1)
                 }
             }
+    }
+    override fun onActorClicked(actor: Actor) {
+        val actorDetailsIntent = Intent(this.context, PersonDetails::class.java)
+        actorDetailsIntent.putExtra("actor", actor)
+        startActivity(actorDetailsIntent)
     }
 }

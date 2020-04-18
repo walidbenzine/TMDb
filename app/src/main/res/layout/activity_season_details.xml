@@ -124,7 +124,7 @@
                             android:id="@+id/season_detail_released_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"/>
+                            android:layout_marginLeft="16dp" />
                     </LinearLayout>
 
 

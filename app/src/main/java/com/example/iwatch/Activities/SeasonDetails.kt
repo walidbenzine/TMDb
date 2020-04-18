@@ -46,6 +46,15 @@ class SeasonDetails : AppCompatActivity(), EpisodesFragment.OnFragmentInteractio
 
         season_view_pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(season_tabs))
         season_tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(season_view_pager))
+
+
+
+        season_detail_title.text= season.name
+        season_detail_nbr.text =number
+        season_detail_episode_nbr.text= season.nbrEpisode.toString()
+        season_detail_released_date.text = season.releasedDate
+        season_detail_resume.text = season.resume
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
