@@ -2,9 +2,7 @@ package com.example.iwatch.Activities
 
 import android.Manifest
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -55,19 +53,16 @@ class MainActivity : AppCompatActivity() {
 
        //SharedPreferences.edit().clear().commit()
         if (SharedPreferences.getString("login", "login").equals("login")) {
-
-
             connect()
-
-
         } else {
-
           //  layoout.visibility = View.VISIBLE
             Toast.makeText(this,"Please Wait im Slower Than a Snail ",Toast.LENGTH_LONG).show()
             Next()
-            }
+        }
 
     }
+
+
 
     fun connect(){
         val  SharedPreferences = getSharedPreferences(PREF_NAME, this.PRIVATE_MODE)

@@ -48,13 +48,6 @@ class CinemaFragment : Fragment(), OnMovieClickListener {
             films = it.getSerializable(ARG_PARAM1) as ArrayList<Movie>
             cinemas = it.getSerializable(ARG_PARAM2) as ArrayList<Cinema>
         }
-
-        /*@Suppress("UNCHECKED_CAST")
-        films = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Movie>
-
-        @Suppress("UNCHECKED_CAST")
-        cinemas = arguments?.getSerializable(ARG_PARAM2) as ArrayList<Cinema>*/
-
     }
 
     override fun onCreateView(

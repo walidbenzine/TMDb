@@ -103,23 +103,32 @@ class Home : AppCompatActivity(),
 
                 0 -> {
                     System.out.println("CASE 0")
-                    /*doAsync {
+                    /*var frag = HomeFragment()
+                    System.out.println("CASE 0")
+                    doAsync {
                         var res = post.PostSerie("http://scirusiwatch.herokuapp.com/getSerieLast")
                         var res2 = post.PostFilm("http://scirusiwatch.herokuapp.com/getlast")
-                        uiThread { HomeFragment.newInstance(res,res2)
-                        System.out.println("DONE!!!!")}
+                        uiThread {
+                                frag.serie = res
+                                frag.films = res2
+                        }
                     }
-                    HomeFragment() */
+                    return frag*/
                     HomeFragment.newInstance(post.PostSerie("http://scirusiwatch.herokuapp.com/getSerieLast"),post.PostFilm("http://scirusiwatch.herokuapp.com/getlast"))
+
                 }
                 1 -> {
                     System.out.println("CASE 1")
-                    /* doAsync {
+					/*var frag = CinemaFragment()
+                    doAsync {
                         var res = post.PostFilm("http://scirusiwatch.herokuapp.com/getTopRated")
                         var res2 = post.PostCinema("http://scirusiwatch.herokuapp.com/getAllRooms")
-                        uiThread { CinemaFragment.newInstance(res,res2) }
+                        uiThread {
+                            frag.films = res
+                            frag.cinemas = res2
+                        }
                     }
-                    CinemaFragment() */
+                    return frag*/
                     CinemaFragment.newInstance(post.PostFilm("http://scirusiwatch.herokuapp.com/getTopRated"),post.PostCinema("http://scirusiwatch.herokuapp.com/getAllRooms"))
                 }
                 2 -> {

@@ -2,6 +2,8 @@ package com.example.iwatch.Fragments
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,7 +21,7 @@ import com.example.iwatch.Activities.*
 import com.example.iwatch.Entities.User
 
 import com.example.iwatch.R
-import org.jetbrains.anko.doAsync
+import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,6 +61,9 @@ class ProfileFragment : Fragment() {
         val v = inflater.inflate(R.layout.fragment_profile, container, false)
 
         //get user attributes
+        /*var userPic = v.findViewById<ImageView>(R.id.user_picture) as ImageView
+        userPic.setImageBitmap(decodeImage(user.picture))*/
+
         var userName = v.findViewById<RecyclerView>(R.id.user_name) as TextView
         userName.text = user.firstName?.capitalize() + " " + user.firstName?.toUpperCase()
 
@@ -97,14 +103,15 @@ class ProfileFragment : Fragment() {
         //open user genre activity
         val btnGenres = v.findViewById<View>(R.id.btn_genre) as LinearLayout
         btnGenres.setOnClickListener {
-            user.genrePref= convert.togenrePref(post.PostArray("http://scirusiwatch.herokuapp.com/getuserGenre/2"))
+            user.genrePref = convert.togenrePref(post.PostArray("http://scirusiwatch.herokuapp.com/getuserGenre/2"))
 
             for (i in 0 until user.genrePref!!.size) {
-//liste des genres
+                //liste des genres
                 System.out.println("cc"+ user.genrePref.get(i))
 
                 }
             val genreIntent = Intent(this.context, UserGenres::class.java)
+            genreIntent.putExtra("user", user)
             startActivity(genreIntent)
         }
 
@@ -164,5 +171,12 @@ class ProfileFragment : Fragment() {
 
                 }
             }
+    }
+
+    fun decodeImage(encodedImage: String): Bitmap {
+
+        var imageBytes = Base64.getDecoder().decode(encodedImage)
+        val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+        return decodedImage
     }
 }
