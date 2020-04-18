@@ -19,13 +19,12 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import java.lang.Exception
 
-
+val Base_URL = "http://scirusiwatch.herokuapp.com/"
 class MainActivity : AppCompatActivity() {
 
     var id = ""
     val PERMISSION_REQUEST_CODE = 1
     var mHandler: Handler? = null
-
     private var PRIVATE_MODE = 0
     private val PREF_NAME = "Scirus-Y"
 
@@ -86,12 +85,12 @@ class MainActivity : AppCompatActivity() {
 
 
                     doAsync {
-                        userJson = post.PostArray("http://scirusiwatch.herokuapp.com/getUser/" + login + "/" + password)
+                        userJson = post.PostArray(Base_URL+"getUser/" + login + "/" + password)
                         if (userJson.toString() != "{}" && userJson.toString() != "[]" ) {
 
                             val user = convert.toUser(userJson.getJSONObject(0))
-                            user.FavoriteMovies = post.PostFilm("http://scirusiwatch.herokuapp.com/getFavFilm/"+ user.id)
-                            user.FavoriteSeries = post.PostSerie("http://scirusiwatch.herokuapp.com//getFavSerie/"+ user.id)
+                            user.FavoriteMovies = post.PostFilm(Base_URL+"getFavFilm/"+ user.id)
+                            user.FavoriteSeries = post.PostSerie(Base_URL+"getFavSerie/"+ user.id)
 
                             uiThread {
 
@@ -139,12 +138,12 @@ class MainActivity : AppCompatActivity() {
 
 
              doAsync {
-                 userJson = post.PostArray("http://scirusiwatch.herokuapp.com/getUser/" + login + "/" + password)
+                 userJson = post.PostArray(Base_URL+"getUser/" + login + "/" + password)
                  if (userJson.toString() != "{}" && userJson.toString() != "[]" ) {
 
                      val user = convert.toUser(userJson.getJSONObject(0))
-                     user.FavoriteMovies = post.PostFilm("http://scirusiwatch.herokuapp.com/getFavFilm/"+ user.id)
-                     user.FavoriteSeries = post.PostSerie("http://scirusiwatch.herokuapp.com//getFavSerie/"+ user.id)
+                     user.FavoriteMovies = post.PostFilm(Base_URL+"getFavFilm/"+ user.id)
+                     user.FavoriteSeries = post.PostSerie(Base_URL+"getFavSerie/"+ user.id)
 
                      uiThread {
                         // Toast.makeText(applicationContext, "Connexion réussi", Toast.LENGTH_SHORT).show()

@@ -16,11 +16,6 @@ import com.example.iwatch.Fragments.*
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_home.*
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
-import org.json.JSONArray
-import org.json.JSONObject
-import java.net.URL
 
 var convert = Convert()
 var post = PostClass()
@@ -106,38 +101,38 @@ class Home : AppCompatActivity(),
                     /*var frag = HomeFragment()
                     System.out.println("CASE 0")
                     doAsync {
-                        var res = post.PostSerie("http://scirusiwatch.herokuapp.com/getSerieLast")
-                        var res2 = post.PostFilm("http://scirusiwatch.herokuapp.com/getlast")
+                        var res = post.PostSerie(Base_URL+"getSerieLast")
+                        var res2 = post.PostFilm("Base_URL+"getlast")
                         uiThread {
                                 frag.serie = res
                                 frag.films = res2
                         }
                     }
                     return frag*/
-                    HomeFragment.newInstance(post.PostSerie("http://scirusiwatch.herokuapp.com/getSerieLast"),post.PostFilm("http://scirusiwatch.herokuapp.com/getlast"))
+                    HomeFragment.newInstance(post.PostSerie(Base_URL+"getSerieLast"),post.PostFilm(Base_URL+"getlast"))
 
                 }
                 1 -> {
                     System.out.println("CASE 1")
 					/*var frag = CinemaFragment()
                     doAsync {
-                        var res = post.PostFilm("http://scirusiwatch.herokuapp.com/getTopRated")
-                        var res2 = post.PostCinema("http://scirusiwatch.herokuapp.com/getAllRooms")
+                        var res = post.PostFilm(Base_URL+"getTopRated")
+                        var res2 = post.PostCinema(Base_URL+"getAllRooms")
                         uiThread {
                             frag.films = res
                             frag.cinemas = res2
                         }
                     }
                     return frag*/
-                    CinemaFragment.newInstance(post.PostFilm("http://scirusiwatch.herokuapp.com/getTopRated"),post.PostCinema("http://scirusiwatch.herokuapp.com/getAllRooms"))
+                    CinemaFragment.newInstance(post.PostFilm(Base_URL+"getTopRated"),post.PostCinema(Base_URL+"getAllRooms"))
                 }
                 2 -> {
                     System.out.println("CASE 2")
-                    SeriesFragment.newInstance(post.PostSerie("http://scirusiwatch.herokuapp.com/getSeriePopular"))
+                    SeriesFragment.newInstance(post.PostSerie(Base_URL+"getSeriePopular"))
                 }
                 3 -> {
                     System.out.println("CASE 3")
-                    PersonsFragment.newInstance(post.PostActor("http://scirusiwatch.herokuapp.com/getActorPopular"))
+                    PersonsFragment.newInstance(post.PostActor(Base_URL+"getActorPopular"))
                 }
                 4 -> {
                     System.out.println("CASE 4")
