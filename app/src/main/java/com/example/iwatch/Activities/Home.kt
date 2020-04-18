@@ -1,21 +1,32 @@
 package com.example.iwatch.Activities
 
-import android.app.SearchManager
-import android.content.Context
+
+import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuItemCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Adapters.OnSearchItemClickListener
+import com.example.iwatch.Adapters.SearchAdapter
 import com.example.iwatch.Entities.*
+import com.example.iwatch.Enumerations.CommonItemSearchType
 import com.example.iwatch.Fragments.*
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.fragment_series.*
 
 var convert = Convert()
 var post = PostClass()
@@ -24,9 +35,15 @@ var user = User()
 class Home : AppCompatActivity(),
     HomeFragment.OnFragmentInteractionListener, CinemaFragment.OnFragmentInteractionListener,
     SeriesFragment.OnFragmentInteractionListener, PersonsFragment.OnFragmentInteractionListener,
-    ProfileFragment.OnFragmentInteractionListener {
+    ProfileFragment.OnFragmentInteractionListener, OnSearchItemClickListener{
 
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
+    private var mSearchAdapter: SearchAdapter? = null
+    private var movieList = ArrayList<Movie>()
+    private var serieList = ArrayList<Serie>()
+    private var cinemaList = ArrayList<Cinema>()
+    private var actorList = ArrayList<Actor>()
+    private var commonItemSearch = ArrayList<CommonItemSearch>()
 
     override fun onFragmentInteraction(uri: Uri) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -37,7 +54,6 @@ class Home : AppCompatActivity(),
         setContentView(R.layout.activity_home)
 
         user = intent.getSerializableExtra("user") as User
-
 
         // set the toolbar
         setSupportActionBar(toolbar)
@@ -53,34 +69,71 @@ class Home : AppCompatActivity(),
         home_container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(home_container))
 
+        getCommonItemSearch()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
+        val searchRecyclerView = findViewById<RecyclerView>(R.id.search_recycler_view) as RecyclerView
+        searchRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this.context)
+        }
+
         val inflater = menuInflater
         inflater.inflate(R.menu.home_menu, menu)
 
-        val manager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchItem = menu?.findItem(R.id.search)
         val searchView = searchItem?.actionView as SearchView
 
-        searchView.setSearchableInfo(manager.getSearchableInfo(componentName))
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                searchView.clearFocus()
-                searchView.setQuery("", false)
-                searchItem.collapseActionView()
-
-                Toast.makeText(this@Home, "looking for $query", Toast.LENGTH_LONG).show()
-
+        searchView.setOnCloseListener(object : SearchView.OnCloseListener {
+            override fun onClose(): Boolean {
                 return true
+            }
+        })
+
+        val searchPlate = searchView.findViewById(androidx.appcompat.R.id.search_src_text) as EditText
+        searchPlate.hint = "Search"
+
+        MenuItemCompat.setOnActionExpandListener(
+            searchItem,
+            object : MenuItemCompat.OnActionExpandListener {
+                override fun onMenuItemActionExpand(item: MenuItem): Boolean {
+                    searchRecyclerView.visibility = View.VISIBLE
+                    return true
+                }
+
+                override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
+                    searchRecyclerView.visibility = View.GONE
+                    return true
+                }
+            })
+
+        searchRecyclerView.addItemDecoration(
+            DividerItemDecoration(
+                applicationContext,
+                LinearLayoutManager.VERTICAL
+            )
+        )
+        searchRecyclerView.setHasFixedSize(true)
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                mSearchAdapter?.filter?.filter(newText)
                 return false
             }
 
         })
+
+        mSearchAdapter = SearchAdapter(commonItemSearch, this)
+        searchRecyclerView.apply {
+            adapter = mSearchAdapter
+        }
 
         return super.onCreateOptionsMenu(menu)
     }
@@ -110,6 +163,7 @@ class Home : AppCompatActivity(),
                     }
                     return frag*/
                     HomeFragment.newInstance(post.PostSerie(Base_URL+"getSerieLast"),post.PostFilm(Base_URL+"getlast"))
+
 
                 }
                 1 -> {
@@ -150,6 +204,105 @@ class Home : AppCompatActivity(),
             return 5
         }
 
+    }
+
+    override fun onSearchItemClicked(commonItem: CommonItemSearch) {
+        when(commonItem.type){
+            CommonItemSearchType.Movie -> getMovie(movieList, commonItem)
+            CommonItemSearchType.Serie -> getSerie(serieList, commonItem)
+            CommonItemSearchType.Cinema -> getCinema(cinemaList, commonItem)
+            CommonItemSearchType.Actor -> getActor(actorList, commonItem)
+        }
+    }
+
+    fun getCommonItemSearch(){
+        movieList = post.PostFilm("http://scirusiwatch.herokuapp.com/getlast")
+        movieList.addAll(post.PostFilm("http://scirusiwatch.herokuapp.com/getTopRated"))
+
+        serieList = post.PostSerie("http://scirusiwatch.herokuapp.com/getSerieLast")
+        serieList.addAll(post.PostSerie("http://scirusiwatch.herokuapp.com/getSeriePopular"))
+
+        cinemaList = post.PostCinema("http://scirusiwatch.herokuapp.com/getAllRooms")
+
+        actorList = post.PostActor("http://scirusiwatch.herokuapp.com/getActorPopular")
+
+        for(movie in movieList){
+            var commonItem = CommonItemSearch()
+            commonItem.id = movie.id
+            commonItem.name = movie.title
+            commonItem.type = CommonItemSearchType.Movie
+            commonItemSearch.add(commonItem)
+        }
+
+        for(serie in serieList){
+            var commonItem = CommonItemSearch()
+            commonItem.id = serie.id
+            commonItem.name = serie.title
+            commonItem.type = CommonItemSearchType.Serie
+            commonItemSearch.add(commonItem)
+        }
+
+        for(cinema in cinemaList){
+            var commonItem = CommonItemSearch()
+            commonItem.id = cinema.id!!
+            commonItem.name = cinema.nom
+            commonItem.type = CommonItemSearchType.Cinema
+            commonItemSearch.add(commonItem)
+        }
+
+        for(actor in actorList){
+            var commonItem = CommonItemSearch()
+            commonItem.id = actor.id
+            commonItem.name = actor.lastName
+            commonItem.type = CommonItemSearchType.Actor
+            commonItemSearch.add(commonItem)
+        }
+    }
+
+    fun getMovie(movieList: ArrayList<Movie>, commonItem: CommonItemSearch){
+        var movie = Movie()
+        for(mv in movieList){
+            if(mv.id == commonItem.id){
+                movie = mv
+            }
+        }
+        val movieDetailsIntent = Intent(this, MovieDetails::class.java)
+        movieDetailsIntent.putExtra("movie", movie)
+        startActivity(movieDetailsIntent)
+    }
+
+    fun getSerie(serieList: ArrayList<Serie>, commonItem: CommonItemSearch){
+        var serie = Serie()
+        for(sr in serieList){
+            if(sr.id == commonItem.id){
+                serie = sr
+            }
+        }
+        val serieDetailsIntent = Intent(this, SerieDetails::class.java)
+        serieDetailsIntent.putExtra("serie", serie)
+        startActivity(serieDetailsIntent)
+    }
+
+    fun getCinema(cinemaList: ArrayList<Cinema>, commonItem: CommonItemSearch){
+        var cinema = Cinema()
+        for(cn in cinemaList){
+            if(cn.id == commonItem.id){
+                cinema = cn
+            }
+        }
+        System.out.println("cinema found: " + cinema.nom)
+    }
+
+    fun getActor(actorList: ArrayList<Actor>, commonItem: CommonItemSearch){
+        var actor = Actor()
+        for(ac in actorList){
+            if(ac.id == commonItem.id){
+                actor = ac
+            }
+        }
+        val serieDetailsIntent = Intent(this, PersonDetails::class.java)
+        serieDetailsIntent.putExtra("actor", actor)
+        startActivity(serieDetailsIntent)
     }
 }
 

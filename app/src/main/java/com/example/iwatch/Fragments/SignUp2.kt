@@ -132,7 +132,7 @@ class SignUp2 : Fragment(){
             var image = ImagePicker.getFirstImageOrNull(data)
             var imageFile =  File(image.path)
             Picasso.get().load(imageFile).into(picture)
-            usr.picture = encodeImage(image.path)
+            usr.picture = image.path
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
@@ -199,12 +199,5 @@ class SignUp2 : Fragment(){
         fragmentManager?.let { genreDialog.show(it, "genre dialog") }
     }
 
-    fun encodeImage(imagePath: String): String{
-
-        val bytes = File(imagePath).readBytes()
-        val base64 = Base64.getEncoder().encodeToString(bytes)
-
-        return base64
-    }
 
 }
