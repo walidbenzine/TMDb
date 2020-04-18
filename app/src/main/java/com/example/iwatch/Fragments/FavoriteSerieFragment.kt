@@ -78,7 +78,7 @@ class FavoriteSerieFragment : Fragment(), OnSerieClickListener {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: ArrayList<Serie>) =
-            FavoriteRoomFragment().apply {
+            FavoriteSerieFragment().apply {
                 arguments = Bundle().apply {
                     putSerializable(ARG_PARAM1, param1)
                  }

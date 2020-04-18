@@ -110,7 +110,7 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
                     var numbers = ArrayList<String>()
                     for(i in 1..serie.nbrSaison){
                         try {
-                            saisons.add(convert.toSaison(post.PostObject("http://10.0.2.2:8080/getSerieSais/" + serie.id.toString() + "/" + i)))
+                            saisons.add(convert.toSaison(post.PostObject("http://scirusiwatch.herokuapp.com/getSerieSais/" + serie.id.toString() + "/" + i)))
                             numbers.add(i.toString())
                         }catch(e: Exception){
                             System.out.println(e)
