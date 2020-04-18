@@ -93,6 +93,13 @@ class ProfileFragment : Fragment() {
             startActivity(favoriteIntent)
         }
 
+        val btndec = v.findViewById<View>(R.id.btn_disconnection) as LinearLayout
+        btndec.setOnClickListener {
+            val favoriteIntent = Intent(this.context, MainActivity::class.java)
+
+            startActivity(favoriteIntent)
+        }
+
         //open user genre activity
         val btnGenres = v.findViewById<View>(R.id.btn_genre) as LinearLayout
         btnGenres.setOnClickListener {

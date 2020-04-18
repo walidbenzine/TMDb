@@ -7,17 +7,16 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.iwatch.Entities.Movie
 import com.example.iwatch.Entities.User
 import com.example.iwatch.Fragments.FavoriteMovieFragment
-import com.example.iwatch.Fragments.FavoriteRoomFragment
+import com.example.iwatch.Fragments.FavoriteSerieFragment
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_favorite.*
 
 
 class Favorite : AppCompatActivity(), FavoriteMovieFragment.OnFragmentInteractionListener,
-    FavoriteRoomFragment.OnFragmentInteractionListener{
+    FavoriteSerieFragment.OnFragmentInteractionListener{
 
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
 
@@ -62,7 +61,7 @@ class Favorite : AppCompatActivity(), FavoriteMovieFragment.OnFragmentInteractio
         override fun getItem(position: Int): Fragment {
             return when (position){
                 0 -> FavoriteMovieFragment.newInstance(user.FavoriteMovies)
-                1 -> FavoriteRoomFragment.newInstance(user.FavoriteSeries)
+                1 -> FavoriteSerieFragment.newInstance(user.FavoriteSeries)
                 else -> Fragment()
             }
         }
