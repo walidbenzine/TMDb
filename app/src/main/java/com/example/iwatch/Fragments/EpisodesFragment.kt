@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.iwatch.Adapters.EpisodeAdapter
 import com.example.iwatch.Entities.Episode
 
 import com.example.iwatch.R
@@ -45,7 +46,7 @@ class EpisodesFragment : Fragment() {
         episode_recycler_view.apply {
             episode_recycler_view!!.layoutManager = LinearLayoutManager(this.context)
             layoutManager = LinearLayoutManager(this.context)
-            adapter = SerieAdapter(serie, this@SeriesFragment)
+            adapter = EpisodeAdapter(episodes, this@EpisodesFragment)
         }
         return v
     }
