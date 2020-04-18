@@ -11,7 +11,9 @@ import kotlinx.android.synthetic.main.activity_confirm_registration.*
 import android.widget.Toast
 import com.example.iwatch.Entities.User
 import org.jetbrains.anko.doAsync
+import java.io.File
 import java.net.URL
+import java.util.*
 
 class ConfirmRegistration : AppCompatActivity() {
 
@@ -87,6 +89,7 @@ class ConfirmRegistration : AppCompatActivity() {
 
         var code = intent.getStringExtra("code").toString()
         var usr = intent.getSerializableExtra("user") as User
+        usr.picture = encodeImage(usr.picture)
 
         btn_confirm_signup.setOnClickListener {
 
@@ -130,5 +133,13 @@ class ConfirmRegistration : AppCompatActivity() {
                 Toast.makeText(applicationContext, "CODE incorrect !", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    fun encodeImage(imagePath: String): String{
+
+        val bytes = File(imagePath).readBytes()
+        val base64 = Base64.getEncoder().encodeToString(bytes)
+
+        return base64
     }
 }

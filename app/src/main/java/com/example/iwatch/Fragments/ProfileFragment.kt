@@ -93,7 +93,7 @@ class ProfileFragment : Fragment() {
             startActivity(favoriteIntent)
         }
 
-        val btndec = v.findViewById<View>(R.id.btn_disconnection) as LinearLayout
+        val btndec = v.findViewById<View>(R.id.btn_disconnect) as LinearLayout
         btndec.setOnClickListener {
             val favoriteIntent = Intent(this.context, MainActivity::class.java)
 
