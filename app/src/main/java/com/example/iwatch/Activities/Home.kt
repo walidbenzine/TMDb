@@ -43,6 +43,7 @@ class Home : AppCompatActivity(),
     private var movieList = ArrayList<Movie>()
     private var serieList = ArrayList<Serie>()
     private var cinemaList = ArrayList<Cinema>()
+    private var actorList = ArrayList<Actor>()
     private var commonItemSearch = ArrayList<CommonItemSearch>()
 
     override fun onFragmentInteraction(uri: Uri) {
@@ -212,13 +213,20 @@ class Home : AppCompatActivity(),
             CommonItemSearchType.Movie -> getMovie(movieList, commonItem)
             CommonItemSearchType.Serie -> getSerie(serieList, commonItem)
             CommonItemSearchType.Cinema -> getCinema(cinemaList, commonItem)
+            CommonItemSearchType.Actor -> getActor(actorList, commonItem)
         }
     }
 
     fun getCommonItemSearch(){
         movieList = post.PostFilm("http://scirusiwatch.herokuapp.com/getlast")
+        movieList.addAll(post.PostFilm("http://scirusiwatch.herokuapp.com/getTopRated"))
+
         serieList = post.PostSerie("http://scirusiwatch.herokuapp.com/getSerieLast")
+        serieList.addAll(post.PostSerie("http://scirusiwatch.herokuapp.com/getSeriePopular"))
+
         cinemaList = post.PostCinema("http://scirusiwatch.herokuapp.com/getAllRooms")
+
+        actorList = post.PostActor("http://scirusiwatch.herokuapp.com/getActorPopular")
 
         for(movie in movieList){
             var commonItem = CommonItemSearch()
@@ -241,6 +249,14 @@ class Home : AppCompatActivity(),
             commonItem.id = cinema.id!!
             commonItem.name = cinema.nom
             commonItem.type = CommonItemSearchType.Cinema
+            commonItemSearch.add(commonItem)
+        }
+
+        for(actor in actorList){
+            var commonItem = CommonItemSearch()
+            commonItem.id = actor.id
+            commonItem.name = actor.lastName
+            commonItem.type = CommonItemSearchType.Actor
             commonItemSearch.add(commonItem)
         }
     }
@@ -277,6 +293,18 @@ class Home : AppCompatActivity(),
             }
         }
         System.out.println("cinema found: " + cinema.nom)
+    }
+
+    fun getActor(actorList: ArrayList<Actor>, commonItem: CommonItemSearch){
+        var actor = Actor()
+        for(ac in actorList){
+            if(ac.id == commonItem.id){
+                actor = ac
+            }
+        }
+        val serieDetailsIntent = Intent(this, PersonDetails::class.java)
+        serieDetailsIntent.putExtra("actor", actor)
+        startActivity(serieDetailsIntent)
     }
 }
 
