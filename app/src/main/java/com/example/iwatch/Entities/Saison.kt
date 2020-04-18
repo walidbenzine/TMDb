@@ -13,8 +13,5 @@ class Saison : Serializable {
     internal var episodeList =  ArrayList<Episode>()
     internal var photo: String? = null
 
-    //A SUPPRIMER
-    internal var actorList: List<Actor>? = null
-
 
 }
