@@ -21,6 +21,9 @@ import com.example.iwatch.Activities.*
 import com.example.iwatch.Entities.User
 
 import com.example.iwatch.R
+import java.io.UnsupportedEncodingException
+import java.net.URLDecoder
+import java.nio.charset.StandardCharsets
 import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -62,7 +65,7 @@ class ProfileFragment : Fragment() {
 
         //get user attributes
         /*var userPic = v.findViewById<ImageView>(R.id.user_picture) as ImageView
-        userPic.setImageBitmap(decodeImage(user.picture))*/
+        userPic.setImageBitmap(decodeImage(decodeValue(user.picture)))*/
 
         var userName = v.findViewById<RecyclerView>(R.id.user_name) as TextView
         userName.text = user.firstName?.capitalize() + " " + user.firstName?.toUpperCase()
@@ -173,9 +176,16 @@ class ProfileFragment : Fragment() {
     }
 
     fun decodeImage(encodedImage: String): Bitmap {
-
         var imageBytes = Base64.getDecoder().decode(encodedImage)
         val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
         return decodedImage
+    }
+
+    fun decodeValue(value: String): String {
+        try {
+            return URLDecoder.decode(value, StandardCharsets.UTF_8.toString());
+        } catch (ex: UnsupportedEncodingException) {
+            throw RuntimeException(ex.cause);
+        }
     }
 }
