@@ -74,7 +74,7 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
 
 
         //print serie details
-        serie_detail_title.text= serie.title
+        serie_detail_title.text = serie.title
         Picasso.get().load(serie.picture).into(serie_detail_picture)
 
         for (i in 0..serie.genreList?.size!! - 1) {

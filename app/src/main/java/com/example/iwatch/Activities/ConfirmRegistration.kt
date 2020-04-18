@@ -23,9 +23,9 @@ class ConfirmRegistration : AppCompatActivity() {
         val conv = Convert()
 
         field_one.addTextChangedListener(
-            object: TextWatcher{
+            object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
-                    if (field_one.text.length>0){
+                    if (field_one.text.length > 0) {
                         field_two.requestFocus()
                     }
                 }
@@ -44,9 +44,9 @@ class ConfirmRegistration : AppCompatActivity() {
             })
 
         field_two.addTextChangedListener(
-            object : TextWatcher{
+            object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
-                    if (field_two.text.length>0){
+                    if (field_two.text.length > 0) {
                         field_three.requestFocus()
                     }
                 }
@@ -64,9 +64,9 @@ class ConfirmRegistration : AppCompatActivity() {
             })
 
         field_three.addTextChangedListener(
-            object : TextWatcher{
+            object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
-                    if (field_three.text.length>0){
+                    if (field_three.text.length > 0) {
                         field_four.requestFocus()
                     }
                 }
@@ -97,29 +97,37 @@ class ConfirmRegistration : AppCompatActivity() {
             sb.append(field_four.text.toString())
             var res = sb.toString()
             if (res.equals(code)) {
-
-
                 val result = post.Post(conv.usrURL(usr))
 
-
-
-                if(!result.equals("null")){
-                    Toast.makeText(applicationContext,"Inscription réussie ! vous pouvez à présent vous connecter", Toast.LENGTH_LONG).show()
+                if (!result.equals("null")) {
+                    Toast.makeText(
+                        applicationContext,
+                        "Inscription réussie ! vous pouvez à présent vous connecter",
+                        Toast.LENGTH_LONG
+                    ).show()
                     var ress = post.PostInt("http://scirusiwatch.herokuapp.com/maxid")
                     for (i in 0 until usr.genrePref!!.size) {
                         doAsync {
-                            post.PostVoid("http://scirusiwatch.herokuapp.com/addgenreuser/${ress}/${usr.genrePref?.get(i)?.id}")
+                            post.PostVoid(
+                                "http://scirusiwatch.herokuapp.com/addgenreuser/${ress}/${usr.genrePref?.get(
+                                    i
+                                )?.id}"
+                            )
 
                         }
 
                     }
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
-                }else{
-                    Toast.makeText(applicationContext,"Erreur lors de l'inscription", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(
+                        applicationContext,
+                        "Erreur lors de l'inscription",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
-            }else{
-                Toast.makeText(applicationContext,"CODE incorrect !", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(applicationContext, "CODE incorrect !", Toast.LENGTH_SHORT).show()
             }
         }
     }
