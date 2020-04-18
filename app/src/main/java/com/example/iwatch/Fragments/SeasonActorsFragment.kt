@@ -47,7 +47,7 @@ class SeasonActorsFragment : Fragment(), OnActorClickListener {
         var v = inflater.inflate(R.layout.fragment_season_actors, container, false)
         val episode_actors_recycler_view = v.findViewById<RecyclerView>(R.id.episode_actors_recycler_view)
         episode_actors_recycler_view.apply {
-            episode_actors_recycler_view!!.layoutManager = LinearLayoutManager(this.context)
+            episode_actors_recycler_view!!.layoutManager = LinearLayoutManager(this.context,LinearLayoutManager.VERTICAL, false)
             layoutManager = LinearLayoutManager(this.context)
             adapter = ActorAdapter(actors, this@SeasonActorsFragment)
         }
