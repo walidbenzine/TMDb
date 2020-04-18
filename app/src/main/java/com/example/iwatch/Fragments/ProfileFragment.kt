@@ -10,10 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iwatch.Activities.*
@@ -95,6 +92,8 @@ class ProfileFragment : Fragment() {
 
         val btndec = v.findViewById<View>(R.id.btn_disconnection) as LinearLayout
         btndec.setOnClickListener {
+           // Toast.makeText("See you later :)", Toast.LENGTH_LONG).show()
+
             val favoriteIntent = Intent(this.context, MainActivity::class.java)
 
             startActivity(favoriteIntent)
