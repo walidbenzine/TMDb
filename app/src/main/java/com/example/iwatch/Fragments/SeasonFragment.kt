@@ -28,14 +28,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class SeasonFragment : Fragment(), SeasonAdapter.OnSeasonClickListener {
 
-    override fun onSeasonClicked(season: Saison) {
-        val seasonDetailsIntent = Intent(this.context, SeasonDetails::class.java)
-        System.out.println("EPISODES ====== " +season.episodeList)
-        var position = saisons.indexOf(season)
-        seasonDetailsIntent.putExtra("season", season)
-        seasonDetailsIntent.putExtra("number", numbers.get(position))
-        startActivity(seasonDetailsIntent)
-    }
+
 
 
     // TODO: Rename and change types of parameters
@@ -123,5 +116,13 @@ class SeasonFragment : Fragment(), SeasonAdapter.OnSeasonClickListener {
                     putSerializable(ARG_PARAM2, param2)
                 }
             }
+    }
+    override fun onSeasonClicked(season: Saison) {
+        val seasonDetailsIntent = Intent(this.context, SeasonDetails::class.java)
+        System.out.println("EPISODES ====== " +season.episodeList)
+        var position = saisons.indexOf(season)
+        seasonDetailsIntent.putExtra("season", season)
+        seasonDetailsIntent.putExtra("number", numbers.get(position))
+        startActivity(seasonDetailsIntent)
     }
 }

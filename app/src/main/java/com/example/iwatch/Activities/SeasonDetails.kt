@@ -12,6 +12,7 @@ import com.example.iwatch.Fragments.EpisodesFragment
 import com.example.iwatch.Fragments.SeasonActorsFragment
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_season_details.*
 
 private var season = Saison()
@@ -46,6 +47,17 @@ class SeasonDetails : AppCompatActivity(), EpisodesFragment.OnFragmentInteractio
 
         season_view_pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(season_tabs))
         season_tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(season_view_pager))
+
+
+
+        season_detail_title.text= season.name
+        season_detail_nbr.text =number
+        season_detail_episode_nbr.text= season.nbrEpisode.toString()
+        season_detail_released_date.text = season.releasedDate
+        season_detail_resume.text = season.resume
+        Picasso.get().load(season.photo).into(season_detail_picture)
+
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
