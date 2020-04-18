@@ -51,7 +51,7 @@ class Convert {
         }
         serie.genreList = genres
 
-        serie.commentList = post.PostComment("http://scirusiwatch.herokuapp.com/getSerieComment/" + serie.id)
+        serie.commentList = post.PostComment(Base_URL+"getSerieComment/" + serie.id)
         return serie
     }
 
@@ -78,7 +78,7 @@ class Convert {
         }
         film.genre = genres
 
-        film.comments = post.PostComment("http://scirusiwatch.herokuapp.com/getMovieComment/" + film.id)
+        film.comments = post.PostComment(Base_URL+"getMovieComment/" + film.id)
 
 
         return film
@@ -193,7 +193,7 @@ class Convert {
 
         var sb = StringBuffer()
 
-        sb.append("http://scirusiwatch.herokuapp.com/addUser/")
+        sb.append(Base_URL+"addUser/")
         sb.append(usr.email+"/")
         sb.append(usr.jeton.toString()+"/")
         sb.append(usr.login+"/")

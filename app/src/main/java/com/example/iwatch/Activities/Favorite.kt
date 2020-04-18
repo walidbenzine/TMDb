@@ -26,7 +26,7 @@ class Favorite : AppCompatActivity(), FavoriteMovieFragment.OnFragmentInteractio
 
         user = intent.getSerializableExtra("user") as User
 
-        user.FavoriteMovies = post.PostFilm("http://scirusiwatch.herokuapp.com/getFavFilm/"+ user.id)
+        user.FavoriteMovies = post.PostFilm(Base_URL+"getFavFilm/"+ user.id)
 
         favorite_toolbar.title = "Favorite"
         setSupportActionBar(favorite_toolbar)

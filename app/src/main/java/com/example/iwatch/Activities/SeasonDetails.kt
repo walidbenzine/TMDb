@@ -78,7 +78,7 @@ class SeasonDetails : AppCompatActivity(), EpisodesFragment.OnFragmentInteractio
                     EpisodesFragment.newInstance(season.episodeList)
                 }
                 1 -> {
-                    SeasonActorsFragment.newInstance(post.PostActor("http://scirusiwatch.herokuapp.com/getSaisonActs/" + season.id.toString() + "/" + number))
+                    SeasonActorsFragment.newInstance(post.PostActor(Base_URL+"getSaisonActs/" + season.id.toString() + "/" + number))
                     //SeasonActorsFragment()
                 }
                 else -> Fragment()

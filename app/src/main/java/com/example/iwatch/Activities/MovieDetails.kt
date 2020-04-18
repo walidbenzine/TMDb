@@ -38,7 +38,7 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
 
         //get movie
         movie = intent.getSerializableExtra("movie") as Movie
-        user.FavoriteMovies = post.PostFilm("http://scirusiwatch.herokuapp.com/getFavFilm/"+ user.id)
+        user.FavoriteMovies = post.PostFilm(Base_URL+"getFavFilm/"+ user.id)
 
 
         //enable back button on the toolbar
@@ -63,7 +63,7 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
 
 
         btn_movie_favori.setOnClickListener {
-            post.PostVoid("http://scirusiwatch.herokuapp.com/addFavFilm/" + user.id + "/" + movie.id)
+            post.PostVoid(Base_URL+"addFavFilm/" + user.id + "/" + movie.id)
             Toast.makeText(applicationContext, "Ajout réussi", Toast.LENGTH_SHORT).show()
             btn_movie_favori.isFavorite = true
         }
@@ -114,13 +114,13 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
             return when (position) {
                 0 -> {
                     MovieDetailsFragment.newInstance(
-                        post.PostActor("http://scirusiwatch.herokuapp.com/getAct/" + movie.id.toString()),
-                        post.PostFilm("http://scirusiwatch.herokuapp.com/getLi/" + movie.id.toString())
+                        post.PostActor(Base_URL+"getAct/" + movie.id.toString()),
+                        post.PostFilm(Base_URL+"getLi/" + movie.id.toString())
                     )
                 }
-                1 -> MovieRoomsFragment.newInstance(post.PostCinema("http://scirusiwatch.herokuapp.com/getRoom/" + movie.id.toString()))
+                1 -> MovieRoomsFragment.newInstance(post.PostCinema(Base_URL+"getRoom/" + movie.id.toString()))
                 2 -> {
-                    CommentsFragment.newInstance(post.PostComment("http://scirusiwatch.herokuapp.com/getC/" + movie.id.toString()))
+                    CommentsFragment.newInstance(post.PostComment(Base_URL+"getC/" + movie.id.toString()))
                 }
                 else -> Fragment()
             }
