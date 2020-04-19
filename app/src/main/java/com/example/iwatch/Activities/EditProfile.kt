@@ -32,10 +32,11 @@ class EditProfile : AppCompatActivity(), ChangePassword.ChangePasswordDialogList
 
         //get user information
         user = intent.getSerializableExtra("user") as User
-
-        userPic = intent.getStringExtra("tof") as String
-        edit_picture.rotation = 90F
-        edit_picture.setImageBitmap(decodeImage(encodeImage(userPic)))
+        if(intent.getStringExtra("tof") != null){
+            userPic = intent.getStringExtra("tof") as String
+            edit_picture.rotation = 90F
+            edit_picture.setImageBitmap(decodeImage(encodeImage(userPic)))
+        }
 
         edit_login.setText(user.login)
         edit_first_name.setText(user.firstName)

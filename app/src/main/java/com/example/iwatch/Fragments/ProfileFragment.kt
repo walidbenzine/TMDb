@@ -71,7 +71,10 @@ class ProfileFragment : Fragment() {
 
         //get user attributes
         var userPicture = v.findViewById<ImageView>(R.id.user_picture) as ImageView
-        userPicture.setImageBitmap(decodeImage(encodeImage(userPic)))
+
+        if(userPic != ""){
+            userPicture.setImageBitmap(decodeImage(encodeImage(userPic)))
+        }
 
         var userName = v.findViewById<RecyclerView>(R.id.user_name) as TextView
         userName.text = user.firstName?.capitalize() + " " + user.firstName?.toUpperCase()

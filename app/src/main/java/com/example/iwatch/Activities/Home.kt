@@ -57,7 +57,11 @@ class Home : AppCompatActivity(),
         System.out.println("HOME ACTIVITY STARTED")
 
         user = intent.getSerializableExtra("user") as User
-        userPic = intent.getStringExtra("tof") as String
+
+        if(intent.getStringExtra("tof") != null){
+            userPic = intent.getStringExtra("tof") as String
+        }
+
 
         // set the toolbar
         setSupportActionBar(toolbar)
