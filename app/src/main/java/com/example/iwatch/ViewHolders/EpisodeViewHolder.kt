@@ -1,5 +1,6 @@
 package com.example.iwatch.ViewHolders
 
+import android.graphics.BitmapFactory
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -8,10 +9,9 @@ import com.example.iwatch.Adapters.OnEpisodeClickListener
 import com.example.iwatch.Entities.Episode
 import com.example.iwatch.R
 import com.squareup.picasso.Picasso
+import java.net.URL
 
 class EpisodeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)  {
-
-
 
     val title = itemView.findViewById(R.id.episode_title) as TextView
     val resume = itemView.findViewById(R.id.episode_resume) as TextView
@@ -24,7 +24,11 @@ class EpisodeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)  {
         resume.text = episode!!.resume
         releaseddate.text= episode!!.dateDiffusion
         popularity.text = episode!!.popularity?.substring(0,3)
-        Picasso.get().load(episode!!.picture).into(picture)
+        //Picasso.get().load(episode!!.picture).into(picture)
+        var url = URL(episode.picture)
+        var image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+        picture.setImageBitmap(image)
+
         itemView.setOnClickListener {
             clickListener.onEpisodeClicked(episode)
         }

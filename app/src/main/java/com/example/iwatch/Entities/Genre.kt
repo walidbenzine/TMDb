@@ -43,7 +43,7 @@ data class Genre (var genreType: GenreType): Serializable{
             }
             GenreType.War -> {
                 toast = "Let's fight today"
-                iconId = R.mipmap.ic_ghost
+                iconId = R.mipmap.ic_war
                 id=10752
 
             }

@@ -8,7 +8,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuItemCompat
@@ -26,7 +25,6 @@ import com.example.iwatch.Fragments.*
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.fragment_series.*
 
 var convert = Convert()
 var post = PostClass()
@@ -68,6 +66,19 @@ class Home : AppCompatActivity(),
 
         home_container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(home_container))
+
+        /*val movieService = ApiFactory.scirusAPI
+        GlobalScope.launch(Dispatchers.Default) {
+            val popularMovieRequest = movieService.getPopularMovie()
+            try {
+                val response = popularMovieRequest.await()
+                val movieResponse = response //This is single object Tmdb Movie response
+                popularMovies = movieResponse?.result // This is list of TMDB Movie
+                System.out.println("size: " + popularMovies.toString())
+            }catch (e: Exception){
+                System.out.println("error: " + e)
+            }
+        }*/
 
         getCommonItemSearch()
 
@@ -304,6 +315,7 @@ class Home : AppCompatActivity(),
         serieDetailsIntent.putExtra("actor", actor)
         startActivity(serieDetailsIntent)
     }
+
 }
 
 

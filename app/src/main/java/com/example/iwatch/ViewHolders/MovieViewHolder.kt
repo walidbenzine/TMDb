@@ -1,5 +1,6 @@
 package com.example.iwatch.ViewHolders
 
+import android.graphics.BitmapFactory
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ImageView
@@ -9,6 +10,7 @@ import com.example.iwatch.Adapters.OnMovieClickListener
 import com.example.iwatch.Entities.Movie
 import com.example.iwatch.R
 import com.squareup.picasso.Picasso
+import java.net.URL
 
 class MovieViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
 
@@ -22,7 +24,10 @@ class MovieViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
         movietTitle.text = movie.title
         movieResume.text = movie.resume
         movieReleasedDate.text = movie.dateSortie
-        Picasso.get().load(movie.imgFilm).into(moviePicture)
+        var url = URL(movie.imgFilm)
+        var image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+        moviePicture.setImageBitmap(image)
+        //Picasso.get().load(movie.imgFilm).into(moviePicture)
         movieRate.text = (((movie.note + "F").toFloat())/2).toString().take(3)
 
         itemView.setOnClickListener {

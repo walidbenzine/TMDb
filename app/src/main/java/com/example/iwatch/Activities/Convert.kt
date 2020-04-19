@@ -80,7 +80,6 @@ class Convert {
 
         film.comments = post.PostComment(Base_URL+"getMovieComment/" + film.id)
 
-
         return film
     }
 

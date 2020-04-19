@@ -1,5 +1,6 @@
 package com.example.iwatch.ViewHolders
 
+import android.graphics.BitmapFactory
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -8,6 +9,7 @@ import com.example.iwatch.Adapters.SeasonAdapter
 import com.example.iwatch.Entities.Saison
 import com.example.iwatch.R
 import com.squareup.picasso.Picasso
+import java.net.URL
 
 class SeasonViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
 
@@ -22,7 +24,10 @@ class SeasonViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
         serieSaisonTitre.text = season!!.name
         serieSaisonDate.text = season!!.releasedDate
         serieSaisonNbr.text = season!!.nbrEpisode.toString()
-        Picasso.get().load(season!!.photo).into(serieSaisonPicture)
+        //Picasso.get().load(season!!.photo).into(serieSaisonPicture)
+        var url = URL(season.photo)
+        var image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+        serieSaisonPicture.setImageBitmap(image)
 
         itemView.setOnClickListener {
             clickListener.onSeasonClicked(season)

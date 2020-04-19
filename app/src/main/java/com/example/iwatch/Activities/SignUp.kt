@@ -1,26 +1,11 @@
 package com.example.iwatch.Activities
 
 import android.net.Uri
-import com.squareup.okhttp.OkHttpClient
-import com.squareup.okhttp.Request
-import org.jetbrains.anko.activityUiThread
-import org.jetbrains.anko.doAsync
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
-import android.widget.Toast
-import com.example.iwatch.Dialogs.ChooseGenre
-import com.example.iwatch.Entities.User
 import com.example.iwatch.Fragments.SignUp1
 import com.example.iwatch.Fragments.SignUp2
 import com.example.iwatch.R
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_sign_up1.*
-import kotlinx.android.synthetic.main.fragment_sign_up1.email
-import kotlinx.android.synthetic.main.fragment_sign_up1.pass
-import kotlinx.android.synthetic.main.fragment_sign_up2.*
-import org.json.JSONObject
 
 class SignUp : AppCompatActivity(), SignUp1.OnFragmentInteractionListener,
     SignUp2.OnFragmentInteractionListener{
