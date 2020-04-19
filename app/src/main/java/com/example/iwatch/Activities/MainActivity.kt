@@ -25,7 +25,7 @@ import org.jetbrains.anko.uiThread
 import java.lang.Exception
 import java.net.URL
 
-val Base_URL = "http://10.0.2.2:8080/"
+val Base_URL = "http://iwatchscirus.herokuapp.com/"
 
 class MainActivity : AppCompatActivity() {
 

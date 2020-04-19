@@ -13,6 +13,7 @@ import com.example.iwatch.Entities.User
 import org.jetbrains.anko.doAsync
 import java.io.File
 import java.io.UnsupportedEncodingException
+import java.lang.Exception
 import java.net.URL
 import java.net.URLDecoder
 import java.net.URLEncoder
@@ -95,7 +96,13 @@ class ConfirmRegistration : AppCompatActivity() {
         var code = intent.getStringExtra("code").toString()
         var usr = intent.getSerializableExtra("user") as User
 
-        usr.picture = encodeValue(encodeImage(usr.picture))
+        try{
+            usr.picture = encodeValue(encodeImage(usr.picture))
+        }catch (e: Exception){
+            System.out.println(e)
+            usr.picture = "null"
+        }
+
 
         btn_confirm_signup.setOnClickListener {
 
@@ -108,7 +115,8 @@ class ConfirmRegistration : AppCompatActivity() {
             if (res.equals(code)) {
 
                 doAsync {
-                    post.Post(conv.usrURL(usr))
+                    System.out.println(conv.usrURL(usr))
+                    post.PostVoid(conv.usrURL(usr))
                 }
 
                     Toast.makeText(

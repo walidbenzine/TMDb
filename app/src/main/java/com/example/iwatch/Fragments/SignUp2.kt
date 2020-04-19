@@ -138,7 +138,8 @@ class SignUp2 : Fragment() {
             var bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver, imageUri)
             picture.rotation = 90F
             picture.setImageBitmap(bitmap)
-            usr.picture = getRealPathFromURI(imageUri!!)
+            //usr.picture = getRealPathFromURI(imageUri!!)
+            usr.picture = "null"
         }
         super.onActivityResult(requestCode, resultCode, data)
     }

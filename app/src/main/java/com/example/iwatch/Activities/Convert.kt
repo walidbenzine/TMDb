@@ -197,8 +197,8 @@ class Convert {
         sb.append(usr.jeton.toString()+"/")
         sb.append(usr.login+"/")
         sb.append(usr.lastName+"/")
-        sb.append(usr.password+"/")
-        sb.append(usr.picture+"/")
+        sb.append(usr.password+"/null/")
+
         sb.append(usr.firstName+"/")
         sb.append(usr.mobile+"/")
         sb.append(usr.adresse)
