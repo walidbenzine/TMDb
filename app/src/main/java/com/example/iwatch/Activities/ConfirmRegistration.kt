@@ -106,19 +106,20 @@ class ConfirmRegistration : AppCompatActivity() {
             sb.append(field_four.text.toString())
             var res = sb.toString()
             if (res.equals(code)) {
-                val result = post.Post(conv.usrURL(usr))
+                doAsync {
+                    post.Post(conv.usrURL(usr))
+                }
 
-                if (!result.equals("null")) {
                     Toast.makeText(
                         applicationContext,
                         "Inscription réussie ! vous pouvez à présent vous connecter",
                         Toast.LENGTH_LONG
                     ).show()
-                    var ress = post.PostInt("http://scirusiwatch.herokuapp.com/maxid")
+                    var ress = post.PostInt(Base_URL+"maxid")
                     for (i in 0 until usr.genrePref!!.size) {
                         doAsync {
                             post.PostVoid(
-                                "http://scirusiwatch.herokuapp.com/addgenreuser/${ress}/${usr.genrePref?.get(
+                                Base_URL+"addgenreuser/${ress}/${usr.genrePref?.get(
                                     i
                                 )?.id}"
                             )
@@ -128,13 +129,6 @@ class ConfirmRegistration : AppCompatActivity() {
                     }
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
-                } else {
-                    Toast.makeText(
-                        applicationContext,
-                        "Erreur lors de l'inscription",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
             } else {
                 Toast.makeText(applicationContext, "CODE incorrect !", Toast.LENGTH_SHORT).show()
             }

@@ -28,10 +28,6 @@ private const val ARG_PARAM2 = "param2"
  */
 class SeasonFragment : Fragment(), SeasonAdapter.OnSeasonClickListener {
 
-
-
-
-    // TODO: Rename and change types of parameters
     private var saisons = ArrayList<Saison>()
     private var numbers = ArrayList<String>()
 
@@ -39,10 +35,10 @@ class SeasonFragment : Fragment(), SeasonAdapter.OnSeasonClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        saisons = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Saison>
-        numbers = arguments?.getSerializable(ARG_PARAM2) as ArrayList<String>
-
+        arguments?.let {
+            saisons = it.getSerializable(ARG_PARAM1) as ArrayList<Saison>
+            numbers = it.getSerializable(ARG_PARAM2) as ArrayList<String>
+       }
     }
 
     override fun onCreateView(

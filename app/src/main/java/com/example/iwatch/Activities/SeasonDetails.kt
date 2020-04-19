@@ -15,6 +15,8 @@ import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_season_details.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import java.net.URL
 
 private var season = Saison()
@@ -84,8 +86,14 @@ class SeasonDetails : AppCompatActivity(), EpisodesFragment.OnFragmentInteractio
                     EpisodesFragment.newInstance(season.episodeList)
                 }
                 1 -> {
-                    SeasonActorsFragment.newInstance(post.PostActor(Base_URL+"getSaisonActs/" + season.id.toString() + "/" + number))
-                    //SeasonActorsFragment()
+                    var frag = SeasonActorsFragment()
+                    doAsync {
+                        var res = post.PostActor(Base_URL+"getSaisonActs/" + season.id.toString() + "/" + number)
+                        uiThread {
+                            frag.actors = res
+                        }
+                    }
+                    return frag
                 }
                 else -> Fragment()
             }

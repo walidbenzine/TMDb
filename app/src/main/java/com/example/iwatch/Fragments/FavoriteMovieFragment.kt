@@ -34,11 +34,10 @@ class FavoriteMovieFragment : Fragment(), OnMovieClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        movies = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Movie>
-        System.out.println("FAVORITE movies ===== "+ movies)
-        System.out.println("FAVORITE movies ===== "+ movies.size)
-
+        arguments?.let {
+            movies = it.getSerializable(ARG_PARAM1) as ArrayList<Movie>
+            System.out.println("FAVORITE movies ===== "+ movies)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

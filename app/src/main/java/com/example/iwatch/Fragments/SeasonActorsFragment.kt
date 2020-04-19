@@ -20,7 +20,6 @@ import com.example.iwatch.R
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
-private var actors = ArrayList<Actor>()
 
 /**
  * A simple [Fragment] subclass.
@@ -31,12 +30,14 @@ class SeasonActorsFragment : Fragment(), OnActorClickListener {
     // TODO: Rename and change types of parameters
 
     private var listener: OnFragmentInteractionListener? = null
+    var actors = ArrayList<Actor>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        actors = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Actor>
-        System.out.println("ACTOOORS ==== "+actors)
-
+        arguments?.let {
+            actors = it.getSerializable(ARG_PARAM1) as ArrayList<Actor>
+            System.out.println("ACTOOORS ==== "+actors)
+        }
     }
 
     override fun onCreateView(
@@ -47,8 +48,7 @@ class SeasonActorsFragment : Fragment(), OnActorClickListener {
         var v = inflater.inflate(R.layout.fragment_season_actors, container, false)
         val episode_actors_recycler_view = v.findViewById<RecyclerView>(R.id.episode_actors_recycler_view)
         episode_actors_recycler_view.apply {
-            episode_actors_recycler_view!!.layoutManager = LinearLayoutManager(this.context,LinearLayoutManager.VERTICAL, false)
-            layoutManager = LinearLayoutManager(this.context)
+            layoutManager = LinearLayoutManager(this.context,LinearLayoutManager.HORIZONTAL,false)
             adapter = ActorAdapter(actors, this@SeasonActorsFragment)
         }
         return v

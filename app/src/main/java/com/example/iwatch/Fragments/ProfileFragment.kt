@@ -47,7 +47,9 @@ class ProfileFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        user =  arguments?.getSerializable(ARG_PARAM1) as User
+        arguments?.let {
+            user = it.getSerializable(ARG_PARAM1) as User
+        }
     }
 
     override fun onCreateView(

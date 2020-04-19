@@ -37,9 +37,10 @@ class AssociatedSeriesFragment : Fragment(), OnSerieClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        series = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Serie>
-        System.out.println("SERIES LIEES ==== " + series)
-
+        arguments?.let {
+            series = it.getSerializable(ARG_PARAM1) as ArrayList<Serie>
+            System.out.println("SERIES LIEES ==== " + series)
+        }
     }
 
     override fun onCreateView(

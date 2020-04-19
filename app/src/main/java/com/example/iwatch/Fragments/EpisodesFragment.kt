@@ -34,10 +34,10 @@ class EpisodesFragment : Fragment(), OnEpisodeClickListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        @Suppress("UNCHECKED_CAST")
-        episodes = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Episode>
-        System.out.println("EPISOODES == "+ episodes)
-
+        arguments?.let {
+            episodes = it.getSerializable(ARG_PARAM1) as ArrayList<Episode>
+            System.out.println("EPISOODES == "+ episodes)
+        }
     }
 
     override fun onCreateView(

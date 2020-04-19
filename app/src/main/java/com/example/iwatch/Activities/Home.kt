@@ -25,6 +25,8 @@ import com.example.iwatch.Fragments.*
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_home.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 var convert = Convert()
 var post = PostClass()
@@ -50,6 +52,8 @@ class Home : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        System.out.println("HOME ACTIVITY STARTED")
 
         user = intent.getSerializableExtra("user") as User
 
@@ -162,42 +166,55 @@ class Home : AppCompatActivity(),
 
                 0 -> {
                     System.out.println("CASE 0")
-                    /*var frag = HomeFragment()
-                    System.out.println("CASE 0")
+                    var frag = HomeFragment()
                     doAsync {
                         var res = post.PostSerie(Base_URL+"getSerieLast")
-                        var res2 = post.PostFilm("Base_URL+"getlast")
+                        var res2 = post.PostFilm(Base_URL+"getlast")
                         uiThread {
                                 frag.serie = res
                                 frag.films = res2
+                            System.out.println("CHARGEMENT DONNEES FILMS/SERIES LAST DONE")
                         }
                     }
-                    return frag*/
-                    HomeFragment.newInstance(post.PostSerie(Base_URL+"getSerieLast"),post.PostFilm(Base_URL+"getlast"))
-
-
+                    return frag
                 }
                 1 -> {
                     System.out.println("CASE 1")
-					/*var frag = CinemaFragment()
+					var frag = CinemaFragment()
                     doAsync {
                         var res = post.PostFilm(Base_URL+"getTopRated")
                         var res2 = post.PostCinema(Base_URL+"getAllRooms")
                         uiThread {
                             frag.films = res
                             frag.cinemas = res2
+                            System.out.println("CHARGEMENT DONNEES FILMS/CINEMAS DONE")
                         }
                     }
-                    return frag*/
-                    CinemaFragment.newInstance(post.PostFilm(Base_URL+"getTopRated"),post.PostCinema(Base_URL+"getAllRooms"))
+                    return frag
                 }
                 2 -> {
                     System.out.println("CASE 2")
-                    SeriesFragment.newInstance(post.PostSerie(Base_URL+"getSeriePopular"))
+                    var frag = SeriesFragment()
+                    doAsync {
+                        var res = post.PostSerie(Base_URL+"getSeriePopular")
+                        uiThread {
+                            frag.serie = res
+                            System.out.println("CHARGEMENT DONNEES SERIES TOP-RATED DONE")
+                        }
+                    }
+                    return frag
                 }
                 3 -> {
                     System.out.println("CASE 3")
-                    PersonsFragment.newInstance(post.PostActor(Base_URL+"getActorPopular"))
+                    var frag = PersonsFragment()
+                    doAsync {
+                        var res = post.PostActor(Base_URL+"getActorPopular")
+                        uiThread {
+                            frag.actors = res
+                            System.out.println("CHARGEMENT DONNEES ACTEURS DONE")
+                        }
+                    }
+                    return frag
                 }
                 4 -> {
                     System.out.println("CASE 4")
@@ -227,46 +244,49 @@ class Home : AppCompatActivity(),
     }
 
     fun getCommonItemSearch(){
-        movieList = post.PostFilm("http://scirusiwatch.herokuapp.com/getlast")
-        movieList.addAll(post.PostFilm("http://scirusiwatch.herokuapp.com/getTopRated"))
 
-        serieList = post.PostSerie("http://scirusiwatch.herokuapp.com/getSerieLast")
-        serieList.addAll(post.PostSerie("http://scirusiwatch.herokuapp.com/getSeriePopular"))
+        doAsync {
+            movieList = post.PostFilm(Base_URL+"getlast")
+            serieList = post.PostSerie(Base_URL+"getSerieLast")
+            cinemaList = post.PostCinema(Base_URL+"getAllRooms")
+            actorList = post.PostActor(Base_URL+"getActorPopular")
+            movieList.addAll(post.PostFilm(Base_URL+"getTopRated"))
+            serieList.addAll(post.PostSerie(Base_URL+"getSeriePopular"))
 
-        cinemaList = post.PostCinema("http://scirusiwatch.herokuapp.com/getAllRooms")
+            uiThread {
+                for(movie in movieList){
+                    var commonItem = CommonItemSearch()
+                    commonItem.id = movie.id
+                    commonItem.name = movie.title
+                    commonItem.type = CommonItemSearchType.Movie
+                    commonItemSearch.add(commonItem)
+                }
 
-        actorList = post.PostActor("http://scirusiwatch.herokuapp.com/getActorPopular")
+                for(serie in serieList){
+                    var commonItem = CommonItemSearch()
+                    commonItem.id = serie.id
+                    commonItem.name = serie.title
+                    commonItem.type = CommonItemSearchType.Serie
+                    commonItemSearch.add(commonItem)
+                }
 
-        for(movie in movieList){
-            var commonItem = CommonItemSearch()
-            commonItem.id = movie.id
-            commonItem.name = movie.title
-            commonItem.type = CommonItemSearchType.Movie
-            commonItemSearch.add(commonItem)
-        }
+                for(cinema in cinemaList){
+                    var commonItem = CommonItemSearch()
+                    commonItem.id = cinema.id!!
+                    commonItem.name = cinema.nom
+                    commonItem.type = CommonItemSearchType.Cinema
+                    commonItemSearch.add(commonItem)
+                }
 
-        for(serie in serieList){
-            var commonItem = CommonItemSearch()
-            commonItem.id = serie.id
-            commonItem.name = serie.title
-            commonItem.type = CommonItemSearchType.Serie
-            commonItemSearch.add(commonItem)
-        }
+                for(actor in actorList){
+                    var commonItem = CommonItemSearch()
+                    commonItem.id = actor.id
+                    commonItem.name = actor.lastName
+                    commonItem.type = CommonItemSearchType.Actor
+                    commonItemSearch.add(commonItem)
+                }
 
-        for(cinema in cinemaList){
-            var commonItem = CommonItemSearch()
-            commonItem.id = cinema.id!!
-            commonItem.name = cinema.nom
-            commonItem.type = CommonItemSearchType.Cinema
-            commonItemSearch.add(commonItem)
-        }
-
-        for(actor in actorList){
-            var commonItem = CommonItemSearch()
-            commonItem.id = actor.id
-            commonItem.name = actor.lastName
-            commonItem.type = CommonItemSearchType.Actor
-            commonItemSearch.add(commonItem)
+            }
         }
     }
 

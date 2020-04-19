@@ -28,7 +28,6 @@ class Splash : AppCompatActivity() {
     private var PRIVATE_MODE = 0
     private val PREF_NAME = "Scirus-Y"
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
@@ -46,10 +45,8 @@ class Splash : AppCompatActivity() {
                 requestPermissions(permissions, PERMISSION_REQUEST_CODE)
             }
         }
-        //SharedPreferences.edit().clear().commit()
         Handler().postDelayed(
             {
-
           if (SharedPreferences.getString("login", "login").equals("login")) {
               val i = Intent(this, MainActivity::class.java)
               startActivity(i)
@@ -66,9 +63,8 @@ class Splash : AppCompatActivity() {
     fun connect(){
         val  SharedPreferences = getSharedPreferences(PREF_NAME, this.PRIVATE_MODE)
         val homeIntent = Intent(this, Home::class.java)
+        val i = Intent(this, MainActivity::class.java)
         val convert = Convert()
-
-
 
             var login = SharedPreferences.getString("login","")
             val password = SharedPreferences.getString("password","")
@@ -76,49 +72,31 @@ class Splash : AppCompatActivity() {
             if (!login.isNullOrEmpty() && !password.isNullOrEmpty()) {
 
                 try{
-                    var userJson = JSONArray()
-
                     doAsync {
-                        userJson = post.PostArray("http://scirusiwatch.herokuapp.com/getUser/" + login + "/" + password)
+                        var userJson = post.PostArray(Base_URL+"getUser/" + login + "/" + password)
                         if (userJson.toString() != "{}" && userJson.toString() != "[]" ) {
 
                             val user = convert.toUser(userJson.getJSONObject(0))
-                            user.FavoriteMovies = post.PostFilm("http://scirusiwatch.herokuapp.com/getFavFilm/"+ user.id)
-                            user.FavoriteSeries = post.PostSerie("http://scirusiwatch.herokuapp.com//getFavSerie/"+ user.id)
+                            user.FavoriteMovies = post.PostFilm(Base_URL+"getFavFilm/"+ user.id)
+                            user.FavoriteSeries = post.PostSerie(Base_URL+"getFavSerie/"+ user.id)
 
                             uiThread {
-
-
-
                                 homeIntent.putExtra("user", user)
-
-
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(homeIntent)
                                 finish()
                             }
 
                         }else {
-                            Toast.makeText(
-                                applicationContext,
-                                "Identifiants incorrects",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            uiThread {
+                                startActivity(i)
+                                finish()
+                            }
                         }
                     }
                 } catch(e: Exception){
                     System.out.println(e)
                 }
-            } else {
-                Toast.makeText(
-                    applicationContext,
-                    "Entrez de bonnes valeurs SVP",
-                    Toast.LENGTH_SHORT
-                ).show()
             }
-
     }
-
-
-
 }

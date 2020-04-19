@@ -9,6 +9,7 @@ import com.example.iwatch.Dialogs.ChangePassword
 import com.example.iwatch.Entities.User
 import com.example.iwatch.R
 import kotlinx.android.synthetic.main.activity_edit_profile.*
+import org.jetbrains.anko.doAsync
 
 
 class EditProfile : AppCompatActivity(), ChangePassword.ChangePasswordDialogListener{
@@ -60,7 +61,10 @@ class EditProfile : AppCompatActivity(), ChangePassword.ChangePasswordDialogList
             user?.mobile = edit_phone_number.text.toString()
             user?.adresse = edit_address.text.toString()
 
-           post.PostVoid(Base_URL+"changeinfo/" + user?.id + "/" + user?.firstName+"/" + user?.lastName+"/" +user?.email +"/" +user?.adresse +"/" + user?.mobile+"/" +user?.login )
+            doAsync {
+                post.PostVoid(Base_URL+"changeinfo/" + user?.id + "/" + user?.firstName+"/" + user?.lastName+"/" +user?.email +"/" +user?.adresse +"/" + user?.mobile+"/" +user?.login )
+            }
+
         }
         return super.onOptionsItemSelected(item)
     }
@@ -72,8 +76,9 @@ class EditProfile : AppCompatActivity(), ChangePassword.ChangePasswordDialogList
 
     override fun applyTexts(oldPassword: String?, newPassword: String?, confirmPassword: String?) {
         if (newPassword==confirmPassword){
-
-            post.PostArray(Base_URL+"changepass/" + user.id + "/" + confirmPassword)
+            doAsync {
+                post.PostArray(Base_URL+"changepass/" + user.id + "/" + confirmPassword)
+            }
             Toast.makeText(
                 applicationContext,
                 "mot de passe a été bien changé",

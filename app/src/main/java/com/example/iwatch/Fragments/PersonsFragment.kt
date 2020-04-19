@@ -33,21 +33,22 @@ private const val ARG_PARAM2 = "param2"
 class PersonsFragment : Fragment(), PersonAdapter.OnPersonClickListener {
 
     // TODO: Rename and change types of parameters
-    private var actors = ArrayList<Actor>()
+    var actors = ArrayList<Actor>()
 
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        actors = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Actor>
+        arguments?.let {
+            actors = it.getSerializable(ARG_PARAM1) as ArrayList<Actor>
+            System.out.println("FIRST ACTOR NAME = "+ actors.get(0).firstName + " " + actors.get(0).popularity)
+        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        System.out.println("FIRST ACTOR NAME = "+ actors.get(0).firstName + " " + actors.get(0).popularity)
 
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_persons, container, false)

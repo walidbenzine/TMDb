@@ -40,8 +40,11 @@ class SeriesFragment : Fragment(),  OnSerieClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        @Suppress("UNCHECKED_CAST")
-        serie = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Serie>
+
+        arguments?.let {
+            serie = it.getSerializable(ARG_PARAM1) as ArrayList<Serie>
+
+        }
     }
 
     override fun onCreateView(

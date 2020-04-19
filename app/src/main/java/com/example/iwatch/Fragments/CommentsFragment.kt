@@ -40,9 +40,9 @@ class CommentsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        @Suppress("UNCHECKED_CAST")
-        comments = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Comment>
+        arguments?.let {
+            comments = it.getSerializable(ARG_PARAM1) as ArrayList<Comment>
+        }
     }
 
     override fun onCreateView(
