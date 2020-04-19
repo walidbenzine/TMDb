@@ -13,6 +13,8 @@ import java.net.URL
 
 class EpisodeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)  {
 
+
+
     val title = itemView.findViewById(R.id.episode_title) as TextView
     val resume = itemView.findViewById(R.id.episode_resume) as TextView
     val releaseddate = itemView.findViewById(R.id.episode_released_date) as TextView
