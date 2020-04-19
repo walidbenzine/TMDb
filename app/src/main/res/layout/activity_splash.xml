@@ -10,12 +10,9 @@
     android:gravity="center_vertical|center_horizontal"
     tools:context=".Activities.Splash">
 
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="iWatch"
-        android:textSize="28dp"
-        android:textColor="@color/white"
-        android:textStyle="bold"/>
+        android:src="@mipmap/logo_white"/>
 
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.example.iwatch.ViewHolders
 
+import android.graphics.BitmapFactory
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -8,6 +9,7 @@ import com.example.iwatch.Adapters.OnSerieClickListener
 import com.example.iwatch.Entities.Serie
 import com.example.iwatch.R
 import com.squareup.picasso.Picasso
+import java.net.URL
 
 class SerieViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
 
@@ -19,7 +21,10 @@ class SerieViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
 
     fun bind(serie: Serie, clickListener: OnSerieClickListener){
 
-        Picasso.get().load(serie?.picture).into(seriePicture)
+        //Picasso.get().load(serie?.picture).into(seriePicture)
+        var url = URL(serie.picture)
+        var image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+        seriePicture.setImageBitmap(image)
         serieTitle.text = serie.title
         serieDetails.text =serie.resume
         serieReleazedDate!!.text= serie.dateSortie

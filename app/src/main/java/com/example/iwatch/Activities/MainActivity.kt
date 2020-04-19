@@ -3,6 +3,7 @@ package com.example.iwatch.Activities
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -14,10 +15,12 @@ import com.example.iwatch.R
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONArray
 import android.util.Log
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import java.lang.Exception
+import java.net.URL
 
 val Base_URL = "http://scirusiwatch.herokuapp.com/"
 class MainActivity : AppCompatActivity() {
@@ -64,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         val homeIntent = Intent(this, Home::class.java)
         val convert = Convert()
 
-        val btnSignUp = findViewById<View>(R.id.btn_signUp) as Button
+        val btnSignUp = findViewById<View>(R.id.btn_signUp) as TextView
         btnSignUp.setOnClickListener() {
             var signUpIntent = Intent(this@MainActivity, SignUp::class.java)
             startActivity(signUpIntent)

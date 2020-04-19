@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/darkGrey"
-        app:navigationIcon="@drawable/ic_action_navigation_arrow_back_inverted"
+        app:navigationIcon="@mipmap/ic_back_arrow"
         android:elevation="4dp"/>
 
     <com.google.android.material.tabs.TabLayout

@@ -1,5 +1,6 @@
 package com.example.iwatch.ViewHolders
 
+import android.graphics.BitmapFactory
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -8,6 +9,7 @@ import com.example.iwatch.Adapters.OnRoomClickListener
 import com.example.iwatch.Entities.Cinema
 import com.example.iwatch.R
 import com.squareup.picasso.Picasso
+import java.net.URL
 
 class MovieRoomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
@@ -18,7 +20,10 @@ class MovieRoomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     fun bind(movieRoom: Cinema, clickListener: OnRoomClickListener){
         movieRoomName.text = movieRoom.nom
         movieRoomAddress.text = movieRoom.adresse
-        Picasso.get().load(movieRoom.image).into(movieRoomPicture)
+        //Picasso.get().load(movieRoom.image).into(movieRoomPicture)
+        var url = URL(movieRoom.image)
+        var image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+        movieRoomPicture.setImageBitmap(image)
 
         itemView.setOnClickListener {
             clickListener.onRoomClicked(movieRoom)

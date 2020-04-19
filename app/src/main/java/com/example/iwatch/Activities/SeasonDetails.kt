@@ -1,5 +1,6 @@
 package com.example.iwatch.Activities
 
+import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,6 +15,7 @@ import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_season_details.*
+import java.net.URL
 
 private var season = Saison()
 private var number =""
@@ -55,7 +57,11 @@ class SeasonDetails : AppCompatActivity(), EpisodesFragment.OnFragmentInteractio
         season_detail_episode_nbr.text= season.nbrEpisode.toString()
         season_detail_released_date.text = season.releasedDate
         season_detail_resume.text = season.resume
-        Picasso.get().load(season.photo).into(season_detail_picture)
+
+        var url = URL(season.photo)
+        var image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+        season_detail_picture.setImageBitmap(image)
+        //Picasso.get().load(season.photo).into(season_detail_picture)
 
 
     }

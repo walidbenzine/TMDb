@@ -1,5 +1,6 @@
 package com.example.iwatch.Activities
 
+import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,6 +21,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_serie_details.*
+import java.net.URL
 
 var serie = Serie()
 
@@ -74,7 +76,10 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
 
         //print serie details
         serie_detail_title.text = serie.title
-        Picasso.get().load(serie.picture).into(serie_detail_picture)
+        var url = URL(serie.picture)
+        var image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+        serie_detail_picture.setImageBitmap(image)
+        //Picasso.get().load(serie.picture).into(serie_detail_picture)
 
         for (i in 0..serie.genreList?.size!! - 1) {
             serie_detail_genre.text = serie.genreList?.get(i)?.genreType.toString() + ", "

@@ -1,31 +1,33 @@
 package com.example.iwatch.Fragments
 
+import android.Manifest
+import android.app.Activity
+import android.content.ContentResolver
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.telephony.SmsManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.esafirm.imagepicker.features.ImagePicker
-import com.esafirm.imagepicker.features.ReturnMode
 import com.example.iwatch.Activities.ConfirmRegistration
-import com.example.iwatch.Activities.user
 import com.example.iwatch.Dialogs.ChooseGenre
 import com.example.iwatch.Entities.Genre
 import com.example.iwatch.Entities.User
 import com.example.iwatch.Enumerations.GenreType
 import com.example.iwatch.R
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_sign_up2.*
-import java.io.File
 import java.util.*
 import kotlin.random.Random
 
@@ -35,6 +37,9 @@ import kotlin.random.Random
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
+private const val PERMISSION_CODE = 1000
+private const val IMAGE_CAPTURE_CODE = 1001
+
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
@@ -43,13 +48,14 @@ private const val ARG_PARAM2 = "param2"
  * Use the [SignUp2.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SignUp2 : Fragment(){
+class SignUp2 : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     var code = ""
     var usr = User()
     private var listener: OnFragmentInteractionListener? = null
+    var imageUri:  Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +72,7 @@ class SignUp2 : Fragment(){
 
         var v = inflater.inflate(R.layout.fragment_sign_up2, container, false)
 
-        var genreSpinner =  v.findViewById<View>(R.id.genre_spinner) as LinearLayout
+        var genreSpinner = v.findViewById<View>(R.id.genre_spinner) as LinearLayout
         genreSpinner.setOnClickListener {
             openDialog()
         }
@@ -103,11 +109,7 @@ class SignUp2 : Fragment(){
 
         var btnTakePicture = v.findViewById<View>(R.id.btn_take_pic) as Button
         btnTakePicture.setOnClickListener {
-            ImagePicker.create(this)
-                .single()
-                .includeVideo(false)
-                .returnMode(ReturnMode.ALL)
-                .start()
+            takePicture()
         }
 
         return v
@@ -128,14 +130,16 @@ class SignUp2 : Fragment(){
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
-            var image = ImagePicker.getFirstImageOrNull(data)
-            var imageFile =  File(image.path)
-            Picasso.get().load(imageFile).into(picture)
-            usr.picture = image.path
+        if(resultCode == Activity.RESULT_OK){
+
+            var bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver, imageUri)
+            picture.rotation = 90F
+            picture.setImageBitmap(bitmap)
+            usr.picture = getRealPathFromURI(imageUri!!)
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
+
 
     override fun onDetach() {
         super.onDetach()
@@ -180,11 +184,11 @@ class SignUp2 : Fragment(){
 
     fun openDialog() {
         val genreDialog = ChooseGenre()
-        genreDialog.listener = object:ChooseGenre.ChooseGenreDialogListener{
+        genreDialog.listener = object : ChooseGenre.ChooseGenreDialogListener {
             override fun applyTexts(selectedGenre: ArrayList<String>) {
                 usr.genrePref.clear()
-                for(genre in selectedGenre){
-                    when(genre){
+                for (genre in selectedGenre) {
+                    when (genre) {
                         "Adventure" -> usr.genrePref?.add(Genre(GenreType.Adventure))
                         "Action" -> usr.genrePref?.add(Genre(GenreType.Action))
                         "Thriller" -> usr.genrePref?.add(Genre(GenreType.Thriller))
@@ -198,6 +202,73 @@ class SignUp2 : Fragment(){
         }
         fragmentManager?.let { genreDialog.show(it, "genre dialog") }
     }
+
+    fun takePicture() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (context?.checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED
+                || context?.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED
+            ) {
+                //permission was not enabled
+               val permission = arrayOf(
+                   Manifest.permission.CAMERA,
+                   Manifest.permission.WRITE_EXTERNAL_STORAGE
+               )
+                //show pop up to request permission
+                requestPermissions(permission, PERMISSION_CODE)
+            } else {
+                //permission already granted
+                openCamera()
+            }
+        } else {
+            //system os is < marshmallow
+            openCamera()
+        }
+    }
+
+    fun openCamera(){
+        val values = ContentValues()
+        values.put(MediaStore.Images.Media.TITLE, "profile_picture")
+        values.put(MediaStore.Images.Media.DESCRIPTION, "From The Camera")
+        imageUri = context?.contentResolver?.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
+
+        startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when(requestCode){
+            PERMISSION_CODE -> {
+                if(grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    //permission from pop up was granted
+                    openCamera()
+                }else{
+                    //permission from pop up was denied
+                    Toast.makeText(context, "Permission Denied", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+
+    fun getRealPathFromURI(uri: Uri) : String{
+        var path = ""
+        if (context?.contentResolver != null) {
+            var cursor = context?.contentResolver?.query(uri, null, null, null, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+                var idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+                path = cursor.getString(idx);
+                cursor.close();
+            }
+        }
+    return path
+}
 
 
 }

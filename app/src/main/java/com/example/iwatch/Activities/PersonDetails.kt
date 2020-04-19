@@ -1,5 +1,6 @@
 package com.example.iwatch.Activities
 
+import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,6 +16,8 @@ import com.google.android.material.tabs.TabLayout
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_favorite.*
 import kotlinx.android.synthetic.main.activity_person_details.*
+import java.net.URL
+
 private var person = Actor()
 
 class PersonDetails : AppCompatActivity(), FilmographyFragment.OnFragmentInteractionListener {
@@ -46,7 +49,11 @@ class PersonDetails : AppCompatActivity(), FilmographyFragment.OnFragmentInterac
 
         //print persons details
         actor_detail_name.text = person.lastName
-        Picasso.get().load(person.picture).into(person_detail_picture)
+        //Picasso.get().load(person.picture).into(person_detail_picture)
+        var url = URL(person.picture)
+        var image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+        person_detail_picture.setImageBitmap(image)
+
         actor_detail_birth_day.text = person.dateOfBirth
         actor_detail_birth_place.text = person.cityOfBirth
         actore_detail_biography.text = person.bibliography

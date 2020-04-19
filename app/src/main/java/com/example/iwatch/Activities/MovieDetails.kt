@@ -1,5 +1,6 @@
 package com.example.iwatch.Activities
 
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
@@ -82,7 +83,11 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
 
         //print movie details
         movie_detail_title.text = movie.title
-        Picasso.get().load(movie.imgFilm).into(movie_detail_picture)
+        //Picasso.get().load(movie.imgFilm).into(movie_detail_picture)
+        var url = URL(movie.imgFilm)
+        var image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+        movie_detail_picture.setImageBitmap(image)
+
         for (i in 0..movie.genre?.size!! - 1) {
             movie_detail_genre.text = movie.genre?.get(i)?.genreType.toString() + ", "
         }
