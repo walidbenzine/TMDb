@@ -28,8 +28,8 @@ private const val ARG_PARAM2 = "param2"
  */
 class SeasonFragment : Fragment(), SeasonAdapter.OnSeasonClickListener {
 
-    private var saisons = ArrayList<Saison>()
-    private var numbers = ArrayList<String>()
+    var saisons = ArrayList<Saison>()
+    var numbers = ArrayList<String>()
 
     private var listener: OnFragmentInteractionListener? = null
 

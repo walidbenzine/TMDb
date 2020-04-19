@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:padding="16dp"
+    android:padding="32dp"
     android:background="@color/darkGrey"
     tools:context=".Activities.MainActivity">
 
@@ -45,6 +45,7 @@
             android:inputType="textPassword"
             android:textColor="@color/white"
             android:textColorHint="@color/lightGrey"/>
+
     </LinearLayout>
 
     <LinearLayout

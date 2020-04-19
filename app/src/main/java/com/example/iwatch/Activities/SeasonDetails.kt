@@ -17,6 +17,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_season_details.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import java.lang.Exception
 import java.net.URL
 
 private var season = Saison()
@@ -61,8 +62,13 @@ class SeasonDetails : AppCompatActivity(), EpisodesFragment.OnFragmentInteractio
         season_detail_resume.text = season.resume
 
         var url = URL(season.photo)
-        var image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
-        season_detail_picture.setImageBitmap(image)
+        try{
+            var image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+            season_detail_picture.setImageBitmap(image)
+        }catch (e: Exception){
+
+        }
+
         //Picasso.get().load(season.photo).into(season_detail_picture)
 
 

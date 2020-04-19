@@ -21,6 +21,8 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_serie_details.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import java.net.URL
 
 var serie = Serie()
@@ -36,13 +38,18 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
 
         serie = intent.getSerializableExtra("serie") as Serie
 
-        user.FavoriteSeries = post.PostSerie(Base_URL+"getFavSerie/"+ user.id)
-
+        doAsync {
+            user.FavoriteSeries = post.PostSerie(Base_URL+"getFavSerie/"+ user.id)
+        }
 
         serieFavori.setOnClickListener {
-            post.PostVoid(Base_URL+"addFavSerie/" + user.id + "/" + serie.id)
-            Toast.makeText(applicationContext, "Ajout réussi", Toast.LENGTH_SHORT).show()
-            serieFavori.isFavorite = true
+            doAsync {
+                post.PostVoid(Base_URL+"addFavSerie/" + user.id + "/" + serie.id)
+                uiThread {
+                    Toast.makeText(applicationContext, "Ajout réussi", Toast.LENGTH_SHORT).show()
+                    serieFavori.isFavorite = true
+                }
+            }
         }
 
         //enable back button on the toolbar
@@ -110,26 +117,46 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
         override fun getItem(position: Int): Fragment {
             return when (position){
                 0 -> {
-                   var saisons = ArrayList<Saison>()
+                    var frag = SeasonFragment()
+                    var saisons = ArrayList<Saison>()
                     var numbers = ArrayList<String>()
                     for(i in 1..serie.nbrSaison){
                         try {
-                            saisons.add(convert.toSaison(post.PostObject(Base_URL+"getSerieSais/" + serie.id.toString() + "/" + i)))
-                            numbers.add(i.toString())
+                            doAsync {
+                                var res = convert.toSaison(post.PostObject(Base_URL+"getSerieSais/" + serie.id.toString() + "/" + i))
+                                saisons.add(res)
+                                numbers.add(i.toString())
+                                uiThread {
+                                    frag.numbers = numbers
+                                    frag.saisons = saisons
+                                }
+                            }
                         }catch(e: Exception){
                             System.out.println(e)
                         }
                     }
-                    SeasonFragment.newInstance(saisons,numbers)
-                    //SeasonFragment()
+                    return frag
                 }
                 1 -> {
-                    AssociatedSeriesFragment.newInstance(post.PostSerie(Base_URL+"getSerieLi/"+serie.id.toString()))
-                    //AssociatedSeriesFragment()
+                    var frag = AssociatedSeriesFragment()
+                    doAsync {
+                        var res = post.PostSerie(Base_URL+"getSerieLi/"+serie.id.toString())
+                        uiThread {
+                            frag.series = res
+                        }
+                    }
+                    return frag
                 }
                 2 -> {
-                    CommentsFragment.newInstance(post.PostComment(Base_URL+"getCSer/" + serie.id.toString()))
-                    //CommentsFragment()
+                    var frag = CommentsFragment()
+                    doAsync {
+                        var res = post.PostComment(Base_URL+"getCSer/" + serie.id.toString())
+                        uiThread {
+                            frag.comments = res
+                            frag.from = "serie"
+                        }
+                    }
+                    return frag
                 }
                 else -> Fragment()
             }

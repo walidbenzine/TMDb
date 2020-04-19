@@ -160,6 +160,7 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
                         var res = post.PostComment(Base_URL+"getC/" + movie.id.toString())
                         uiThread {
                             frag.comments = res
+                            frag.from = "movie"
                             System.out.println("CHARGEMENT DES DONNES COMMENTS DONE")
                         }
                     }

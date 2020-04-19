@@ -1,6 +1,9 @@
 package com.example.iwatch.Fragments
 
+import android.app.Activity
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,21 +13,35 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.core.view.get
+import androidx.core.view.marginTop
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Activities.Base_URL
 import com.example.iwatch.Activities.user
 import com.example.iwatch.Adapters.CommentAdapter
 import com.example.iwatch.Entities.Comment
 import com.example.iwatch.Entities.User
 import com.example.iwatch.R
 import kotlinx.android.synthetic.main.comment_item.*
+import kotlinx.android.synthetic.main.comment_item.view.*
 import kotlinx.android.synthetic.main.fragment_comments.*
+import kotlinx.android.synthetic.main.fragment_sign_up2.view.*
+import java.io.UnsupportedEncodingException
 import java.net.URL
+import java.net.URLDecoder
+import java.nio.charset.StandardCharsets
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
+
 
 /**
  * A simple [Fragment] subclass.
@@ -35,13 +52,18 @@ class CommentsFragment : Fragment() {
     // TODO: Rename and change types of parameters
 
     private var listener: OnFragmentInteractionListener? = null
+    lateinit var commentView: View
+    lateinit var v: View
 
     var comments = ArrayList<Comment>()
+    var from = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
             comments = it.getSerializable(ARG_PARAM1) as ArrayList<Comment>
+            from = it.getSerializable(ARG_PARAM1) as String
         }
     }
 
@@ -50,7 +72,9 @@ class CommentsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var v = inflater.inflate(R.layout.fragment_comments, container, false)
+        commentView = inflater.inflate(R.layout.comment_item, container, false)
+
+        v = inflater.inflate(R.layout.fragment_comments, container, false)
         val commentRecyclerView = v.findViewById<RecyclerView>(R.id.comments_recycler_view)
         var userPicture = v.findViewById<ImageView>(R.id.add_comment_user_picture)
         var btnAddComment = v.findViewById<EditText>(R.id.add_comment)
@@ -69,10 +93,19 @@ class CommentsFragment : Fragment() {
         userPicture.setImageResource(R.mipmap.ic_drama)
 
         btnAddComment.setOnEditorActionListener { v, actionId, event ->
-            if(actionId==EditorInfo.IME_ACTION_SEND){
+            if (actionId == EditorInfo.IME_ACTION_SEND) {
 
-                System.out.println("comment content: " + add_comment.text.toString())
-                PostVoid("http://scirusiwatch.herokuapp.com/addcomm/${user.id}/${add_comment.text.toString()}/movie/${user.login}")
+                addComment(add_comment.text.toString(), user)
+                add_comment.text.clear()
+
+                when (from) {
+                    "movie" -> PostVoid(
+                            Base_URL+"addcomm/${user.id}/${add_comment.text.toString()}/movie/${user.login}"
+                    )
+                    "serie" -> PostVoid(
+                        Base_URL+"addcomm/${user.id}/${add_comment.text.toString()}/serie/${user.login}"
+                    )
+                }
 
                 true
             }
@@ -140,11 +173,39 @@ class CommentsFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: ArrayList<Comment>) =
+        fun newInstance(param1: ArrayList<Comment>, param2: String) =
             CommentsFragment().apply {
                 arguments = Bundle().apply {
                     putSerializable(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    fun addComment(comment: String, user: User) {
+
+        var newComment = commentView.findViewById<LinearLayout>(R.id.new_comment)
+
+        newComment.comment_text.text = comment
+        newComment.comment_user_name.text = user.firstName + " " + user.lastName
+        //newComment.comment_user_picture.setImageBitmap(decodeImage(decodeValue(user.picture)))
+
+        var cm = v.findViewById<LinearLayout>(R.id.comment_fragment)
+        cm.removeViewAt(cm.childCount -1)
+        cm.addView(newComment)
+    }
+
+    fun decodeImage(encodedImage: String): Bitmap {
+        var imageBytes = Base64.getDecoder().decode(encodedImage)
+        val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+        return decodedImage
+    }
+
+    fun decodeValue(value: String): String {
+        try {
+            return URLDecoder.decode(value, StandardCharsets.UTF_8.toString());
+        } catch (ex: UnsupportedEncodingException) {
+            throw RuntimeException(ex.cause);
+        }
     }
 }

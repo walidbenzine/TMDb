@@ -18,6 +18,8 @@ import com.example.iwatch.Activities.*
 import com.example.iwatch.Entities.User
 
 import com.example.iwatch.R
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import java.io.UnsupportedEncodingException
 import java.net.URLDecoder
 import java.nio.charset.StandardCharsets
@@ -90,13 +92,16 @@ class ProfileFragment : Fragment() {
         val btnFavorite = v.findViewById<View>(R.id.btn_favorite) as LinearLayout
         btnFavorite.setOnClickListener {
             val favoriteIntent = Intent(this.context, Favorite::class.java)
-            user.FavoriteMovies = post.PostFilm("http://scirusiwatch.herokuapp.com/getFavFilm/"+ user.id)
-            user.FavoriteSeries = post.PostSerie("http://scirusiwatch.herokuapp.com/getFavSerie/"+ user.id)
-
-            System.out.println("yaaaw"+user.genrePref)
-            favoriteIntent.putExtra("user", user)
-            startActivity(favoriteIntent)
-        }
+            doAsync {
+                user.FavoriteMovies = post.PostFilm(Base_URL+"getFavFilm/"+ user.id)
+                user.FavoriteSeries = post.PostSerie(Base_URL+"getFavSerie/"+ user.id)
+                uiThread {
+                    System.out.println("yaaaw"+user.genrePref)
+                    favoriteIntent.putExtra("user", user)
+                    startActivity(favoriteIntent)
+                }
+            }
+       }
 
     /*    val btndec = v.findViewById<View>(R.id.btn_disconnect) as LinearLayout
         btndec.setOnClickListener {
@@ -112,10 +117,14 @@ class ProfileFragment : Fragment() {
         //open user genre activity
         val btnGenres = v.findViewById<View>(R.id.btn_genre) as LinearLayout
         btnGenres.setOnClickListener {
-            user.genrePref = convert.togenrePref(post.PostArray("http://scirusiwatch.herokuapp.com/getuserGenre/2"))
-            val genreIntent = Intent(this.context, UserGenres::class.java)
-            genreIntent.putExtra("user", user)
-            startActivity(genreIntent)
+            doAsync {
+                user.genrePref = convert.togenrePref(post.PostArray(Base_URL+"getuserGenre/"+user.id.toString()))
+                uiThread {
+                    val genreIntent = Intent(getActivity(), UserGenres::class.java)
+                    genreIntent.putExtra("user", user)
+                    startActivity(genreIntent)
+                }
+            }
         }
 
         val btnDisconnect = v.findViewById<View>(R.id.btn_disconnect) as LinearLayout

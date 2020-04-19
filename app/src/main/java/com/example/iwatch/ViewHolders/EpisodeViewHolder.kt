@@ -9,6 +9,7 @@ import com.example.iwatch.Adapters.OnEpisodeClickListener
 import com.example.iwatch.Entities.Episode
 import com.example.iwatch.R
 import com.squareup.picasso.Picasso
+import java.lang.Exception
 import java.net.URL
 
 class EpisodeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)  {
@@ -25,9 +26,14 @@ class EpisodeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)  {
         releaseddate.text= episode!!.dateDiffusion
         popularity.text = episode!!.popularity?.substring(0,3)
         //Picasso.get().load(episode!!.picture).into(picture)
-        var url = URL(episode.picture)
-        var image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
-        picture.setImageBitmap(image)
+        try{
+            var url = URL(episode.picture)
+            var image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+            picture.setImageBitmap(image)
+        }catch (e:Exception){
+
+        }
+
 
         itemView.setOnClickListener {
             clickListener.onEpisodeClicked(episode)

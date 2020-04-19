@@ -10,6 +10,7 @@ import com.example.iwatch.Adapters.OnMovieClickListener
 import com.example.iwatch.Entities.Movie
 import com.example.iwatch.R
 import com.squareup.picasso.Picasso
+import java.lang.Exception
 import java.net.URL
 
 class MovieViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
@@ -24,9 +25,14 @@ class MovieViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
         movietTitle.text = movie.title
         movieResume.text = movie.resume
         movieReleasedDate.text = movie.dateSortie
-        var url = URL(movie.imgFilm)
-        var image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
-        moviePicture.setImageBitmap(image)
+        try{
+            var url = URL(movie.imgFilm)
+            var image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+            moviePicture.setImageBitmap(image)
+        }catch (e:Exception){
+
+        }
+
         //Picasso.get().load(movie.imgFilm).into(moviePicture)
         movieRate.text = (((movie.note + "F").toFloat())/2).toString().take(3)
 

@@ -19,6 +19,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.iwatch.Activities.ConfirmRegistration
@@ -27,6 +28,7 @@ import com.example.iwatch.Entities.Genre
 import com.example.iwatch.Entities.User
 import com.example.iwatch.Enumerations.GenreType
 import com.example.iwatch.R
+import kotlinx.android.synthetic.main.comment_item.view.*
 import kotlinx.android.synthetic.main.fragment_sign_up2.*
 import java.util.*
 import kotlin.random.Random
@@ -56,6 +58,7 @@ class SignUp2 : Fragment() {
     var usr = User()
     private var listener: OnFragmentInteractionListener? = null
     var imageUri:  Uri? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -261,14 +264,13 @@ class SignUp2 : Fragment() {
         if (context?.contentResolver != null) {
             var cursor = context?.contentResolver?.query(uri, null, null, null, null);
             if (cursor != null) {
-                cursor.moveToFirst();
-                var idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-                path = cursor.getString(idx);
-                cursor.close();
+                cursor.moveToFirst()
+                var idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
+                path = cursor.getString(idx)
+                cursor.close()
             }
         }
-    return path
-}
-
+        return path
+    }
 
 }

@@ -30,7 +30,7 @@ class AssociatedSeriesFragment : Fragment(), OnSerieClickListener {
 
 
     // TODO: Rename and change types of parameters
-    private var series = ArrayList<Serie>()
+    var series = ArrayList<Serie>()
 
     private var listener: OnFragmentInteractionListener? = null
 
