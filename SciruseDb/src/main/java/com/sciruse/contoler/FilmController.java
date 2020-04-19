@@ -128,6 +128,12 @@ public class FilmController {
 
 			return "done";
 		}
+		
+		@RequestMapping("/getcommfilm/{id}")
+		public List<Comments> getcommfilm(Integer id) throws IOException
+		{
+			return repo.getMovie(id).getComments();
+		}
 
 
 }
