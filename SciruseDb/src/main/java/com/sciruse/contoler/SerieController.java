@@ -188,5 +188,11 @@ public class SerieController {
 
 		return "done";
 	}
+	
+	@RequestMapping("/getcommserie/{id}")
+	public List<Comments> getcommserie(@PathVariable Integer id) throws IOException
+	{
+		return serieRepository.getSerie(id).getComments();
+	}
 
 }

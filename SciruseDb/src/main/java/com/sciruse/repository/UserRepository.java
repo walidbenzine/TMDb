@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sciruse.models.Comments;
 import com.sciruse.models.User;
 
 public interface UserRepository extends CrudRepository<User, Long>{
@@ -61,7 +62,7 @@ public interface UserRepository extends CrudRepository<User, Long>{
 	@Transactional
 	void addgenreuser(Integer iduser,Integer idgenre);
 	
-	@Query(value = "INSERT INTO sciruse.comments(`id`, `text`, `type`, `user`) VALUES ( ?1 , ?2 , ?3 , ?4 );", nativeQuery = true)
+	@Query(value = "INSERT INTO `comments`(`id`, `text`, `type`, `user`) VALUES ( ?1 , ?2 , ?3 , ?4 );", nativeQuery = true)
 	void addcomm(Integer id, String comm, String type, String user);
 	
 	@Query(value = "INSERT INTO `film_comments`(`film_id`, `comments`) VALUES ( ?1 , ?2 );", nativeQuery = true)
@@ -72,6 +73,8 @@ public interface UserRepository extends CrudRepository<User, Long>{
 	
 	@Query(value = "SELECT MAX(ID) FROM user;", nativeQuery = true)
 	Integer maxid();
+	
+	
 	
 	
 	

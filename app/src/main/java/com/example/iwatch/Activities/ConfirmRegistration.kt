@@ -106,6 +106,7 @@ class ConfirmRegistration : AppCompatActivity() {
             sb.append(field_four.text.toString())
             var res = sb.toString()
             if (res.equals(code)) {
+
                 doAsync {
                     post.Post(conv.usrURL(usr))
                 }
@@ -118,12 +119,7 @@ class ConfirmRegistration : AppCompatActivity() {
                     var ress = post.PostInt(Base_URL+"maxid")
                     for (i in 0 until usr.genrePref!!.size) {
                         doAsync {
-                            post.PostVoid(
-                                Base_URL+"addgenreuser/${ress}/${usr.genrePref?.get(
-                                    i
-                                )?.id}"
-                            )
-
+                            post.PostVoid(Base_URL+"addgenreuser/${ress}/${usr.genrePref?.get(i)?.id}")
                         }
 
                     }

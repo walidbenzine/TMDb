@@ -1,5 +1,6 @@
 package com.sciruse.models;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +53,7 @@ public void setSeriehistory(List<Serie> seriehistory) {
 	Seriehistory = seriehistory;
 }
 private int jeton ;
-private String picture ;
+private Blob picture ;
 
 @ManyToMany (cascade = {CascadeType.ALL})
 @JsonIgnore
@@ -153,10 +154,10 @@ public int getJeton() {
 public void setJeton(int jeton) {
 	this.jeton = jeton;
 }
-public String getPicture() {
+public Blob getPicture() {
 	return picture;
 }
-public void setPicture(String picture) {
+public void setPicture(Blob picture) {
 	this.picture = picture;
 }
 public String getLogin() {
