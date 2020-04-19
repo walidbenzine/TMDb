@@ -95,6 +95,7 @@ class ConfirmRegistration : AppCompatActivity() {
 
         var code = intent.getStringExtra("code").toString()
         var usr = intent.getSerializableExtra("user") as User
+        var userPic = intent.getStringExtra("tof") as String
 
         try{
             usr.picture = encodeValue(encodeImage(usr.picture))
@@ -132,6 +133,7 @@ class ConfirmRegistration : AppCompatActivity() {
 
                     }
                     val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("tof", userPic)
                     startActivity(intent)
             } else {
                 Toast.makeText(applicationContext, "CODE incorrect !", Toast.LENGTH_SHORT).show()

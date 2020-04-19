@@ -30,6 +30,10 @@ import com.example.iwatch.Enumerations.GenreType
 import com.example.iwatch.R
 import kotlinx.android.synthetic.main.comment_item.view.*
 import kotlinx.android.synthetic.main.fragment_sign_up2.*
+import java.io.File
+import java.io.UnsupportedEncodingException
+import java.net.URLDecoder
+import java.nio.charset.StandardCharsets
 import java.util.*
 import kotlin.random.Random
 
@@ -58,6 +62,8 @@ class SignUp2 : Fragment() {
     var usr = User()
     private var listener: OnFragmentInteractionListener? = null
     var imageUri:  Uri? = null
+
+    var userPic = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -106,6 +112,7 @@ class SignUp2 : Fragment() {
             val intent = Intent(activity, ConfirmRegistration::class.java)
             intent.putExtra("code", code)
             intent.putExtra("user", usr)
+            intent.putExtra("tof", userPic)
             startActivity(intent)
         }
 
@@ -138,6 +145,7 @@ class SignUp2 : Fragment() {
             var bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver, imageUri)
             picture.rotation = 90F
             picture.setImageBitmap(bitmap)
+            userPic = getRealPathFromURI(imageUri!!)
             //usr.picture = getRealPathFromURI(imageUri!!)
             usr.picture = "null"
         }

@@ -1,5 +1,7 @@
 package com.example.iwatch.Activities
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -10,12 +12,15 @@ import com.example.iwatch.Entities.User
 import com.example.iwatch.R
 import kotlinx.android.synthetic.main.activity_edit_profile.*
 import org.jetbrains.anko.doAsync
+import java.io.File
+import java.util.*
 
 
-class EditProfile : AppCompatActivity(), ChangePassword.ChangePasswordDialogListener{
+class EditProfile : AppCompatActivity(), ChangePassword.ChangePasswordDialogListener {
 
     private var user = User()
     private var post = PostClass()
+    var userPic = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +32,10 @@ class EditProfile : AppCompatActivity(), ChangePassword.ChangePasswordDialogList
 
         //get user information
         user = intent.getSerializableExtra("user") as User
+
+        userPic = intent.getStringExtra("tof") as String
+        edit_picture.rotation = 90F
+        edit_picture.setImageBitmap(decodeImage(encodeImage(userPic)))
 
         edit_login.setText(user.login)
         edit_first_name.setText(user.firstName)
@@ -49,11 +58,11 @@ class EditProfile : AppCompatActivity(), ChangePassword.ChangePasswordDialogList
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         //go back to profil fragment
-        if(item.itemId == android.R.id.home){
+        if (item.itemId == android.R.id.home) {
             onBackPressed()
         }
         //save modifications
-        else if(item.itemId == R.id.menu_save_profile){
+        else if (item.itemId == R.id.menu_save_profile) {
             user?.login = edit_login.text.toString()
             user?.firstName = edit_first_name.text.toString()
             user?.lastName = edit_last_name.text.toString()
@@ -62,7 +71,7 @@ class EditProfile : AppCompatActivity(), ChangePassword.ChangePasswordDialogList
             user?.adresse = edit_address.text.toString()
 
             doAsync {
-                post.PostVoid(Base_URL+"changeinfo/" + user?.id + "/" + user?.firstName+"/" + user?.lastName+"/" +user?.email +"/" +user?.adresse +"/" + user?.mobile+"/" +user?.login )
+                post.PostVoid(Base_URL + "changeinfo/" + user?.id + "/" + user?.firstName + "/" + user?.lastName + "/" + user?.email + "/" + user?.adresse + "/" + user?.mobile + "/" + user?.login)
             }
 
         }
@@ -75,22 +84,35 @@ class EditProfile : AppCompatActivity(), ChangePassword.ChangePasswordDialogList
     }
 
     override fun applyTexts(oldPassword: String?, newPassword: String?, confirmPassword: String?) {
-        if (newPassword==confirmPassword){
+        if (newPassword == confirmPassword) {
             doAsync {
-                post.PostArray(Base_URL+"changepass/" + user.id + "/" + confirmPassword)
+                post.PostArray(Base_URL + "changepass/" + user.id + "/" + confirmPassword)
             }
             Toast.makeText(
                 applicationContext,
                 "mot de passe a été bien changé",
                 Toast.LENGTH_SHORT
             ).show()
-        }
-        else{
+        } else {
             Toast.makeText(
                 applicationContext,
                 "confirm password is not correct!!",
                 Toast.LENGTH_SHORT
             ).show()
         }
+    }
+
+    fun decodeImage(encodedImage: String): Bitmap {
+        var imageBytes = Base64.getDecoder().decode(encodedImage)
+        val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+        return decodedImage
+    }
+
+    fun encodeImage(imagePath: String): String{
+
+        val bytes = File(imagePath).readBytes()
+        val base64 = Base64.getEncoder().encodeToString(bytes)
+
+        return base64
     }
 }

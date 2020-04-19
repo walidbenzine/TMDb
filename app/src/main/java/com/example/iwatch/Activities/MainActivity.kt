@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     private var PRIVATE_MODE = 0
     private val PREF_NAME = "Scirus-Y"
     val convert = Convert()
-    lateinit var commentView: View
+    var userPic = ""
 
 
 
@@ -45,6 +45,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val homeIntent = Intent(this, Home::class.java)
+
+        if(intent.getStringExtra("tof") != null){
+            userPic =  intent.getStringExtra("tof") as String
+        }
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
@@ -91,7 +95,9 @@ class MainActivity : AppCompatActivity() {
                                 editor.putString("password",password.toString())
                                 editor.commit()
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-
+                                if(userPic != ""){
+                                    intent.putExtra("tof", userPic)
+                                }
                                 startActivity(homeIntent)
                             }
 

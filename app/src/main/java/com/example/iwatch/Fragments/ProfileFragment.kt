@@ -20,6 +20,7 @@ import com.example.iwatch.Entities.User
 import com.example.iwatch.R
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import java.io.File
 import java.io.UnsupportedEncodingException
 import java.net.URLDecoder
 import java.nio.charset.StandardCharsets
@@ -44,12 +45,14 @@ class ProfileFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var user = User()
     private var listener: OnFragmentInteractionListener? = null
+    var userPic = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             user = it.getSerializable(ARG_PARAM1) as User
+            userPic = it.getString("tof") as String
         }
     }
 
@@ -67,8 +70,8 @@ class ProfileFragment : Fragment() {
         val v = inflater.inflate(R.layout.fragment_profile, container, false)
 
         //get user attributes
-        /*var userPic = v.findViewById<ImageView>(R.id.user_picture) as ImageView
-        userPic.setImageBitmap(decodeImage(decodeValue(user.picture)))*/
+        var userPicture = v.findViewById<ImageView>(R.id.user_picture) as ImageView
+        userPicture.setImageBitmap(decodeImage(encodeImage(userPic)))
 
         var userName = v.findViewById<RecyclerView>(R.id.user_name) as TextView
         userName.text = user.firstName?.capitalize() + " " + user.firstName?.toUpperCase()
@@ -96,8 +99,8 @@ class ProfileFragment : Fragment() {
                 user.FavoriteMovies = post.PostFilm(Base_URL+"getFavFilm/"+ user.id)
                 user.FavoriteSeries = post.PostSerie(Base_URL+"getFavSerie/"+ user.id)
                 uiThread {
-                    System.out.println("yaaaw"+user.genrePref)
                     favoriteIntent.putExtra("user", user)
+                    favoriteIntent.putExtra("tof", userPic)
                     startActivity(favoriteIntent)
                 }
             }
@@ -188,11 +191,11 @@ class ProfileFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: User) =
+        fun newInstance(param1: User, param2: String) =
             ProfileFragment().apply {
                 arguments = Bundle().apply {
                     putSerializable(ARG_PARAM1, param1)
-
+                    putString("tof", param2)
                 }
             }
     }
@@ -203,11 +206,11 @@ class ProfileFragment : Fragment() {
         return decodedImage
     }
 
-    fun decodeValue(value: String): String {
-        try {
-            return URLDecoder.decode(value, StandardCharsets.UTF_8.toString());
-        } catch (ex: UnsupportedEncodingException) {
-            throw RuntimeException(ex.cause);
-        }
+    fun encodeImage(imagePath: String): String{
+
+        val bytes = File(imagePath).readBytes()
+        val base64 = Base64.getEncoder().encodeToString(bytes)
+
+        return base64
     }
 }

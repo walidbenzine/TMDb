@@ -31,6 +31,7 @@ import org.jetbrains.anko.uiThread
 var convert = Convert()
 var post = PostClass()
 var user = User()
+var userPic = ""
 
 class Home : AppCompatActivity(),
     HomeFragment.OnFragmentInteractionListener, CinemaFragment.OnFragmentInteractionListener,
@@ -56,6 +57,7 @@ class Home : AppCompatActivity(),
         System.out.println("HOME ACTIVITY STARTED")
 
         user = intent.getSerializableExtra("user") as User
+        userPic = intent.getStringExtra("tof") as String
 
         // set the toolbar
         setSupportActionBar(toolbar)
@@ -218,7 +220,7 @@ class Home : AppCompatActivity(),
                 }
                 4 -> {
                     System.out.println("CASE 4")
-                    ProfileFragment.newInstance(user)
+                    ProfileFragment.newInstance(user, userPic)
                 }
                 else -> {
                     System.out.println("CASE ELSE")
