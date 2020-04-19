@@ -128,7 +128,7 @@ class SerieDetails : AppCompatActivity(), SeasonFragment.OnFragmentInteractionLi
                     //AssociatedSeriesFragment()
                 }
                 2 -> {
-                    CommentsFragment.newInstance(post.PostComment(Base_URL+"getCSer/" + serie.id.toString()))
+                    CommentsFragment.newInstance(post.PostComment(Base_URL+"getCSer/" + serie.id.toString()), "serie")
                     //CommentsFragment()
                 }
                 else -> Fragment()

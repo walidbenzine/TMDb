@@ -1,6 +1,7 @@
 package com.example.iwatch.Activities
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
@@ -9,14 +10,16 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.StrictMode
 import android.view.View
-import android.widget.Button
-import android.widget.Toast
 import com.example.iwatch.R
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONArray
 import android.util.Log
-import android.widget.TextView
+import android.view.inputmethod.EditorInfo
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.iwatch.Entities.User
+import kotlinx.android.synthetic.main.comment_item.view.*
+import kotlinx.android.synthetic.main.fragment_comments.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import java.lang.Exception
@@ -30,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     var mHandler: Handler? = null
     private var PRIVATE_MODE = 0
     private val PREF_NAME = "Scirus-Y"
+    lateinit var commentView: View
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -127,4 +131,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 }
+

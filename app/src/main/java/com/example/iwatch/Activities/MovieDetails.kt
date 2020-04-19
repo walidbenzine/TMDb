@@ -125,7 +125,7 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
                 }
                 1 -> MovieRoomsFragment.newInstance(post.PostCinema(Base_URL+"getRoom/" + movie.id.toString()))
                 2 -> {
-                    CommentsFragment.newInstance(post.PostComment(Base_URL+"getC/" + movie.id.toString()))
+                    CommentsFragment.newInstance(post.PostComment(Base_URL+"getC/" + movie.id.toString()), "movie")
                 }
                 else -> Fragment()
             }
