@@ -8,7 +8,7 @@ import com.example.iwatch.R
 import com.example.iwatch.ViewHolders.MovieRoomViewHolder
 import com.squareup.picasso.Picasso
 
-class MovieRoomAdapter(val movieRoomList: ArrayList<Cinema>): RecyclerView.Adapter<MovieRoomViewHolder>() {
+class MovieRoomAdapter(val movieRoomList: ArrayList<Cinema>, val roomClickListener: OnRoomClickListener): RecyclerView.Adapter<MovieRoomViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieRoomViewHolder {
         var v = LayoutInflater.from(parent.context).inflate(R.layout.movie_room_item, parent, false)
@@ -21,9 +21,12 @@ class MovieRoomAdapter(val movieRoomList: ArrayList<Cinema>): RecyclerView.Adapt
 
     override fun onBindViewHolder(holder: MovieRoomViewHolder, position: Int) {
         val movieRoom: Cinema = movieRoomList[position]
+        holder.bind(movieRoom, roomClickListener)
 
-        holder.movieRoomName.text = movieRoom.nom
-        holder.movieRoomAddress.text = movieRoom.adresse
-        Picasso.get().load(movieRoom.image).into(holder.movieRoomPicture)
     }
+}
+
+interface OnRoomClickListener {
+    fun onRoomClicked(room: Cinema)
+
 }

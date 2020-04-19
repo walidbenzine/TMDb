@@ -1,6 +1,7 @@
 package com.example.iwatch.Fragments
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Activities.MapsActivity
 import com.example.iwatch.Adapters.MovieRoomAdapter
+import com.example.iwatch.Adapters.OnRoomClickListener
 import com.example.iwatch.Entities.Cinema
 
 import com.example.iwatch.R
@@ -24,7 +27,8 @@ private const val ARG_PARAM1 = "param1"
  * Use the [MovieRoomsFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class MovieRoomsFragment : Fragment() {
+class MovieRoomsFragment : Fragment(), OnRoomClickListener {
+
     // TODO: Rename and change types of parameters
 
     private var listener: OnFragmentInteractionListener? = null
@@ -54,10 +58,17 @@ class MovieRoomsFragment : Fragment() {
 
         movieRoomRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
-            adapter = MovieRoomAdapter(movieRooms)
+            adapter = MovieRoomAdapter(movieRooms, this@MovieRoomsFragment)
         }
 
         return v
+    }
+
+
+    override fun onRoomClicked(room: Cinema) {
+        val roomDetailsIntent = Intent(this.context, MapsActivity::class.java)
+        roomDetailsIntent.putExtra("room", room)
+        startActivity(roomDetailsIntent)
     }
 
     // TODO: Rename method, update argument and hook method into UI event
