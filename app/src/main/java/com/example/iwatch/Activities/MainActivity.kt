@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val  SharedPreferences = getSharedPreferences(PREF_NAME, this.PRIVATE_MODE)
-        val layoout = findViewById<View>(R.id.wait) as ConstraintLayout
+
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
@@ -51,13 +51,9 @@ class MainActivity : AppCompatActivity() {
         }
 
        //SharedPreferences.edit().clear().commit()
-        if (SharedPreferences.getString("login", "login").equals("login")) {
+
             connect()
-        } else {
-          //  layoout.visibility = View.VISIBLE
-            Toast.makeText(this,"Please Wait im Slower Than a Snail ",Toast.LENGTH_LONG).show()
-            Next()
-        }
+
 
     }
 
@@ -76,7 +72,7 @@ class MainActivity : AppCompatActivity() {
 
         btn_login.setOnClickListener {
             var login = email.text.toString()
-            val password = pass.text
+            val password = pass.text.toString()
 
             if (!login.isNullOrEmpty() && !password.isNullOrEmpty()) {
                 Toast.makeText(applicationContext, "Connexion en cours", Toast.LENGTH_SHORT).show()
@@ -128,42 +124,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-     fun Next(){
-         val  SharedPreferences = getSharedPreferences(PREF_NAME, this.PRIVATE_MODE)
-         val homeIntent = Intent(this, Home::class.java)
-         var login  =  SharedPreferences.getString("login","")
-         var password = SharedPreferences.getString("password", "")
-         try{
-             var userJson = JSONArray()
-
-
-             doAsync {
-                 userJson = post.PostArray(Base_URL+"getUser/" + login + "/" + password)
-                 if (userJson.toString() != "{}" && userJson.toString() != "[]" ) {
-
-                     val user = convert.toUser(userJson.getJSONObject(0))
-                     user.FavoriteMovies = post.PostFilm(Base_URL+"getFavFilm/"+ user.id)
-                     user.FavoriteSeries = post.PostSerie(Base_URL+"getFavSerie/"+ user.id)
-
-                     uiThread {
-                        // Toast.makeText(applicationContext, "Connexion réussi", Toast.LENGTH_SHORT).show()
-                         homeIntent.putExtra("user", user)
-                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                         startActivity(homeIntent)
-                         finish()
-                     }
-
-                 }else {
-                     Toast.makeText(
-                         applicationContext,
-                         "Identifiants incorrects",
-                         Toast.LENGTH_SHORT
-                     ).show()
-                 }
-             }
-         } catch(e: Exception){
-             System.out.println(e)
-         }
-
-     }
 }

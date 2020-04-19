@@ -12,7 +12,11 @@ import android.widget.Toast
 import com.example.iwatch.Entities.User
 import org.jetbrains.anko.doAsync
 import java.io.File
+import java.io.UnsupportedEncodingException
 import java.net.URL
+import java.net.URLDecoder
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 import java.util.*
 
 class ConfirmRegistration : AppCompatActivity() {
@@ -20,6 +24,7 @@ class ConfirmRegistration : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_registration)
+
 
         val post = PostClass()
         val conv = Convert()
@@ -89,7 +94,8 @@ class ConfirmRegistration : AppCompatActivity() {
 
         var code = intent.getStringExtra("code").toString()
         var usr = intent.getSerializableExtra("user") as User
-        usr.picture = encodeImage(usr.picture)
+
+        usr.picture = encodeValue(encodeImage(usr.picture))
 
         btn_confirm_signup.setOnClickListener {
 
@@ -139,5 +145,13 @@ class ConfirmRegistration : AppCompatActivity() {
         val base64 = Base64.getEncoder().encodeToString(bytes)
 
         return base64
+    }
+
+    fun encodeValue(value: String) : String{
+        try {
+            return URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
+        } catch (ex: UnsupportedEncodingException) {
+            throw RuntimeException(ex.cause)
+        }
     }
 }
