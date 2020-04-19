@@ -101,7 +101,7 @@ class ConfirmRegistration : AppCompatActivity() {
             var res = sb.toString()
             if (res.equals(code)) {
                 val result = post.Post(conv.usrURL(usr))
-
+                System.out.println(result+"yaaaw")
                 if (!result.equals("null")) {
                     Toast.makeText(
                         applicationContext,
@@ -112,9 +112,7 @@ class ConfirmRegistration : AppCompatActivity() {
                     for (i in 0 until usr.genrePref!!.size) {
                         doAsync {
                             post.PostVoid(
-                                "http://scirusiwatch.herokuapp.com/addgenreuser/${ress}/${usr.genrePref?.get(
-                                    i
-                                )?.id}"
+                                "http://scirusiwatch.herokuapp.com/addgenreuser/${ress}/${usr.genrePref?.get(i)?.id}"
                             )
 
                         }
