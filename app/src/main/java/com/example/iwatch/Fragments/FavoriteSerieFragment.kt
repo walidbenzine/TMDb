@@ -36,10 +36,10 @@ class FavoriteSerieFragment : Fragment(), OnSerieClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        series =  arguments?.getSerializable(ARG_PARAM1) as ArrayList<Serie>
-        System.out.println("FAVORITE SERIES ===== "+ series)
-
+        arguments?.let {
+            series = it.getSerializable(ARG_PARAM1) as ArrayList<Serie>
+            System.out.println("FAVORITE SERIES ===== "+ series)
+        }
     }
 
     override fun onCreateView(

@@ -9,6 +9,7 @@ import com.example.iwatch.Adapters.OnRoomClickListener
 import com.example.iwatch.Entities.Cinema
 import com.example.iwatch.R
 import com.squareup.picasso.Picasso
+import java.lang.Exception
 import java.net.URL
 
 class MovieRoomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -21,9 +22,14 @@ class MovieRoomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         movieRoomName.text = movieRoom.nom
         movieRoomAddress.text = movieRoom.adresse
         //Picasso.get().load(movieRoom.image).into(movieRoomPicture)
-        var url = URL(movieRoom.image)
-        var image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
-        movieRoomPicture.setImageBitmap(image)
+        try{
+            var url = URL(movieRoom.image)
+            var image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+            movieRoomPicture.setImageBitmap(image)
+        }catch (e:Exception){
+
+        }
+
 
         itemView.setOnClickListener {
             clickListener.onRoomClicked(movieRoom)

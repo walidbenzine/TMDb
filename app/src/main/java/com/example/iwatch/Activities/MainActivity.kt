@@ -25,7 +25,8 @@ import org.jetbrains.anko.uiThread
 import java.lang.Exception
 import java.net.URL
 
-val Base_URL = "http://scirusiwatch.herokuapp.com/"
+val Base_URL = "http://10.0.2.2:8080/"
+
 class MainActivity : AppCompatActivity() {
 
     var id = ""
@@ -33,7 +34,9 @@ class MainActivity : AppCompatActivity() {
     var mHandler: Handler? = null
     private var PRIVATE_MODE = 0
     private val PREF_NAME = "Scirus-Y"
+    val convert = Convert()
     lateinit var commentView: View
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,8 +44,7 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        val  SharedPreferences = getSharedPreferences(PREF_NAME, this.PRIVATE_MODE)
-
+        val homeIntent = Intent(this, Home::class.java)
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
@@ -57,19 +59,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-       //SharedPreferences.edit().clear().commit()
-
-            connect()
-
-
-    }
-
-
-
-    fun connect(){
-        val  SharedPreferences = getSharedPreferences(PREF_NAME, this.PRIVATE_MODE)
-        val homeIntent = Intent(this, Home::class.java)
-        val convert = Convert()
 
         val btnSignUp = findViewById<View>(R.id.btn_signUp) as TextView
         btnSignUp.setOnClickListener() {
@@ -77,18 +66,15 @@ class MainActivity : AppCompatActivity() {
             startActivity(signUpIntent)
         }
 
+
         btn_login.setOnClickListener {
             var login = email.text.toString()
             val password = pass.text.toString()
 
             if (!login.isNullOrEmpty() && !password.isNullOrEmpty()) {
-                Toast.makeText(applicationContext, "Connexion en cours", Toast.LENGTH_SHORT).show()
                 try{
-                    var userJson = JSONArray()
-
-
                     doAsync {
-                        userJson = post.PostArray(Base_URL+"getUser/" + login + "/" + password)
+                        var userJson = post.PostArray(Base_URL+"getUser/" + login + "/" + password)
                         if (userJson.toString() != "{}" && userJson.toString() != "[]" ) {
 
                             val user = convert.toUser(userJson.getJSONObject(0))
@@ -96,26 +82,24 @@ class MainActivity : AppCompatActivity() {
                             user.FavoriteSeries = post.PostSerie(Base_URL+"getFavSerie/"+ user.id)
 
                             uiThread {
-
                                 Toast.makeText(applicationContext, "Connexion réussi", Toast.LENGTH_SHORT).show()
-
                                 homeIntent.putExtra("user", user)
 
+                                val  SharedPreferences = getSharedPreferences(PREF_NAME, PRIVATE_MODE)
                                 var editor = SharedPreferences.edit()
                                 editor.putString("login",login)
                                 editor.putString("password",password.toString())
                                 editor.commit()
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(homeIntent)
-                                finish()
                             }
 
                         }else {
                             Toast.makeText(
-                                applicationContext,
-                                "Identifiants incorrects",
-                                Toast.LENGTH_SHORT
+                                    applicationContext,
+                                    "Identifiants incorrects",
+                                    Toast.LENGTH_SHORT
                             ).show()
                         }
                     }
@@ -124,13 +108,12 @@ class MainActivity : AppCompatActivity() {
                 }
             } else {
                 Toast.makeText(
-                    applicationContext,
-                    "Entrez de bonnes valeurs SVP",
-                    Toast.LENGTH_SHORT
+                        applicationContext,
+                        "Entrez de bonnes valeurs SVP",
+                        Toast.LENGTH_SHORT
                 ).show()
             }
         }
     }
-
 }
 

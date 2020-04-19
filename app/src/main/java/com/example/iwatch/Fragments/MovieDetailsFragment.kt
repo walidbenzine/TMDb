@@ -42,12 +42,11 @@ class MovieDetailsFragment : Fragment(), OnActorClickListener, OnAssociatedFilmC
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        @Suppress("UNCHECKED_CAST")
-        actors = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Actor>
-
-        @Suppress("UNCHECKED_CAST")
-        associatedFilms = arguments?.getSerializable(ARG_PARAM2) as ArrayList<Movie>
+        arguments?.let {
+            actors = it.getSerializable(ARG_PARAM1) as ArrayList<Actor>
+            associatedFilms = it.getSerializable(ARG_PARAM2) as ArrayList<Movie>
+            System.out.println("ACTORS == "+ actors +" FILMS LIES == "+ associatedFilms)
+        }
     }
 
     override fun onCreateView(
@@ -58,7 +57,6 @@ class MovieDetailsFragment : Fragment(), OnActorClickListener, OnAssociatedFilmC
         val v = inflater.inflate(R.layout.fragment_movie_details, container, false)
         val actorRecyclerView = v.findViewById<RecyclerView>(R.id.movie_detail_actors)
 
-        System.out.println("ACTORS == "+ actors +" FILMS LIES == "+ associatedFilms)
 
         actorRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)

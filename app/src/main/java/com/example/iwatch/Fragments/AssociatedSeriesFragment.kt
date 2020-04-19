@@ -30,16 +30,17 @@ class AssociatedSeriesFragment : Fragment(), OnSerieClickListener {
 
 
     // TODO: Rename and change types of parameters
-    private var series = ArrayList<Serie>()
+    var series = ArrayList<Serie>()
 
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        series = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Serie>
-        System.out.println("SERIES LIEES ==== " + series)
-
+        arguments?.let {
+            series = it.getSerializable(ARG_PARAM1) as ArrayList<Serie>
+            System.out.println("SERIES LIEES ==== " + series)
+        }
     }
 
     override fun onCreateView(

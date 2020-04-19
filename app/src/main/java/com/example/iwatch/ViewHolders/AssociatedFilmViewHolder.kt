@@ -9,6 +9,7 @@ import com.example.iwatch.Adapters.OnAssociatedFilmClickListener
 import com.example.iwatch.Entities.Movie
 import com.example.iwatch.R
 import com.squareup.picasso.Picasso
+import java.lang.Exception
 import java.net.URL
 
 class AssociatedFilmViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -19,9 +20,14 @@ class AssociatedFilmViewHolder(itemView: View): RecyclerView.ViewHolder(itemView
     fun bind(movie: Movie, clickListener: OnAssociatedFilmClickListener){
         associatedFilmName.text = movie.title
         //Picasso.get().load(movie.imgFilm).into(associatedFilmPicture)
-        var url = URL(movie.imgFilm)
-        var image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
-        associatedFilmPicture.setImageBitmap(image)
+        try{
+            var url = URL(movie.imgFilm)
+            var image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+            associatedFilmPicture.setImageBitmap(image)
+        }catch (e:Exception){
+
+        }
+
 
         itemView.setOnClickListener {
             clickListener.onAssociatedMovieClicked(movie)

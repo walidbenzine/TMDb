@@ -39,7 +39,7 @@ class Convert {
         serie.note = obj.get("note").toString()
         serie.nbrEpisodes = obj.get("nbrEpisodes").toString().toInt()
         serie.nbrSaison = obj.get("nbrSaison").toString().toInt()
-        serie.picture = "https://image.tmdb.org/t/p/original" + obj.get("image").toString()
+        serie.picture = "https://image.tmdb.org/t/p/original/" + obj.get("image").toString()
         serie.video = obj.get("video").toString()
 
         var genrearray = JSONArray(obj.get("genre").toString())
@@ -66,7 +66,7 @@ class Convert {
         film.note = obj.get("note").toString()
         film.title = obj.get("title").toString()
         film.resume = obj.get("resume").toString()
-        film.imgFilm = "https://image.tmdb.org/t/p/original" + obj.get("image").toString()
+        film.imgFilm = "https://image.tmdb.org/t/p/original/" + obj.get("image").toString()
         film.video = obj.get("video").toString()
 
         var genrearray = JSONArray(obj.get("genre").toString())
@@ -92,7 +92,7 @@ class Convert {
         act.bibliography = obj.get("bibliographie").toString()
         act.dateOfBirth = obj.get("dateNaissance").toString()
         act.popularity = obj.get("popularite").toString()
-        act.picture = "https://image.tmdb.org/t/p/original" + obj.get("photo").toString()
+        act.picture = "https://image.tmdb.org/t/p/original/" + obj.get("photo").toString()
 
         return act
     }
@@ -106,7 +106,7 @@ class Convert {
         sais.name = obj.get("nom").toString()
         sais.resume = obj.get("details").toString()
         sais.releasedDate = obj.get("dateSortie").toString()
-        sais.photo = "https://image.tmdb.org/t/p/original" + obj.get("image").toString()
+        sais.photo = "https://image.tmdb.org/t/p/original/" + obj.get("image").toString()
         sais.nbrEpisode = obj.get("nbrEpisodes").toString().toInt()
 
         var episodearray = JSONArray(obj.get("listEpisodes").toString())
@@ -132,7 +132,7 @@ class Convert {
         ep.resume = obj.get("resume").toString()
         ep.dateDiffusion = obj.get("date_Diff").toString()
         ep.number = obj.get("number").toString()
-        ep.picture = "https://image.tmdb.org/t/p/original" + obj.get("image").toString()
+        ep.picture = "https://image.tmdb.org/t/p/original/" + obj.get("image").toString()
 
         return ep
     }

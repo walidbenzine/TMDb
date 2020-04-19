@@ -10,6 +10,7 @@ import com.example.iwatch.Adapters.OnActorClickListener
 import com.example.iwatch.Entities.Actor
 import com.example.iwatch.R
 import com.squareup.picasso.Picasso
+import java.lang.Exception
 import java.net.URL
 
 class ActorViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -20,9 +21,14 @@ class ActorViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     fun bind(actor: Actor, clickListener: OnActorClickListener){
 
         //Picasso.get().load(actor.picture).into(actorPicture)
-        var url = URL(actor.picture)
-        var image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
-        actorPicture.setImageBitmap(image)
+        try{
+            var url = URL(actor.picture)
+            var image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+            actorPicture.setImageBitmap(image)
+        }catch (e:Exception){
+
+        }
+
         actorName.text = actor.lastName
 
         itemView.setOnClickListener {

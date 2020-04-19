@@ -9,6 +9,7 @@ import com.example.iwatch.Adapters.SeasonAdapter
 import com.example.iwatch.Entities.Saison
 import com.example.iwatch.R
 import com.squareup.picasso.Picasso
+import java.lang.Exception
 import java.net.URL
 
 class SeasonViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
@@ -26,8 +27,12 @@ class SeasonViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
         serieSaisonNbr.text = season!!.nbrEpisode.toString()
         //Picasso.get().load(season!!.photo).into(serieSaisonPicture)
         var url = URL(season.photo)
-        var image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
-        serieSaisonPicture.setImageBitmap(image)
+        try {
+            var image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+            serieSaisonPicture.setImageBitmap(image)
+        }catch(e: Exception){
+
+        }
 
         itemView.setOnClickListener {
             clickListener.onSeasonClicked(season)

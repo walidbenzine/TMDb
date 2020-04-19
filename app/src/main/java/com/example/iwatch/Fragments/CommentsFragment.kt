@@ -19,6 +19,7 @@ import androidx.core.view.get
 import androidx.core.view.marginTop
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.iwatch.Activities.Base_URL
 import com.example.iwatch.Activities.user
 import com.example.iwatch.Adapters.CommentAdapter
 import com.example.iwatch.Entities.Comment
@@ -60,9 +61,10 @@ class CommentsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        @Suppress("UNCHECKED_CAST")
-        comments = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Comment>
-        from = arguments?.getString(ARG_PARAM2) as String
+        arguments?.let {
+            comments = it.getSerializable(ARG_PARAM1) as ArrayList<Comment>
+            from = it.getSerializable(ARG_PARAM1) as String
+        }
     }
 
     override fun onCreateView(
@@ -98,10 +100,10 @@ class CommentsFragment : Fragment() {
 
                 when (from) {
                     "movie" -> PostVoid(
-                        "http://scirusiwatch.herokuapp.com/addcomm/${user.id}/${add_comment.text.toString()}/movie/${user.login}"
+                            Base_URL+"addcomm/${user.id}/${add_comment.text.toString()}/movie/${user.login}"
                     )
                     "serie" -> PostVoid(
-                        "http://scirusiwatch.herokuapp.com/addcomm/${user.id}/${add_comment.text.toString()}/serie/${user.login}"
+                        Base_URL+"addcomm/${user.id}/${add_comment.text.toString()}/serie/${user.login}"
                     )
                 }
 

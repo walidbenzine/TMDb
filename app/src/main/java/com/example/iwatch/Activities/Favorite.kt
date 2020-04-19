@@ -13,6 +13,8 @@ import com.example.iwatch.Fragments.FavoriteSerieFragment
 import com.example.iwatch.R
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_favorite.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 
 class Favorite : AppCompatActivity(), FavoriteMovieFragment.OnFragmentInteractionListener,
@@ -26,7 +28,13 @@ class Favorite : AppCompatActivity(), FavoriteMovieFragment.OnFragmentInteractio
 
         user = intent.getSerializableExtra("user") as User
 
-        user.FavoriteMovies = post.PostFilm(Base_URL+"getFavFilm/"+ user.id)
+        doAsync {
+            var res = post.PostFilm(Base_URL+"getFavFilm/"+ user.id)
+            uiThread {
+                user.FavoriteMovies = res
+                System.out.println("CHARGEMENT DONNES FILMS FAVORIS DONE")
+            }
+        }
 
         favorite_toolbar.title = "Favorite"
         setSupportActionBar(favorite_toolbar)

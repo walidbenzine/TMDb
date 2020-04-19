@@ -32,21 +32,15 @@ private var filmography = ArrayList<Movie>()
  * create an instance of this fragment.
  */
 class FilmographyFragment : Fragment(), OnMovieClickListener {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    var films =  ArrayList<Movie>()
-
-
 
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        filmography = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Movie>
-        System.out.println("FILMOGRAPHIEEE === "+ filmography)
-
+        arguments?.let {
+            filmography = it.getSerializable(ARG_PARAM1) as ArrayList<Movie>
+            System.out.println("FILMOGRAPHIEEE === "+ filmography)
+        }
     }
 
     override fun onCreateView(

@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.iwatch.Activities.MapsActivity
 import com.example.iwatch.Adapters.MovieRoomAdapter
 import com.example.iwatch.Adapters.OnRoomClickListener
 import com.example.iwatch.Entities.Cinema
@@ -37,9 +36,9 @@ class MovieRoomsFragment : Fragment(), OnRoomClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        @Suppress("UNCHECKED_CAST")
-        movieRooms = arguments?.getSerializable(ARG_PARAM1) as ArrayList<Cinema>
+        arguments?.let {
+            movieRooms = it.getSerializable(ARG_PARAM1) as ArrayList<Cinema>
+        }
     }
 
     override fun onCreateView(
@@ -49,12 +48,6 @@ class MovieRoomsFragment : Fragment(), OnRoomClickListener {
         // Inflate the layout for this fragment
         var v = inflater.inflate(R.layout.fragment_movie_rooms, container, false)
         val movieRoomRecyclerView = v.findViewById<RecyclerView>(R.id.movie_detail_rooms)
-
-        try {
-            System.out.println("TEEEST+++++ " + movieRooms.get(0).image)
-        }catch (e: Exception){
-            System.out.println(e)
-        }
 
         movieRoomRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
@@ -66,9 +59,6 @@ class MovieRoomsFragment : Fragment(), OnRoomClickListener {
 
 
     override fun onRoomClicked(room: Cinema) {
-        val roomDetailsIntent = Intent(this.context, MapsActivity::class.java)
-        roomDetailsIntent.putExtra("room", room)
-        startActivity(roomDetailsIntent)
     }
 
     // TODO: Rename method, update argument and hook method into UI event

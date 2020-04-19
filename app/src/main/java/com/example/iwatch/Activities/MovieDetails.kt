@@ -20,6 +20,8 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_movie_details.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import java.net.URL
 
 
@@ -39,7 +41,14 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
 
         //get movie
         movie = intent.getSerializableExtra("movie") as Movie
-        user.FavoriteMovies = post.PostFilm(Base_URL+"getFavFilm/"+ user.id)
+
+        doAsync {
+            var res = post.PostFilm(Base_URL+"getFavFilm/"+ user.id)
+            uiThread {
+                user.FavoriteMovies = res
+            }
+        }
+
 
 
         //enable back button on the toolbar
@@ -64,9 +73,13 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
 
 
         btn_movie_favori.setOnClickListener {
-            post.PostVoid(Base_URL+"addFavFilm/" + user.id + "/" + movie.id)
-            Toast.makeText(applicationContext, "Ajout réussi", Toast.LENGTH_SHORT).show()
-            btn_movie_favori.isFavorite = true
+            doAsync {
+                post.PostVoid(Base_URL+"addFavFilm/" + user.id + "/" + movie.id)
+                uiThread {
+                    Toast.makeText(applicationContext, "Ajout réussi", Toast.LENGTH_SHORT).show()
+                    btn_movie_favori.isFavorite = true
+                }
+            }
         }
 
         //play movie trailer
@@ -118,14 +131,40 @@ class MovieDetails : AppCompatActivity(), MovieDetailsFragment.OnFragmentInterac
         override fun getItem(position: Int): Fragment {
             return when (position) {
                 0 -> {
-                    MovieDetailsFragment.newInstance(
-                        post.PostActor(Base_URL+"getAct/" + movie.id.toString()),
-                        post.PostFilm(Base_URL+"getLi/" + movie.id.toString())
-                    )
+                    var frag = MovieDetailsFragment()
+                    doAsync {
+                        var res = post.PostActor(Base_URL+"getAct/" + movie.id.toString())
+                        var res2 = post.PostFilm(Base_URL+"getLi/" + movie.id.toString())
+                        uiThread {
+                            frag.actors = res
+                            frag.associatedFilms = res2
+                            System.out.println("CHARGEMENT DES DONNES ACTEURS/FILMS LIES DONE")
+                        }
+                    }
+                    return frag
                 }
-                1 -> MovieRoomsFragment.newInstance(post.PostCinema(Base_URL+"getRoom/" + movie.id.toString()))
+                1 -> {
+                    var frag = MovieRoomsFragment()
+                    doAsync {
+                        var res = post.PostCinema(Base_URL+"getRoom/" + movie.id.toString())
+                        uiThread {
+                            frag.movieRooms = res
+                            System.out.println("CHARGEMENT DES DONNES CINEMAS DONE")
+                        }
+                    }
+                    return frag
+                }
                 2 -> {
-                    CommentsFragment.newInstance(post.PostComment(Base_URL+"getC/" + movie.id.toString()), "movie")
+                    var frag = CommentsFragment()
+                    doAsync {
+                        var res = post.PostComment(Base_URL+"getC/" + movie.id.toString())
+                        uiThread {
+                            frag.comments = res
+                            frag.from = "movie"
+                            System.out.println("CHARGEMENT DES DONNES COMMENTS DONE")
+                        }
+                    }
+                    return frag
                 }
                 else -> Fragment()
             }
