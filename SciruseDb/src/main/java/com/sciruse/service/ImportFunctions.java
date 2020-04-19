@@ -38,35 +38,7 @@ public class ImportFunctions {
 
 	}
 
-
-	public static void main(String[] args) {
-		Vector<Film>films;
-		Vector<Genre>genres;
-		Vector<Comments>comments;
-		Vector<Actors>actors;
-		Vector<Serie> series;
-		Actors act;
-		try {
-			//films = MoviesPopular(Base_url+"movie/popular?api_key="+API_Key+"&language=fr&page=1");
-
-			//we need to give it the movie id 
-			//comments = Comment(Base_url+"movie/419704/reviews?api_key="+API_Key+"&language=en-US&page=1");
-			//actors = Actors(Base_url+"movie/419704/credits?api_key="+API_Key);
-			//act = getActorInfo(Base_url+"person/287?api_key="+API_Key+"&language=en-US");
-			//series = Serie(Base_url+"tv/popular?api_key="+API_Key+"&language=fr&page=1");
-			//actors=Actors(Base_url+"tv/456/credits?api_key="+API_Key+"&language=en-US");
-			//Saison e =  getSaisonInfo(Base_url+"tv/456/season/1?api_key="+API_Key+"&language=en-US");
-
-			System.out.println(getMovieVideo(Base_url+"tv/21631/season/1/videos?api_key="+API_Key+"&language=en-US"));
-
-
-		}catch (Exception e) {System.out.println(e);}
-
-		//addRoom();
-
-	}
-
-	public static  JSONObject GetMyJson(String url) throws IOException {
+	public   JSONObject GetMyJson(String url) throws IOException {
 		JSONObject object;
 		Request request = new Request.Builder()
 				.url(url)
@@ -81,7 +53,7 @@ public class ImportFunctions {
 		return object;
 	}
 
-	public static  Vector<Film> MoviesPopular(String url) throws IOException {
+	public   Vector<Film> MoviesPopular(String url) throws IOException {
 
 		Vector<Film>films =new Vector<Film>();
 		ArrayList<String> listdata;      
@@ -108,7 +80,7 @@ public class ImportFunctions {
 	}
 
 	//Base_url+"person/287?api_key="+API_Key+"&language=en-US"
-	public static  Vector<Actors> Actors(String url) throws IOException {
+	public   Vector<Actors> Actors(String url) throws IOException {
 		Vector<Actors> actors=new Vector<Actors>(); 
 		String id;
 		JSONObject object = GetMyJson(url);
@@ -133,7 +105,7 @@ public class ImportFunctions {
 	}
 
 	//            get/movie/{movie_id}
-	public static  Film getFilmInfo(String url) throws IOException {
+	public   Film getFilmInfo(String url) throws IOException {
 		Film film = new Film();
 		Genre g =null;
 		try {
@@ -154,7 +126,7 @@ public class ImportFunctions {
 			return null;
 		}
 	}
-	public static  Film getFilmInfo2(String url) throws IOException {
+	public   Film getFilmInfo2(String url) throws IOException {
 		Film film = new Film();
 		Genre g =null;
 		JSONObject object = GetMyJson(url);
@@ -172,7 +144,7 @@ public class ImportFunctions {
 	}
 
 
-	public static  List<Film> getFilmBiblio(String url) throws IOException {
+	public   List<Film> getFilmBiblio(String url) throws IOException {
 		List<Film>films =new Vector<Film>();
 		String id;
 		JSONObject object = GetMyJson(url);
@@ -197,7 +169,7 @@ public class ImportFunctions {
 	}
 
 
-	public static  List<Serie> getSerieBiblio(String url) throws IOException {
+	public   List<Serie> getSerieBiblio(String url) throws IOException {
 		List<Serie> series =new Vector<Serie>();
 		String id;
 		JSONObject object = GetMyJson(url);
@@ -223,7 +195,7 @@ public class ImportFunctions {
 		return series;
 	}
 
-	public static  List<Film> getFilmLiee(String url) throws IOException {
+	public   List<Film> getFilmLiee(String url) throws IOException {
 		List<Film>films =new Vector<Film>();
 		String id;
 		int i =0;
@@ -248,7 +220,7 @@ public class ImportFunctions {
 	}
 
 
-	public static  Actors getActorInfo(String url) throws IOException {
+	public   Actors getActorInfo(String url) throws IOException {
 		Actors actor = new Actors();
 		JSONObject object = GetMyJson(url);
 		actor.setDateNaissance(object.get("birthday").toString());  ;
@@ -264,7 +236,7 @@ public class ImportFunctions {
 
 
 
-	public static  Vector<Comments> Comment(String url) throws IOException {
+	public   Vector<Comments> Comment(String url) throws IOException {
 		Vector<Comments> comments=new Vector<Comments>(); 
 		JSONObject object = GetMyJson(url);
 		JSONArray commment = object.getJSONArray("results");
@@ -304,7 +276,7 @@ public class ImportFunctions {
 		return genres;
 	}
 
-	public static  List<Serie> Serie(String url) throws IOException {
+	public List<Serie> Serie(String url) throws IOException {
 		List<Serie> series=new Vector<Serie>();
 		String id;
 		JSONObject object = GetMyJson(url);
@@ -327,7 +299,7 @@ public class ImportFunctions {
 		return series;
 	}
 
-	public static  Serie getSerieInfo(String url) throws IOException {
+	public  Serie getSerieInfo(String url) throws IOException {
 		Serie serie = new Serie();
 		JSONObject object = GetMyJson(url);
 
@@ -372,7 +344,7 @@ public class ImportFunctions {
 
 
 
-	public static Serie setSaisonEpisodeCount(String movieId,Serie serie) throws IOException {
+	public Serie setSaisonEpisodeCount(String movieId,Serie serie) throws IOException {
 
 		JSONObject object = GetMyJson(Base_url+"tv/"+movieId+"?api_key="+API_Key+"&language=en-US");
 		if(object != null) {
@@ -383,7 +355,7 @@ public class ImportFunctions {
 	}
 
 
-	public static  Saison getSaisonInfo(String url) throws IOException {
+	public  Saison getSaisonInfo(String url) throws IOException {
 		List<Episode> ep = new ArrayList<Episode>();
 		Saison saison = new Saison();
 		try {
@@ -427,7 +399,7 @@ public class ImportFunctions {
 	}
 
 
-	public static  List<Serie> getSerieLiee(String url) throws IOException {
+	public  List<Serie> getSerieLiee(String url) throws IOException {
 
 		List<Serie> seriesLies = new ArrayList<Serie>();
 		JSONObject object = GetMyJson(url);
@@ -505,7 +477,7 @@ public class ImportFunctions {
 
 
 
-	public static  String getMovieVideo(String url) throws IOException {
+	public  String getMovieVideo(String url) throws IOException {
 		String video ="null";
 
 		try {
