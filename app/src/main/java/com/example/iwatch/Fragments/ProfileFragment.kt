@@ -27,6 +27,8 @@ import java.util.*
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+private val PREF_NAME = "Scirus-Y"
+private var PRIVATE_MODE = 0
 
 /**
  * A simple [Fragment] subclass.
@@ -73,6 +75,7 @@ class ProfileFragment : Fragment() {
         var userJeton = v.findViewById<RecyclerView>(R.id.user_jeton) as TextView
         userJeton.text = user.jeton.toString()
 
+
         //open edit profile activity
         val btnEditProfile = v.findViewById<View>(R.id.btn_edit_profile) as Button
         btnEditProfile.setOnClickListener {
@@ -93,14 +96,16 @@ class ProfileFragment : Fragment() {
             startActivity(favoriteIntent)
         }
 
-        val btndec = v.findViewById<View>(R.id.btn_disconnect) as LinearLayout
+    /*    val btndec = v.findViewById<View>(R.id.btn_disconnect) as LinearLayout
         btndec.setOnClickListener {
+<<<<<<< HEAD
            // Toast.makeText("See you later :)", Toast.LENGTH_LONG).show()
 
             val favoriteIntent = Intent(this.context, MainActivity::class.java)
+=======
+>>>>>>> 06ad45f516fe695008f781f3b34aaf05f47f0c5f
 
-            startActivity(favoriteIntent)
-        }
+        }*/
 
         //open user genre activity
         val btnGenres = v.findViewById<View>(R.id.btn_genre) as LinearLayout
@@ -114,6 +119,13 @@ class ProfileFragment : Fragment() {
         val btnDisconnect = v.findViewById<View>(R.id.btn_disconnect) as LinearLayout
         btnDisconnect.setOnClickListener {
 
+            val pref = activity!!.getSharedPreferences(PREF_NAME,Context.MODE_PRIVATE)
+            val homeIntent = Intent(this.context, MainActivity::class.java)
+
+            pref.edit().clear().commit()
+            homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(homeIntent)
+            activity!!.finish()
         }
 
         return v
