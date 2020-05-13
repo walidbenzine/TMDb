@@ -151,7 +151,7 @@ class ConfirmRegistration : AppCompatActivity() {
 
     fun encodeValue(value: String) : String{
         try {
-            return URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
+            return URLEncoder.encode(value, StandardCharsets.UTF_8.toString())
         } catch (ex: UnsupportedEncodingException) {
             throw RuntimeException(ex.cause)
         }
